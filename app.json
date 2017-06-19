@@ -1,0 +1,151 @@
+{
+	"id": "com.xiaomi-mi",
+	"name": {
+		"en": "Xiaomi-mi zigbee"
+	},
+	"description": {
+		"en": "Xiaomi-mi zigbee",
+		"nl": "Xiaomi-mi zigbee"
+	},
+	"category": [
+    "lights"
+  ],
+	"version": "0.0.1",
+	"compatibility": ">=1.4.0",
+	"author": {
+		"name": "Ted Tolboom",
+		"email": "dTNL.Homey@gmail.com"
+	},
+	"images": {
+		"large": "/assets/images/large.png",
+		"small": "/assets/images/small.png"
+	},
+	"drivers": [
+		{
+			"id": "door_window_sensor",
+			"name": {
+				"en": "Smart Home Door/Window sensor (Zigbee)",
+				"nl": "Smart Home Door/Window sensor (Zigbee)"
+			},
+			"class": "sensor",
+			"capabilities": [
+        "alarm_contact",
+    		"measure_battery",
+    		"alarm_battery"
+      ],
+			"zigbee": {
+				"manufacturerName": "LUMI",
+				"productId": ["Xiaomi Door Sensor"],
+				"deviceId": 104,
+				"profileId": 104,
+				"learnmode": {
+					"image": "/drivers/door_window_sensor/assets/icon.svg",
+					"instruction": {
+						"en": "Follow instructions"
+					}
+				}
+			},
+			"images": {
+				"large": "/drivers/door_window_sensor/assets/images/large.png",
+				"small": "/drivers/door_window_sensor/assets/images/small.png"
+			},
+			"settings": [
+      ]
+    },
+		{
+			"id": "motion_sensor",
+			"name": {
+				"en": "Smart Home Motion sensor",
+				"nl": "Smart Home Motion sensor"
+			},
+			"class": "sensor",
+			"capabilities": [
+        "alarm_motion",
+    		"alarm_battery",
+    		"measure_battery"
+      ],
+			"zigbee": {
+				"manufacturerName": "LUMI",
+				"productId": ["Xiaomi Motion"],
+				"deviceId": 104,
+				"profileId": 104,
+				"learnmode": {
+					"image": "/drivers/motion_sensor/assets/icon.svg",
+					"instruction": {
+						"en": "Turn the device on and off 6 times",
+						"nl": "Zet het apparaat 6 keer aan en uit"
+					}
+				}
+			},
+			"images": {
+				"large": "/drivers/motion_sensor/assets/images/large.png",
+				"small": "/drivers/motion_sensor/assets/images/small.png"
+			},
+			"settings": [
+      ]
+    },
+		{
+			"id": "temperature_humidity_sensor",
+			"name": {
+				"en": "Smart Home Temperature Humidity sensor",
+				"nl": "Smart Home Temperature Humidity sensor"
+			},
+			"class": "sensor",
+			"capabilities": [
+        "measure_temperature",
+        "measure_humidity",
+        "measure_battery",
+        "alarm_battery"
+      ],
+			"zigbee": {
+				"manufacturerName": "LUMI",
+				"productId": "temperature_humidity_sensor",
+				"deviceId": 302,
+				"profileId": 104,
+				"learnmode": {
+					"image": "/drivers/temperature_humidity_sensor/assets/icon.svg",
+					"instruction": {
+						"en": "Turn the device on and off 6 times",
+						"nl": "Zet het apparaat 6 keer aan en uit"
+					}
+				}
+			},
+			"images": {
+				"large": "/drivers/temperature_humidity_sensor/assets/images/large.png",
+				"small": "/drivers/temperature_humidity_sensor/assets/images/small.png"
+			},
+			"settings": [
+      ]
+    },
+		{
+			"id": "wireless_switch",
+			"name": {
+				"en": "Smart Home wireless switch",
+				"nl": "Smart Home wireless switch"
+			},
+			"class": "socket",
+			"capabilities": [
+        "onoff"
+      ],
+			"zigbee": {
+				"manufacturerName": "LUMI",
+				"productId": "Xiaomi Button",
+				"deviceId": 104,
+				"profileId": 104,
+				"learnmode": {
+					"image": "/drivers/wireless_switch/assets/icon_pair.svg",
+					"instruction": {
+						"en": "Press the pair button 4 times in 5 seconds",
+						"nl": "Druk 4 keer op de pair knop binnen 5 seconden"
+					}
+				}
+			},
+			"images": {
+				"large": "/drivers/wireless_switch/assets/images/large.png",
+				"small": "/drivers/wireless_switch/assets/images/small.png"
+			},
+			"settings": [
+      ]
+    }
+  ]
+}
