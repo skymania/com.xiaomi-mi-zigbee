@@ -3,7 +3,11 @@
 const path = require('path');
 const ZigBeeDriver = require('homey-zigbeedriver');
 
-const maxBrightness = 255;
+// https://github.com/a4refillpad/Xiaomi/blob/master/devicetypes/a4refillpad/xiaomi-zigbee-button.src/xiaomi-zigbee-button.groovy
+// fingerprint profileId: "0104", deviceId: "0104",
+// inClusters: "0000, 0003",
+// outClusters: "0000, 0004, 0003, 0006, 0008, 0005",
+// manufacturer: "LUMI", model: "lumi.sensor_switch", deviceJoinName: "Xiaomi Button"
 
 module.exports = new ZigBeeDriver(path.basename(__dirname), {
 	debug: true,
@@ -16,7 +20,16 @@ module.exports = new ZigBeeDriver(path.basename(__dirname), {
 			command_get: 'onOff',
 			command_report_parser: value => value === 1,
 		},
-		measure_battery: {},
+		measure_battery: {
+			command_endpoint: 0,
+			command_cluster: 'genPowerCfg',
+			// command_set: value => value ? 'on' : 'off',
+			// command_set_parser: () => ({}),
+			command_get: 'batteryPercentageRemaining',
+			// BatteryPercentageRemaining indicates the remaining battery life as a percentage of the complete battery lifespan, expressed to the nearest halfpercent in the range 0 to 100 - for example, 0xAF represents 87.5%.
+			// The special value 0xFF indicates an invalid or unknown measurement.
+			command_report_parser: value => value / 2,
+		},
 		alarm_battery: {},
 	},
 });
