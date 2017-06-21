@@ -36,15 +36,14 @@
 			"zigbee": {
 				"manufacturerName": "LUMI",
 				"productId": [
-					"Xiaomi Door Sensor",
-					"lumi.sensor_magnet"
+					"Xiaomi Door Sensor"
 				],
 				"deviceId": 104,
 				"profileId": 104,
 				"learnmode": {
-					"image": "/drivers/door_window_sensor/assets/icon.svg",
+					"image": "/drivers/door_window_sensor/assets/learn_door.svg",
 					"instruction": {
-						"en": "Follow instructions"
+						"en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
 					}
 				}
 			},
@@ -69,14 +68,14 @@
       ],
 			"zigbee": {
 				"manufacturerName": "LUMI",
-				"productId": ["Xiaomi Motion", "lumi.sensor_motion"],
+				"productId": ["Xiaomi Motion Sensor"],
 				"deviceId": 104,
 				"profileId": 104,
 				"learnmode": {
-					"image": "/drivers/motion_sensor/assets/icon.svg",
+					"image": "/drivers/motion_sensor/assets/learn_motion.svg",
 					"instruction": {
-						"en": "Turn the device on and off 6 times",
-						"nl": "Zet het apparaat 6 keer aan en uit"
+						"en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
+						"nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
 					}
 				}
 			},
@@ -102,14 +101,14 @@
       ],
 			"zigbee": {
 				"manufacturerName": "LUMI",
-				"productId": "temperature_humidity_sensor",
-				"deviceId": [302],
-				"profileId": [104],
+				"productId": ["Xiaomi Temperature Humidity sensor"],
+				"deviceId": [302, 24321],
+				"profileId": [104, 260],
 				"learnmode": {
-					"image": "/drivers/temperature_humidity_sensor/assets/icon.svg",
+					"image": "/drivers/temperature_humidity_sensor/assets/learn_temp.svg",
 					"instruction": {
-						"en": "Turn the device on and off 6 times",
-						"nl": "Zet het apparaat 6 keer aan en uit"
+						"en": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release",
+						"nl": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release"
 					}
 				}
 			},
@@ -132,14 +131,14 @@
       ],
 			"zigbee": {
 				"manufacturerName": "LUMI",
-				"productId": ["Xiaomi Button", "lumi.sensor_switch"],
+				"productId": ["Xiaomi Button"],
 				"deviceId": 104,
 				"profileId": 104,
 				"learnmode": {
-					"image": "/drivers/wireless_switch/assets/icon_pair.svg",
+					"image": "/drivers/wireless_switch/assets/learn_button.svg",
 					"instruction": {
-						"en": "Press the pair button 4 times in 5 seconds",
-						"nl": "Druk 4 keer op de pair knop binnen 5 seconden"
+						"en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
+						"nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
 					}
 				}
 			},
