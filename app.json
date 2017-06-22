@@ -20,6 +20,23 @@
 		"large": "/assets/images/large.png",
 		"small": "/assets/images/small.png"
 	},
+	"flow": {
+		"actions": [
+			{
+				"id": "XIAOMI_config",
+				"title": {
+					"en": "Retrieve information"
+				},
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=temperature_humidity_sensor"
+          }
+        ]
+      }
+    ]
+	},
 	"drivers": [
 		{
 			"id": "door_window_sensor",

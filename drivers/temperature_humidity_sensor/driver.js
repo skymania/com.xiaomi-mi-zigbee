@@ -46,3 +46,13 @@ module.exports = new ZigBeeDriver(path.basename(__dirname), {
 		alarm_battery: {},
 	},
 });
+
+Homey.manager('flow').on('action.XIAOMI_config', (callback, args) => {
+	Homey.log("arguments:", args);
+	const node = module.exports.nodes[args.device.token];
+	Homey.log("node:", node);
+	node.instance.endpoints[0].genBasic.read('manufacturerName', (err, result) => {
+		if (err) return Homey.error(err);
+		return callback(null, true);
+	});
+});
