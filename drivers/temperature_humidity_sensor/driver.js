@@ -8,7 +8,7 @@ const ZigBeeDriver = require('homey-zigbeedriver');
 // inClusters: "0000 (Basic),0001(Power Configuration),0003(Identify),0009(Alarms),0402(Temperature Measurement),0405(Relative Humidity Measurement)"
 
 module.exports = new ZigBeeDriver(path.basename(__dirname), {
-	debug: true,
+	debug: false,
 	capabilities: {
 		measure_temperature: {
 			command_endpoint: 0,
@@ -50,7 +50,7 @@ module.exports = new ZigBeeDriver(path.basename(__dirname), {
 Homey.manager('flow').on('action.XIAOMI_config', (callback, args) => {
 	Homey.log("arguments:", args);
 	const node = module.exports.nodes[args.device.token];
-	Homey.log("node:", node);
+	Homey.log("node.instance:", node.instance);
 	node.instance.endpoints[0].genBasic.read('manufacturerName', (err, result) => {
 		if (err) return Homey.error(err);
 		return callback(null, true);

@@ -10,28 +10,28 @@ const ZigBeeDriver = require('homey-zigbeedriver');
 // manufacturer: "LUMI", model: "lumi.sensor_magnet", deviceJoinName: "Xiaomi Door Sensor"
 
 module.exports = new ZigBeeDriver(path.basename(__dirname), {
-	debug: true,
+	debug: false,
 	capabilities: {
 		alarm_contact: {
 			command_endpoint: 0,
-			// command_cluster: 'genLevelCtrl',
+			command_cluster: 'genOnOff',
 			// command_set: 'moveToLevel',
 			// command_set_parser: (value, node) => ({
 			//	level: value * maxBrightness,
 			//	transtime: node.settings.transtime,
 			// }),
-			// command_get: 'currentLevel',
-			// command_report_parser: value => value / maxBrightness,
+			command_get: 'onOff',
+			command_report_parser: value => value === 1,
 		},
 		measure_battery: {
-			command_endpoint: 0,
-			command_cluster: 'genPowerCfg',
+			// command_endpoint: 0,
+			// command_cluster: 'genPowerCfg',
 			// command_set: value => value ? 'on' : 'off',
 			// command_set_parser: () => ({}),
-			command_get: 'batteryPercentageRemaining',
+			// command_get: 'batteryPercentageRemaining',
 			// BatteryPercentageRemaining indicates the remaining battery life as a percentage of the complete battery lifespan, expressed to the nearest halfpercent in the range 0 to 100 - for example, 0xAF represents 87.5%.
 			// The special value 0xFF indicates an invalid or unknown measurement.
-			command_report_parser: value => value / 2,
+			// command_report_parser: value => value / 2,
 		},
 		alarm_battery: {},
 	},
