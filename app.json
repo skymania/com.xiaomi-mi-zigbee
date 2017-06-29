@@ -55,8 +55,8 @@
 				"productId": [
 					"Xiaomi Door Sensor"
 				],
-				"deviceId": 104,
-				"profileId": 104,
+				"deviceId": 260,
+				"profileId": 260,
 				"learnmode": {
 					"image": "/drivers/door_window_sensor/assets/learn_door.svg",
 					"instruction": {
@@ -85,9 +85,9 @@
       ],
 			"zigbee": {
 				"manufacturerName": "LUMI",
-				"productId": ["Xiaomi Motion Sensor"],
-				"deviceId": 104,
-				"profileId": 104,
+				"productId": "Xiaomi Motion",
+				"deviceId": 260,
+				"profileId": 260,
 				"learnmode": {
 					"image": "/drivers/motion_sensor/assets/learn_motion.svg",
 					"instruction": {
@@ -119,8 +119,8 @@
 			"zigbee": {
 				"manufacturerName": "LUMI",
 				"productId": ["Xiaomi Temperature Humidity sensor"],
-				"deviceId": [302, 24321],
-				"profileId": [104, 260],
+				"deviceId": [770, 24321],
+				"profileId": 260,
 				"learnmode": {
 					"image": "/drivers/temperature_humidity_sensor/assets/learn_temp.svg",
 					"instruction": {
@@ -149,8 +149,8 @@
 			"zigbee": {
 				"manufacturerName": "LUMI",
 				"productId": ["Xiaomi Button"],
-				"deviceId": 104,
-				"profileId": 104,
+				"deviceId": 260,
+				"profileId": 260,
 				"learnmode": {
 					"image": "/drivers/wireless_switch/assets/learn_button.svg",
 					"instruction": {
