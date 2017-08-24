@@ -42,8 +42,8 @@
 		{
 			"id": "door_window_sensor",
 			"name": {
-				"en": "Smart Home Door/Window sensor (Zigbee)",
-				"nl": "Smart Home Door/Window sensor (Zigbee)"
+				"en": "Door/Window sensor",
+				"nl": "Door/Window sensor"
 			},
 			"class": "sensor",
 			"capabilities": [
@@ -75,8 +75,8 @@
 		{
 			"id": "motion_sensor",
 			"name": {
-				"en": "Smart Home Motion sensor",
-				"nl": "Smart Home Motion sensor"
+				"en": "Motion sensor",
+				"nl": "Motion sensor"
 			},
 			"class": "sensor",
 			"capabilities": [
@@ -107,8 +107,8 @@
 		{
 			"id": "temperature_humidity_sensor",
 			"name": {
-				"en": "Smart Home Temperature Humidity sensor",
-				"nl": "Smart Home Temperature Humidity sensor"
+				"en": "Temperature Humidity sensor",
+				"nl": "Temperature Humidity sensor"
 			},
 			"class": "sensor",
 			"capabilities": [
@@ -140,10 +140,10 @@
 		{
 			"id": "wireless_switch",
 			"name": {
-				"en": "Smart Home wireless switch",
-				"nl": "Smart Home wireless switch"
+				"en": "Wireless switch",
+				"nl": "Wireless switch"
 			},
-			"class": "socket",
+			"class": "button",
 			"capabilities": [
         "onoff"
       ],
