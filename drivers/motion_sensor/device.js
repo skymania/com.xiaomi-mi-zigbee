@@ -19,9 +19,9 @@ class XiaomiMotionSensor extends ZigBeeDevice {
 		this.printNode();
 
 		// Not useful in this case, but using registerReportListener you can subscribe to incoming reports
-		// this.registerReportListener('genLevelCtrl', 'move', report => {
+		// this.registerReportListener('msOccupancySensing', 'occupancy', report => {
 		// 	console.log(report);
-		// });
+		// },1);
 
 		if (this.node) {
 

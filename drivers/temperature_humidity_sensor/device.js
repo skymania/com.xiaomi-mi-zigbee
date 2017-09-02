@@ -17,15 +17,19 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
 		// print the node's info to the console
 		this.printNode();
 
-		// Not useful in this case, but using registerReportListener you can subscribe to incoming reports
-		// this.registerReportListener('genLevelCtrl', 'move', report => {
-		// console.log(report);
-		// });
+		// Temperature msTemperatureMeasurement measuredValue endpoint 1
+		// this.registerReportListener('msTemperatureMeasurement', 'measuredValue', report => {
+		//	console.log(report);
+		//}, 1);
+		// Humidity msRelativeHumidity measuredValue endpoint 1
+		//this.registerReportListener('msRelativeHumidity', 'measuredValue', report => {
+		//	console.log(report);
+		//}, 1);
 
 		if (this.node) {
 
 			// Listen to all the commands that come in
-			this.node.on('command', report => {
+			this.node.on('report', report => {
 				console.log('Command received');
 				console.log(report);
 				console.log(report.endpoint);
