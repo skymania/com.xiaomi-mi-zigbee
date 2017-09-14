@@ -39,7 +39,7 @@
         "productId": [
           "lumi.sensor_magnet.aq2"
         ],
-        "deviceId": 260,
+        "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/aqara_door_window_sensor/assets/learn_door.svg",
