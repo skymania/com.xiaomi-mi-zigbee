@@ -108,7 +108,7 @@
         ],
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/temperature_humidity_pressure_sensor/assets/learn_temp.svg",
+          "image": "/drivers/aqara_weather_sensor/assets/learn_temp.svg",
           "instruction": {
             "en": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release",
             "nl": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release"
@@ -116,8 +116,8 @@
         }
       },
       "images": {
-        "large": "/drivers/temperature_humidity_pressure_sensor/assets/images/large.png",
-        "small": "/drivers/temperature_humidity_pressure_sensor/assets/images/small.png"
+        "large": "/drivers/aqara_weather_sensor/assets/images/large.png",
+        "small": "/drivers/aqara_weather_sensor/assets/images/small.png"
       },
       "settings": []
     },
