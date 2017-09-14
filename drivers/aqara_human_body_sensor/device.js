@@ -5,11 +5,11 @@ const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 // fingerprint profileId: "0104", deviceId: "0104",
-// inClusters: "0000(Basic), 0003(Identify), FFFF, 0019(OTA Upgrade cluster)",
-// outClusters: "0000(Basic), 0004(Groups), 0003(Identify), 0006(On/Off), 0008(Level Control), 0005(Scenes), 0019(OTA Upgrade cluster)",
-// manufacturer: "LUMI", model: "lumi.sensor_motion", deviceJoinName: "Xiaomi Motion"
+// inClusters: "0000, 0003, FFFF, 0019",
+// outClusters: "0000, 0004, 0003, 0006, 0008, 0005, 0019",
+// manufacturer: "LUMI", model: "lumi.sensor_motion.aq2", deviceJoinName: "Xiaomi Motion"
 
-class XiaomiMotionSensor extends ZigBeeDevice {
+class AqaraHumanBodySensor extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
@@ -37,4 +37,4 @@ class XiaomiMotionSensor extends ZigBeeDevice {
 	}
 }
 
-module.exports = XiaomiMotionSensor;
+module.exports = AqaraHumanBodySensor;

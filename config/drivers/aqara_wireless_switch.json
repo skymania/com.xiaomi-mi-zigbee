@@ -1,0 +1,30 @@
+{
+	"id": "aqara_wireless_switch",
+	"name": {
+		"en": "Aqara Wireless switch",
+		"nl": "Aqara Wireless switch"
+	},
+	"class": "button",
+	"capabilities": [
+		"onoff"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": ["lumi.sensor_switch.aq2"],
+		"deviceId": 260,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/aqara_wireless_switch/assets/learn_button.svg",
+			"instruction": {
+				"en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
+				"nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/aqara_wireless_switch/assets/images/large.png",
+		"small": "/drivers/aqara_wireless_switch/assets/images/small.png"
+	},
+	"settings": [
+	]
+}

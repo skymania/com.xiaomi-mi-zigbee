@@ -9,7 +9,7 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 // inClusters: "0000, 0003, FFFF, 0402, 0403, 0405", outClusters: "0000, 0004, FFFF",
 // manufacturer: "LUMI", model: "lumi.weather", deviceJoinName: "Xiaomi Aqara Temp Sensor"
 
-class XiaomiWeatherSensor extends ZigBeeDevice {
+class AqaraWeatherSensor extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
@@ -85,4 +85,4 @@ class XiaomiWeatherSensor extends ZigBeeDevice {
 	}
 }
 
-module.exports = XiaomiWeatherSensor;
+module.exports = AqaraWeatherSensor;

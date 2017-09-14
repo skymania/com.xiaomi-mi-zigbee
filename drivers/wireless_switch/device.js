@@ -10,7 +10,7 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 // outClusters: "0000(Basic), 0004(Groups), 0003(Identify), 0006(On/Off), 0008(Level Control), 0005(Scenes)",
 // manufacturer: "LUMI", model: "lumi.sensor_switch", deviceJoinName: "Xiaomi Button"
 
-class XiaomiDoorWindowSensor extends ZigBeeDevice {
+class XiaomiWirelessSwitch extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
@@ -39,4 +39,4 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
 	}
 }
 
-module.exports = XiaomiDoorWindowSensor;
+module.exports = XiaomiWirelessSwitch;
