@@ -50,54 +50,40 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// Temperature Cluster
 		// Register measure temperature capability
 		this.registerCapability('measure_temperature', 'msTemperatureMeasurement', {
-			get: 'measuredValue',
 			report: 'measuredValue',
 			reportParser(value) {
 				return Math.round((value / 100) * 10) / 10;
 			},
-			getOpts: {
-				pollInterval: 5000,
-			},
 		});
 
-		// Temperature msTemperatureMeasurement measuredValue endpoint 0
-		this.registerReportListener('msTemperatureMeasurement', 'measuredValue', report => {
-			console.log(report);
+		this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', 30, 900, 1, data => {
+			this.log('measuredValue', data);
 		}, 0);
 
 		// Humidity Cluster
 		// Register measure humidity capability
 		this.registerCapability('measure_humidity', 'msRelativeHumidity', {
-			get: 'measuredValue',
 			report: 'measuredValue',
 			reportParser(value) {
 				return value;
 			},
-			getOpts: {
-				pollInterval: 5000,
-			},
 		});
 
-		// Humidity msRelativeHumidity measuredValue endpoint 0
-		this.registerReportListener('msRelativeHumidity', 'measuredValue', report => {
-			console.log(report);
+		this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', 30, 3600, 1, data => {
+			this.log('measuredValue', data);
 		}, 0);
 
 		// Pressure Cluster
 		// Register measure pressure capability
 		this.registerCapability('measure_pressure', 'msPressureMeasurement', {
-			get: 'measuredValue',
 			report: 'measuredValue',
 			reportParser(value) {
 				return value;
 			},
-			getOpts: {
-				pollInterval: 5000,
-			},
 		});
-		// Humidity msPressureMeasurement measuredValue endpoint 0
-		this.registerReportListener('msPressureMeasurement', 'measuredValue', report => {
-			console.log(report);
+
+		this.registerAttrReportListener('msPressureMeasurement', 'measuredValue', 30, 3600, 1, data => {
+			this.log('measuredValue', data);
 		}, 0);
 
 		if (this.node) {

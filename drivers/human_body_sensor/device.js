@@ -17,7 +17,16 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
 
 		// print the node's info to the console
 		this.printNode();
-
+		// alarm_motion
+		this.registerCapability('alarm_motion', 'msOccupancySensing', {
+			report: 'occupancy',
+			reportParser(value) {
+				return value;
+			},
+		});
+		this.registerAttrReportListener('msOccupancySensing', 'occupancy', 1, 6000, null, data => {
+			this.log('occupancy', data);
+		}, 0);
 		// Not useful in this case, but using registerReportListener you can subscribe to incoming reports
 		// this.registerReportListener('msOccupancySensing', 'occupancy', report => {
 		// 	console.log(report);

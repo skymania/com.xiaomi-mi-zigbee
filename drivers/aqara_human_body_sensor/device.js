@@ -46,10 +46,30 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 		// print the node's info to the console
 		this.printNode();
 
-		// Not useful in this case, but using registerReportListener you can subscribe to incoming reports
-		// this.registerReportListener('msOccupancySensing', 'occupancy', report => {
-		// 	console.log(report);
-		// },1);
+		// Occupancy Cluster
+		// Register alarm_motion capability
+		this.registerCapability('alarm_motion', 'msOccupancySensing', {
+			report: 'occupancy',
+			reportParser(value) {
+				return value;
+			},
+		});
+
+		this.registerAttrReportListener('msOccupancySensing', 'occupancy', 1, 6000, null, data => {
+			this.log('occupancy', data);
+		});
+
+		// Occupancy Cluster
+		// Register measure_luminance capability
+		this.registerCapability('measure_luminance', 'msIlluminanceMeasurement', {
+			report: 'occupancy',
+			reportParser(value) {
+				return value;
+			},
+		});
+		this.registerAttrReportListener('msIlluminanceMeasurement', 'measuredValue', 180, 3600, 20, data => {
+			this.log('measuredValue', data);
+		});
 
 		if (this.node) {
 
