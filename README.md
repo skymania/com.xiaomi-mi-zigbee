@@ -9,4 +9,8 @@ This app allows you to connect your Xiaomi-mi Smart Home Devices directly via Zi
 * Temperature and Humidity Sensor
 * Wireless switch
 
-1.1.0 version = SDK2 - meshdriver based   
+0.0.3 version
+* meshdriver update to 1.2.0    
+* add registerAttrReportListener
+
+0.0.2 version = SDK2 - meshdriver based   
