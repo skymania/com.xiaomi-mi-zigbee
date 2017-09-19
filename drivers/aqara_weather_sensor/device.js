@@ -49,54 +49,25 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 		// Temperature Cluster
 		// Register measure temperature capability
-		this.registerCapability('measure_temperature', 'msTemperatureMeasurement', {
-			report: 'measuredValue',
-			reportParser(value) {
-				return Math.round((value / 100) * 10) / 10;
-			},
-		});
-
 		this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', 30, 900, 1, data => {
-			this.log('measuredValue', data);
+			this.log('msTemperatureMeasurement - measuredValue', Math.round((data / 100) * 10) / 10);
+			this.setCapabilityValue('measure_temperature', Math.round((data / 100) * 10) / 10);
 		}, 0);
 
 		// Humidity Cluster
 		// Register measure humidity capability
-		this.registerCapability('measure_humidity', 'msRelativeHumidity', {
-			report: 'measuredValue',
-			reportParser(value) {
-				return value;
-			},
-		});
-
 		this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', 30, 3600, 1, data => {
-			this.log('measuredValue', data);
+			this.log('msRelativeHumidity - measuredValue', data);
+			this.setCapabilityValue('measure_humidity', data);
 		}, 0);
 
 		// Pressure Cluster
-		// Register measure pressure capability
-		this.registerCapability('measure_pressure', 'msPressureMeasurement', {
-			report: 'measuredValue',
-			reportParser(value) {
-				return value;
-			},
-		});
-
+		// Register measure pressure capability, reported data in pa, convert to mbar
 		this.registerAttrReportListener('msPressureMeasurement', 'measuredValue', 30, 3600, 1, data => {
-			this.log('measuredValue', data);
+			this.log('msPressureMeasurement - measuredValue', Math.round((data / 100) * 10) / 10);
+			this.setCapabilityValue('measure_pressure', Math.round((data / 100) * 10) / 10);
 		}, 0);
 
-		if (this.node) {
-
-			// Listen to all the commands that come in
-			this.node.on('report', report => {
-				console.log('Command received');
-				console.log(report);
-				console.log(report.endpoint);
-				console.log(report.attr);
-				console.log(report.value);
-			});
-		}
 	}
 }
 
