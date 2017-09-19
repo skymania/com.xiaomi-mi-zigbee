@@ -27,24 +27,9 @@ class AqaraWaterSensor extends ZigBeeDevice {
 		});
 		this.registerAttrReportListener('genOnOff', 'OnOff', 1, 6000, 1, data => {
 			this.log('OnOff', data);
-		});
+			this.setCapabilityValue('alarm_water', data === 1);
+		}, 0);
 
-		// DWS genOnOff OnOff endpoint 1
-		//this.registerReportListener('genOnOff', 'OnOff', report => {
-		//	console.log(report);
-		//}, 1);
-
-		if (this.node) {
-
-			// Listen to all the commands that come in
-			this.node.on('command', report => {
-				console.log('Command received');
-				console.log(report);
-				console.log(report.endpoint);
-				console.log(report.attr);
-				console.log(report.value);
-			});
-		}
 	}
 }
 
