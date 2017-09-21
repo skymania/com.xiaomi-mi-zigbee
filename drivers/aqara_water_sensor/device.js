@@ -20,13 +20,13 @@ class AqaraWaterSensor extends ZigBeeDevice {
 		this.printNode();
 
 		this.registerCapability('alarm_water', 'genOnOff', {
-			report: 'OnOff',
+			report: 'onOff',
 			reportParser(value) {
 				return value;
 			},
 		});
-		this.registerAttrReportListener('genOnOff', 'OnOff', 1, 6000, 1, data => {
-			this.log('OnOff', data);
+		this.registerAttrReportListener('genOnOff', 'onOff', 1, 6000, 1, data => {
+			this.log('onOff', data);
 			this.setCapabilityValue('alarm_water', data === 1);
 		}, 0);
 
