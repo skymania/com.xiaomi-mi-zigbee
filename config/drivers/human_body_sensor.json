@@ -16,7 +16,7 @@
 		"deviceId": 260,
 		"profileId": 260,
 		"learnmode": {
-			"image": "/drivers/human_body_sensor/assets/learn_motion.svg",
+			"image": "/drivers/human_body_sensor/assets/learn_human_body.svg",
 			"instruction": {
 				"en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
 				"nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
