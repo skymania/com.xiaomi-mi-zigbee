@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.0.3",
+  "version": "0.0.4",
   "compatibility": ">=1.5.0",
   "sdk": 2,
   "author": {
@@ -279,6 +279,69 @@
       "images": {
         "large": "/drivers/wireless_switch/assets/images/large.png",
         "small": "/drivers/wireless_switch/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "aqara_light_control_double",
+      "name": {
+        "en": "Wireless light control double",
+        "nl": "Wireless light control double"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.ctrl_neutral2"
+        ],
+        "deviceId": 6,
+        "profileId": 260,
+        "learnmode":
+        {
+          "image": "/drivers/aqara_light_control_double/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/aqara_light_control_double/assets/images/large.png",
+        "small": "/drivers/aqara_light_control_double/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "aqara_lumi_plug",
+      "name": {
+        "en": "Smart plug",
+        "nl": "Smart plug"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.plug"
+        ],
+        "deviceId": 81,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/aqara_lumi_plug/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/aqara_lumi_plug/assets/images/large.png",
+        "small": "/drivers/aqara_lumi_plug/assets/images/small.png"
       },
       "settings": []
     }
