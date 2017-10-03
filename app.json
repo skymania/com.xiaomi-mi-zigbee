@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.0.4",
+  "version": "0.0.5",
   "compatibility": ">=1.5.0",
   "sdk": 2,
   "author": {
@@ -24,199 +24,69 @@
   "flow": {},
   "drivers": [
     {
-      "id": "aqara_door_window_sensor",
+      "id": "ctrl_neutral2",
       "name": {
-        "en": "Aqara Window Doorsensor"
+        "en": "Wireless light control double",
+        "nl": "Wireless light control double"
       },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_contact",
-        "measure_battery",
-        "alarm_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_magnet.aq2"
-        ],
-        "deviceId": 24321,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/aqara_door_window_sensor/assets/learn_door.svg",
-          "instruction": {
-            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/aqara_door_window_sensor/assets/images/large.png",
-        "small": "/drivers/aqara_door_window_sensor/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "aqara_human_body_sensor",
-      "name": {
-        "en": "Aqara Human body sensor"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_motion",
-        "measure_luminance",
-        "alarm_battery",
-        "measure_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_motion.aq2",
-        "deviceId": 260,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/aqara_human_body_sensor/assets/learn_human_body.svg",
-          "instruction": {
-            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
-            "nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/aqara_human_body_sensor/assets/images/large.png",
-        "small": "/drivers/aqara_human_body_sensor/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "aqara_weather_sensor",
-      "name": {
-        "en": "Aqara Weather sensor",
-        "nl": "Aqara Weather sensor"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "measure_temperature",
-        "measure_pressure",
-        "measure_humidity"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.weather"
-        ],
-        "deviceId": [
-          770,
-          24321
-        ],
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/aqara_weather_sensor/assets/learn_temp.svg",
-          "instruction": {
-            "en": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/aqara_weather_sensor/assets/images/large.png",
-        "small": "/drivers/aqara_weather_sensor/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "aqara_wireless_switch",
-      "name": {
-        "en": "Aqara Wireless switch",
-        "nl": "Aqara Wireless switch"
-      },
-      "class": "button",
+      "class": "light",
       "capabilities": [
         "onoff"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.sensor_switch.aq2"
+          "lumi.ctrl_neutral2"
         ],
-        "deviceId": 24321,
+        "deviceId": 6,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/aqara_wireless_switch/assets/learn_button.svg",
+          "image": "/drivers/ctrl_neutral2/assets/learn.svg",
           "instruction": {
-            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
-            "nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
           }
         }
       },
       "images": {
-        "large": "/drivers/aqara_wireless_switch/assets/images/large.png",
-        "small": "/drivers/aqara_wireless_switch/assets/images/small.png"
+        "large": "/drivers/ctrl_neutral2/assets/images/large.png",
+        "small": "/drivers/ctrl_neutral2/assets/images/small.png"
       },
       "settings": []
     },
     {
-      "id": "door_window_sensor",
+      "id": "plug",
       "name": {
-        "en": "Door/Window sensor",
-        "nl": "Door/Window sensor"
+        "en": "Smart plug",
+        "nl": "Smart plug"
       },
-      "class": "sensor",
+      "class": "socket",
       "capabilities": [
-        "alarm_contact",
-        "measure_battery",
-        "alarm_battery"
+        "onoff"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.sensor_magnet"
+          "lumi.plug"
         ],
-        "deviceId": 260,
+        "deviceId": 81,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/door_window_sensor/assets/learn_door.svg",
+          "image": "/drivers/plug/assets/learn.svg",
           "instruction": {
-            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
           }
         }
       },
       "images": {
-        "large": "/drivers/door_window_sensor/assets/images/large.png",
-        "small": "/drivers/door_window_sensor/assets/images/small.png"
+        "large": "/drivers/plug/assets/images/large.png",
+        "small": "/drivers/plug/assets/images/small.png"
       },
       "settings": []
     },
     {
-      "id": "human_body_sensor",
-      "name": {
-        "en": "Motion sensor",
-        "nl": "Motion sensor"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_motion",
-        "alarm_battery",
-        "measure_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_motion",
-        "deviceId": 260,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/human_body_sensor/assets/learn_human_body.svg",
-          "instruction": {
-            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
-            "nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/human_body_sensor/assets/images/large.png",
-        "small": "/drivers/human_body_sensor/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "temperature_humidity_sensor",
+      "id": "sens",
       "name": {
         "en": "Temperature Humidity sensor",
         "nl": "Temperature Humidity sensor"
@@ -238,7 +108,7 @@
         ],
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/temperature_humidity_sensor/assets/learn_temp.svg",
+          "image": "/drivers/sens/assets/learn_temp.svg",
           "instruction": {
             "en": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release",
             "nl": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release"
@@ -246,13 +116,200 @@
         }
       },
       "images": {
-        "large": "/drivers/temperature_humidity_sensor/assets/images/large.png",
-        "small": "/drivers/temperature_humidity_sensor/assets/images/small.png"
+        "large": "/drivers/sens/assets/images/large.png",
+        "small": "/drivers/sens/assets/images/small.png"
       },
       "settings": []
     },
     {
-      "id": "wireless_switch",
+      "id": "sensor_86sw2Un",
+      "name": {
+        "en": "Wireless light switch double",
+        "nl": "Wireless light switch double"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.sensor_86sw2Un"
+        ],
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_86sw2Un/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_86sw2Un/assets/images/large.png",
+        "small": "/drivers/sensor_86sw2Un/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_magnet.aq2",
+      "name": {
+        "en": "Aqara Window Doorsensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_contact",
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.sensor_magnet.aq2"
+        ],
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_magnet.aq2/assets/learn_door.svg",
+          "instruction": {
+            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_magnet",
+      "name": {
+        "en": "Door/Window sensor",
+        "nl": "Door/Window sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_contact",
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.sensor_magnet"
+        ],
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_magnet/assets/learn_door.svg",
+          "instruction": {
+            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_magnet/assets/images/large.png",
+        "small": "/drivers/sensor_magnet/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_motion.aq2",
+      "name": {
+        "en": "Aqara Human body sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_motion",
+        "measure_luminance",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_motion.aq2",
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
+          "instruction": {
+            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
+            "nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_motion.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_motion.aq2/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_motion",
+      "name": {
+        "en": "Motion sensor",
+        "nl": "Motion sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_motion",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_motion",
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_motion/assets/learn_human_body.svg",
+          "instruction": {
+            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
+            "nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_motion/assets/images/large.png",
+        "small": "/drivers/sensor_motion/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_switch.aq2",
+      "name": {
+        "en": "Aqara Wireless switch",
+        "nl": "Aqara Wireless switch"
+      },
+      "class": "button",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.sensor_switch.aq2"
+        ],
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_switch.aq2/assets/learn_button.svg",
+          "instruction": {
+            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
+            "nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_switch.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_switch.aq2/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_switch",
       "name": {
         "en": "Wireless switch",
         "nl": "Wireless switch"
@@ -269,7 +326,7 @@
         "deviceId": 260,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/wireless_switch/assets/learn_button.svg",
+          "image": "/drivers/sensor_switch/assets/learn_button.svg",
           "instruction": {
             "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
             "nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
@@ -277,71 +334,44 @@
         }
       },
       "images": {
-        "large": "/drivers/wireless_switch/assets/images/large.png",
-        "small": "/drivers/wireless_switch/assets/images/small.png"
+        "large": "/drivers/sensor_switch/assets/images/large.png",
+        "small": "/drivers/sensor_switch/assets/images/small.png"
       },
       "settings": []
     },
     {
-      "id": "aqara_light_control_double",
+      "id": "weather",
       "name": {
-        "en": "Wireless light control double",
-        "nl": "Wireless light control double"
+        "en": "Aqara Weather sensor",
+        "nl": "Aqara Weather sensor"
       },
-      "class": "light",
+      "class": "sensor",
       "capabilities": [
-        "onoff"
+        "measure_temperature",
+        "measure_pressure",
+        "measure_humidity"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.ctrl_neutral2"
+          "lumi.weather"
         ],
-        "deviceId": 6,
-        "profileId": 260,
-        "learnmode":
-        {
-          "image": "/drivers/aqara_light_control_double/assets/learn.svg",
-          "instruction": {
-            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/aqara_light_control_double/assets/images/large.png",
-        "small": "/drivers/aqara_light_control_double/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "aqara_lumi_plug",
-      "name": {
-        "en": "Smart plug",
-        "nl": "Smart plug"
-      },
-      "class": "socket",
-      "capabilities": [
-        "onoff"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.plug"
+        "deviceId": [
+          770,
+          24321
         ],
-        "deviceId": 81,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/aqara_lumi_plug/assets/learn.svg",
+          "image": "/drivers/weather/assets/learn_temp.svg",
           "instruction": {
-            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
-            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+            "en": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release"
           }
         }
       },
       "images": {
-        "large": "/drivers/aqara_lumi_plug/assets/images/large.png",
-        "small": "/drivers/aqara_lumi_plug/assets/images/small.png"
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
       },
       "settings": []
     }

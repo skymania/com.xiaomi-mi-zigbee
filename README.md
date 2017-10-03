@@ -9,6 +9,10 @@ This app allows you to connect your Xiaomi-mi Smart Home Devices directly via Zi
 * Temperature and Humidity Sensor
 * Wireless switch
 
+0.0.5 version
+* merge of PR from Sprut     
+* renamed driverID's for clarity (re-pair needed)      
+
 0.0.4 version
 * add registerAttrReportListener + setCapabilityValue for the Aqara sensors   
 
