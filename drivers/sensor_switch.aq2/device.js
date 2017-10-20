@@ -12,22 +12,25 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 // manufacturer: "LUMI", model: "lumi.sensor_switch", deviceJoinName: "Xiaomi Button"
 
 /*
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] - Battery: false
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] - Endpoints: 0
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] -- Clusters:
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] --- zapp
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] --- genBasic
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] ---- cid : genBasic
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] ---- sid : attrs
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] --- genGroups
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] ---- cid : genGroups
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] ---- sid : attrs
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] --- genOnOff
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] ---- cid : genOnOff
-2017-10-01 12:30:06 [log] [ManagerDrivers] [aqara_wireless_switch] [0] ---- sid : attrs
-2017-10-01 12:30:07 [log] [ManagerDrivers] [aqara_wireless_switch] [0] --- manuSpecificCluster
-2017-10-01 12:30:07 [log] [ManagerDrivers] [aqara_wireless_switch] [0] ---- cid : manuSpecificCluster
-2017-10-01 12:30:07 [log] [ManagerDrivers] [aqara_wireless_switch] [0] ---- sid : attrs
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ------------------------------------------
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] Node: 31956e48-9b41-47f5-a9b3-66ca8e09c15c
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] - Battery: false
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] - Endpoints: 0
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] -- Clusters:
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- zapp
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- genBasic
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- cid : genBasic
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- sid : attrs
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- genGroups
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- cid : genGroups
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- sid : attrs
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- genOnOff
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- cid : genOnOff
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- sid : attrs
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- manuSpecificCluster
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- cid : manuSpecificCluster
+2017-10-20 23:44:54 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- sid : attrs
+2017-10-20 23:44:56 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ------------------------------------------
 */
 
 class AqaraWirelessSwitch extends ZigBeeDevice {

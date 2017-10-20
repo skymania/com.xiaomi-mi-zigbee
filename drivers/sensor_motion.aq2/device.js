@@ -11,31 +11,29 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 // manufacturer: "LUMI", model: "lumi.sensor_motion.aq2", deviceJoinName: "Xiaomi Motion"
 
 /*
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ZigBeeDevice has been inited
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ------------------------------------------
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] Node: 52c927a0-98e3-4b1b-8074-2da221c04522
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] - Battery: false
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] - Endpoints: 0
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] -- Clusters:
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] --- zapp
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] --- genBasic
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- cid : genBasic
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- sid : attrs
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- manufacturerName : LUMI
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- modelId : lumi.sensor_motion.aq2
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] --- genOta
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- cid : genOta
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- sid : attrs
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] --- msIlluminanceMeasurement
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- cid : msIlluminanceMeasurement
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- sid : attrs
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] --- msOccupancySensing
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- cid : msOccupancySensing
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- sid : attrs
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] --- manuSpecificCluster
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- cid : manuSpecificCluster
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- sid : attrs
-2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ------------------------------------------
+2017-10-20 23:14:47 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ZigBeeDevice has been inited
+2017-10-20 23:14:47 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ------------------------------------------
+2017-10-20 23:14:47 [log] [ManagerDrivers] [sensor_motion.aq2] [0] Node: 363f731f-57fe-4a43-96fe-0513ae78a907
+2017-10-20 23:14:47 [log] [ManagerDrivers] [sensor_motion.aq2] [0] - Battery: false
+2017-10-20 23:14:47 [log] [ManagerDrivers] [sensor_motion.aq2] [0] - Endpoints: 0
+2017-10-20 23:14:47 [log] [ManagerDrivers] [sensor_motion.aq2] [0] -- Clusters:
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] --- zapp
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] --- genBasic
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- cid : genBasic
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- sid : attrs
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] --- genOta
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- cid : genOta
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- sid : attrs
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] --- msIlluminanceMeasurement
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- cid : msIlluminanceMeasurement
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- sid : attrs
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] --- msOccupancySensing
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- cid : msOccupancySensing
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- sid : attrs
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] --- manuSpecificCluster
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- cid : manuSpecificCluster
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ---- sid : attrs
+2017-10-20 23:14:48 [log] [ManagerDrivers] [sensor_motion.aq2] [0] ------------------------------------------
 */
 
 class AqaraHumanBodySensor extends ZigBeeDevice {
@@ -49,32 +47,67 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 
 		// Occupancy Cluster
 		// Register alarm_motion capability
-		this.registerCapability('alarm_motion', 'msOccupancySensing', {
-			get: 'occupancy',
-			report: 'occupancy',
-			reportParser(value) {
-				if (value === 1) return true;
-				return false;
-			},
-		}, 0);
+		this.log('Initializing Occupancy (0x0401) Cluster');
+		// The minimal reporting interval in seconds (e.g. 10 (seconds)):
+		this.minIntMot = this.getSetting('minIntMot') || 1;
+		// The maximal reporting interval in seconds (e.g. 300 (seconds))
+		this.maxIntMot = this.getSetting('maxIntMot') || 60;
 
-
-		// Register AttributeReportListener for occupancy
-		this.registerAttrReportListener('msOccupancySensing', 'occupancy', 1, 6000, null, data => {
-			this.log('msOccupancySensing - occupancy', data === 1);
-			this.setCapabilityValue('alarm_motion', data === 1);
-		}, 0);
+		// Register the AttributeReportListener
+		this.registerAttrReportListener(
+				'msOccupancySensing', // Cluster
+				'occupancy', // Attr
+				this.minIntMot,
+				this.maxIntMot,
+				null,
+				this.onMotionReport.bind(this), // Callback with value
+				0) // The endpoint index
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener', err);
+			});
 
 		// Illuminance Cluster
-		// Register measure_luminance capability
-		this.registerCapability('measure_luminance', 'msIlluminanceMeasurement', {}, 0);
+		// Occupancy Cluster
+		this.log('Initializing Illuminance Cluster');
+		// The minimal reporting interval in seconds (e.g. 10 (seconds)):
+		this.minIntLum = this.getSetting('minIntLum') || 1;
+		// The maximal reporting interval in seconds (e.g. 300 (seconds))
+		this.maxIntLum = this.getSetting('maxIntLum') || 60;
+		// The maximal reporting interval in seconds (e.g. 300 (seconds))
+		this.repChangeLum = this.getSetting('repChangeLum') || 10;
 
-		// Register AttributeReportListener for lumminance
-		this.registerAttrReportListener('msIlluminanceMeasurement', 'measuredValue', 180, 3600, 20, data => {
-			this.log('msIlluminanceMeasurement - measuredValue', data);
-			this.setCapabilityValue('measure_luminance', data);
-		}, 0);
+		// Register the AttributeReportListener
+		this.registerAttrReportListener(
+				'msIlluminanceMeasurement', // Cluster
+				'measuredValue', // Attr
+				this.minIntMot,
+				this.maxIntMot,
+				this.repChangeLum,
+				this.onLuminanceReport.bind(this), // Callback with value
+				0) // The endpoint index
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener', err);
+			});
 
+	}
+	onMotionReport(value) {
+		this.log('msOccupancySensing - occupancy', value === 1);
+		this.setCapabilityValue('alarm_motion', value === 1);
+	}
+	onLuminanceReport(value) {
+		const luminanceValue = Math.round(Math.pow(10, (value - 1) / 10000));
+		this.log('msIlluminanceMeasurement - measuredValue', value, luminanceValue);
+		this.setCapabilityValue('measure_luminance', luminanceValue);
 	}
 }
 

@@ -11,59 +11,69 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 // manufacturer: "LUMI", model: "lumi.weather", deviceJoinName: "Xiaomi Aqara Temp Sensor"
 
 /*
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] - Battery: false
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] - Endpoints: 0
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] -- Clusters:
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] --- zapp
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] --- genBasic
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- cid : genBasic
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- sid : attrs
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] --- genIdentify
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- cid : genIdentify
-2017-09-09 18:54:06 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- sid : attrs
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] --- genGroups
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- cid : genGroups
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- sid : attrs
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] --- msTemperatureMeasurement
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- cid : msTemperatureMeasurement
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- sid : attrs
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] --- msPressureMeasurement
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- cid : msPressureMeasurement
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- sid : attrs
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] --- msRelativeHumidity
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- cid : msRelativeHumidity
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- sid : attrs
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] --- manuSpecificCluster
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- cid : manuSpecificCluster
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ---- sid : attrs
-2017-09-09 18:54:07 [log] [ManagerDrivers] [temperature_humidity_pressure_sensor] [0] ------------------------------------------
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ZigBeeDevice has been inited
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ------------------------------------------
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] Node: 00881eb0-f819-44c5-ade7-87b56d3f7a14
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] - Battery: false
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] - Endpoints: 0
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] -- Clusters:
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] --- zapp
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] --- genBasic
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- cid : genBasic
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- manufacturerName : LUMI
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- modelId : lumi.weather
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] --- genIdentify
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- cid : genIdentify
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] --- genGroups
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- cid : genGroups
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] --- msTemperatureMeasurement
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- cid : msTemperatureMeasurement
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2017-10-20 22:48:42 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 2613
+2017-10-20 22:48:43 [log] [ManagerDrivers] [weather] [0] --- msPressureMeasurement
+2017-10-20 22:48:43 [log] [ManagerDrivers] [weather] [0] ---- 16 : 10101
+2017-10-20 22:48:43 [log] [ManagerDrivers] [weather] [0] ---- 20 : -1
+2017-10-20 22:48:44 [log] [ManagerDrivers] [weather] [0] ---- cid : msPressureMeasurement
+2017-10-20 22:48:44 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2017-10-20 22:48:44 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 1010
+2017-10-20 22:48:44 [log] [ManagerDrivers] [weather] [0] --- msRelativeHumidity
+2017-10-20 22:48:44 [log] [ManagerDrivers] [weather] [0] ---- cid : msRelativeHumidity
+2017-10-20 22:48:45 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2017-10-20 22:48:45 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 5356
+2017-10-20 22:48:45 [log] [ManagerDrivers] [weather] [0] --- manuSpecificCluster
+2017-10-20 22:48:45 [log] [ManagerDrivers] [weather] [0] ---- cid : manuSpecificCluster
+2017-10-20 22:48:45 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2017-10-20 22:48:45 [log] [ManagerDrivers] [weather] [0] ------------------------------------------
 */
 
 class AqaraWeatherSensor extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		// Temperature Cluster (0x0402)
 		this.log('Initializing Temperature (0x0402) Cluster');
 		// Min report interval in seconds (must be greater than 1)
-		const minIntTemp = this.getSetting('minIntTemp') || 30;
+		this.minIntTemp = this.getSetting('minIntTemp') || 30;
 		// Max report interval in seconds (must be zero or greater than 60 and greater than min report interval)
-		const maxIntTemp = this.getSetting('maxIntTemp') || 120;
+		this.maxIntTemp = this.getSetting('maxIntTemp') || 120;
 		// Report change value, if value changed more than this value send a report
-		const repChangeTemp = this.getSetting('repChangeTemp') || 50; // note: 1 = 0.01 [°C]
+		this.repChangeTemp = this.getSetting('repChangeTemp') || 50; // note: 1 = 0.01 [°C]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener(
 				'msTemperatureMeasurement', // Cluster
 				'measuredValue', // Attr
-				minIntTemp,
-				maxIntTemp,
-				repChangeTemp,
+				this.minIntTemp,
+				this.maxIntTemp,
+				this.repChangeTemp,
 				this.onTemperatureReport.bind(this), // Callback with value
 				0) // The endpoint index
 			.then(() => {
@@ -78,19 +88,19 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// Humidity Cluster (0x0405)
 		this.log('Initializing Humidity (0x0405) Cluster');
 		// The minimal reporting interval in seconds (e.g. 10 (seconds)):
-		const minIntHum = this.getSetting('minIntHum') || 60;
+		this.minIntHum = this.getSetting('minIntHum') || 60;
 		// The maximal reporting interval in seconds (e.g. 300 (seconds))
-		const maxIntHum = this.getSetting('maxIntHum') || 180;
+		this.maxIntHum = this.getSetting('maxIntHum') || 180;
 		// Reportable change; the attribute should report its value when the value is changed more than this setting.
-		const repChangeHum = this.getSetting('repChangeHum') || 100; // note: 1 = 0.01 [%]
+		this.repChangeHum = this.getSetting('repChangeHum') || 100; // note: 1 = 0.01 [%]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener(
 				'msRelativeHumidity', // Cluster
 				'measuredValue', // Attr
-				minIntHum,
-				maxIntHum,
-				repChangeHum,
+				this.minIntHum,
+				this.maxIntHum,
+				this.repChangeHum,
 				this.onHumidityReport.bind(this), // Callback with value
 				0) // The endpoint index
 			.then(() => {
@@ -106,19 +116,19 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		this.log('Initializing Pressure (0x0403) Cluster');
 
 		// The minimal reporting interval in seconds (e.g. 10 (seconds)):
-		const minIntPres = this.getSetting('minIntPres') || 60;
+		this.minIntPres = this.getSetting('minIntPres') || 60;
 		// The maximal reporting interval in seconds (e.g. 300 (seconds))
-		const maxIntPres = this.getSetting('maxIntPres') || 240;
+		this.maxIntPres = this.getSetting('maxIntPres') || 240;
 		// Reportable change; the attribute should report its value when the value is changed more than this setting.
-		const repChangePres = this.getSetting('repChangePres') || 100; // note: 1 = 0.01 [%]
+		this.repChangePres = this.getSetting('repChangePres') || 1; // note: 1 = 0.01 [%]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener(
 				'msPressureMeasurement', // Cluster
 				'measuredValue', // Attr
-				minIntPres,
-				maxIntPres,
-				repChangePres,
+				this.minIntPres,
+				this.maxIntPres,
+				this.repChangePres,
 				this.onPressureReport.bind(this), // Callback with value
 				0) // The endpoint index
 			.then(() => {
@@ -133,21 +143,20 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		this.log('Fully initialized');
 
 	}
-
 	onTemperatureReport(value) {
-		const parsedValue = Math.round((value / 100) * 10) / 10;
+		let parsedValue = Math.round((value / 100) * 10) / 10;
 		this.log('msTemperatureMeasurement - measuredValue', parsedValue);
 		this.setCapabilityValue('measure_temperature', parsedValue);
 	}
 
 	onHumidityReport(value) {
-		const parsedValue = Math.round((value / 100) * 10) / 10;
+		let parsedValue = Math.round((value / 100) * 10) / 10;
 		this.log('msRelativeHumidity - measuredValue', parsedValue);
 		this.setCapabilityValue('measure_humidity', parsedValue);
 	}
 
 	onPressureReport(value) {
-		const parsedValue = Math.round((value / 100) * 10) / 10;
+		let parsedValue = Math.round((value / 100) * 10);
 		this.log('msPressureMeasurement - measuredValue', parsedValue);
 		this.setCapabilityValue('measure_pressure', parsedValue);
 	}
