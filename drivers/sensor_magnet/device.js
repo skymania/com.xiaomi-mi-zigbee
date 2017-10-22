@@ -58,17 +58,17 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
 		//	console.log(report);
 		//}, 1);
 
-		if (this.node) {
+		this.registerCapability('alarm_contact', 'genOnOff', {
+			report: 'onOff',
+			reportParser(value) {
+				return value === 1;
+			},
+		}, 0);
 
-			// Listen to all the commands that come in
-			this.node.on('command', report => {
-				console.log('Command received');
-				console.log(report);
-				console.log(report.endpoint);
-				console.log(report.attr);
-				console.log(report.value);
-			});
-		}
+		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, 1, data => {
+			this.log('genOnOff - onOff', data === 1);
+			this.setCapabilityValue('alarm_contact', data === 1);
+		}, 0);
 	}
 }
 
