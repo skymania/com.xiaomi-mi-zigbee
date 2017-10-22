@@ -139,6 +139,14 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener', err);
 			});
+		this.registerCapability('measure_pressure', 'msPressureMeasurement', {
+			/*
+			getOpts: {
+				pollInterval: 10000,
+			},
+			*/
+		}, 0);
+
 
 		this.log('Fully initialized');
 

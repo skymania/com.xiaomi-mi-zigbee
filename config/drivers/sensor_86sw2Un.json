@@ -4,7 +4,7 @@
 		"en": "Wireless light switch double",
 		"nl": "Wireless light switch double"
 	},
-	"class": "light",
+	"class": "socket",
 	"capabilities": [
 		"onoff"
 	],

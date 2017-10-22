@@ -80,12 +80,6 @@ class XiaomiTempSensor extends ZigBeeDevice {
 		// print the node's info to the console
 		this.printNode();
 
-		// enable debugging
-		// this.enableDebug();
-
-		// print the node's info to the console
-		// this.printNode();
-
 		// Temperature Cluster (0x0402)
 		this.log('Initializing Temperature (0x0402) Cluster');
 		// Min report interval in seconds (must be greater than 1)
@@ -103,7 +97,7 @@ class XiaomiTempSensor extends ZigBeeDevice {
 				this.maxIntTemp,
 				this.repChangeTemp,
 				this.onTemperatureReport.bind(this), // Callback with value
-				0) // The endpoint index
+				1) // The endpoint index
 			.then(() => {
 				// Registering attr reporting succeeded
 				this.log('registered attr report listener');
@@ -130,7 +124,7 @@ class XiaomiTempSensor extends ZigBeeDevice {
 				this.maxIntHum,
 				this.repChangeHum,
 				this.onHumidityReport.bind(this), // Callback with value
-				0) // The endpoint index
+				1) // The endpoint index
 			.then(() => {
 				// Registering attr reporting succeeded
 				this.log('registered attr report listener');

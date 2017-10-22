@@ -127,7 +127,7 @@
         "en": "Wireless light switch double",
         "nl": "Wireless light switch double"
       },
-      "class": "light",
+      "class": "socket",
       "capabilities": [
         "onoff"
       ],
@@ -283,7 +283,7 @@
         "en": "Aqara Wireless switch",
         "nl": "Aqara Wireless switch"
       },
-      "class": "button",
+      "class": "socket",
       "capabilities": [
         "onoff"
       ],

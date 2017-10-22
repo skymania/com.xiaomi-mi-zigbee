@@ -51,7 +51,10 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 		// The minimal reporting interval in seconds (e.g. 10 (seconds)):
 		this.minIntMot = this.getSetting('minIntMot') || 1;
 		// The maximal reporting interval in seconds (e.g. 300 (seconds))
-		this.maxIntMot = this.getSetting('maxIntMot') || 60;
+		this.maxIntMot = this.getSetting('maxIntMot') || 600; // 600 = 60 seconds
+
+		// The maximal reporting interval in seconds (e.g. 300 (seconds))
+		this.IntCanMot = this.getSetting('IntCanMot') || 60;
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener(
@@ -59,7 +62,7 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 				'occupancy', // Attr
 				this.minIntMot,
 				this.maxIntMot,
-				null,
+				1,
 				this.onMotionReport.bind(this), // Callback with value
 				0) // The endpoint index
 			.then(() => {
@@ -77,7 +80,7 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 		// The minimal reporting interval in seconds (e.g. 10 (seconds)):
 		this.minIntLum = this.getSetting('minIntLum') || 1;
 		// The maximal reporting interval in seconds (e.g. 300 (seconds))
-		this.maxIntLum = this.getSetting('maxIntLum') || 60;
+		this.maxIntLum = this.getSetting('maxIntLum') || 3000; // 3000 = 300 seconds
 		// The maximal reporting interval in seconds (e.g. 300 (seconds))
 		this.repChangeLum = this.getSetting('repChangeLum') || 10;
 
@@ -105,7 +108,7 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 		this.setCapabilityValue('alarm_motion', value === 1);
 	}
 	onLuminanceReport(value) {
-		const luminanceValue = Math.round(Math.pow(10, (value - 1) / 10000));
+		const luminanceValue = value; //Math.round(Math.pow(10, (value - 1) / 10000));
 		this.log('msIlluminanceMeasurement - measuredValue', value, luminanceValue);
 		this.setCapabilityValue('measure_luminance', luminanceValue);
 	}
