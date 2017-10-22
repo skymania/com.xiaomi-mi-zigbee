@@ -125,7 +125,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// Register the AttributeReportListener
 		this.registerAttrReportListener(
 				'msPressureMeasurement', // Cluster
-				'measuredValue', // Attr
+				'16', // Attr
 				this.minIntPres,
 				this.maxIntPres,
 				this.repChangePres,
@@ -146,7 +146,6 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 			},
 			*/
 		}, 0);
-
 
 		this.log('Fully initialized');
 

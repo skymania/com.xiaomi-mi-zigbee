@@ -106,6 +106,7 @@ class XiaomiTempSensor extends ZigBeeDevice {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener', err);
 			});
+		this.registerCapability('measure_temperature', 'msTemperatureMeasurement');
 
 		// Humidity Cluster (0x0405)
 		this.log('Initializing Humidity (0x0405) Cluster');
@@ -124,7 +125,7 @@ class XiaomiTempSensor extends ZigBeeDevice {
 				this.maxIntHum,
 				this.repChangeHum,
 				this.onHumidityReport.bind(this), // Callback with value
-				1) // The endpoint index
+			) // The endpoint index
 			.then(() => {
 				// Registering attr reporting succeeded
 				this.log('registered attr report listener');
@@ -133,6 +134,7 @@ class XiaomiTempSensor extends ZigBeeDevice {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener', err);
 			});
+		this.registerCapability('measure_humidity', 'msRelativeHumidity');
 
 		this.log('Fully initialized');
 

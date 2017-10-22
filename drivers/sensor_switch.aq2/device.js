@@ -42,18 +42,22 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 		// print the node's info to the console
 		this.printNode();
 		// Register onoff capability
-		this.registerCapability('onoff', 'genOnOff', {
-			/*
-			getOpts: {
-				pollInterval: 10000,
-			},
-			*/
-		}, 0);
+		//this.registerCapability('onoff', 'genOnOff', {
+		/*
+		getOpts: {
+			pollInterval: 10000,
+		},
+		*/
+		//}, 0);
 
 
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, 1, data => {
-			this.log('genOnOff - onOff', data === 1);
+			this.log('genOnOff - onOff', data, data === 1);
 			this.setCapabilityValue('onoff', data === 1);
+		}, 0);
+
+		this.registerReportListener('genOnOff', 'onOff', report => {
+			this.log(report);
 		}, 0);
 
 		// Button (1x) genOnOff OnOff endpoint 1
