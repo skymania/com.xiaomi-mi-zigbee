@@ -6,7 +6,11 @@
 	},
 	"class": "light",
 	"capabilities": [
-		"onoff"
+		"measure_temperature",
+		"onoff",
+		"onoff.1",
+		"measure_power",
+		"meter_power"
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
