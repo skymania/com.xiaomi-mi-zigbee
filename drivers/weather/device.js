@@ -152,19 +152,19 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 	}
 	onTemperatureReport(value) {
 		let parsedValue = Math.round((value / 100) * 10) / 10;
-		this.log('msTemperatureMeasurement - measuredValue', parsedValue);
+		this.log('msTemperatureMeasurement - measuredValue', value, parsedValue);
 		this.setCapabilityValue('measure_temperature', parsedValue);
 	}
 
 	onHumidityReport(value) {
 		let parsedValue = Math.round((value / 100) * 10) / 10;
-		this.log('msRelativeHumidity - measuredValue', parsedValue);
+		this.log('msRelativeHumidity - measuredValue', value, parsedValue);
 		this.setCapabilityValue('measure_humidity', parsedValue);
 	}
 
 	onPressureReport(value) {
 		let parsedValue = Math.round((value / 100) * 10);
-		this.log('msPressureMeasurement - measuredValue', parsedValue);
+		this.log('msPressureMeasurement - measuredValue', value, parsedValue);
 		this.setCapabilityValue('measure_pressure', parsedValue);
 	}
 }
