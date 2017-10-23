@@ -76,14 +76,22 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 		// print the node's info to the console
 		this.printNode();
 
+		// Register onoff capability
+		this.registerCapability('onoff', 'genOnOff', {
+			endpoint: 1
+		});
+		this.registerCapability('onoff.1', 'genOnOff', {
+			endpoint: 2
+		});
+
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, 1, data => {
 			this.log('genOnOff - onOff', data === 1);
 			this.setCapabilityValue('onoff', data === 1);
-		}, 0);
+		}, 1);
 
 		this.registerReportListener('genOnOff', 'onOff', report => {
 			this.log(report);
-		}, 0);
+		}, 1);
 	}
 
 }
