@@ -30,8 +30,13 @@
         "nl": "Wireless light control double"
       },
       "class": "light",
-      "capabilities": [
-        "onoff"
+      "capabilities":
+      [
+        "measure_temperature",
+        "onoff",
+        "onoff.1",
+        "measure_power",
+        "meter_power"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -62,7 +67,10 @@
       },
       "class": "socket",
       "capabilities": [
-        "onoff"
+        "measure_temperature",
+        "onoff",
+        "measure_power",
+        "meter_power"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
