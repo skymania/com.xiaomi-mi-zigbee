@@ -372,10 +372,10 @@
         "deviceId": 1026,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/sensor_wleak.aq1/assets/learn_human_body.svg",
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
           "instruction": {
-            "en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
-            "nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
           }
         }
       },
