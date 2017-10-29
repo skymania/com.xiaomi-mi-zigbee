@@ -1,0 +1,32 @@
+{
+	"id": "sensor_wleak.aq1",
+	"name": {
+		"en": "Leak sensor",
+		"nl": "Leak sensor"
+	},
+	"class": "sensor",
+	"capabilities": [
+		"alarm_water",
+		"alarm_battery",
+		"measure_battery"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": "lumi.sensor_wleak.aq1",
+		"deviceId": 1026,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/sensor_wleak.aq1/assets/learn_human_body.svg",
+			"instruction": {
+				"en": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release",
+				"nl": "Long press the reset button to open more than 3 seconds until the blue light flashes three times after release"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+		"small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+	},
+	"settings": [
+	]
+}

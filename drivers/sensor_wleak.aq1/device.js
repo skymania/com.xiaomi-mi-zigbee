@@ -10,7 +10,8 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 // outClusters: "0000, 0004",
 // manufacturer: "LUMI", model: "lumi.sensor_magnet.aq2", deviceJoinName: "Xiaomi Aqara Door Sensor"
 
-class AqaraWaterSensor extends ZigBeeDevice {
+class AqaraWaterSensor extends ZigBeeDevice
+{
 	onMeshInit() {
 
 		// enable debugging
@@ -19,7 +20,8 @@ class AqaraWaterSensor extends ZigBeeDevice {
 		// print the node's info to the console
 		this.printNode();
 
-		this.registerCapability('alarm_water', 'genOnOff', {
+		/*
+		this.registerCapability('alarm_water', 'genOta', {
 			report: 'onOff',
 			reportParser(value) {
 				return value;
@@ -28,7 +30,7 @@ class AqaraWaterSensor extends ZigBeeDevice {
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 6000, 1, data => {
 			this.log('onOff', data);
 			this.setCapabilityValue('alarm_water', data === 1);
-		}, 0);
+		}, 0);*/
 
 	}
 }
