@@ -1,0 +1,32 @@
+{
+	"id": "sensor_smoke",
+	"name": {
+		"en": "Smoke sensor",
+		"nl": "Smoke sensor"
+	},
+	"class": "sensor",
+	"capabilities": [
+		"alarm_smoke",
+		"alarm_battery",
+		"measure_battery"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": "lumi.sensor_smoke",
+		"deviceId": 1026,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/sensor_smoke/assets/learn.svg",
+			"instruction": {
+				"en": "Press 3 times quickly to hear the device ring 3 times",
+				"nl": "Press 3 times quickly to hear the device ring 3 times"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/sensor_smoke/assets/images/large.png",
+		"small": "/drivers/sensor_smoke/assets/images/small.png"
+	},
+	"settings": [
+	]
+}
