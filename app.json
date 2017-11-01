@@ -17,14 +17,6 @@
     "name": "Ted Tolboom",
     "email": "dTNL.Homey@gmail.com"
   },
-  "contributors": {
-    "developers": [
-      {
-        "name": "Sprut",
-        "email": "sprut.1@me.com"
-      }
-    ]
-  },
   "images": {
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
@@ -39,11 +31,7 @@
       },
       "class": "light",
       "capabilities": [
-        "measure_temperature",
-        "onoff",
-        "onoff.1",
-        "measure_power",
-        "meter_power"
+        "onoff"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -67,35 +55,6 @@
       "settings": []
     },
     {
-      "id": "curtain",
-      "name": {
-        "en": "Curtain",
-        "nl": "Curtain"
-      },
-      "class": "windowcoverings",
-      "capabilities": [
-        "onoff"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.curtain",
-        "deviceId": 514,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/curtain/assets/learn.svg",
-          "instruction": {
-            "en": "Press 3 times quickly to hear the device ring 3 times",
-            "nl": "Press 3 times quickly to hear the device ring 3 times"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/curtain/assets/images/large.png",
-        "small": "/drivers/curtain/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
       "id": "plug",
       "name": {
         "en": "Smart plug",
@@ -103,10 +62,7 @@
       },
       "class": "socket",
       "capabilities": [
-        "measure_temperature",
-        "onoff",
-        "measure_power",
-        "meter_power"
+        "onoff"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -171,7 +127,7 @@
         "en": "Wireless light switch double",
         "nl": "Wireless light switch double"
       },
-      "class": "socket",
+      "class": "light",
       "capabilities": [
         "onoff"
       ],
@@ -199,13 +155,11 @@
     {
       "id": "sensor_magnet.aq2",
       "name": {
-        "en": "Aqara Window Doorsensor"
+        "en": "Aqara Window/Door Sensor"
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_contact",
-        "measure_battery",
-        "alarm_battery"
+        "alarm_contact"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -224,8 +178,7 @@
       "images": {
         "large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
         "small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
-      },
-      "settings": []
+      }
     },
     {
       "id": "sensor_magnet",
@@ -262,7 +215,7 @@
     {
       "id": "sensor_motion.aq2",
       "name": {
-        "en": "Aqara Human body sensor"
+        "en": "Aqara Human Body Sensor"
       },
       "class": "sensor",
       "capabilities": [
@@ -288,7 +241,25 @@
         "large": "/drivers/sensor_motion.aq2/assets/images/large.png",
         "small": "/drivers/sensor_motion.aq2/assets/images/small.png"
       },
-      "settings": []
+      "settings": [
+        {
+          "id": "alarm_motion_reset_window",
+          "type": "number",
+          "label": {
+            "en": "Disable motion alarm after",
+            "nl": "Schakel bewegingsalarm uit na"
+          },
+          "hint": {
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+          },
+          "value": 300,
+          "attr": {
+            "min": 1,
+            "max": 86400
+          }
+        }
+      ]
     },
     {
       "id": "sensor_motion",
@@ -322,75 +293,12 @@
       "settings": []
     },
     {
-      "id": "sensor_natgas",
-      "name": {
-        "en": "Gas sensor",
-        "nl": "Gas sensor"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_co",
-        "measure_temperature",
-        "alarm_battery",
-        "measure_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_natgas",
-        "deviceId": 257,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/sensor_natgas/assets/learn.svg",
-          "instruction": {
-            "en": "Press 3 times quickly to hear the device ring 3 times",
-            "nl": "Press 3 times quickly to hear the device ring 3 times"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/sensor_natgas/assets/images/large.png",
-        "small": "/drivers/sensor_natgas/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "sensor_smoke",
-      "name": {
-        "en": "Smoke sensor",
-        "nl": "Smoke sensor"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_smoke",
-        "alarm_battery",
-        "measure_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_smoke",
-        "deviceId": 1026,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/sensor_smoke/assets/learn.svg",
-          "instruction": {
-            "en": "Press 3 times quickly to hear the device ring 3 times",
-            "nl": "Press 3 times quickly to hear the device ring 3 times"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/sensor_smoke/assets/images/large.png",
-        "small": "/drivers/sensor_smoke/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
       "id": "sensor_switch.aq2",
       "name": {
         "en": "Aqara Wireless switch",
         "nl": "Aqara Wireless switch"
       },
-      "class": "socket",
+      "class": "button",
       "capabilities": [
         "onoff"
       ],
@@ -421,7 +329,7 @@
         "en": "Wireless switch",
         "nl": "Wireless switch"
       },
-      "class": "socket",
+      "class": "button",
       "capabilities": [
         "onoff"
       ],
@@ -443,37 +351,6 @@
       "images": {
         "large": "/drivers/sensor_switch/assets/images/large.png",
         "small": "/drivers/sensor_switch/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "sensor_wleak.aq1",
-      "name": {
-        "en": "Leak sensor",
-        "nl": "Leak sensor"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_water",
-        "alarm_battery",
-        "measure_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_wleak.aq1",
-        "deviceId": 1026,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
-          "instruction": {
-            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
-            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
-        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
       },
       "settings": []
     },
@@ -510,8 +387,7 @@
       "images": {
         "large": "/drivers/weather/assets/images/large.png",
         "small": "/drivers/weather/assets/images/small.png"
-      },
-      "settings": []
+      }
     }
   ]
 }
