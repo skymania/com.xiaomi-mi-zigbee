@@ -26,7 +26,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		const repChangePres = this.getSetting('repChangePres') || 100; // note: 1 = 0.01 [%]
 
 		// Register the AttributeReportListener
-		this.registerAttrReportListener('msPressureMeasurement', 'measuredValue', minIntPres, maxIntPres, repChangePres,
+		this.registerAttrReportListener('msPressureMeasurement', '16', minIntPres, maxIntPres, repChangePres,
 			this.onPressureReport.bind(this));
 	}
 
@@ -43,7 +43,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 	}
 
 	onPressureReport(value) {
-		const parsedValue = Math.round((value / 100) * 10) / 10;
+		const parsedValue = Math.round((value / 100) * 10);
 		this.log('measure_pressure', parsedValue);
 		this.setCapabilityValue('measure_pressure', parsedValue);
 	}
