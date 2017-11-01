@@ -1,13 +1,13 @@
 # Xiaomi Smart Home (Zigbee)
 
-This app adds support for the Zigbee Smart Home devices made by [ Xiaomi Smart Home Devices](https://xiaomi-mi.com/).  
+This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Home Devices](https://xiaomi-mi.com/).  
 <a href="https://github.com/TedTolboom/com.xiaomi-mi-zigbee">
   <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/assets/images/small.png">
 </a>  
 
 ## Links:
-[xiaomi-mi Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi-zigbee)                    
-[Hank Tech app Github repository](https://github.com/TedTolboom/com.xiaomi-mi-zigbee)   
+[Xiaomi-mi Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi-zigbee)                    
+[Xiaomi-mi Zigbee app Github repository](https://github.com/TedTolboom/com.xiaomi-mi-zigbee)   
 
 ## Supported devices
 * Door/Window sensor (contact alarm)
