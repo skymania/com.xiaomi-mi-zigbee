@@ -5,9 +5,8 @@
 		"en": "Aqara Wireless Remote Switch Double",
 		"nl": "Aqara Wireless Remote Switch Double"
 	},
-	"class": "socket",
+	"class": "sensor",
 	"capabilities": [
-		"onoff"
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
