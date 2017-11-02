@@ -1,5 +1,6 @@
 {
 	"id": "sens",
+	"branch": "development",
 	"name": {
 		"en": "Temperature/Humidity sensor",
 		"nl": "Temperature/Humidity sensor"

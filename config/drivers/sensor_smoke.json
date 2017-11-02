@@ -1,5 +1,6 @@
 {
 	"id": "sensor_smoke",
+	"branch": "development",
 	"name": {
 		"en": "Smoke detector",
 		"nl": "Smoke detector"

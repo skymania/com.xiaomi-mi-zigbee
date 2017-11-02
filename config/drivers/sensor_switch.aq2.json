@@ -1,5 +1,6 @@
 {
 	"id": "sensor_switch.aq2",
+	"branch": "development",
 	"name": {
 		"en": "Aqara Wireless switch",
 		"nl": "Aqara Wireless switch"

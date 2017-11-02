@@ -1,5 +1,6 @@
 {
 	"id": "sensor_switch",
+	"branch": "development",
 	"name": {
 		"en": "Wireless switch",
 		"nl": "Wireless switch"

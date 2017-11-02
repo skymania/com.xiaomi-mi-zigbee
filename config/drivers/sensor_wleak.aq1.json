@@ -1,5 +1,6 @@
 {
 	"id": "sensor_wleak.aq1",
+	"branch": "development",
 	"name": {
 		"en": "Aqara Water sensor",
 		"nl": "Aqara Water sensor"

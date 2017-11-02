@@ -1,5 +1,6 @@
 {
 	"id": "sensor_natgas",
+	"branch": "development",
 	"name": {
 		"en": "Gas Leak detector",
 		"nl": "Gas Leak detector"

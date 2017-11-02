@@ -1,6 +1,6 @@
 'use strict';
 
-const branches = ['production', 'beta', 'alpha'];
+const branches = ['master', 'beta', 'alpha', 'development'];
 const branch = require('git-branch').sync();
 const branchIndex = branches.indexOf(branch);
 

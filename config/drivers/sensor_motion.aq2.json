@@ -1,5 +1,6 @@
 {
 	"id": "sensor_motion.aq2",
+	"branch": "master",
 	"name": {
 		"en": "Aqara Human Body Sensor"
 	},

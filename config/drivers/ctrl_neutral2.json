@@ -1,5 +1,6 @@
 {
 	"id": "ctrl_neutral2",
+	"branch": "development",
 	"name": {
 		"en": "Aqara Wall Switch Double",
 		"nl": "Aqara Wall Switch Double"
