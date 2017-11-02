@@ -4,9 +4,9 @@
 		"en": "Wireless switch",
 		"nl": "Wireless switch"
 	},
-	"class": "socket",
+	"class": "button",
 	"capabilities": [
-		"onoff"
+		"button"
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
