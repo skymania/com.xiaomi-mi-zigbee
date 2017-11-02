@@ -1,10 +1,11 @@
 {
-	"id": "sensor_magnet.aq2",
-	"name": {
-		"en": "Aqara Window/Door Sensor"
-	},
-	"class": "sensor",
-	"capabilities": [
+  "id": "sensor_magnet.aq2",
+  "branch": "production",
+  "name": {
+    "en": "Aqara Window/Door Sensor"
+  },
+  "class": "sensor",
+  "capabilities": [
     "alarm_contact"
   ],
 	"zigbee": {
