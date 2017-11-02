@@ -1,0 +1,33 @@
+{
+	"id": "sensor_motion",
+	"branch": "development",
+	"name": {
+		"en": "Occupancy sensor",
+		"nl": "Occupancy sensor"
+	},
+	"class": "sensor",
+	"capabilities": [
+		"alarm_motion",
+		"alarm_battery",
+		"measure_battery"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": "lumi.sensor_motion",
+		"deviceId": 260,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/sensor_motion/assets/learn_human_body.svg",
+			"instruction": {
+				"en": "Long press the reset button for more than 3 seconds until the blue light flashes three times",
+				"nl": "Houd de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/sensor_motion/assets/images/large.png",
+		"small": "/drivers/sensor_motion/assets/images/small.png"
+	},
+	"settings": [
+	]
+}

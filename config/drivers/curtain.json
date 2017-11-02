@@ -1,0 +1,31 @@
+{
+	"id": "curtain",
+	"branch": "development",
+	"name": {
+		"en": "Curtain Controller",
+		"nl": "Curtain Controller"
+	},
+	"class": "windowcoverings",
+	"capabilities": [
+		"onoff"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": "lumi.curtain",
+		"deviceId": 514,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/curtain/assets/learn.svg",
+			"instruction": {
+				"en": "Press 3 times quickly to hear the device ring 3 times",
+				"nl": "Press 3 times quickly to hear the device ring 3 times"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/curtain/assets/images/large.png",
+		"small": "/drivers/curtain/assets/images/small.png"
+	},
+	"settings": [
+	]
+}

@@ -1,0 +1,34 @@
+{
+	"id": "plug",
+	"branch": "development",
+	"name": {
+		"en": "Smart socket plug",
+		"nl": "Smart socket plug"
+	},
+	"class": "socket",
+	"capabilities": [
+		"measure_temperature",
+		"onoff",
+		"measure_power",
+		"meter_power"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": ["lumi.plug"],
+		"deviceId": 81,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/plug/assets/learn.svg",
+			"instruction": {
+				"en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+				"nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/plug/assets/images/large.png",
+		"small": "/drivers/plug/assets/images/small.png"
+	},
+	"settings": [
+	]
+}
