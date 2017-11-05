@@ -45,7 +45,21 @@
 							"en": "Pressed 4x",
 							"nl": "4x ingedrukt"
 						}
-					}
+					},
+					{
+						"id": "Key Held Down",
+						"label": {
+							"en": "Held Down",
+							"nl": "Lang ingedrukt"
+						}
+	              },
+					{
+						"id": "Key Released",
+						"label": {
+							"en": "Released",
+							"nl": "Losgelaten"
+						}
+	        }
 				]
 			}
 		]
