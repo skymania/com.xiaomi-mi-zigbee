@@ -24,8 +24,8 @@
 		"learnmode": {
 			"image": "/drivers/weather/assets/learn_temp.svg",
 			"instruction": {
-				"en": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release",
-				"nl": "Long press the button on top of the sensor to open more than 5 seconds until the blue light flashes three times after release"
+				"en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
 			}
 		}
 	},
