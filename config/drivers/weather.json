@@ -22,7 +22,7 @@
     ],
 		"profileId": 260,
 		"learnmode": {
-			"image": "/drivers/weather/assets/learn_temp.svg",
+			"image": "/drivers/weather/assets/learn_weather.svg",
 			"instruction": {
 				"en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
 				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"

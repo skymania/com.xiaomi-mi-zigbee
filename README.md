@@ -52,6 +52,7 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 ## Change Log:
 ### v 0.1.1
 * Wireless Switch (round) - Add 'Key Held' and 'Key released' triggers
+* Aqara Weather sensor - Add correct learn picture
 * All devices - Update inclusion instructions
 
 ### v 0.1.0

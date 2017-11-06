@@ -1,730 +1,730 @@
 {
-	"id": "com.xiaomi-mi",
-	"name": {
-		"en": "Xiaomi-mi zigbee"
-	},
-	"description": {
-		"en": "Xiaomi-mi zigbee",
-		"nl": "Xiaomi-mi zigbee"
-	},
-	"category": [
+  "id": "com.xiaomi-mi",
+  "name": {
+    "en": "Xiaomi-mi zigbee"
+  },
+  "description": {
+    "en": "Xiaomi-mi zigbee",
+    "nl": "Xiaomi-mi zigbee"
+  },
+  "category": [
     "lights"
   ],
-	"version": "0.1.1",
-	"compatibility": ">=1.5.4",
-	"sdk": 2,
-	"author": {
-		"name": "Ted Tolboom",
-		"email": "dTNL.Homey@gmail.com"
-	},
-	"contributors": {
-		"developers": [
-			{
-				"name": "Sprut",
-				"email": "sprut.1@me.com"
+  "version": "0.1.1",
+  "compatibility": ">=1.5.4",
+  "sdk": 2,
+  "author": {
+    "name": "Ted Tolboom",
+    "email": "dTNL.Homey@gmail.com"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Sprut",
+        "email": "sprut.1@me.com"
       },
-			{
-				"name": "Kasteleman",
-				"email": "kasteleman@gmail.com"
+      {
+        "name": "Kasteleman",
+        "email": "kasteleman@gmail.com"
       },
-			{
-				"name": "Ted Tolboom",
-				"email": "dTNL.Homey@gmail.com"
+      {
+        "name": "Ted Tolboom",
+        "email": "dTNL.Homey@gmail.com"
       }
     ]
-	},
-	"contributing": {
-		"donate": {
-			"paypal": {
-				"email": "dtnl.homey@gmail.com",
-				"currency": "EUR"
-			}
-		}
-	},
-	"images": {
-		"large": "/assets/images/large.png",
-		"small": "/assets/images/small.png"
-	},
-	"flow": {
-		"triggers": [
-			{
-				"id": "button1_scene",
-				"title": {
-					"en": "A scene has been activated",
-					"nl": "Een scene is geactiveerd"
-				},
-				"hint": {
-					"en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
-					"nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_switch|sensor_switch.aq2"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "email": "dtnl.homey@gmail.com",
+        "currency": "EUR"
+      }
+    }
+  },
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "button1_scene",
+        "title": {
+          "en": "A scene has been activated",
+          "nl": "Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2"
           },
-					{
-						"name": "scene",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "Key Pressed 1 time",
-								"label": {
-									"en": "Pressed 1x",
-									"nl": "1x ingedrukt"
-								}
+          {
+            "name": "scene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Key Pressed 1 time",
+                "label": {
+                  "en": "Pressed 1x",
+                  "nl": "1x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 2 times",
-								"label": {
-									"en": "Pressed 2x",
-									"nl": "2x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 2 times",
+                "label": {
+                  "en": "Pressed 2x",
+                  "nl": "2x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 3 times",
-								"label": {
-									"en": "Pressed 3x",
-									"nl": "3x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 3 times",
+                "label": {
+                  "en": "Pressed 3x",
+                  "nl": "3x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 4 timess",
-								"label": {
-									"en": "Pressed 4x",
-									"nl": "4x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 4 timess",
+                "label": {
+                  "en": "Pressed 4x",
+                  "nl": "4x ingedrukt"
+                }
               },
-							{
-								"id": "Key Held Down",
-								"label": {
-									"en": "Held Down",
-									"nl": "Lang ingedrukt"
-								}
+              {
+                "id": "Key Held Down",
+                "label": {
+                  "en": "Held Down",
+                  "nl": "Lang ingedrukt"
+                }
               },
-							{
-								"id": "Key Released",
-								"label": {
-									"en": "Released",
-									"nl": "Losgelaten"
-								}
+              {
+                "id": "Key Released",
+                "label": {
+                  "en": "Released",
+                  "nl": "Losgelaten"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "button1_button",
-				"title": {
-					"en": "A button has been pressed",
-					"nl": "Een knop is ingedrukt"
-				},
-				"hint": {
-					"en": "This card will trigger on any button pressed and provides the scene tokens.",
-					"nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_switch|sensor_switch.aq2"
+      {
+        "id": "button1_button",
+        "title": {
+          "en": "A button has been pressed",
+          "nl": "Een knop is ingedrukt"
+        },
+        "hint": {
+          "en": "This card will trigger on any button pressed and provides the scene tokens.",
+          "nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2"
           }
         ],
-				"tokens": [
-					{
-						"name": "scene",
-						"type": "string",
-						"title": {
-							"en": "scene",
-							"nl": "scene"
-						},
-						"example": "Button pressed (test)"
+        "tokens": [
+          {
+            "name": "scene",
+            "type": "string",
+            "title": {
+              "en": "scene",
+              "nl": "scene"
+            },
+            "example": "Button pressed (test)"
           }
         ]
       },
-			{
-				"id": "button2_scene",
-				"title": {
-					"en": "A scene has been activated",
-					"nl": "Een scene is geactiveerd"
-				},
-				"hint": {
-					"en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
-					"nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_86sw2Un"
+      {
+        "id": "button2_scene",
+        "title": {
+          "en": "A scene has been activated",
+          "nl": "Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_86sw2Un"
           },
-					{
-						"name": "button",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "1",
-								"label": {
-									"en": "Left button",
-									"nl": "Linker knop"
-								}
+          {
+            "name": "button",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Left button",
+                  "nl": "Linker knop"
+                }
               },
-							{
-								"id": "2",
-								"label": {
-									"en": "Right button",
-									"nl": "Rechter knop"
-								}
+              {
+                "id": "2",
+                "label": {
+                  "en": "Right button",
+                  "nl": "Rechter knop"
+                }
               }
             ]
           },
-					{
-						"name": "scene",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "Key Pressed 1 time",
-								"label": {
-									"en": "Pressed 1x",
-									"nl": "1x ingedrukt"
-								}
+          {
+            "name": "scene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Key Pressed 1 time",
+                "label": {
+                  "en": "Pressed 1x",
+                  "nl": "1x ingedrukt"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "button2_button",
-				"title": {
-					"en": "A button has been pressed",
-					"nl": "Een knop is ingedrukt"
-				},
-				"hint": {
-					"en": "This card will trigger on any button pressed and provides the scene tokens.",
-					"nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_86sw2Un"
+      {
+        "id": "button2_button",
+        "title": {
+          "en": "A button has been pressed",
+          "nl": "Een knop is ingedrukt"
+        },
+        "hint": {
+          "en": "This card will trigger on any button pressed and provides the scene tokens.",
+          "nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_86sw2Un"
           }
         ],
-				"tokens": [
-					{
-						"name": "button",
-						"type": "string",
-						"title": {
-							"en": "button",
-							"nl": "knop"
-						},
-						"example": "0"
+        "tokens": [
+          {
+            "name": "button",
+            "type": "string",
+            "title": {
+              "en": "button",
+              "nl": "knop"
+            },
+            "example": "0"
           },
-					{
-						"name": "scene",
-						"type": "string",
-						"title": {
-							"en": "scene",
-							"nl": "scene"
-						},
-						"example": "Button pressed (test)"
+          {
+            "name": "scene",
+            "type": "string",
+            "title": {
+              "en": "scene",
+              "nl": "scene"
+            },
+            "example": "Button pressed (test)"
           }
         ]
       }
     ]
-	},
-	"drivers": [
-		{
-			"id": "ctrl_neutral2",
-			"name": {
-				"en": "Aqara Wall Switch Double",
-				"nl": "Aqara Wall Switch Double"
-			},
-			"class": "light",
-			"capabilities": [
+  },
+  "drivers": [
+    {
+      "id": "ctrl_neutral2",
+      "name": {
+        "en": "Aqara Wall Switch Double",
+        "nl": "Aqara Wall Switch Double"
+      },
+      "class": "light",
+      "capabilities": [
         "measure_temperature",
         "onoff",
         "onoff.1",
         "measure_power",
         "meter_power"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.ctrl_neutral2"
         ],
-				"deviceId": 6,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/ctrl_neutral2/assets/learn.svg",
-					"instruction": {
-						"en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-						"nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/ctrl_neutral2/assets/images/large.png",
-				"small": "/drivers/ctrl_neutral2/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 6,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/ctrl_neutral2/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_neutral2/assets/images/large.png",
+        "small": "/drivers/ctrl_neutral2/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "curtain",
-			"name": {
-				"en": "Curtain Controller",
-				"nl": "Curtain Controller"
-			},
-			"class": "windowcoverings",
-			"capabilities": [
+    {
+      "id": "curtain",
+      "name": {
+        "en": "Curtain Controller",
+        "nl": "Curtain Controller"
+      },
+      "class": "windowcoverings",
+      "capabilities": [
         "onoff"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.curtain",
-				"deviceId": 514,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/curtain/assets/learn.svg",
-					"instruction": {
-						"en": "Press 3 times quickly to hear the device ring 3 times",
-						"nl": "Press 3 times quickly to hear the device ring 3 times"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/curtain/assets/images/large.png",
-				"small": "/drivers/curtain/assets/images/small.png"
-			},
-			"settings": []
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain",
+        "deviceId": 514,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/curtain/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain/assets/images/large.png",
+        "small": "/drivers/curtain/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "plug",
-			"name": {
-				"en": "Smart socket plug",
-				"nl": "Smart socket plug"
-			},
-			"class": "socket",
-			"capabilities": [
+    {
+      "id": "plug",
+      "name": {
+        "en": "Smart socket plug",
+        "nl": "Smart socket plug"
+      },
+      "class": "socket",
+      "capabilities": [
         "measure_temperature",
         "onoff",
         "measure_power",
         "meter_power"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.plug"
         ],
-				"deviceId": 81,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/plug/assets/learn.svg",
-					"instruction": {
-						"en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
-						"nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/plug/assets/images/large.png",
-				"small": "/drivers/plug/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 81,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/plug/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/plug/assets/images/large.png",
+        "small": "/drivers/plug/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sens",
-			"name": {
-				"en": "Temperature/Humidity sensor",
-				"nl": "Temperature/Humidity sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sens",
+      "name": {
+        "en": "Temperature/Humidity sensor",
+        "nl": "Temperature/Humidity sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "measure_temperature",
         "measure_humidity",
         "measure_battery",
         "alarm_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sens"
         ],
-				"deviceId": [
+        "deviceId": [
           24321
         ],
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sens/assets/learn_temp.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sens/assets/images/large.png",
-				"small": "/drivers/sens/assets/images/small.png"
-			},
-			"settings": []
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sens/assets/learn_temp.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sens/assets/images/large.png",
+        "small": "/drivers/sens/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_86sw2Un",
-			"name": {
-				"en": "Aqara Wireless Remote Switch Double",
-				"nl": "Aqara Wireless Remote Switch Double"
-			},
-			"class": "sensor",
-			"capabilities": [],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+    {
+      "id": "sensor_86sw2Un",
+      "name": {
+        "en": "Aqara Wireless Remote Switch Double",
+        "nl": "Aqara Wireless Remote Switch Double"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_86sw2Un"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_86sw2Un/assets/learn.svg",
-					"instruction": {
-						"en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-						"nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_86sw2Un/assets/images/large.png",
-				"small": "/drivers/sensor_86sw2Un/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_86sw2Un/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_86sw2Un/assets/images/large.png",
+        "small": "/drivers/sensor_86sw2Un/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_magnet.aq2",
-			"name": {
-				"en": "Aqara Window/Door Sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_magnet.aq2",
+      "name": {
+        "en": "Aqara Window/Door Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_contact"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_magnet.aq2"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_magnet.aq2/assets/learn_door.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
-				"small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
-			}
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_magnet.aq2/assets/learn_door.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
+      }
     },
-		{
-			"id": "sensor_magnet",
-			"name": {
-				"en": "Door/Window sensor",
-				"nl": "Door/Window sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_magnet",
+      "name": {
+        "en": "Door/Window sensor",
+        "nl": "Door/Window sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_contact",
         "measure_battery",
         "alarm_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_magnet"
         ],
-				"deviceId": 260,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_magnet/assets/learn_door.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_magnet/assets/images/large.png",
-				"small": "/drivers/sensor_magnet/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_magnet/assets/learn_door.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_magnet/assets/images/large.png",
+        "small": "/drivers/sensor_magnet/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_motion.aq2",
-			"name": {
-				"en": "Aqara Human Body Sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_motion.aq2",
+      "name": {
+        "en": "Aqara Human Body Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_motion",
         "measure_luminance",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_motion.aq2",
-				"deviceId": 260,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_motion.aq2/assets/images/large.png",
-				"small": "/drivers/sensor_motion.aq2/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "alarm_motion_reset_window",
-					"type": "number",
-					"label": {
-						"en": "Disable motion alarm after",
-						"nl": "Schakel bewegingsalarm uit na"
-					},
-					"hint": {
-						"en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.",
-						"nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
-					},
-					"value": 300,
-					"attr": {
-						"min": 1,
-						"max": 86400
-					}
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_motion.aq2",
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_motion.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_motion.aq2/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "alarm_motion_reset_window",
+          "type": "number",
+          "label": {
+            "en": "Disable motion alarm after",
+            "nl": "Schakel bewegingsalarm uit na"
+          },
+          "hint": {
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+          },
+          "value": 300,
+          "attr": {
+            "min": 1,
+            "max": 86400
+          }
         }
       ]
     },
-		{
-			"id": "sensor_motion",
-			"name": {
-				"en": "Occupancy sensor",
-				"nl": "Occupancy sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_motion",
+      "name": {
+        "en": "Occupancy sensor",
+        "nl": "Occupancy sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_motion",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_motion",
-				"deviceId": 260,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_motion/assets/learn_human_body.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_motion/assets/images/large.png",
-				"small": "/drivers/sensor_motion/assets/images/small.png"
-			},
-			"settings": []
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_motion",
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_motion/assets/learn_human_body.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_motion/assets/images/large.png",
+        "small": "/drivers/sensor_motion/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_natgas",
-			"name": {
-				"en": "Gas Leak detector",
-				"nl": "Gas Leak detector"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_natgas",
+      "name": {
+        "en": "Gas Leak detector",
+        "nl": "Gas Leak detector"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_co",
         "measure_temperature",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_natgas",
-				"deviceId": 257,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_natgas/assets/learn.svg",
-					"instruction": {
-						"en": "Press 3 times quickly to hear the device ring 3 times",
-						"nl": "Press 3 times quickly to hear the device ring 3 times"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_natgas/assets/images/large.png",
-				"small": "/drivers/sensor_natgas/assets/images/small.png"
-			},
-			"settings": []
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_natgas",
+        "deviceId": 257,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_natgas/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_natgas/assets/images/large.png",
+        "small": "/drivers/sensor_natgas/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_smoke",
-			"name": {
-				"en": "Smoke detector",
-				"nl": "Smoke detector"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_smoke",
+      "name": {
+        "en": "Smoke detector",
+        "nl": "Smoke detector"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_smoke",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_smoke",
-				"deviceId": 1026,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_smoke/assets/learn.svg",
-					"instruction": {
-						"en": "Press 3 times quickly to hear the device ring 3 times",
-						"nl": "Press 3 times quickly to hear the device ring 3 times"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_smoke/assets/images/large.png",
-				"small": "/drivers/sensor_smoke/assets/images/small.png"
-			},
-			"settings": []
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_smoke",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_smoke/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_smoke/assets/images/large.png",
+        "small": "/drivers/sensor_smoke/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_switch.aq2",
-			"name": {
-				"en": "Aqara Wireless switch",
-				"nl": "Aqara Wireless switch"
-			},
-			"class": "sensor",
-			"capabilities": [],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+    {
+      "id": "sensor_switch.aq2",
+      "name": {
+        "en": "Aqara Wireless switch",
+        "nl": "Aqara Wireless switch"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_switch.aq2"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_switch.aq2/assets/learn_switch.svg",
-					"instruction": {
-						"en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_switch.aq2/assets/images/large.png",
-				"small": "/drivers/sensor_switch.aq2/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_switch.aq2/assets/learn_switch.svg",
+          "instruction": {
+            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_switch.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_switch.aq2/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_switch",
-			"name": {
-				"en": "Wireless switch",
-				"nl": "Wireless switch"
-			},
-			"class": "sensor",
-			"capabilities": [],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+    {
+      "id": "sensor_switch",
+      "name": {
+        "en": "Wireless switch",
+        "nl": "Wireless switch"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_switch"
         ],
-				"deviceId": 260,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_switch/assets/learn_button.svg",
-					"instruction": {
-						"en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_switch/assets/images/large.png",
-				"small": "/drivers/sensor_switch/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_switch/assets/learn_button.svg",
+          "instruction": {
+            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_switch/assets/images/large.png",
+        "small": "/drivers/sensor_switch/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_wleak.aq1",
-			"name": {
-				"en": "Aqara Water sensor",
-				"nl": "Aqara Water sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_wleak.aq1",
+      "name": {
+        "en": "Aqara Water sensor",
+        "nl": "Aqara Water sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_water",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_wleak.aq1",
-				"deviceId": 1026,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
-					"instruction": {
-						"en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
-						"nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
-				"small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
-			},
-			"settings": []
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_wleak.aq1",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "weather",
-			"name": {
-				"en": "Aqara Weather sensor",
-				"nl": "Aqara Weather sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "weather",
+      "name": {
+        "en": "Aqara Weather sensor",
+        "nl": "Aqara Weather sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "measure_temperature",
         "measure_pressure",
         "measure_humidity"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.weather"
         ],
-				"deviceId": [
+        "deviceId": [
           770,
           24321
         ],
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/weather/assets/learn_temp.svg",
-					"instruction": {
-						"en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/weather/assets/images/large.png",
-				"small": "/drivers/weather/assets/images/small.png"
-			}
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/weather/assets/learn_weather.svg",
+          "instruction": {
+            "en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      }
     }
   ]
 }
