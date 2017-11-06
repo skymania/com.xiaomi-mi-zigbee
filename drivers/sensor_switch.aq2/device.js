@@ -21,9 +21,8 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 
 	onOnOffListener(data) {
 		this.log('genOnOff - onOff', data);
-		const keyPresses = data || 1;
 		const remoteValue = {
-			scene: `Key Pressed ${keyPresses} time${keyPresses === 1 ? '' : 's'}`,
+			scene: 'Key Pressed 1 time',
 		};
 		// Trigger the trigger card with 1 dropdown option
 		this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
