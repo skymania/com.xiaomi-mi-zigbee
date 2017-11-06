@@ -12,20 +12,20 @@ class XiaomiTempSensor extends ZigBeeDevice {
 		this.printNode();
 
 		const minIntTemp = this.getSetting('minIntTemp') || 60;
-		const maxIntTemp = this.getSetting('maxIntTemp') || 3600;
-		const repChangeTemp = this.getSetting('repChangeTemp') || 50; // note: 1 = 0.01 [°C]
+		const maxIntTemp = this.getSetting('maxIntTemp') || 600;
+		const repChangeTemp = this.getSetting('repChangeTemp') || 1; // note: 1 = 0.01 [°C]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', minIntTemp, maxIntTemp, repChangeTemp,
-			this.onTemperatureReport.bind(this));
+			this.onTemperatureReport.bind(this), 0, true);
 
 		const minIntHum = this.getSetting('minIntHum') || 60;
-		const maxIntHum = this.getSetting('maxIntHum') || 3600;
-		const repChangeHum = this.getSetting('repChangeHum') || 100; // note: 1 = 0.01 [%]
+		const maxIntHum = this.getSetting('maxIntHum') || 600;
+		const repChangeHum = this.getSetting('repChangeHum') || 1; // note: 1 = 0.01 [%]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', minIntHum, maxIntHum, repChangeHum,
-			this.onHumidityReport.bind(this));
+			this.onHumidityReport.bind(this), 0, true);
 
 	}
 
