@@ -2,6 +2,8 @@
 const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
+let keyHeld = false;
+
 class XiaomiWirelessSwitch extends ZigBeeDevice {
 	onMeshInit() {
 		// define and register FlowCardTriggers
@@ -20,12 +22,38 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 	}
 
 	onOnOffListener(data) {
-		if (data !== 0) {
-			this.log('genOnOff - onOff', data);
-			const keyPresses = data || 1;
-			const remoteValue = {
-				scene: `Key Pressed ${keyPresses} time${keyPresses === 1 ? '' : 's'}`,
+		this.log('genOnOff - onOff', data);
+		let remoteValue = null;
+		if (data === 0) {
+			keyHeld = false;
+			this.buttonHeldTimeout = setTimeout(() => {
+				keyHeld = true;
+				remoteValue = {
+					scene: 'Key Held Down',
+				};
+				this.log('Scene trigger', remoteValue.scene);
+				// Trigger the trigger card with 1 dropdown option
+				this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
+				// Trigger the trigger card with tokens
+				this.triggerButton1_button.trigger(this, remoteValue, null);
+			}, 200);
+		}
+
+		if (data === 1) {
+			clearTimeout(this.buttonHeldTimeout);
+			remoteValue = {
+				scene: `${keyHeld ? 'Key Released' : 'Key pressed 1 time'}`,
 			};
+		}
+
+		if (data > 1) {
+			remoteValue = {
+				scene: `Key Pressed ${data} times`,
+			};
+		}
+
+		if (remoteValue !== null) {
+			this.log('Scene trigger', remoteValue.scene);
 			// Trigger the trigger card with 1 dropdown option
 			this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
 			// Trigger the trigger card with tokens

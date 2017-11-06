@@ -19,8 +19,8 @@
 		"learnmode": {
 			"image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
 			"instruction": {
-				"en": "Long press the reset button for more than 3 seconds until the blue light flashes three times",
-				"nl": "Houd de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+				"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
 			}
 		}
 	},

@@ -8,23 +8,26 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 ## Links:
 [Xiaomi-mi Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi-zigbee)                    
 [Xiaomi-mi Zigbee app Github repository](https://github.com/TedTolboom/com.xiaomi-mi-zigbee)   
+**Note:** This app is using [HomeyConfig composer](https://www.npmjs.com/package/node-homey-config-composer).   
+Please file Pull Requests on the development branch of this repository and with respect to the refactored files in _/drivers_ and _/config_ folders.   
 
 ## Supported devices
 * Door/Window sensor (contact alarm)
 * Aqara Window/Door Sensor (contact alarm)
-* Aqara Human Body Sensor (motion alarm, lumminance, temperature)
+* Aqara Human Body Sensor (motion alarm, luminance, temperature)
 * Aqara Weather sensor (temperature, relative humidity, atmospheric pressure)
 * Wireless switch (1x - 4x click)
-* Aqara Wireless switch (1x - 4x click)
+* Aqara Wireless switch (1x - 4x click)   
+**Note:** The Aqara Human Body Sensor has a button next to the PIR window; the Occupancy sensor has a pinhole   
 
 ## Devices Work in Progress (reports received)
+* Temperature/Humidity Sensor
+* Occupancy Sensor
 * Aqara Wireless Remote Switch (single / double)
 * Curtain Controller
 * Smart socket plug
 
 ## Devices Work in Progress (inclusion is possible, no reporting yet)
-* Occupancy Sensor
-* Temperature/Humidity Sensor
 * Cube
 * Aqara Wall Switch Double
 * Aqara Water sensor
@@ -44,8 +47,13 @@ This app and driver development has been supported by:
 
 ## Feedback:
 Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum](https://forum.athom.com/discussion/4120/) or contact me on [Slack](https://athomcommunity.slack.com/team/tedtolboom)    
-If possible, please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
+Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.1.1
+* Wireless Switch (round) - Add 'Key Held' and 'Key released' triggers
+* Aqara Weather sensor - Add correct learn picture
+* All devices - Update inclusion instructions
+
 ### v 0.1.0
 * App store release with support for the both Door/Window sensors, both wireless switches, Aqara Human Body sensor, Aqara Weather sensor
