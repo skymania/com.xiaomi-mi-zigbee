@@ -1,6 +1,6 @@
 {
 	"id": "sensor_motion",
-	"branch": "development",
+	"branch": "master",
 	"name": {
 		"en": "Occupancy sensor",
 		"nl": "Occupancy sensor"
