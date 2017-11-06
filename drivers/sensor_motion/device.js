@@ -13,7 +13,7 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
 
 		// Register attribute listener for occupancy
 		this.registerAttrReportListener('msOccupancySensing', 'occupancy', 1, 3600, 1,
-			this.onOccupancyReport.bind(this));
+			this.onOccupancyReport.bind(this), 0, true);
 	}
 
 	onOccupancyReport(value) {
