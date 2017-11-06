@@ -9,7 +9,7 @@ class AqaraDoorWindowSensor extends ZigBeeDevice {
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1, data => {
 			this.log(`alarm_contact -> ${data === 1}`);
 			this.setCapabilityValue('alarm_contact', data === 1);
-		});
+		}, 0);
 	}
 }
 
