@@ -18,8 +18,8 @@ Please file Pull Requests on the development branch of this repository and with 
 * Aqara Weather sensor (temperature, relative humidity, atmospheric pressure)
 * Wireless switch (1x - 4x click, Key Held, Key released)
 * Aqara Wireless switch (1x - 4x click)   
-* Temperature/Humidity Sensor
-* Occupancy Sensor
+* Temperature/Humidity Sensor (temperature, relative humidity)
+* Occupancy Sensor (motion alarm)
 * Aqara Wireless Remote Switch Single / Double (1x click)     
 
 **Note:** The Aqara Human Body Sensor has a button next to the PIR window; the Occupancy sensor has a pinhole   
