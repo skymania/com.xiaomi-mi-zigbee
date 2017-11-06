@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "compatibility": ">=1.5.4",
   "sdk": 2,
   "author": {
@@ -61,7 +61,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_switch|sensor_switch.aq2"
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_86sw1Un"
           },
           {
             "name": "scene",
@@ -127,7 +127,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_switch|sensor_switch.aq2"
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_86sw1Un"
           }
         ],
         "tokens": [
@@ -163,14 +163,14 @@
             "type": "dropdown",
             "values": [
               {
-                "id": "1",
+                "id": "Left button",
                 "label": {
                   "en": "Left button",
                   "nl": "Linker knop"
                 }
               },
               {
-                "id": "2",
+                "id": "Right button",
                 "label": {
                   "en": "Right button",
                   "nl": "Rechter knop"
@@ -537,7 +537,25 @@
         "large": "/drivers/sensor_motion/assets/images/large.png",
         "small": "/drivers/sensor_motion/assets/images/small.png"
       },
-      "settings": []
+      "settings": [
+        {
+          "id": "alarm_motion_reset_window",
+          "type": "number",
+          "label": {
+            "en": "Disable motion alarm after",
+            "nl": "Schakel bewegingsalarm uit na"
+          },
+          "hint": {
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+          },
+          "value": 300,
+          "attr": {
+            "min": 1,
+            "max": 86400
+          }
+        }
+      ]
     },
     {
       "id": "sensor_natgas",
@@ -718,7 +736,6 @@
           "instruction": {
             "en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
             "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-
           }
         }
       },
