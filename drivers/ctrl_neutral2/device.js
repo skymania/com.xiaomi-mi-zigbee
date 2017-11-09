@@ -171,51 +171,62 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 class AqaraLightControlDouble extends ZigBeeDevice {
 
-	onMeshInit()
-	{
+	onMeshInit() {
 		// enable debugging
 		this.enableDebug();
 
 		// print the node's info to the console
 		this.printNode();
 
+		/*
 		this.registerAttrReportListener('genDeviceTempCfg', 'currentTemperature', 1, 60, 1, data =>
 		{
 			this.log('endpoint: 0 - currentTemperature', data);
 			this.setCapabilityValue('measure_temperature', data);
 		}, 0);
 
-		this.registerReportListener('genDeviceTempCfg', 'currentTemperature', report =>
-		{
-			this.log(report);
-		}, 0);
+
+		*/
 
 		// Register onoff capability
 		this.registerCapability('onoff', 'genOnOff', { endpoint: 1});
 		this.registerCapability('onoff.1', 'genOnOff', { endpoint: 2});
 
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, 1, data =>
-		{
-			this.log('endpoint: 1 - onOff', data === 1);
-			this.setCapabilityValue('onoff', data === 1);
-		}, 1);
+		this.registerAttrReportListener(
+			'genOnOff', 'onOff',
+			1, 3600, 1,
+			this.onOnOffListener1.bind(this),
+			3, true);
 
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, 1, data =>
-		{
-			this.log('endpoint: 2 - onOff', data === 1);
-			this.setCapabilityValue('onoff.1', data === 1);
-		}, 2);
+		this.registerAttrReportListener(
+			'genOnOff', 'onOff',
+			1, 3600, 1,
+			this.onOnOffListener2.bind(this),
+			4, true);
 
-		this.registerReportListener('genOnOff', 'onOff', report =>
-		{
-			this.log(report);
-		}, 1);
+		//this.registerAttrReportListener('genDeviceTempCfg', 'currentTemperature', 1, 3600, 1, this.onOtherListener.bind(this), 0, true);
+		//this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 3600, 1, this.onOtherListener.bind(this), 6, true);
 
-		this.registerReportListener('genOnOff', 'onOff', report =>
-		{
-			this.log(report);
-		}, 2);
 	}
+
+	onOnOffListener1(data) {
+		this.log('genOnOff - 1' , data);
+		if (data > 0) {
+			this.setCapabilityValue('onoff', !this.getCapabilityValue('onoff'));
+		}
+	}
+
+	onOnOffListener2(data,capability) {
+		this.log('genOnOff - 2' , data);
+		if (data > 0) {
+			this.setCapabilityValue('onoff.1', !this.getCapabilityValue('onoff.1'));
+		}
+	}
+
+	/*
+	onOtherListener(data) {
+		this.log('onOtherListener', data );
+	}*/
 
 }
 
