@@ -21,10 +21,12 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1, this.onOnOffListener.bind(this), 0);
 	}
 
+
 	onOnOffListener(data) {
 		this.log('genOnOff - onOff', data);
 		let remoteValue = null;
-		if (data === 0) {
+		if (data === 0 && lastKey !== 0) {
+			lastKey = 0;
 			keyHeld = false;
 			this.buttonHeldTimeout = setTimeout(() => {
 				keyHeld = true;
@@ -36,11 +38,12 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 				this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
 				// Trigger the trigger card with tokens
 				this.triggerButton1_button.trigger(this, remoteValue, null);
-			}, 200);
+			}, 1000);
 		}
 
-		if (data === 1) {
+		if (data === 1 && lastKey !== 1) {
 			clearTimeout(this.buttonHeldTimeout);
+			lastKey = 1;
 			remoteValue = {
 				scene: `${keyHeld ? 'Key Released' : 'Key pressed 1 time'}`,
 			};
