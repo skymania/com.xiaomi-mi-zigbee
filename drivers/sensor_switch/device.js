@@ -3,11 +3,12 @@ const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 let keyHeld = false;
+let lastKey = null;
 
 class XiaomiWirelessSwitch extends ZigBeeDevice {
 	onMeshInit() {
 		// define and register FlowCardTriggers
-		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene');
+		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene_held');
 		this.triggerButton1_scene
 			.register()
 			.registerRunListener((args, state) => {
@@ -23,44 +24,49 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 
 
 	onOnOffListener(data) {
-		this.log('genOnOff - onOff', data);
-		let remoteValue = null;
-		if (data === 0 && lastKey !== 0) {
-			lastKey = 0;
-			keyHeld = false;
-			this.buttonHeldTimeout = setTimeout(() => {
-				keyHeld = true;
+		this.log('genOnOff - onOff', data, 'lastKey', lastKey);
+		if (lastKey !== data) {
+			lastKey = data;
+			let remoteValue = null;
+			if (data === 0) {
+				keyHeld = false;
+				this.buttonHeldTimeout = setTimeout(() => {
+					keyHeld = true;
+					remoteValue = {
+						scene: 'Key Held Down',
+					};
+					this.log('Scene trigger', remoteValue.scene);
+					// Trigger the trigger card with 1 dropdown option
+					this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
+					// Trigger the trigger card with tokens
+					this.triggerButton1_button.trigger(this, remoteValue, null);
+				}, (this.getSetting('button_long_press_threshold') || 1000));
+			}
+
+			if (data === 1) {
+				clearTimeout(this.buttonHeldTimeout);
 				remoteValue = {
-					scene: 'Key Held Down',
+					scene: `${keyHeld ? 'Key Released' : 'Key pressed 1 time'}`,
 				};
+			}
+
+			if (data > 1) {
+				remoteValue = {
+					scene: `Key Pressed ${data} times`,
+				};
+			}
+
+			if (remoteValue !== null) {
 				this.log('Scene trigger', remoteValue.scene);
 				// Trigger the trigger card with 1 dropdown option
 				this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
 				// Trigger the trigger card with tokens
 				this.triggerButton1_button.trigger(this, remoteValue, null);
-			}, 1000);
-		}
-
-		if (data === 1 && lastKey !== 1) {
-			clearTimeout(this.buttonHeldTimeout);
-			lastKey = 1;
-			remoteValue = {
-				scene: `${keyHeld ? 'Key Released' : 'Key pressed 1 time'}`,
-			};
-		}
-
-		if (data > 1) {
-			remoteValue = {
-				scene: `Key Pressed ${data} times`,
-			};
-		}
-
-		if (remoteValue !== null) {
-			this.log('Scene trigger', remoteValue.scene);
-			// Trigger the trigger card with 1 dropdown option
-			this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
-			// Trigger the trigger card with tokens
-			this.triggerButton1_button.trigger(this, remoteValue, null);
+				// reset lastKey after the last trigger
+				this.buttonLastKeyTimeout = setTimeout(() => {
+					lastKey = null;
+				}, 3000);
+			}
 		}
 	}
 }
