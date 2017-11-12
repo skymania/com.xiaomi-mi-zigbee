@@ -12,6 +12,7 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 		this.triggerButton1_scene
 			.register()
 			.registerRunListener((args, state) => {
+				this.log(args.scene, state.scene, args.scene === state.scene);
 				return Promise.resolve(args.scene === state.scene);
 			});
 		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
@@ -46,7 +47,7 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 			if (data === 1) {
 				clearTimeout(this.buttonHeldTimeout);
 				remoteValue = {
-					scene: `${keyHeld ? 'Key Released' : 'Key pressed 1 time'}`,
+					scene: `${keyHeld ? 'Key Released' : 'Key Pressed 1 time'}`,
 				};
 			}
 
