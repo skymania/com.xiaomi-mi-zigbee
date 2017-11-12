@@ -5,27 +5,13 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 class XiaomiTempSensor extends ZigBeeDevice {
 	onMeshInit() {
 
-		// enable debugging
-		this.enableDebug();
+		// Register the AttributeReportListener for measure_temperature
+		this._attrReportListeners['0_msTemperatureMeasurement'] = this._attrReportListeners['0_msTemperatureMeasurement'] || {};
+		this._attrReportListeners['0_msTemperatureMeasurement']['measuredValue'] = this.onTemperatureReport.bind(this);
 
-		// print the node's info to the console
-		this.printNode();
-
-		const minIntTemp = this.getSetting('minIntTemp') || 60;
-		const maxIntTemp = this.getSetting('maxIntTemp') || 600;
-		const repChangeTemp = this.getSetting('repChangeTemp') || 1; // note: 1 = 0.01 [°C]
-
-		// Register the AttributeReportListener
-		this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', minIntTemp, maxIntTemp, repChangeTemp,
-			this.onTemperatureReport.bind(this), 0, true);
-
-		const minIntHum = this.getSetting('minIntHum') || 60;
-		const maxIntHum = this.getSetting('maxIntHum') || 600;
-		const repChangeHum = this.getSetting('repChangeHum') || 1; // note: 1 = 0.01 [%]
-
-		// Register the AttributeReportListener
-		this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', minIntHum, maxIntHum, repChangeHum,
-			this.onHumidityReport.bind(this), 0, true);
+		// Register the AttributeReportListener for measure_humidity
+		this._attrReportListeners['0_msRelativeHumidity'] = this._attrReportListeners['0_msRelativeHumidity'] || {};
+		this._attrReportListeners['0_msRelativeHumidity']['measuredValue'] = this.onHumidityReport.bind(this);
 
 	}
 

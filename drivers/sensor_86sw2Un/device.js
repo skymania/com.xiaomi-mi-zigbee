@@ -8,12 +8,6 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 
 	onMeshInit() {
 
-		// enable debugging
-		this.enableDebug();
-
-		// print the node's info to the console
-		this.printNode();
-
 		// define and register FlowCardTriggers
 		this.triggerButton2_scene = new Homey.FlowCardTriggerDevice('button2_scene');
 		this.triggerButton2_scene
@@ -26,13 +20,15 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 		this.triggerButton2_button
 			.register();
 
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1, this.onOnOffListener.bind(this), 0, true);
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1, this.onOnOffListener2.bind(this), 1, true);
+		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
+		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this);
+
+		this._attrReportListeners['1_genOnOff'] = this._attrReportListeners['1_genOnOff'] || {};
+		this._attrReportListeners['1_genOnOff']['onOff'] = this.onOnOffListener2.bind(this);
 
 	}
 	onOnOffListener(data) {
 		this.log('genOnOff - onOff', data, 'Left button');
-
 		if (data === 0) {
 			const remoteValue = {
 				button: 'Left button',

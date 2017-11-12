@@ -18,7 +18,8 @@ class AqaraLightSwitchSingle extends ZigBeeDevice {
 		this.triggerButton1_button
 			.register();
 
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1, this.onOnOffListener.bind(this), 0);
+		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
+		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this);
 	}
 
 	onOnOffListener(data) {
