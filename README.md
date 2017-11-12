@@ -54,7 +54,10 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 ### v 0.1.2
 * Add support for Aqara Wireless Remote Switch (Single / Double)
 * Add support for Temperature / Humidity sensor
-* Add support for Xiaomi Occupancy sensor
+* Add support for Xiaomi Occupancy sensor    
+* Contain issue with (Aqara) Wireless switch (re-)triggering multiple times due to latency in Zigbee network (3s re-trigger timeout added)   
+* Add dedicated Flow trigger for Xiaomi wireless switch to make 'Key Held' exclusively available (flow repair needed)   
+* Add 'Key Held threshold' parameter for Xiaomi wireless switch   
 
 ### v 0.1.1
 * Wireless Switch (round) - Add 'Key Held' and 'Key released' triggers
