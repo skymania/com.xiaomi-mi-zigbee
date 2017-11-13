@@ -16,20 +16,21 @@ Please file Pull Requests on the development branch of this repository and with 
 * Aqara Window/Door Sensor (contact alarm)
 * Aqara Human Body Sensor (motion alarm, luminance, temperature)
 * Aqara Weather sensor (temperature, relative humidity, atmospheric pressure)
-* Wireless switch (1x - 4x click)
+* Wireless switch (1x - 4x click, Key Held, Key released)
 * Aqara Wireless switch (1x - 4x click)   
+* Temperature/Humidity Sensor (temperature, relative humidity)
+* Occupancy Sensor (motion alarm)
+* Aqara Wireless Remote Switch Single / Double (1x click)     
+
 **Note:** The Aqara Human Body Sensor has a button next to the PIR window; the Occupancy sensor has a pinhole   
 
 ## Devices Work in Progress (reports received)
-* Temperature/Humidity Sensor
-* Occupancy Sensor
-* Aqara Wireless Remote Switch (single / double)
 * Curtain Controller
 * Smart socket plug
 
 ## Devices Work in Progress (inclusion is possible, no reporting yet)
 * Cube
-* Aqara Wall Switch Double
+* Aqara Wall Switch Single / Double
 * Aqara Water sensor
 * Gas Leak detector
 * Smoke detector
@@ -50,6 +51,14 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.1.2
+* Add support for Aqara Wireless Remote Switch (Single / Double)
+* Add support for Temperature / Humidity sensor
+* Add support for Xiaomi Occupancy sensor    
+* Contain issue with (Aqara) Wireless switch (re-)triggering multiple times due to latency in Zigbee network (3s re-trigger timeout added)   
+* Add dedicated Flow trigger for Xiaomi wireless switch to make 'Key Held' exclusively available (flow repair needed)   
+* Add 'Key Held threshold' parameter for Xiaomi wireless switch   
+
 ### v 0.1.1
 * Wireless Switch (round) - Add 'Key Held' and 'Key released' triggers
 * Aqara Weather sensor - Add correct learn picture

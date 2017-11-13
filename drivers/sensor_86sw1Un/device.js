@@ -7,20 +7,31 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 class AqaraLightSwitchSingle extends ZigBeeDevice {
 
 	onMeshInit() {
-		// enable debugging
-		this.enableDebug();
+		// define and register FlowCardTriggers
+		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene');
+		this.triggerButton1_scene
+			.register()
+			.registerRunListener((args, state) => {
+				return Promise.resolve(args.scene === state.scene);
+			});
+		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
+		this.triggerButton1_button
+			.register();
 
-		// print the node's info to the console
-		this.printNode();
-
-		// Register onoff capability
-		this.registerCapability('onoff', 'genOnOff', {
-			getOpts: {
-				pollInterval: 3000,
-			},
-		});
+		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
+		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this);
 	}
 
+	onOnOffListener(data) {
+		this.log('genOnOff - onOff', data);
+		const remoteValue = {
+			scene: 'Key Pressed 1 time',
+		};
+		// Trigger the trigger card with 1 dropdown option
+		this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
+		// Trigger the trigger card with tokens
+		this.triggerButton1_button.trigger(this, remoteValue, null);
+	}
 }
 
 module.exports = AqaraLightSwitchSingle;

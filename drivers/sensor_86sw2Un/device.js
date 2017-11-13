@@ -8,56 +8,51 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 
 	onMeshInit() {
 
-		// enable debugging
-		this.enableDebug();
-
-		// print the node's info to the console
-		this.printNode();
-
 		// define and register FlowCardTriggers
-		let triggerButton2_scene = new Homey.FlowCardTriggerDevice('button2_scene');
-		triggerButton2_scene
+		this.triggerButton2_scene = new Homey.FlowCardTriggerDevice('button2_scene');
+		this.triggerButton2_scene
 			.register()
 			.registerRunListener((args, state) => {
 				return Promise.resolve(args.button === state.button && args.scene === state.scene);
 			});
 
-		let triggerButton2_button = new Homey.FlowCardTriggerDevice('button2_button');
-		triggerButton2_button
+		this.triggerButton2_button = new Homey.FlowCardTriggerDevice('button2_button');
+		this.triggerButton2_button
 			.register();
 
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1, data => {
-			this.log('genOnOff - onOff, LEFT', data);
-			// in case of one click (onOff command)
-			if (data === 1) {
-				const remoteValue = {
-					button: '1',
-					scene: 'Key Pressed 1 time',
-				};
-				// Trigger the trigger card with 1 dropdown option
-				triggerButton2_scene.trigger(this, triggerButton2_scene.getArgumentValues, remoteValue);
-				// Trigger the trigger card with tokens
-				triggerButton2_button.trigger(this, remoteValue, null);
-			}
-		}, 1);
+		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
+		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this);
 
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1, data => {
-			this.log('genOnOff - onOff, RIGHT', data === 1);
-			// in case of one click (onOff command)
-			if (data === 1) {
-				const remoteValue = {
-					button: '2',
-					scene: 'Key Pressed 1 time',
-				};
-				// Trigger the trigger card with 1 dropdown option
-				triggerButton2_scene.trigger(this, triggerButton2_scene.getArgumentValues, remoteValue);
-				// Trigger the trigger card with tokens
-				triggerButton2_button.trigger(this, remoteValue, null);
-			}
-		}, 2);
+		this._attrReportListeners['1_genOnOff'] = this._attrReportListeners['1_genOnOff'] || {};
+		this._attrReportListeners['1_genOnOff']['onOff'] = this.onOnOffListener2.bind(this);
 
 	}
-
+	onOnOffListener(data) {
+		this.log('genOnOff - onOff', data, 'Left button');
+		if (data === 0) {
+			const remoteValue = {
+				button: 'Left button',
+				scene: 'Key Pressed 1 time',
+			};
+			// Trigger the trigger card with 1 dropdown option
+			this.triggerButton2_scene.trigger(this, this.triggerButton2_scene.getArgumentValues, remoteValue);
+			// Trigger the trigger card with tokens
+			this.triggerButton2_button.trigger(this, remoteValue, null);
+		}
+	}
+	onOnOffListener2(data) {
+		this.log('genOnOff - onOff', data, 'Right button');
+		if (data === 0) {
+			const remoteValue = {
+				button: 'Right button',
+				scene: 'Key Pressed 1 time',
+			};
+			// Trigger the trigger card with 1 dropdown option
+			this.triggerButton2_scene.trigger(this, this.triggerButton2_scene.getArgumentValues, remoteValue);
+			// Trigger the trigger card with tokens
+			this.triggerButton2_button.trigger(this, remoteValue, null);
+		}
+	}
 }
 
 module.exports = AqaraLightSwitchDouble;

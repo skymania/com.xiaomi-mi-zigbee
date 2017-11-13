@@ -11,7 +11,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', minIntTemp, maxIntTemp, repChangeTemp,
-			this.onTemperatureReport.bind(this));
+			this.onTemperatureReport.bind(this), 0);
 
 		const minIntHum = this.getSetting('minIntHum') || 60;
 		const maxIntHum = this.getSetting('maxIntHum') || 3600;
@@ -19,7 +19,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', minIntHum, maxIntHum, repChangeHum,
-			this.onHumidityReport.bind(this));
+			this.onHumidityReport.bind(this), 0);
 
 		const minIntPres = this.getSetting('minIntPres') || 60;
 		const maxIntPres = this.getSetting('maxIntPres') || 3600;
@@ -27,7 +27,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msPressureMeasurement', '16', minIntPres, maxIntPres, repChangePres,
-			this.onPressureReport.bind(this));
+			this.onPressureReport.bind(this), 0);
 	}
 
 	onTemperatureReport(value) {

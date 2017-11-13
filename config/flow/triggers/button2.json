@@ -19,14 +19,14 @@
 				"type": "dropdown",
 				"values": [
 					{
-						"id": "1",
+						"id": "Left button",
 						"label": {
 							"en": "Left button",
 							"nl": "Linker knop"
 						}
 			},
 					{
-						"id": "2",
+						"id": "Right button",
 						"label": {
 							"en": "Right button",
 							"nl": "Rechter knop"

@@ -5,19 +5,13 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 class AqaraHumanBodySensor extends ZigBeeDevice {
 	onMeshInit() {
 
-		// enable debugging
-		this.enableDebug();
-
-		// print the node's info to the console
-		this.printNode();
-
 		// Register attribute listener for occupancy
 		this.registerAttrReportListener('msOccupancySensing', 'occupancy', 1, 3600, 1,
-			this.onOccupancyReport.bind(this));
+			this.onOccupancyReport.bind(this), 0);
 
 		// Register attribute listener for illuminance measurements
 		this.registerAttrReportListener('msIlluminanceMeasurement', 'measuredValue', 1, 3600, 20,
-			this.onIlluminanceReport.bind(this));
+			this.onIlluminanceReport.bind(this), 0);
 	}
 
 	onOccupancyReport(value) {

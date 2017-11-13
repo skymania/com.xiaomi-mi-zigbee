@@ -5,15 +5,9 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 class XiaomiHumanBodySensor extends ZigBeeDevice {
 	onMeshInit() {
 
-		// enable debugging
-		this.enableDebug();
-
-		// print the node's info to the console
-		this.printNode();
-
 		// Register attribute listener for occupancy
-		this.registerAttrReportListener('msOccupancySensing', 'occupancy', 1, 3600, 1,
-			this.onOccupancyReport.bind(this));
+		this._attrReportListeners['0_msOccupancySensing'] = this._attrReportListeners['0_msOccupancySensing'] || {};
+		this._attrReportListeners['0_msOccupancySensing']['occupancy'] = this.onOccupancyReport.bind(this);
 	}
 
 	onOccupancyReport(value) {
