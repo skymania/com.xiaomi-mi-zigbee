@@ -1,5 +1,5 @@
 {
-	"id": "sensor_86sw1Un",
+	"id": "sensor_86sw1lu",
 	"branch": "master",
 	"name": {
 		"en": "Aqara Wireless Remote Switch Single",
@@ -10,11 +10,11 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.sensor_86sw1Un"],
+		"productId": ["lumi.sensor_86sw1lu"],
 		"deviceId": 24321,
 		"profileId": 260,
 		"learnmode": {
-			"image": "/drivers/sensor_86sw1Un/assets/learn.svg",
+			"image": "/drivers/sensor_86sw1lu/assets/learn.svg",
 			"instruction": {
 				"en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
 				"nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
@@ -22,8 +22,8 @@
 		}
 	},
 	"images": {
-		"large": "/drivers/sensor_86sw1Un/assets/images/large.png",
-		"small": "/drivers/sensor_86sw1Un/assets/images/small.png"
+		"large": "/drivers/sensor_86sw1lu/assets/images/large.png",
+		"small": "/drivers/sensor_86sw1lu/assets/images/small.png"
 	},
 	"settings": [
 	]
