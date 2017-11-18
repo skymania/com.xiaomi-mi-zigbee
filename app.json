@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.1.2",
+  "version": "0.1.3",
   "compatibility": ">=1.5.4",
   "sdk": 2,
   "author": {
@@ -61,7 +61,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_switch.aq2|sensor_86sw1Un"
+            "filter": "driver_id=sensor_switch.aq2|sensor_86sw1lu"
           },
           {
             "name": "scene",
@@ -179,7 +179,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_86sw1Un"
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_86sw1lu"
           }
         ],
         "tokens": [
@@ -287,6 +287,104 @@
   },
   "drivers": [
     {
+      "id": "ctrl_neutral2",
+      "name": {
+        "en": "Aqara Wall Switch Double",
+        "nl": "Aqara Wall Switch Double"
+      },
+      "class": "light",
+      "capabilities": [
+        "measure_temperature",
+        "onoff",
+        "onoff.1",
+        "measure_power",
+        "meter_power"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.ctrl_neutral2"
+        ],
+        "deviceId": 6,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/ctrl_neutral2/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_neutral2/assets/images/large.png",
+        "small": "/drivers/ctrl_neutral2/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "curtain",
+      "name": {
+        "en": "Curtain Controller",
+        "nl": "Curtain Controller"
+      },
+      "class": "windowcoverings",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain",
+        "deviceId": 514,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/curtain/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain/assets/images/large.png",
+        "small": "/drivers/curtain/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "plug",
+      "name": {
+        "en": "Smart socket plug",
+        "nl": "Smart socket plug"
+      },
+      "class": "socket",
+      "capabilities": [
+        "measure_temperature",
+        "onoff",
+        "measure_power",
+        "meter_power"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.plug"
+        ],
+        "deviceId": 81,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/plug/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/plug/assets/images/large.png",
+        "small": "/drivers/plug/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
       "id": "sens",
       "name": {
         "en": "Temperature/Humidity sensor",
@@ -323,7 +421,7 @@
       "settings": []
     },
     {
-      "id": "sensor_86sw1Un",
+      "id": "sensor_86sw1lu",
       "name": {
         "en": "Aqara Wireless Remote Switch Single",
         "nl": "Aqara Wireless Remote Switch Single"
@@ -333,12 +431,12 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.sensor_86sw1Un"
+          "lumi.sensor_86sw1lu"
         ],
         "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/sensor_86sw1Un/assets/learn.svg",
+          "image": "/drivers/sensor_86sw1lu/assets/learn.svg",
           "instruction": {
             "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
             "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
@@ -346,8 +444,8 @@
         }
       },
       "images": {
-        "large": "/drivers/sensor_86sw1Un/assets/images/large.png",
-        "small": "/drivers/sensor_86sw1Un/assets/images/small.png"
+        "large": "/drivers/sensor_86sw1lu/assets/images/large.png",
+        "small": "/drivers/sensor_86sw1lu/assets/images/small.png"
       },
       "settings": []
     },
@@ -541,6 +639,69 @@
       ]
     },
     {
+      "id": "sensor_natgas",
+      "name": {
+        "en": "Gas Leak detector",
+        "nl": "Gas Leak detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_co",
+        "measure_temperature",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_natgas",
+        "deviceId": 257,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_natgas/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_natgas/assets/images/large.png",
+        "small": "/drivers/sensor_natgas/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_smoke",
+      "name": {
+        "en": "Smoke detector",
+        "nl": "Smoke detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_smoke",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_smoke",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_smoke/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_smoke/assets/images/large.png",
+        "small": "/drivers/sensor_smoke/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
       "id": "sensor_switch.aq2",
       "name": {
         "en": "Aqara Wireless switch",
@@ -615,6 +776,37 @@
           }
         }
       ]
+    },
+    {
+      "id": "sensor_wleak.aq1",
+      "name": {
+        "en": "Aqara Water sensor",
+        "nl": "Aqara Water sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_water",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_wleak.aq1",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "weather",
