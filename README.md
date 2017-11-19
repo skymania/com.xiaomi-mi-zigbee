@@ -52,7 +52,8 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 ### v 0.1.3
-* Fix device ID's (and update driver name) for Aqara Wireless Remote Switch Single   
+* Add second deviceID for Aqara Window/Door Sensor 
+* Fix deviceID's (and update driver name) for Aqara Wireless Remote Switch Single   
 
 ### v 0.1.2
 * Add support for Aqara Wireless Remote Switch (Single / Double)
