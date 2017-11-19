@@ -14,7 +14,7 @@
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.sensor_motion.aq2",
-		"deviceId": 260,
+		"deviceId": [260, 263],
 		"profileId": 260,
 		"learnmode": {
 			"image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
