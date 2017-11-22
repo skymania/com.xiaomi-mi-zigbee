@@ -1,5 +1,7 @@
 # Xiaomi-mi Smart Home (Zigbee)
 
+### This app requires Homey SW release 1.5.4 or higher
+
 This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Home Devices](https://xiaomi-mi.com/).  
 <a href="https://github.com/TedTolboom/com.xiaomi-mi-zigbee">
   <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/assets/images/small.png">
@@ -52,7 +54,7 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 ### v 0.1.3
-* Add second deviceID for Aqara Window/Door Sensor 
+* Add second deviceID for Aqara Window/Door Sensor
 * Fix deviceID's (and update driver name) for Aqara Wireless Remote Switch Single   
 
 ### v 0.1.2

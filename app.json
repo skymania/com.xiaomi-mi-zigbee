@@ -1,7 +1,7 @@
 {
   "id": "com.xiaomi-mi",
   "name": {
-    "en": "Xiaomi Mi ZigBee"
+    "en": "Xiaomi Mi ZigBee (>=1.5.4)"
   },
   "description": {
     "en": "Control Xiaomi Mi ZigBee devices",
@@ -814,8 +814,8 @@
     {
       "id": "weather",
       "name": {
-        "en": "Aqara Weather sensor",
-        "nl": "Aqara Weather sensor"
+        "en": "Aqara Temperature and Humidity Sensor",
+        "nl": "Aqara Temperature and Humidity Sensor"
       },
       "class": "sensor",
       "capabilities": [
