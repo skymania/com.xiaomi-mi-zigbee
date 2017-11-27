@@ -15,13 +15,13 @@ Please file Pull Requests on the development branch of this repository and with 
 
 ## Supported devices
 * Door/Window sensor (contact alarm)
-* Aqara Window/Door Sensor (contact alarm)
-* Aqara Human Body Sensor (motion alarm, luminance, temperature)
-* Aqara Weather sensor (temperature, relative humidity, atmospheric pressure)
-* Wireless switch (1x - 4x click, Key Held, Key released)
-* Aqara Wireless switch (1x - 4x click)   
-* Temperature/Humidity Sensor (temperature, relative humidity)
 * Occupancy Sensor (motion alarm)
+* Temperature/Humidity Sensor (temperature, relative humidity)
+* Wireless switch (1x - 4x click, Key Held, Key released)
+* Aqara Window/Door Sensor (contact alarm)
+* Aqara Human Body Sensor (motion alarm, luminance)
+* Aqara Temperature and Humidity Sensor (temperature, relative humidity, atmospheric pressure)
+* Aqara Wireless switch (1x - 4x click)   
 * Aqara Wireless Remote Switch Single / Double (1x click)     
 
 **Note:** The Aqara Human Body Sensor has a button next to the PIR window; the Occupancy sensor has a pinhole   
@@ -34,6 +34,8 @@ Please file Pull Requests on the development branch of this repository and with 
 * Cube
 * Aqara Wall Switch Single / Double
 * Aqara Water sensor
+
+## Devices Work in Progress (inclusion is possible, requiring ZigBee Shepherd change)
 * Gas Leak detector
 * Smoke detector
 
