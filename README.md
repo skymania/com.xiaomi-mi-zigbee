@@ -55,6 +55,9 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.1.4
+* Add 1x click of both buttons for Aqara Wireless Remote Switch Double  
+
 ### v 0.1.3
 * Add second deviceID for Aqara Window/Door Sensor
 * Fix deviceID's (and update driver name) for Aqara Wireless Remote Switch Single   

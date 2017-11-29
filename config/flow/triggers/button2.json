@@ -31,7 +31,14 @@
 							"en": "Right button",
 							"nl": "Rechter knop"
 						}
-			}
+			},
+					{
+						"id": "Both buttons",
+						"label": {
+							"en": "Both buttons",
+							"nl": "Beide knoppen"
+						}
+	}
 		]
 		},
 			{

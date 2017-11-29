@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.1.3",
+  "version": "0.1.4",
   "compatibility": ">=1.5.4",
   "sdk": 2,
   "author": {
@@ -227,6 +227,13 @@
                   "en": "Right button",
                   "nl": "Rechter knop"
                 }
+              },
+              {
+                "id": "Both buttons",
+                "label": {
+                  "en": "Both buttons",
+                  "nl": "Beide knoppen"
+                }
               }
             ]
           },
@@ -282,6 +289,123 @@
             "example": "Button pressed (test)"
           }
         ]
+      },
+      {
+        "id": "cube_shaked",
+        "title": {
+          "en": "Cube shaked",
+          "nl": "Cube geschud"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          }
+        ]
+      },
+      {
+        "id": "cube_catched",
+        "title": {
+          "en": "Cube catched",
+          "nl": "Cube opgevangen"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          }
+        ]
+      },
+      {
+        "id": "cube_turned",
+        "title": {
+          "en": "Cube turned",
+          "nl": "Cube gedraaid"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          }
+        ]
+      },
+      {
+        "id": "cube_double_tapped",
+        "title": {
+          "en": "Cube tapped twice",
+          "nl": "Cube 2x geklopt"
+        },
+        "tokens": [
+          {
+            "name": "side_up",
+            "type": "number",
+            "title": {
+              "en": "side top",
+              "nl": "zijde boven"
+            },
+            "example": {
+              "en": "1"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          },
+          {
+            "name": "double_tapped",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "1 up",
+                  "nl": "1 naar boven"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "2 up",
+                  "nl": "2 naar boven"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "3 up",
+                  "nl": "3 naar boven"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "4 up",
+                  "nl": "4 naar boven"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "5 up",
+                  "nl": "5 naar boven"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "6 up",
+                  "nl": "6 naar boven"
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -318,6 +442,37 @@
       "images": {
         "large": "/drivers/ctrl_neutral2/assets/images/large.png",
         "small": "/drivers/ctrl_neutral2/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "cube",
+      "name": {
+        "en": "Cube",
+        "nl": "Cube"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.sensor_cube"
+        ],
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/cube/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/cube/assets/images/large.png",
+        "small": "/drivers/cube/assets/images/small.png"
       },
       "settings": []
     },
