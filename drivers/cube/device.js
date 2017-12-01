@@ -13,11 +13,6 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.printNode();
 
 		// Register the AttributeReportListener
-		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, value => {
-			this.log('genMultistateInput cluster 0', value);
-		}, 0);
-
-		// Register the AttributeReportListener
 		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, this.flippedAttribReport.bind(this), 1);
 
 		// Register the AttributeReportListener
@@ -29,37 +24,27 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		}, 2);
 
 		// Cube is shaked
-		this.shakeCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_shaked').register()
-			.registerRunListener((args, state) => {
-				this.log(args, state);
-				return Promise.resolve(args.cube_shaked === state.cube_shaked);
-			});
+		this.shakeCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_shaked');
+		this.shakeCubeTriggerDevice.register();
 
 		// cube is catched
-		this.catchCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_catched').register()
-			.registerRunListener((args, state) => {
-				this.log(args, state);
-				return Promise.resolve(args.cube_catched === state.cube_catched);
-			});
+		this.catchCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_catched');
+		this.catchCubeTriggerDevice.register();
 
 		// cube is slided
-		/* this.slideCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_slided').register()
-			.registerRunListener((args, state) => {
-				this.log(args, state);
-				return Promise.resolve(args.dropdown === state.dropdown);
-			}); */
+		this.slideCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_slided');
+		this.slideCubeTriggerDevice.register();
 
 		// cube is turned
-		this.turnedCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_turned').register()
-			.registerRunListener((args, state) => {
-				this.log(args, state);
-				return Promise.resolve(args.cube_turned === state.cube_turned);
-			});
+		this.turnedCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_turned');
+		this.turnedCubeTriggerDevice.register();
 
 		// cube is double tapped
-		this.doubletapCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_double_tapped').register()
+		this.doubletapCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_double_tapped');
+		this.doubletapCubeTriggerDevice
+			.register()
 			.registerRunListener((args, state) => {
-				this.log(args, state);
+				this.log(args.double_tapped, state.double_tapped, args.double_tapped === state.double_tapped);
 				return Promise.resolve(args.double_tapped === state.double_tapped);
 			});
 
@@ -69,6 +54,9 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				this.log(args, state);
 				return Promise.resolve(args.dropdown === state.dropdown);
 			}); */
+
+		// cube flipped 180
+		// .....
 
 
 		// 			+---+
@@ -88,18 +76,17 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.log('data reported: ', data);
 		let cubeDegreeflipped = 90;
 		let cubeSideup = 0;
-		let tokens = {};
 
 		// cube shaked
 		if (data === 0) {
-			this.shakeCubeTriggerDevice.trigger(this, { state: 'cube_shaked' }, {})
+			this.shakeCubeTriggerDevice.trigger(this, null, null)
 				.then(() => this.log('triggered cube_shaked'))
 				.catch(err => this.error('Error triggering cube_shaked', err));
 		}
 
 		// cube catched
 		if (data === 3) {
-			this.catchCubeTriggerDevice.trigger(this, { state: 'cube_catched' }, {})
+			this.catchCubeTriggerDevice.trigger(this, null, null)
 				.then(() => this.log('triggered cube_catched'))
 				.catch(err => this.error('Error triggering cube_catched', err));
 		}
@@ -107,41 +94,39 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		// cube slided
 		if (data >= 256 && data <= 261) {
 			cubeSideup = data - 255;
-		//	return this.slideCubeTriggerDevice.trigger(this, { state: 'cube_slided' }, { action: `slided with ${cubeSideup} up` })
-		//		.then(() => this.log(`triggered cube_slided, action=slided with ${cubeSideup} up`))
-		//		.catch(err => this.error('Error triggering cube_slided', err));
+			this.slideCubeTriggerDevice.trigger(this, null, null)
+				.then(() => this.log('triggered cube_slided'))
+				.catch(err => this.error('Error triggering cube_slided', err));
 		}
 
 		// cube double tapped
 		if (data >= 512 && data <= 517) {
 			cubeSideup = data - 511;
-			tokens = {
-				cubeSideup_number: cubeSideup,
-			};
-			this.log(tokens);
-			this.doubletapCubeTriggerDevice.trigger(this, tokens, { double_tapped: cubeSideup.toString() })
+			this.doubletapCubeTriggerDevice.trigger(this, { cubeSideup_number: cubeSideup }, { cube_double_tapped: parseInt(cubeSideup, 0).toString() })
 				.then(() => this.log(`triggered cube_double_tapped, action=double tapped with ${cubeSideup} up`))
 				.catch(err => this.error('Error triggering double_tapped', err));
-
-			/* return this.doubletapCubeTriggerDevice.trigger(this, { state: 'cube_double_tapped' }, { action: `double tapped with ${cubeSideup} up` })
-				.then(() => this.log(`triggered cube_double_tapped, action=double tapped with ${cubeSideup} up`))
-				.catch(err => this.error('Error triggering double_tapped', err)); */
 		}
 
-		// cube flipped 90
+		// cube flipped 90 not working yet: not al values found
 		if (data > 64 && data < 70) {
 			cubeDegreeflipped = 90;
 			cubeSideup = 70 - data;
+
 		}
-		//return this.flippedCube90TriggerDevice.trigger(this, { state: `cube_flipped_${cubeDegreeflipped}` }, { action: `${cubeDegreeflipped} with ${cubeSideup} up` })
-		//	.then(() => this.log(`triggered cube_flipped, action=${cubeDegreeflipped} with ${cubeSideup} up`))
-		//	.catch(err => this.error('Error triggering cube_flipped', err));
+
+		// cube flipped 180
+		if (data >= 128 && data <= 133) {
+			cubeDegreeflipped = 180;
+			cubeSideup = 133 - data;
+
+		}
+
 	}
 
 	turnedAttribReport(data) {
 		// cube turned
 		if (data === 500) {
-			this.turnedCubeTriggerDevice.trigger(this, { state: 'cube_turned' }, {})
+			this.turnedCubeTriggerDevice.trigger(this, null, null)
 				.then(() => this.log('triggered cube_turned'))
 				.catch(err => this.error('Error triggering cube_turned', err));
 		}

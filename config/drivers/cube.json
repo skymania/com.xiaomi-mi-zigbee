@@ -17,8 +17,8 @@
 		"learnmode": {
 			"image": "/drivers/cube/assets/learn.svg",
 			"instruction": {
-				"en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
-				"nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+				"en": "Long press the power button to open more than 5 seconds until the light flashes three times after release",
+				"nl": "Long press the power button to open more than 5 seconds until the light flashes three times after release"
 			}
 		}
 	},
