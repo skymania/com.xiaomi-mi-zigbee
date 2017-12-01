@@ -1,5 +1,101 @@
 'use strict';
 
+const flip90options = {
+	65: {
+		direction: 'left',
+		side: 2,
+	},
+	66: {
+		direction: 'right',
+		side: 3,
+	},
+	68: {
+		direction: 'right',
+		side: 5,
+	},
+	72: {
+		direction: 'left',
+		side: 1,
+	},
+	80: {
+		direction: 'right',
+		side: 3,
+	},
+	74: {
+		direction: 'left',
+		side: 3,
+	},
+	75: {
+		direction: 'recht',
+		side: 4,
+	},
+	77: {
+		direction: 'left',
+		side: 6,
+	},
+	92: {
+		direction: 'left',
+		side: 5,
+	},
+	93: {
+		direction: 'left',
+		side: 6,
+	},
+	96: {
+		direction: 'left',
+		side: 1,
+	},
+	99: {
+		direction: 'right',
+		side: 4,
+	},
+	81: {
+		direction: 'right',
+		side: 2,
+	},
+	83: {
+		direction: 'left',
+		side: 4,
+	},
+	84: {
+		direction: 'left',
+		side: 5,
+	},
+	89: {
+		direction: 'right',
+		side: 2,
+	},
+	98: {
+		direction: 'left',
+		side: 3,
+	},
+	69: {
+		direction: 'right',
+		side: 6,
+	},
+	104: {
+		direction: 'left',
+		side: 1,
+	},
+	105: {
+		direction: 'left',
+		side: 2,
+	},
+	101: {
+		direction: 'right',
+		side: 6,
+	},
+	107: {
+		direction: 'right',
+		side: 4,
+	},
+	108: {
+		direction: 'right',
+		side: 5,
+	},
+};
+
+
 const Homey = require('homey');
 
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
@@ -11,6 +107,17 @@ class AqaraCubeSensor extends ZigBeeDevice {
 
 		// print the node's info to the console
 		this.printNode();
+
+		// Register the AttributeReportListener
+		this.registerAttrReportListener('genMultistateInput', 'Status flags', 1, 60, null, value => {
+			this.log('genAnalogInput cluster 2, Status flags', value);
+		}, 1);
+
+		// Register the AttributeReportListener
+		this.registerAttrReportListener('genMultistateInput', 'Status flags', 1, 60, null, value => {
+			this.log('genAnalogInput cluster 2, Status flags', value);
+		}, 1);
+
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, this.flippedAttribReport.bind(this), 1);
@@ -108,11 +215,14 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		}
 
 		// cube flipped 90 not working yet: not al values found
-		if (data > 64 && data < 70) {
-			cubeDegreeflipped = 90;
-			cubeSideup = 70 - data;
-
+		// const index = flip90options[data];
+		if (flip90options[data] !== void 0) {
+			// this.log('indexwaarde: ', index);
+			cubeDegreeflipped = flip90options[data].direction;
+			cubeSideup = flip90options[data].side;
+			this.log(`Cube flipped 90 degrees ${cubeDegreeflipped} with ${cubeSideup} on Top`);
 		}
+
 
 		// cube flipped 180
 		if (data >= 128 && data <= 133) {
