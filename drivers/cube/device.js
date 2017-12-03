@@ -129,6 +129,8 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, value => {
 			this.log('genAnalogInput cluster 2, presentValue', value);
 		}, 2);
+		// this._attrReportListeners['2_genAnalogInput'] = this._attrReportListeners['2_genAnalogInput'] || {};
+		// this._attrReportListeners['2_genAnalogInput']['presentValue'] = this.rotateAttribReport.bind(this);
 
 		// Cube is shaked
 		this.shakeCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_shaked');
@@ -180,7 +182,12 @@ class AqaraCubeSensor extends ZigBeeDevice {
 	}
 
 	flippedAttribReport(data) {
-		this.log('data reported: ', data);
+		// data in binary first 4 bits indicate type of motion, following group of 3 bits indicate the face of the cube
+		const motionType = (data >> 6) & 0b1111; // 0 (shake), 1 (flip 90), 2 (flip 180), 4 (slide), 8 (double tap)
+		const sourceFace = (data >> 3) & 0b111; // sourceFace (0-5)
+		const targetFace = data & 0b111; // targetFace (0-5)
+		this.log('data reported: ', data, 'motionType', motionType, 'sourceFace', sourceFace, 'targetFace', targetFace);
+
 		let cubeDegreeflipped = 90;
 		let cubeSideup = 0;
 
@@ -209,7 +216,11 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		// cube double tapped
 		if (data >= 512 && data <= 517) {
 			cubeSideup = data - 511;
-			this.doubletapCubeTriggerDevice.trigger(this, { cubeSideup_number: cubeSideup }, { cube_double_tapped: parseInt(cubeSideup, 0).toString() })
+			this.doubletapCubeTriggerDevice.trigger(this, {
+					cubeSideup_number: cubeSideup
+				}, {
+					cube_double_tapped: parseInt(cubeSideup, 0).toString()
+				})
 				.then(() => this.log(`triggered cube_double_tapped, action=double tapped with ${cubeSideup} up`))
 				.catch(err => this.error('Error triggering double_tapped', err));
 		}
@@ -234,6 +245,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 	}
 
 	turnedAttribReport(data) {
+		this.log('turned', data);
 		// cube turned
 		if (data === 500) {
 			this.turnedCubeTriggerDevice.trigger(this, null, null)

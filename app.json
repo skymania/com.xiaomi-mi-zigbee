@@ -333,6 +333,20 @@
         ]
       },
       {
+        "id": "cube_slided",
+        "title": {
+          "en": "Cube slided",
+          "nl": "Cube verschoven"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          }
+        ]
+      },
+      {
         "id": "cube_double_tapped",
         "title": {
           "en": "Cube tapped twice",
@@ -465,8 +479,8 @@
         "learnmode": {
           "image": "/drivers/cube/assets/learn.svg",
           "instruction": {
-            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
-            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+            "en": "Long press the power button to open more than 5 seconds until the light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the light flashes three times after release"
           }
         }
       },
