@@ -10,7 +10,7 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 			this.onOccupancyReport.bind(this), 0);
 
 		// Register attribute listener for illuminance measurements
-		this.registerAttrReportListener('msIlluminanceMeasurement', 'measuredValue', 1, 3600, 20,
+		this.registerAttrReportListener('msIlluminanceMeasurement', 'measuredValue', 1, 3600, 1,
 			this.onIlluminanceReport.bind(this), 0);
 	}
 
