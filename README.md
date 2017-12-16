@@ -57,6 +57,7 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 ## Change Log:
 ### v 0.1.4
 * Add 1x click of both buttons for Aqara Wireless Remote Switch Double  
+* Increase luminance sensor sensitivity for Aqara Human Body Sensor   
 
 ### v 0.1.3
 * Add second deviceID for Aqara Window/Door Sensor
