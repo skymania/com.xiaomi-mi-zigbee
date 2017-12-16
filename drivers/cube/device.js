@@ -95,6 +95,29 @@ const flip90options = {
 	},
 };
 
+const motionArray = {
+	0: {
+		motion: 'Shake'
+	},
+	1: {
+		motion: 'Flip 90 degrees'
+	},
+	2: {
+		motion: 'Flip 180 degrees'
+	},
+	4: {
+		motion: 'Slide'
+	},
+	8: {
+		motion: 'Double tap'
+	},
+	16: {
+		motion: 'Rotate'
+	},
+	32: {
+		motion: 'Catch'
+	},
+};
 
 const Homey = require('homey');
 
@@ -186,7 +209,15 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		const motionType = (data >> 6) & 0b1111; // 0 (shake), 1 (flip 90), 2 (flip 180), 4 (slide), 8 (double tap)
 		const sourceFace = (data >> 3) & 0b111; // sourceFace (0-5)
 		const targetFace = data & 0b111; // targetFace (0-5)
-		this.log('data reported: ', data, 'motionType', motionType, 'sourceFace', sourceFace, 'targetFace', targetFace);
+		this.log('data reported: ', data, 'motionType', motionArray[motionType].motion, 'sourceFace', sourceFace, 'targetFace', targetFace);
+
+		if (motionType > 0) this.faceSideUp = targetFace;
+
+		const cubeAction = {
+			motion: motionArray[motionType].motion,
+			sourceFace,
+			targetFace: this.faceSideUp,
+		};
 
 		let cubeDegreeflipped = 90;
 		let cubeSideup = 0;
