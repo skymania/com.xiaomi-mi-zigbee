@@ -11,7 +11,7 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 [Xiaomi-mi Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi-zigbee)                    
 [Xiaomi-mi Zigbee app Github repository](https://github.com/TedTolboom/com.xiaomi-mi-zigbee)   
 **Note:** This app is using [HomeyConfig composer](https://www.npmjs.com/package/node-homey-config-composer).   
-Please file Pull Requests on the development branch of this repository and with respect to the refactored files in _/drivers_ and _/config_ folders.   
+Please file Pull Requests on the *development* branch of this repository and with respect to the refactored files in _/drivers_ and _/config_ folders.   
 
 ## Supported devices
 * Door/Window sensor (contact alarm)
