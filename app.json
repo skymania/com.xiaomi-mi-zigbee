@@ -317,6 +317,137 @@
             "filter": "driver_id=ctrl_neutral2"
           }
         ]
+      },
+      {
+        "id": "cube_shaked",
+        "title": {
+          "en": "Cube shaked",
+          "nl": "Cube geschud"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          }
+        ]
+      },
+      {
+        "id": "cube_catched",
+        "title": {
+          "en": "Cube catched",
+          "nl": "Cube opgevangen"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          }
+        ]
+      },
+      {
+        "id": "cube_turned",
+        "title": {
+          "en": "Cube turned",
+          "nl": "Cube gedraaid"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          }
+        ]
+      },
+      {
+        "id": "cube_slided",
+        "title": {
+          "en": "Cube slided",
+          "nl": "Cube verschoven"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          }
+        ]
+      },
+      {
+        "id": "cube_double_tapped",
+        "title": {
+          "en": "Cube tapped twice",
+          "nl": "Cube 2x geklopt"
+        },
+        "tokens": [
+          {
+            "name": "side_up",
+            "type": "number",
+            "title": {
+              "en": "side top",
+              "nl": "zijde boven"
+            },
+            "example": {
+              "en": "1"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          },
+          {
+            "name": "double_tapped",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "1 up",
+                  "nl": "1 naar boven"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "2 up",
+                  "nl": "2 naar boven"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "3 up",
+                  "nl": "3 naar boven"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "4 up",
+                  "nl": "4 naar boven"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "5 up",
+                  "nl": "5 naar boven"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "6 up",
+                  "nl": "6 naar boven"
+                }
+              }
+            ]
+          }
+        ]
       }
     ],
     "conditions": [
