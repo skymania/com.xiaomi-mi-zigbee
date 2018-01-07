@@ -282,6 +282,80 @@
             "example": "Button pressed (test)"
           }
         ]
+      },
+      {
+        "id": "ctrl_neutral2_switch2_turned_on",
+        "title": {
+          "en": "Right Switch On",
+          "nl": "Rechter Schakelaar Op"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
+          }
+        ]
+      },
+      {
+        "id": "ctrl_neutral2_switch2_turned_off",
+        "title": {
+          "en": "Right Switch Off",
+          "nl": "Rechter Schakelaar Uit"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "ctrl_neutral2_switch2_is_on",
+        "title": {
+          "en": "Right switch is !{{on|off}}",
+          "nl": "Rechter schakelaar is !{{ingeschakeld|uitgeschakeld}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "ctrl_neutral2_turn_on_switch2",
+        "title": {
+          "en": "Turn On Right Switch",
+          "nl": "Op Rechter Schakelaar"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
+          }
+        ]
+      },
+      {
+        "id": "ctrl_neutral2_turn_off_switch2",
+        "title": {
+          "en": "Turn Off Right Switch",
+          "nl": "Uit Rechter Schakelaar"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
+          }
+        ]
       }
     ]
   },
@@ -666,19 +740,39 @@
     		"onoff",
     		"onoff.1"
     	],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Switch 1"
+          },
+          "greyout": false
+        },
+        "onoff.1": {
+          "title": {
+            "en": "Switch 2"
+          },
+          "greyout": false
+        }
+      },
       "mobile": {
         "components": [
           {
             "id": "icon",
-            "capabilities": [ "onoff"]
+            "capabilities": []
           },
           {
             "id": "toggle",
-            "capabilities": [ "onoff" ]
+            "capabilities": [ "onoff" ],
+            "options": {
+              "showTitle": true
+            }
           },
           {
             "id": "toggle",
-            "capabilities": [ "onoff.1" ]
+            "capabilities": [ "onoff.1" ],
+            "options": {
+              "showTitle": true
+            }
           }
         ]
       },
@@ -698,9 +792,7 @@
     	"images": {
     		"large": "/drivers/ctrl_neutral2/assets/images/large.png",
     		"small": "/drivers/ctrl_neutral2/assets/images/small.png"
-    	},
-    	"settings": [
-    	]
+    	}
     }
   ]
 }
