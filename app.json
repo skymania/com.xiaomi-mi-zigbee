@@ -291,133 +291,76 @@
         ]
       },
       {
-        "id": "cube_shaked",
+        "id": "ctrl_neutral2_switch2_turned_on",
         "title": {
-          "en": "Cube shaked",
-          "nl": "Cube geschud"
+          "en": "Right Switch On",
+          "nl": "Rechter Schakelaar Op"
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
-            "filter": "driver_id=cube"
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       },
       {
-        "id": "cube_catched",
+        "id": "ctrl_neutral2_switch2_turned_off",
         "title": {
-          "en": "Cube catched",
-          "nl": "Cube opgevangen"
+          "en": "Right Switch Off",
+          "nl": "Rechter Schakelaar Uit"
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
-            "filter": "driver_id=cube"
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "ctrl_neutral2_switch2_is_on",
+        "title": {
+          "en": "Right switch is !{{on|off}}",
+          "nl": "Rechter schakelaar is !{{ingeschakeld|uitgeschakeld}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "ctrl_neutral2_turn_on_switch2",
+        "title": {
+          "en": "Turn On Right Switch",
+          "nl": "Op Rechter Schakelaar"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       },
       {
-        "id": "cube_turned",
+        "id": "ctrl_neutral2_turn_off_switch2",
         "title": {
-          "en": "Cube turned",
-          "nl": "Cube gedraaid"
+          "en": "Turn Off Right Switch",
+          "nl": "Uit Rechter Schakelaar"
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
-            "filter": "driver_id=cube"
-          }
-        ]
-      },
-      {
-        "id": "cube_slided",
-        "title": {
-          "en": "Cube slided",
-          "nl": "Cube verschoven"
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "filter": "driver_id=cube"
-          }
-        ]
-      },
-      {
-        "id": "cube_double_tapped",
-        "title": {
-          "en": "Cube tapped twice",
-          "nl": "Cube 2x geklopt"
-        },
-        "tokens": [
-          {
-            "name": "side_up",
-            "type": "number",
-            "title": {
-              "en": "side top",
-              "nl": "zijde boven"
-            },
-            "example": {
-              "en": "1"
-            }
-          }
-        ],
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "filter": "driver_id=cube"
-          },
-          {
-            "name": "double_tapped",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "1",
-                "label": {
-                  "en": "1 up",
-                  "nl": "1 naar boven"
-                }
-              },
-              {
-                "id": "2",
-                "label": {
-                  "en": "2 up",
-                  "nl": "2 naar boven"
-                }
-              },
-              {
-                "id": "3",
-                "label": {
-                  "en": "3 up",
-                  "nl": "3 naar boven"
-                }
-              },
-              {
-                "id": "4",
-                "label": {
-                  "en": "4 up",
-                  "nl": "4 naar boven"
-                }
-              },
-              {
-                "id": "5",
-                "label": {
-                  "en": "5 up",
-                  "nl": "5 naar boven"
-                }
-              },
-              {
-                "id": "6",
-                "label": {
-                  "en": "6 up",
-                  "nl": "6 naar boven"
-                }
-              }
-            ]
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       }
@@ -430,14 +373,51 @@
         "en": "Aqara Wall Switch Double",
         "nl": "Aqara Wall Switch Double"
       },
-      "class": "light",
+      "class": "socket",
       "capabilities": [
-        "measure_temperature",
         "onoff",
-        "onoff.1",
-        "measure_power",
-        "meter_power"
+        "onoff.1"
       ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Switch 1"
+          },
+          "greyout": false
+        },
+        "onoff.1": {
+          "title": {
+            "en": "Switch 2"
+          },
+          "greyout": false
+        }
+      },
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": []
+          },
+          {
+            "id": "toggle",
+            "capabilities": [
+              "onoff"
+            ],
+            "options": {
+              "showTitle": true
+            }
+          },
+          {
+            "id": "toggle",
+            "capabilities": [
+              "onoff.1"
+            ],
+            "options": {
+              "showTitle": true
+            }
+          }
+        ]
+      },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
@@ -448,16 +428,15 @@
         "learnmode": {
           "image": "/drivers/ctrl_neutral2/assets/learn.svg",
           "instruction": {
-            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
           }
         }
       },
       "images": {
         "large": "/drivers/ctrl_neutral2/assets/images/large.png",
         "small": "/drivers/ctrl_neutral2/assets/images/small.png"
-      },
-      "settings": []
+      }
     },
     {
       "id": "cube",

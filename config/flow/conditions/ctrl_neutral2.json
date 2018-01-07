@@ -1,0 +1,16 @@
+[
+	{
+		"id": "ctrl_neutral2_switch2_is_on",
+		"title": {
+			"en": "Right switch is !{{on|off}}",
+			"nl": "Rechter schakelaar is !{{ingeschakeld|uitgeschakeld}}"
+		},
+		"args": [
+			{
+				"type": "device",
+				"name": "ctrl_neutral2",
+				"filter": "driver_id=ctrl_neutral2"
+      }
+    ]
+  }
+]

@@ -1,166 +1,164 @@
 /*
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] Node: d4560311-d095-41b1-8ae8-fc57398fe6a0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] - Battery: false
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] - Endpoints: 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] -- Clusters:
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- zapp
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genBasic
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- 65281 : den o !�
-                                                                                    ( !!&
-!N��#�!
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genBasic
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- zclVersion : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- appVersion : 17
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- stackVersion : 2
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- hwVersion : 38
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- manufacturerName : LUMI
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- modelId : lumi.ctrl_neutral2
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- dateCode : 08-31-2016
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- powerSource : 4
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- locationDesc :
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genPowerCfg
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genPowerCfg
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- mainsVoltage : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- mainsAlarmMask : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- batteryVoltage : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genDeviceTempCfg
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genDeviceTempCfg
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- currentTemperature : 31
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- lowTempThres : 55
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- highTempThres : 60
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genIdentify
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genIdentify
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- identifyTime : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genTime
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genTime
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genOta
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genOta
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] - Endpoints: 1
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] -- Clusters:
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- zapp
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genGroups
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genGroups
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- nameSupport : 128
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genScenes
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genScenes
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- count : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- currentScene : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- currentGroup : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sceneValid : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- nameSupport : 128
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genOnOff
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- 61440 : 117440551
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genOnOff
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- onOff : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genBinaryOutput
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genBinaryOutput
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- activeText : ON
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- description : CHANNEL1
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- inactiveText : OFF
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- minimumOffTime : 500000
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- minimumOnTime : 500000
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- outOfService : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- presentValue : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- statusFlags : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- applicationType : 67109376
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] - Endpoints: 2
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] -- Clusters:
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- zapp
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genGroups
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genGroups
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- nameSupport : 128
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genScenes
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genScenes
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- count : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- currentScene : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- currentGroup : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sceneValid : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- nameSupport : 128
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genOnOff
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- 61440 : 117440556
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genOnOff
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- onOff : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genBinaryOutput
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genBinaryOutput
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- activeText : ON
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- description : CHANNEL2
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- inactiveText : OFF
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- minimumOffTime : 500000
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- minimumOnTime : 500000
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- outOfService : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- presentValue : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- statusFlags : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- applicationType : 67109377
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] - Endpoints: 3
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] -- Clusters:
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- zapp
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genOnOff
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genOnOff
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- onOff : 1
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genMultistateInput
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genMultistateInput
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- numberOfStates : 4
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- outOfService : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- presentValue : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- statusFlags : 0
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] - Endpoints: 4
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] -- Clusters:
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- zapp
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genOnOff
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genOnOff
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- onOff : 1
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genMultistateInput
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genMultistateInput
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- numberOfStates : 4
-2017-10-23 23:01:17 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- outOfService : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- presentValue : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- statusFlags : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] - Endpoints: 5
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] -- Clusters:
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- zapp
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genOnOff
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genOnOff
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- onOff : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genMultistateInput
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genMultistateInput
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- numberOfStates : 4
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- outOfService : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- presentValue : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- statusFlags : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] - Endpoints: 6
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] -- Clusters:
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- zapp
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] --- genAnalogInput
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- cid : genAnalogInput
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- sid : attrs
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- description : POWER
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- maxPresentValue : 1600
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- minPresentValue : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- outOfService : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- presentValue : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- resolution : 1
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- statusFlags : 0
-2017-10-23 23:01:18 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- applicationType : 590336
+Node: 686b5c46-3be5-4b73-bb9e-14b3f2e09876
+- Battery: false
+- Endpoints: 0
+-- Clusters:
+--- zapp
+--- genBasic
+---- 65281 : den o !�(!!&!�#�!
+---- cid : genBasic
+---- sid : attrs
+---- zclVersion : 0
+---- appVersion : 18
+---- stackVersion : 2
+---- hwVersion : 38
+---- manufacturerName : LUMI
+---- modelId : lumi.ctrl_neutral2
+---- dateCode : 11-11-2016
+---- powerSource : 4
+---- locationDesc :
+--- genPowerCfg
+---- cid : genPowerCfg
+---- sid : attrs
+---- mainsVoltage : 0
+---- mainsAlarmMask : 0
+---- batteryVoltage : 0
+--- genDeviceTempCfg
+---- cid : genDeviceTempCfg
+---- sid : attrs
+---- currentTemperature : 29
+---- lowTempThres : 55
+---- highTempThres : 60
+--- genIdentify
+---- cid : genIdentify
+---- sid : attrs
+---- identifyTime : 0
+--- genTime
+---- cid : genTime
+---- sid : attrs
+--- genOta
+---- cid : genOta
+---- sid : attrs
+- Endpoints: 1
+-- Clusters:
+--- zapp
+--- genGroups
+---- cid : genGroups
+---- sid : attrs
+---- nameSupport : 128
+--- genScenes
+---- cid : genScenes
+---- sid : attrs
+---- count : 0
+---- currentScene : 0
+---- currentGroup : 0
+---- sceneValid : 0
+---- nameSupport : 128
+--- genOnOff
+---- 61440 : 55253733
+---- cid : genOnOff
+---- sid : attrs
+---- onOff : 0
+--- genBinaryOutput
+---- cid : genBinaryOutput
+---- sid : attrs
+---- activeText : ON
+---- description : CHANNEL1
+---- inactiveText : OFF
+---- minimumOffTime : 500000
+---- minimumOnTime : 500000
+---- outOfService : 0
+---- presentValue : 0
+---- statusFlags : 0
+---- applicationType : 67109376
+- Endpoints: 2
+-- Clusters:
+--- zapp
+--- genGroups
+---- cid : genGroups
+---- sid : attrs
+---- nameSupport : 128
+--- genScenes
+---- cid : genScenes
+---- sid : attrs
+---- count : 0
+---- currentScene : 0
+---- currentGroup : 0
+---- sceneValid : 0
+---- nameSupport : 128
+--- genOnOff
+---- 61440 : 55253727
+---- cid : genOnOff
+---- sid : attrs
+---- onOff : 0
+--- genBinaryOutput
+---- cid : genBinaryOutput
+---- sid : attrs
+---- activeText : ON
+---- description : CHANNEL2
+---- inactiveText : OFF
+---- minimumOffTime : 500000
+---- minimumOnTime : 500000
+---- outOfService : 0
+---- presentValue : 0
+---- statusFlags : 0
+---- applicationType : 67109377
+- Endpoints: 3
+-- Clusters:
+--- zapp
+--- genOnOff
+---- cid : genOnOff
+---- sid : attrs
+---- onOff : 1
+--- genMultistateInput
+---- cid : genMultistateInput
+---- sid : attrs
+---- numberOfStates : 4
+---- outOfService : 0
+---- presentValue : 0
+---- statusFlags : 0
+- Endpoints: 4
+-- Clusters:
+--- zapp
+--- genOnOff
+---- cid : genOnOff
+---- sid : attrs
+---- onOff : 1
+--- genMultistateInput
+---- cid : genMultistateInput
+---- sid : attrs
+---- numberOfStates : 4
+---- outOfService : 0
+---- presentValue : 0
+---- statusFlags : 0
+- Endpoints: 5
+-- Clusters:
+--- zapp
+--- genOnOff
+---- cid : genOnOff
+---- sid : attrs
+---- onOff : 0
+--- genMultistateInput
+---- cid : genMultistateInput
+---- sid : attrs
+---- numberOfStates : 4
+---- outOfService : 0
+---- presentValue : 0
+---- statusFlags : 0
+- Endpoints: 6
+-- Clusters:
+--- zapp
+--- genAnalogInput
+---- cid : genAnalogInput
+---- sid : attrs
+---- description : POWER
+---- maxPresentValue : 1600
+---- minPresentValue : 0
+---- outOfService : 0
+---- presentValue : 0
+---- resolution : 1
+---- statusFlags : 0
+---- applicationType : 590336
 */
 
 'use strict';
@@ -178,55 +176,115 @@ class AqaraLightControlDouble extends ZigBeeDevice {
 		// print the node's info to the console
 		this.printNode();
 
-		/*
-		this.registerAttrReportListener('genDeviceTempCfg', 'currentTemperature', 1, 60, 1, data =>
-		{
-			this.log('endpoint: 0 - currentTemperature', data);
-			this.setCapabilityValue('measure_temperature', data);
-		}, 0);
-
-
-		*/
-
-		// Register onoff capability
+		// Register capabilities
 		this.registerCapability('onoff', 'genOnOff', { endpoint: 1});
 		this.registerCapability('onoff.1', 'genOnOff', { endpoint: 2});
 
-		this.registerAttrReportListener(
-			'genOnOff', 'onOff',
-			1, 3600, 1,
-			this.onOnOffListener1.bind(this),
-			3, true);
+		// Register triggers for flows
+		this._triggerSwitchTwoOn = new Homey.FlowCardTriggerDevice('ctrl_neutral2_switch2_turned_on').register();
+		this._triggerSwitchTwoOff = new Homey.FlowCardTriggerDevice('ctrl_neutral2_switch2_turned_off').register();
 
-		this.registerAttrReportListener(
-			'genOnOff', 'onOff',
-			1, 3600, 1,
-			this.onOnOffListener2.bind(this),
-			4, true);
+		// Register conditions for flows
+		this._conditionSwitchTwo = new Homey.FlowCardCondition("ctrl_neutral2_switch2_is_on").register()
+			.registerRunListener((args, state) => {return Promise.resolve(this.getCapabilityValue('onoff.1'));})
 
-		//this.registerAttrReportListener('genDeviceTempCfg', 'currentTemperature', 1, 3600, 1, this.onOtherListener.bind(this), 0, true);
-		//this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 3600, 1, this.onOtherListener.bind(this), 6, true);
+		// Register actions for flows
+		this._actionSwitchTwoOn = new Homey.FlowCardAction('ctrl_neutral2_turn_on_switch2').register()
+			.registerRunListener((args, state) => {return this.triggerCapabilityListener('onoff.1', true, {});});
+		this._actionSwitchTwoOff = new Homey.FlowCardAction('ctrl_neutral2_turn_off_switch2').register()
+			.registerRunListener((args, state) => {return this.triggerCapabilityListener('onoff.1', false, {});});
+
+		// Register listeners for attributes
+		this.registerAttrReportListener('genOnOff', 'onOff',1, 3600, 1,
+			this.switchOneAttrListener.bind(this),3, true);
+		this.registerAttrReportListener('genOnOff', 'onOff',1, 3600, 1,
+			this.switchTwoAttrListener.bind(this),4, true);
 
 	}
 
-	onOnOffListener1(data) {
-		this.log('genOnOff - 1' , data);
+  // Method to handle changes to attributes
+	switchOneAttrListener(data) {
+		this.log('[AqaraLightControlDouble] [switchOneAttrListener] Received data =' , data);
 		if (data > 0) {
-			this.setCapabilityValue('onoff', !this.getCapabilityValue('onoff'));
+			let currentValue = this.getCapabilityValue('onoff');
+			this.log('[AqaraLightControlDouble] [switchOneAttrListener] Setting capability value to', !currentValue);
+			this.setCapabilityValue('onoff', !currentValue);
 		}
 	}
 
-	onOnOffListener2(data,capability) {
-		this.log('genOnOff - 2' , data);
+	switchTwoAttrListener(data) {
+		this.log('[AqaraLightControlDouble] [switchTwoAttrListener] Received data =' , data);
 		if (data > 0) {
-			this.setCapabilityValue('onoff.1', !this.getCapabilityValue('onoff.1'));
+			let currentValue = this.getCapabilityValue('onoff.1');
+			this.log('[AqaraLightControlDouble] [switchTwoAttrListener] Setting capability value to', !currentValue);
+			this.setCapabilityValue('onoff.1', !currentValue);
+			if (!currentValue === true) this._triggerSwitchTwoOn.trigger(this,{},{}).catch( this.error );
+			else this._triggerSwitchTwoOff.trigger(this,{},{}).catch( this.error );
 		}
 	}
 
-	/*
-	onOtherListener(data) {
-		this.log('onOtherListener', data );
-	}*/
+  // Overload parent method to trigger flows when capabilities' changes
+	async _registerCapabilityListenerHandler(capabilitySetObj, capabilityId, value, opts) {
+		return super._registerCapabilityListenerHandler(capabilitySetObj, capabilityId, value, opts)
+		.then(res => this.switchCapabilityListener(capabilityId, value))
+	}
+
+  // method to check capabilities' changes and trigger relevant flows
+  switchCapabilityListener(capabilityId, value) {
+		this.log('[AqaraLightControlDouble] [switchCapabilityListener] Received capabilityId =', capabilityId, ' value = ', value);
+		if (capabilityId === "onoff.1") {
+			if (value === true) {
+				this.log('[AqaraLightControlDouble] [switchCapabilityListener] Triggering ctrl_neutral2_switch2_turned_on');
+				this._triggerSwitchTwoOn.trigger(this,{},{});
+			} else {
+				this.log('[AqaraLightControlDouble] [switchCapabilityListener] Triggering ctrl_neutral2_switch2_turned_off');
+				this._triggerSwitchTwoOff.trigger(this,{},{});
+			}
+		}
+	}
+
+	// Temporary till until Zigbee Meshdriver bug is fixed. See https://github.com/athombv/homey/issues/2137
+	// Rewrite parent method to overcome Zigbee Meshdriver bug.
+	_mergeSystemAndUserOpts(capabilityId, clusterId, userOpts) {
+
+		// Merge systemOpts & userOpts
+		let systemOpts = {};
+
+		let tempCapabilityId = capabilityId;
+		let index = tempCapabilityId.lastIndexOf('.');
+		if (index!==-1) {
+			tempCapabilityId = tempCapabilityId.slice(0,index)
+		}
+
+		try {
+			systemOpts = Homey.util.recursiveDeepCopy(require(`../../node_modules/homey-meshdriver/lib/zigbee/system/capabilities/${tempCapabilityId}/${clusterId}.js`));
+
+			// Bind correct scope
+			for (let i in systemOpts) {
+				if (systemOpts.hasOwnProperty(i) && typeof systemOpts[i] === 'function') {
+					systemOpts[i] = systemOpts[i].bind(this);
+				}
+			}
+		}
+		catch (err) {
+			if (err.code !== 'MODULE_NOT_FOUND' || err.message.indexOf(`../../node_modules/homey-meshdriver/lib/zigbee/system/capabilities/${tempCapabilityId}/${clusterId}.js`) < 0) {
+				process.nextTick(() => {
+					throw err;
+				});
+			}
+		}
+
+		// Insert default endpoint zero
+		if (userOpts && !userOpts.hasOwnProperty('endpoint')) userOpts.endpoint = this.getClusterEndpoint(clusterId);
+		else if (typeof userOpts === 'undefined') userOpts = {
+			endpoint: this.getClusterEndpoint(clusterId)
+		};
+
+		this._capabilities[capabilityId][clusterId] = Object.assign(
+			systemOpts || {},
+			userOpts || {}
+		);
+	}
 
 }
 
