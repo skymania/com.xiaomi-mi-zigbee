@@ -1,7 +1,7 @@
 {
   "id": "com.xiaomi-mi",
   "name": {
-    "en": "Xiaomi Mi ZigBee"
+    "en": "Xiaomi Mi ZigBee (>=1.5.4)"
   },
   "description": {
     "en": "Control Xiaomi Mi ZigBee devices",
@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.1.3",
+  "version": "0.1.4",
   "compatibility": ">=1.5.4",
   "sdk": 2,
   "author": {
@@ -227,6 +227,13 @@
                   "en": "Right button",
                   "nl": "Rechter knop"
                 }
+              },
+              {
+                "id": "Both buttons",
+                "label": {
+                  "en": "Both buttons",
+                  "nl": "Beide knoppen"
+                }
               }
             ]
           },
@@ -430,6 +437,37 @@
         "large": "/drivers/ctrl_neutral2/assets/images/large.png",
         "small": "/drivers/ctrl_neutral2/assets/images/small.png"
       }
+    },
+    {
+      "id": "cube",
+      "name": {
+        "en": "Cube",
+        "nl": "Cube"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.sensor_cube"
+        ],
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/cube/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the power button to open more than 5 seconds until the light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/cube/assets/images/large.png",
+        "small": "/drivers/cube/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "curtain",
@@ -924,8 +962,8 @@
     {
       "id": "weather",
       "name": {
-        "en": "Aqara Weather sensor",
-        "nl": "Aqara Weather sensor"
+        "en": "Aqara Temperature and Humidity Sensor",
+        "nl": "Aqara Temperature and Humidity Sensor"
       },
       "class": "sensor",
       "capabilities": [

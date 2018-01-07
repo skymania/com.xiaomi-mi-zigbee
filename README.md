@@ -1,5 +1,7 @@
 # Xiaomi-mi Smart Home (Zigbee)
 
+### This app requires Homey SW release 1.5.4 or higher
+
 This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Home Devices](https://xiaomi-mi.com/).  
 <a href="https://github.com/TedTolboom/com.xiaomi-mi-zigbee">
   <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/assets/images/small.png">
@@ -9,17 +11,17 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 [Xiaomi-mi Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi-zigbee)                    
 [Xiaomi-mi Zigbee app Github repository](https://github.com/TedTolboom/com.xiaomi-mi-zigbee)   
 **Note:** This app is using [HomeyConfig composer](https://www.npmjs.com/package/node-homey-config-composer).   
-Please file Pull Requests on the development branch of this repository and with respect to the refactored files in _/drivers_ and _/config_ folders.   
+Please file Pull Requests on the *development* branch of this repository and with respect to the refactored files in _/drivers_ and _/config_ folders.   
 
 ## Supported devices
 * Door/Window sensor (contact alarm)
-* Aqara Window/Door Sensor (contact alarm)
-* Aqara Human Body Sensor (motion alarm, luminance, temperature)
-* Aqara Weather sensor (temperature, relative humidity, atmospheric pressure)
-* Wireless switch (1x - 4x click, Key Held, Key released)
-* Aqara Wireless switch (1x - 4x click)   
-* Temperature/Humidity Sensor (temperature, relative humidity)
 * Occupancy Sensor (motion alarm)
+* Temperature/Humidity Sensor (temperature, relative humidity)
+* Wireless switch (1x - 4x click, Key Held, Key released)
+* Aqara Window/Door Sensor (contact alarm)
+* Aqara Human Body Sensor (motion alarm, luminance)
+* Aqara Temperature and Humidity Sensor (temperature, relative humidity, atmospheric pressure)
+* Aqara Wireless switch (1x - 4x click)   
 * Aqara Wireless Remote Switch Single / Double (1x click)     
 
 **Note:** The Aqara Human Body Sensor has a button next to the PIR window; the Occupancy sensor has a pinhole   
@@ -32,6 +34,8 @@ Please file Pull Requests on the development branch of this repository and with 
 * Cube
 * Aqara Wall Switch Single / Double
 * Aqara Water sensor
+
+## Devices Work in Progress (inclusion is possible, requiring ZigBee Shepherd change)
 * Gas Leak detector
 * Smoke detector
 
@@ -51,8 +55,12 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.1.4
+* Add 1x click of both buttons for Aqara Wireless Remote Switch Double  
+* Increase luminance sensor sensitivity for Aqara Human Body Sensor   
+
 ### v 0.1.3
-* Add second deviceID for Aqara Window/Door Sensor 
+* Add second deviceID for Aqara Window/Door Sensor
 * Fix deviceID's (and update driver name) for Aqara Wireless Remote Switch Single   
 
 ### v 0.1.2
