@@ -5,14 +5,47 @@
 		"en": "Aqara Wall Switch Double",
 		"nl": "Aqara Wall Switch Double"
 	},
-	"class": "light",
+	"class": "socket",
 	"capabilities": [
-		"measure_temperature",
 		"onoff",
-		"onoff.1",
-		"measure_power",
-		"meter_power"
+		"onoff.1"
 	],
+	"capabilitiesOptions": {
+		"onoff": {
+			"title": {
+				"en": "Switch 1"
+			},
+			"greyout": false
+		},
+		"onoff.1": {
+			"title": {
+				"en": "Switch 2"
+			},
+			"greyout": false
+		}
+	},
+	"mobile": {
+		"components": [
+			{
+				"id": "icon",
+				"capabilities": []
+			},
+			{
+				"id": "toggle",
+				"capabilities": ["onoff"],
+				"options": {
+					"showTitle": true
+				}
+			},
+			{
+				"id": "toggle",
+				"capabilities": ["onoff.1"],
+				"options": {
+					"showTitle": true
+				}
+			}
+		]
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": ["lumi.ctrl_neutral2"],
@@ -21,15 +54,13 @@
 		"learnmode": {
 			"image": "/drivers/ctrl_neutral2/assets/learn.svg",
 			"instruction": {
-				"en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-				"nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+				"en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+				"nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
 			}
 		}
 	},
 	"images": {
 		"large": "/drivers/ctrl_neutral2/assets/images/large.png",
 		"small": "/drivers/ctrl_neutral2/assets/images/small.png"
-	},
-	"settings": [
-	]
+	}
 }
