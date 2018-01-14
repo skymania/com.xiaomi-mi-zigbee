@@ -1,0 +1,29 @@
+[{
+		"id": "ctrl_neutral2_switch2_turned_on",
+		"title": {
+			"en": "Right Switch On",
+			"nl": "Rechter Schakelaar Op"
+		},
+		"args": [
+			{
+				"type": "device",
+				"name": "ctrl_neutral2",
+				"filter": "driver_id=ctrl_neutral2"
+		}
+	]
+},
+	{
+		"id": "ctrl_neutral2_switch2_turned_off",
+		"title": {
+			"en": "Right Switch Off",
+			"nl": "Rechter Schakelaar Uit"
+		},
+		"args": [
+			{
+				"type": "device",
+				"name": "ctrl_neutral2",
+				"filter": "driver_id=ctrl_neutral2"
+		}
+	]
+}
+]

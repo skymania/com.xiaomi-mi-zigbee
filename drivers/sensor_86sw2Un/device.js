@@ -26,6 +26,9 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 		this._attrReportListeners['1_genOnOff'] = this._attrReportListeners['1_genOnOff'] || {};
 		this._attrReportListeners['1_genOnOff']['onOff'] = this.onOnOffListener2.bind(this);
 
+		this._attrReportListeners['2_genOnOff'] = this._attrReportListeners['2_genOnOff'] || {};
+		this._attrReportListeners['2_genOnOff']['onOff'] = this.onOnOffListener3.bind(this);
+
 	}
 	onOnOffListener(data) {
 		this.log('genOnOff - onOff', data, 'Left button');
@@ -45,6 +48,19 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 		if (data === 0) {
 			const remoteValue = {
 				button: 'Right button',
+				scene: 'Key Pressed 1 time',
+			};
+			// Trigger the trigger card with 1 dropdown option
+			this.triggerButton2_scene.trigger(this, this.triggerButton2_scene.getArgumentValues, remoteValue);
+			// Trigger the trigger card with tokens
+			this.triggerButton2_button.trigger(this, remoteValue, null);
+		}
+	}
+	onOnOffListener3(data) {
+		this.log('genOnOff - onOff', data, 'Both buttons');
+		if (data === 0) {
+			const remoteValue = {
+				button: 'Both buttons',
 				scene: 'Key Pressed 1 time',
 			};
 			// Trigger the trigger card with 1 dropdown option

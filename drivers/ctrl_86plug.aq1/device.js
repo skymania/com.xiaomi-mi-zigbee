@@ -4,7 +4,7 @@ const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 //const ZigBeeLightDevice = require('homey-meshdriver').ZigBeeLightDevice;
 
-class AqaraPlug extends ZigBeeDevice {
+class AqaraSocket extends ZigBeeDevice {
 
 	onMeshInit() {
 		// enable debugging
@@ -17,7 +17,7 @@ class AqaraPlug extends ZigBeeDevice {
 		this.registerCapability('onoff', 'genOnOff');
 
 		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 300, 1, data => {
+		this.registerAttrReportListener('genOnOff', 'onOff', 1, 300, 10, data => {
 			if (this.getCapabilityValue('onoff') !== (data === 1)) {
 				this.log('genOnOff - onOff', data);
 				this.setCapabilityValue('onoff', data === 1);
@@ -39,7 +39,7 @@ class AqaraPlug extends ZigBeeDevice {
 		}, 1);
 
 		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 300, 10, data => {
+		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 300, 1, data => {
 			// this.log('genAnalogInput - presentValue (power)', data);
 			this.setCapabilityValue('measure_power', data);
 		}, 1);
@@ -64,7 +64,7 @@ class AqaraPlug extends ZigBeeDevice {
 
 }
 
-module.exports = AqaraPlug;
+module.exports = AqaraSocket;
 /*
 2018-01-14 09:13:49 [log] [ManagerDrivers] [plug] [0] ZigBeeDevice has been inited
 2018-01-14 09:13:49 [log] [ManagerDrivers] [plug] [0] ------------------------------------------

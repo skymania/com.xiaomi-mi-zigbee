@@ -1,0 +1,29 @@
+{
+	"id": "ctrl_neutral1",
+	"branch": "master",
+	"name": {
+		"en": "Aqara Wall Switch Single",
+		"nl": "Aqara Wall Switch Single"
+	},
+	"class": "socket",
+	"capabilities": [
+		"onoff"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": ["lumi.ctrl_neutral1"],
+		"deviceId": 6,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/ctrl_neutral1/assets/learn.svg",
+			"instruction": {
+				"en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+				"nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/ctrl_neutral1/assets/images/large.png",
+		"small": "/drivers/ctrl_neutral1/assets/images/small.png"
+	}
+}

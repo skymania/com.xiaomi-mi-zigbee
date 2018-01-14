@@ -1,0 +1,31 @@
+{
+	"id": "cube",
+	"branch": "development",
+	"name": {
+		"en": "Cube",
+		"nl": "Cube"
+	},
+	"class": "sensor",
+	"capabilities": [
+		"alarm_battery"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": ["lumi.sensor_cube"],
+		"deviceId": 24321,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/cube/assets/learn.svg",
+			"instruction": {
+				"en": "Long press the power button to open more than 5 seconds until the light flashes three times after release",
+				"nl": "Long press the power button to open more than 5 seconds until the light flashes three times after release"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/cube/assets/images/large.png",
+		"small": "/drivers/cube/assets/images/small.png"
+	},
+	"settings": [
+	]
+}
