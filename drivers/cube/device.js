@@ -155,6 +155,11 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		// this._attrReportListeners['2_genAnalogInput'] = this._attrReportListeners['2_genAnalogInput'] || {};
 		// this._attrReportListeners['2_genAnalogInput']['presentValue'] = this.rotateAttribReport.bind(this);
 
+		// Register the AttributeReportListener
+		this.registerAttrReportListener('genBasic', '65281', 1, 60, null, value => {
+			this.log('genBasic, 65281', value, typeof (value));
+		}, 1);
+
 		// Cube is shaked
 		this.shakeCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_shaked');
 		this.shakeCubeTriggerDevice.register();
