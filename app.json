@@ -634,66 +634,6 @@
       }
     },
     {
-      "id": "cube",
-      "name": {
-        "en": "Cube",
-        "nl": "Cube"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_cube"
-        ],
-        "deviceId": 24321,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/cube/assets/learn.svg",
-          "instruction": {
-            "en": "Long press the power button to open more than 5 seconds until the light flashes three times after release",
-            "nl": "Long press the power button to open more than 5 seconds until the light flashes three times after release"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/cube/assets/images/large.png",
-        "small": "/drivers/cube/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "curtain",
-      "name": {
-        "en": "Curtain Controller",
-        "nl": "Curtain Controller"
-      },
-      "class": "windowcoverings",
-      "capabilities": [
-        "onoff"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.curtain",
-        "deviceId": 514,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/curtain/assets/learn.svg",
-          "instruction": {
-            "en": "Press 3 times quickly to hear the device ring 3 times",
-            "nl": "Press 3 times quickly to hear the device ring 3 times"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/curtain/assets/images/large.png",
-        "small": "/drivers/curtain/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
       "id": "plug",
       "name": {
         "en": "Smart socket plug",
@@ -985,69 +925,6 @@
       ]
     },
     {
-      "id": "sensor_natgas",
-      "name": {
-        "en": "Gas Leak detector",
-        "nl": "Gas Leak detector"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_co",
-        "measure_temperature",
-        "alarm_battery",
-        "measure_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_natgas",
-        "deviceId": 257,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/sensor_natgas/assets/learn.svg",
-          "instruction": {
-            "en": "Press 3 times quickly to hear the device ring 3 times",
-            "nl": "Press 3 times quickly to hear the device ring 3 times"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/sensor_natgas/assets/images/large.png",
-        "small": "/drivers/sensor_natgas/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "sensor_smoke",
-      "name": {
-        "en": "Smoke detector",
-        "nl": "Smoke detector"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_smoke",
-        "alarm_battery",
-        "measure_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_smoke",
-        "deviceId": 1026,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/sensor_smoke/assets/learn.svg",
-          "instruction": {
-            "en": "Press 3 times quickly to hear the device ring 3 times",
-            "nl": "Press 3 times quickly to hear the device ring 3 times"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/sensor_smoke/assets/images/large.png",
-        "small": "/drivers/sensor_smoke/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
       "id": "sensor_switch.aq2",
       "name": {
         "en": "Aqara Wireless switch",
@@ -1122,37 +999,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "sensor_wleak.aq1",
-      "name": {
-        "en": "Aqara Water sensor",
-        "nl": "Aqara Water sensor"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "alarm_water",
-        "alarm_battery",
-        "measure_battery"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_wleak.aq1",
-        "deviceId": 1026,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
-          "instruction": {
-            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
-            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
-        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
-      },
-      "settings": []
     },
     {
       "id": "weather",
