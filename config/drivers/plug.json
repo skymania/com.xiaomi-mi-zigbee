@@ -1,6 +1,6 @@
 {
 	"id": "plug",
-	"branch": "development",
+	"branch": "master",
 	"name": {
 		"en": "Smart socket plug",
 		"nl": "Smart socket plug"

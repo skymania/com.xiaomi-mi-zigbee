@@ -1,6 +1,6 @@
 {
 	"id": "ctrl_86plug.aq1",
-	"branch": "development",
+	"branch": "master",
 	"name": {
 		"en": "Aqara Smart Socket",
 		"nl": "Aqara Smart Socket"

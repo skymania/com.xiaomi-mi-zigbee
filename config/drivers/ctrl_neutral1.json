@@ -1,6 +1,6 @@
 {
 	"id": "ctrl_neutral1",
-	"branch": "development",
+	"branch": "master",
 	"name": {
 		"en": "Aqara Wall Switch Single",
 		"nl": "Aqara Wall Switch Single"
