@@ -1,0 +1,34 @@
+{
+	"id": "ctrl_86plug.aq1",
+	"branch": "development",
+	"name": {
+		"en": "Aqara Smart Socket",
+		"nl": "Aqara Smart Socket"
+	},
+	"class": "socket",
+	"capabilities": [
+		"onoff",
+		"measure_power",
+		"measure_voltage",
+		"meter_power"
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": ["lumi.ctrl_86plug.aq1"],
+		"deviceId": 81,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/ctrl_86plug.aq1/assets/learn.svg",
+			"instruction": {
+				"en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+				"nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/ctrl_86plug.aq1/assets/images/large.png",
+		"small": "/drivers/ctrl_86plug.aq1/assets/images/small.png"
+	},
+	"settings": [
+	]
+}
