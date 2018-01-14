@@ -10,34 +10,38 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 ## Links:
 [Xiaomi-mi Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi-zigbee)                    
 [Xiaomi-mi Zigbee app Github repository](https://github.com/TedTolboom/com.xiaomi-mi-zigbee)   
+
 **Note:** This app is using [HomeyConfig composer](https://www.npmjs.com/package/node-homey-config-composer).   
 Please file Pull Requests on the *development* branch of this repository and with respect to the refactored files in _/drivers_ and _/config_ folders.   
 
-## Supported devices
-* Door/Window sensor (contact alarm)
-* Occupancy Sensor (motion alarm)
-* Temperature/Humidity Sensor (temperature, relative humidity)
-* Wireless switch (1x - 4x click, Key Held, Key released)
-* Aqara Window/Door Sensor (contact alarm)
-* Aqara Human Body Sensor (motion alarm, luminance)
-* Aqara Temperature and Humidity Sensor (temperature, relative humidity, atmospheric pressure)
-* Aqara Wireless switch (1x - 4x click)   
-* Aqara Wireless Remote Switch Single / Double (1x click)     
+## Supported devices (supported capabilities)
+* [Door/Window sensor](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-door-window-sensors/) (contact alarm)
+* [Occupancy Sensor](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-occupancy-sensor/) (motion alarm)
+* [Temperature/Humidity Sensor](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-temperature-humidity-sensor/) (temperature, relative humidity)
+* [Wireless switch](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-wireless-switch/) (1x - 4x click, Key Held, Key released)  
+* [Smart socket plug ZigBee edition](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-socket-plug-2-zigbee-edition-white/) (onoff, measure_power)
 
-**Note:** The Aqara Human Body Sensor has a button next to the PIR window; the Occupancy sensor has a pinhole   
+* [Aqara Window/Door Sensor](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-window-door-sensor/) (contact alarm)
+* [Aqara Human Body Sensor](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (motion alarm, luminance)
+* [Aqara Temperature and Humidity Sensor](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (temperature, relative humidity, atmospheric pressure)
+* [Aqara Smart Light Wall Switch Single](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-single-key/) / [Double](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-double-key/) (onoff)
+* [Aqara Smart Socket ZigBee Version](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-socket-zigbee-version/) (onoff, measure_power)
+* [Aqara Wireless switch](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x - 4x click)   
+* [Aqara Wireless Remote Switch Single](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-single-key/) / [Double](https://xiaomi-mi.com/sockets-and-sensors/remote-switch-for-aqara-smart-light-wall-switch-double-key/) (1x click for each button and combined)     
+
+**Notes:**
+* Battery operated devices will not yet show the **battery level**; this will be added in a future release (manufacturer specific ZigBee implementation)    
+* The Smart socket plug and Aqara Smart Socket ZigBee version report the actual power (W), **consumed energy (kWh)** will be added in a future release (manufacturer specific ZigBee implementation)    
+*
 
 ## Devices Work in Progress (reports received)
-* Curtain Controller
-* Smart socket plug
-
-## Devices Work in Progress (inclusion is possible, no reporting yet)
+* Curtain Controller ([GitHub issue](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/30))
 * Cube
-* Aqara Wall Switch Single / Double
-* Aqara Water sensor
 
-## Devices Work in Progress (inclusion is possible, requiring ZigBee Shepherd change)
-* Gas Leak detector
-* Smoke detector
+## Devices Work in Progress (inclusion is possible, require a [ZigBee Shepherd change (by Athom)](https://github.com/athombv/homey/issues/2005))
+* MiJia Honeywell Smoke Detector White
+* MiJia Honeywell Gas Leak Detector
+* MiJia Aqara Water sensor
 
 ## Supported Languages:
 * English
@@ -55,6 +59,12 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.2.0
+* Add support for Smart socket plug ZigBee edition (onoff, measure_power)   
+* Add support for Aqara Smart Light Wall Switch Single / Double (onoff)   
+* Add support for Aqara Smart Socket ZigBee Version (onoff, measure_power)   
+* Add explicitly in app title dependency on Homey SW release (>= 1.5.4)   
+
 ### v 0.1.4
 * Add 1x click of both buttons for Aqara Wireless Remote Switch Double  
 * Increase luminance sensor sensitivity for Aqara Human Body Sensor   
