@@ -8,10 +8,10 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 
 	onMeshInit() {
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		// Register capabilities and reportListeners for Left switch
 		this.registerCapability('onoff', 'genOnOff', {
