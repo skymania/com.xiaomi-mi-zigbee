@@ -39,8 +39,8 @@ class AqaraPlug extends ZigBeeDevice {
 		}, 1);
 
 		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 300, 1, data => {
-			this.log('genAnalogInput - presentValue (power)', data);
+		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 300, 10, data => {
+			// this.log('genAnalogInput - presentValue (power)', data);
 			this.setCapabilityValue('measure_power', data);
 		}, 1);
 
@@ -54,8 +54,8 @@ class AqaraPlug extends ZigBeeDevice {
 
 		// Report is send if status is changed or after 5 min
 		this.registerAttrReportListener('genAnalogInput', 'presentValue', 300, 1800, 1, data => {
-			this.log('genAnalogInput - presentValue (power)', data);
-			this.setCapabilityValue('measure_power', data);
+			this.log('genAnalogInput - presentValue (meter)', data);
+			this.setCapabilityValue('meter_power', data);
 		}, 2);
 
 		// measure_voltage
