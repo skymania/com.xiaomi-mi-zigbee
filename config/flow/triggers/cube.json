@@ -69,9 +69,7 @@
 					"en": "side top",
 					"nl": "zijde boven"
 				},
-				"example": {
-					"en": "1"
-				}
+				"example": "1"
 			}
 		],
 		"args": [
@@ -86,45 +84,45 @@
 				"values": [
 					{
 						"id": "1",
-						 "label": {
-							 "en": "1 up",
-							 "nl": "1 naar boven"
-						 }
+						"label": {
+							"en": "1 up",
+							"nl": "1 naar boven"
+						}
 					},
 					{
-						 "id": "2",
-						 "label": {
-							 "en": "2 up",
-							 "nl": "2 naar boven"
-						 }
+						"id": "2",
+						"label": {
+							"en": "2 up",
+							"nl": "2 naar boven"
+						}
 					},
 					{
-						 "id": "3",
-						 "label": {
-							 "en": "3 up",
-								"nl": "3 naar boven"
-						 }
+						"id": "3",
+						"label": {
+							"en": "3 up",
+							"nl": "3 naar boven"
+						}
 					},
 					{
-						 "id": "4",
-						 "label": {
-							 "en": "4 up",
-							 "nl": "4 naar boven"
-						 }
+						"id": "4",
+						"label": {
+							"en": "4 up",
+							"nl": "4 naar boven"
+						}
 					},
 					{
-						 "id": "5",
-						 "label": {
-							 "en": "5 up",
-							 "nl": "5 naar boven"
-						 }
+						"id": "5",
+						"label": {
+							"en": "5 up",
+							"nl": "5 naar boven"
+						}
 					},
 					{
-						 "id": "6",
-						 "label": {
-							 "en": "6 up",
-							 "nl": "6 naar boven"
-						 }
+						"id": "6",
+						"label": {
+							"en": "6 up",
+							"nl": "6 naar boven"
+						}
 					 }
 				 ]
 				}
