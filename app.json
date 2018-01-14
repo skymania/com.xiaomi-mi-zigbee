@@ -190,7 +190,9 @@
               "en": "scene",
               "nl": "scene"
             },
-            "example": "Button pressed (test)"
+            "example": {
+              "en": "Button pressed (test)"
+            }
           }
         ]
       },
@@ -277,7 +279,9 @@
               "en": "button",
               "nl": "knop"
             },
-            "example": "0"
+            "example": {
+              "en": "0"
+            }
           },
           {
             "name": "scene",
@@ -286,7 +290,9 @@
               "en": "scene",
               "nl": "scene"
             },
-            "example": "Button pressed (test)"
+            "example": {
+              "en": "Button pressed (test)"
+            }
           }
         ]
       },
@@ -388,7 +394,9 @@
               "en": "side top",
               "nl": "zijde boven"
             },
-            "example": "1"
+            "example": {
+              "en": "1"
+            }
           }
         ],
         "args": [
