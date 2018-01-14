@@ -141,8 +141,10 @@
 					"en": "scene",
 					"nl": "scene"
 				},
-				"example": "Button pressed (test)"
+				"example": {
+					"en": "Button pressed (test)"
 				}
+			}
 			]
 		}
 ]

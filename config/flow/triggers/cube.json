@@ -69,7 +69,9 @@
 					"en": "side top",
 					"nl": "zijde boven"
 				},
-				"example": "1"
+				"example": {
+					"en": "1"
+				}
 			}
 		],
 		"args": [
