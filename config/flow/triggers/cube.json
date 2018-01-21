@@ -444,9 +444,9 @@
 		 ]
 	},
 	{
-		"id": "cube_turn",
+		"id": "cube_rotate",
 		"title": {
-			"en": "Cube turned",
+			"en": "Cube rotated",
 			"nl": "Cube gedraaid"
 		},
 		"args": [

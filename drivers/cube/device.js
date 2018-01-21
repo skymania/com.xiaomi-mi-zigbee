@@ -113,11 +113,11 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			});
 
 		// cube is turned
-		this.cubeTurnTriggerDevice = new Homey.FlowCardTriggerDevice('cube_turn');
-		this.cubeTurnTriggerDevice
+		this.cubeRotateTriggerDevice = new Homey.FlowCardTriggerDevice('cube_rotate');
+		this.cubeRotateTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('cubeDoubleTap (args, state):', args, state);
+				this.log('cubeRotate (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -212,9 +212,9 @@ class AqaraCubeSensor extends ZigBeeDevice {
 
 		// cube turned
 		if (cubeAction.motion === 'Rotate') {
-			this.cubeTurnTriggerDevice.trigger(this, null, cubeAction)
-				.then(() => this.log('triggered cube_turned, cubeAction:', cubeAction))
-				.catch(err => this.error('Error triggering cube_turned', err));
+			this.cubeRotateTriggerDevice.trigger(this, null, cubeAction)
+				.then(() => this.log('triggered cubeRotate, cubeAction:', cubeAction))
+				.catch(err => this.error('Error triggering cubeRotate', err));
 		}
 
 		this.cubeMotionTriggerDevice.trigger(this, {
