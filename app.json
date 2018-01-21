@@ -45,6 +45,134 @@
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   },
+  "capabilities": {
+    "cube_measure_rotation": {
+      "type": "number",
+      "title": {
+        "en": "Rotation",
+        "nl": "Draaihoek"
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "°"
+      },
+      "decimals": 2
+    },
+    "cube_state_motion": {
+      "type": "enum",
+      "title": {
+        "en": "Motion",
+        "nl": "Beweging"
+      },
+      "getable": true,
+      "setable": false,
+      "values": [
+        {
+          "id": "Shake",
+          "title": {
+            "en": "Shake",
+            "nl": "Schudden"
+          }
+        },
+        {
+          "id": "Flip90",
+          "title": {
+            "en": "Flip 90°",
+            "nl": "Flip 90°"
+          }
+        },
+        {
+          "id": "Flip180",
+          "title": {
+            "en": "Flip 180°",
+            "nl": "Flip 180°"
+          }
+        },
+        {
+          "id": "Slide",
+          "title": {
+            "en": "Slide",
+            "nl": "Schuiven"
+          }
+        },
+        {
+          "id": "DoubleTap",
+          "title": {
+            "en": "Double tap",
+            "nl": "Kloppen"
+          }
+        },
+        {
+          "id": "Rotate",
+          "title": {
+            "en": "Rotate",
+            "nl": "Roteren"
+          }
+        },
+        {
+          "id": "Catch",
+          "title": {
+            "en": "Catch",
+            "nl": "Vangen"
+          }
+        }
+      ]
+    },
+    "cube_state_face": {
+      "type": "enum",
+      "title": {
+        "en": "Face up",
+        "nl": "Zijde boven"
+      },
+      "getable": true,
+      "setable": false,
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Face 1",
+            "nl": "Zijde 1"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Face 2",
+            "nl": "Zijde 2"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Face 3",
+            "nl": "Zijde 3"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Face 4",
+            "nl": "Zijde 4"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "Face 5",
+            "nl": "Zijde 5"
+          }
+        },
+        {
+          "id": "6",
+          "title": {
+            "en": "Face 6",
+            "nl": "Zijde 6"
+          }
+        }
+      ]
+    }
+  },
   "flow": {
     "triggers": [
       {
@@ -319,7 +447,7 @@
         ]
       },
       {
-        "id": "cube_shaked",
+        "id": "cube_shake",
         "title": {
           "en": "Cube shaked",
           "nl": "Cube geschud"
@@ -329,39 +457,259 @@
             "name": "device",
             "type": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
+              }
+            ]
           }
         ]
       },
       {
-        "id": "cube_catched",
+        "id": "cube_flip90",
         "title": {
-          "en": "Cube catched",
-          "nl": "Cube opgevangen"
+          "en": "Cube flipped 90°",
+          "nl": "Cube 90° gekanteld"
         },
         "args": [
           {
             "name": "device",
             "type": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "sourceFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "from any side",
+                  "nl": "van iedere zijde"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "from side 1",
+                  "nl": "van zijde 1"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "from side 2",
+                  "nl": "van zijde 2"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "from side 3",
+                  "nl": "van zijde 3"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "from side 4",
+                  "nl": "van zijde 4"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "from side 5",
+                  "nl": "van side 5"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "from side 6",
+                  "nl": "van zijde 6"
+                }
+              }
+            ]
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "to any side",
+                  "nl": "naar iedere zijde"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "to 1",
+                  "nl": "naar 1"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "to 2",
+                  "nl": "naar 2"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "to 3",
+                  "nl": "naar 3"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "to 4",
+                  "nl": "naar 4"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "to 5",
+                  "nl": "naar 5"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "to 6",
+                  "nl": "naar 6"
+                }
+              }
+            ]
           }
         ]
       },
       {
-        "id": "cube_turned",
+        "id": "cube_flip180",
         "title": {
-          "en": "Cube turned",
-          "nl": "Cube gedraaid"
+          "en": "Cube flipped 180°",
+          "nl": "Cube 180° gekanteld"
         },
         "args": [
           {
             "name": "device",
             "type": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
+              }
+            ]
           }
         ]
       },
       {
-        "id": "cube_slided",
+        "id": "cube_slide",
         "title": {
           "en": "Cube slided",
           "nl": "Cube verschoven"
@@ -371,28 +719,70 @@
             "name": "device",
             "type": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
+              }
+            ]
           }
         ]
       },
       {
-        "id": "cube_double_tapped",
+        "id": "cube_doubleTap",
         "title": {
-          "en": "Cube tapped twice",
-          "nl": "Cube 2x geklopt"
+          "en": "Cube double tapped",
+          "nl": "Cube twee keer kloppen"
         },
-        "tokens": [
-          {
-            "name": "side_up",
-            "type": "number",
-            "title": {
-              "en": "side top",
-              "nl": "zijde boven"
-            },
-            "example": {
-              "en": "1"
-            }
-          }
-        ],
         "args": [
           {
             "name": "device",
@@ -400,49 +790,125 @@
             "filter": "driver_id=cube"
           },
           {
-            "name": "double_tapped",
+            "name": "targetFace",
             "type": "dropdown",
             "values": [
               {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
+              },
+              {
                 "id": "1",
                 "label": {
-                  "en": "1 up",
-                  "nl": "1 naar boven"
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
                 }
               },
               {
                 "id": "2",
                 "label": {
-                  "en": "2 up",
-                  "nl": "2 naar boven"
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
                 }
               },
               {
                 "id": "3",
                 "label": {
-                  "en": "3 up",
-                  "nl": "3 naar boven"
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
                 }
               },
               {
                 "id": "4",
                 "label": {
-                  "en": "4 up",
-                  "nl": "4 naar boven"
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
                 }
               },
               {
                 "id": "5",
                 "label": {
-                  "en": "5 up",
-                  "nl": "5 naar boven"
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
                 }
               },
               {
                 "id": "6",
                 "label": {
-                  "en": "6 up",
-                  "nl": "6 naar boven"
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cube_turn",
+        "title": {
+          "en": "Cube turned",
+          "nl": "Cube gedraaid"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
                 }
               }
             ]
@@ -641,8 +1107,43 @@
       },
       "class": "sensor",
       "capabilities": [
+        "measure_battery",
+        "cube_state_motion",
+        "cube_state_face",
+        "cube_measure_rotation",
         "alarm_battery"
       ],
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": []
+          },
+          {
+            "id": "battery",
+            "capabilities": [
+              "measure_battery"
+            ]
+          },
+          {
+            "id": "sensor",
+            "capabilities": [
+              "cube_state_motion",
+              "cube_state_face",
+              "cube_measure_rotation",
+              "alarm_battery"
+            ],
+            "options": {
+              "showTitle": true,
+              "icons": {
+                "cube_state_motion": "/drivers/cube/assets/icon.svg",
+                "cube_state_face": "/drivers/cube/assets/icon_face.svg",
+                "cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg"
+              }
+            }
+          }
+        ]
+      },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [

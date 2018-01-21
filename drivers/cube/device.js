@@ -1,115 +1,31 @@
 'use strict';
 
-const flip90options = {
-	65: {
-		direction: 'left',
-		side: 2,
-	},
-	66: {
-		direction: 'right',
-		side: 3,
-	},
-	68: {
-		direction: 'right',
-		side: 5,
-	},
-	72: {
-		direction: 'left',
-		side: 1,
-	},
-	80: {
-		direction: 'right',
-		side: 3,
-	},
-	74: {
-		direction: 'left',
-		side: 3,
-	},
-	75: {
-		direction: 'recht',
-		side: 4,
-	},
-	77: {
-		direction: 'left',
-		side: 6,
-	},
-	92: {
-		direction: 'left',
-		side: 5,
-	},
-	93: {
-		direction: 'left',
-		side: 6,
-	},
-	96: {
-		direction: 'left',
-		side: 1,
-	},
-	99: {
-		direction: 'right',
-		side: 4,
-	},
-	81: {
-		direction: 'right',
-		side: 2,
-	},
-	83: {
-		direction: 'left',
-		side: 4,
-	},
-	84: {
-		direction: 'left',
-		side: 5,
-	},
-	89: {
-		direction: 'right',
-		side: 2,
-	},
-	98: {
-		direction: 'left',
-		side: 3,
-	},
-	69: {
-		direction: 'right',
-		side: 6,
-	},
-	104: {
-		direction: 'left',
-		side: 1,
-	},
-	105: {
-		direction: 'left',
-		side: 2,
-	},
-	101: {
-		direction: 'right',
-		side: 6,
-	},
-	107: {
-		direction: 'right',
-		side: 4,
-	},
-	108: {
-		direction: 'right',
-		side: 5,
-	},
-};
+// 			+---+
+// 			| 1 |
+// 	+---+---+---+
+// 	| 5 | 6 | 2 |
+// 	+---+---+---+
+// 			| 4 |
+// 			+---+
+// 			| 3 |
+// 			+---+
+// where side 6 holds the MI logo and side 4 has the battery door.
 
 const motionArray = {
 	0: {
 		motion: 'Shake'
 	},
 	1: {
-		motion: 'Flip 90 degrees'
+		motion: 'Flip90'
 	},
 	2: {
-		motion: 'Flip 180 degrees'
+		motion: 'Flip180'
 	},
 	4: {
 		motion: 'Slide'
 	},
 	8: {
-		motion: 'Double tap'
+		motion: 'DoubleTap'
 	},
 	16: {
 		motion: 'Rotate'
@@ -124,168 +40,170 @@ const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 class AqaraCubeSensor extends ZigBeeDevice {
-	onMeshInit() {
+	async onMeshInit() {
 		// enable debugging
 		this.enableDebug();
 
 		// print the node's info to the console
 		this.printNode();
 
-		// Register the AttributeReportListener
-		this.registerAttrReportListener('genMultistateInput', 'Status flags', 1, 60, null, value => {
-			this.log('genAnalogInput cluster 2, Status flags', value);
-		}, 1);
-
-		// Register the AttributeReportListener
-		this.registerAttrReportListener('genMultistateInput', 'Status flags', 1, 60, null, value => {
-			this.log('genAnalogInput cluster 2, Status flags', value);
-		}, 1);
-
-
-		// Register the AttributeReportListener
+		// Register the AttributeReportListener - Shake, Catch, Flip 90, Flip 180, Slide and Double tap motionType
 		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, this.flippedAttribReport.bind(this), 1);
 
-		// Register the AttributeReportListener
+		// Register the AttributeReportListener - Flip motionType
 		this.registerAttrReportListener('genAnalogInput', '65285', 1, 60, null, this.turnedAttribReport.bind(this), 2);
 
-		// Register the AttributeReportListener
+		// Register the AttributeReportListener - Rotation angle
 		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, value => {
 			this.log('genAnalogInput cluster 2, presentValue', value);
 		}, 2);
-		// this._attrReportListeners['2_genAnalogInput'] = this._attrReportListeners['2_genAnalogInput'] || {};
-		// this._attrReportListeners['2_genAnalogInput']['presentValue'] = this.rotateAttribReport.bind(this);
 
-		// Register the AttributeReportListener
+		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null, value => {
 			this.log('genBasic, 65281', value, typeof (value));
 		}, 0);
 
 		// Cube is shaked
-		this.shakeCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_shaked');
-		this.shakeCubeTriggerDevice.register();
+		this.cubeShakeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_shake');
+		this.cubeShakeTriggerDevice
+			.register()
+			.registerRunListener((args, state) => {
+				this.log('cubeShake (args, state):', args, state);
+				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
+			});
 
+		// Cube is flipped 90 degrees
+		this.cubeFlip90TriggerDevice = new Homey.FlowCardTriggerDevice('cube_flip90');
+		this.cubeFlip90TriggerDevice
+			.register()
+			.registerRunListener((args, state) => {
+				this.log('cubeFlip90 (args, state):', args, state);
+				return Promise.resolve(
+					(args.sourceFace === '0' && args.targetFace === state.targetFace) || // any side to target side
+					(args.sourceFace === state.sourceFace && args.targetFace === '0') || // source side to any side
+					(args.sourceFace === state.sourceFace && args.targetFace === state.targetFace) || // source side to target side
+					(args.sourceFace === '0' && args.targetFace === '0')); // any side to any side
+			});
+
+		// Cube is flipped 180 degrees
+		this.cubeFlip180TriggerDevice = new Homey.FlowCardTriggerDevice('cube_flip180');
+		this.cubeFlip180TriggerDevice
+			.register()
+			.registerRunListener((args, state) => {
+				this.log('cubeFlip180 (args, state):', args, state);
+				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
+			});
+
+		// cube is slided
+		this.cubeSlideTriggerDevice = new Homey.FlowCardTriggerDevice('cube_slide');
+		this.cubeSlideTriggerDevice
+			.register()
+			.registerRunListener((args, state) => {
+				this.log('cubeSlide (args, state):', args, state);
+				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
+			});
+
+		// cube is double tapped
+		this.cubeDoubleTapTriggerDevice = new Homey.FlowCardTriggerDevice('cube_doubleTap');
+		this.cubeDoubleTapTriggerDevice
+			.register()
+			.registerRunListener((args, state) => {
+				this.log('cubeDoubleTap (args, state):', args, state);
+				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
+			});
+
+		// cube is turned
+		this.cubeTurnTriggerDevice = new Homey.FlowCardTriggerDevice('cube_turn');
+		this.cubeTurnTriggerDevice
+			.register()
+			.registerRunListener((args, state) => {
+				this.log('cubeDoubleTap (args, state):', args, state);
+				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
+			});
+
+		/*
 		// cube is catched
 		this.catchCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_catched');
 		this.catchCubeTriggerDevice.register();
-
-		// cube is slided
-		this.slideCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_slided');
-		this.slideCubeTriggerDevice.register();
-
-		// cube is turned
-		this.turnedCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_turned');
-		this.turnedCubeTriggerDevice.register();
-
-		// cube is double tapped
-		this.doubletapCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_double_tapped');
-		this.doubletapCubeTriggerDevice
-			.register()
-			.registerRunListener((args, state) => {
-				this.log(args.double_tapped, state.double_tapped, args.double_tapped === state.double_tapped);
-				return Promise.resolve(args.double_tapped === state.double_tapped);
-			});
-
-		// cube is flipped 90
-		/* this.flippedCube90TriggerDevice = new Homey.FlowCardTriggerDevice('cube_flipped_90').register()
-			.registerRunListener((args, state) => {
-				this.log(args, state);
-				return Promise.resolve(args.dropdown === state.dropdown);
-			}); */
-
-		// cube flipped 180
-		// .....
-
-
-		// 			+---+
-		// 			| 1 |
-		// 	+---+---+---+
-		// 	| 5 | 6 | 2 |
-		// 	+---+---+---+
-		// 			| 4 |
-		// 			+---+
-		// 			| 3 |
-		// 			+---+
-		// where side 6 holds the MI logo and side 4 has the battery door.
-
+		*/
 	}
 
 	flippedAttribReport(data) {
 		// data in binary first 4 bits indicate type of motion, following group of 3 bits indicate the face of the cube
 		const motionType = (data >> 6) & 0b1111; // 0 (shake), 1 (flip 90), 2 (flip 180), 4 (slide), 8 (double tap)
-		const sourceFace = (data >> 3) & 0b111; // sourceFace (0-5)
-		const targetFace = data & 0b111; // targetFace (0-5)
-		this.log('data reported: ', data, 'motionType', motionArray[motionType].motion, 'sourceFace', sourceFace, 'targetFace', targetFace);
+		const sourceFace = ((data >> 3) & 0b111) + 1; // sourceFace (1-6)
+		// in case of Shake event retrieve last known cube_state_face
+		const targetFace = motionArray[motionType].motion !== 'Shake' ? (data & 0b111) + 1 : this.getCapabilityValue('cube_state_face'); // targetFace (1-6)
 
-		if (motionType > 0) this.faceSideUp = targetFace;
+		this.log('data reported: ', data, 'motionType', motionArray[motionType].motion, 'sourceFace', sourceFace, 'targetFace', targetFace);
 
 		const cubeAction = {
 			motion: motionArray[motionType].motion,
-			sourceFace,
-			targetFace: this.faceSideUp,
+			sourceFace: sourceFace.toString(),
+			targetFace: targetFace.toString(),
 		};
 
-		let cubeDegreeflipped = 90;
-		let cubeSideup = 0;
+		this.setCapabilityValue('cube_state_motion', cubeAction.motion);
+		this.setCapabilityValue('cube_state_face', cubeAction.targetFace);
 
 		// cube shaked
-		if (data === 0) {
-			this.shakeCubeTriggerDevice.trigger(this, null, null)
-				.then(() => this.log('triggered cube_shaked'))
+		if (cubeAction.motion === 'Shake') {
+			this.cubeShakeTriggerDevice.trigger(this, null, cubeAction)
+				.then(() => this.log('triggered cube_shaked, cubeAction:', cubeAction))
 				.catch(err => this.error('Error triggering cube_shaked', err));
 		}
+		// cube Flip90
+		if (cubeAction.motion === 'Flip90') {
+			this.cubeFlip90TriggerDevice.trigger(this, null, cubeAction)
+				.then(() => this.log('triggered cube_flip90, cubeAction:', cubeAction))
+				.catch(err => this.error('Error triggering cube_flip90', err));
+		}
 
-		// cube catched
-		if (data === 3) {
-			this.catchCubeTriggerDevice.trigger(this, null, null)
-				.then(() => this.log('triggered cube_catched'))
-				.catch(err => this.error('Error triggering cube_catched', err));
+		// cube Flip180
+		if (cubeAction.motion === 'Flip180') {
+			this.cubeFlip180TriggerDevice.trigger(this, null, cubeAction)
+				.then(() => this.log('triggered cube_flip180, cubeAction:', cubeAction))
+				.catch(err => this.error('Error triggering cube_flip180', err));
 		}
 
 		// cube slided
-		if (data >= 256 && data <= 261) {
-			cubeSideup = data - 255;
-			this.slideCubeTriggerDevice.trigger(this, null, null)
-				.then(() => this.log('triggered cube_slided'))
+		if (cubeAction.motion === 'Slide') {
+			this.cubeSlideTriggerDevice.trigger(this, null, cubeAction)
+				.then(() => this.log('triggered cube_slided, cubeAction:', cubeAction))
 				.catch(err => this.error('Error triggering cube_slided', err));
 		}
 
 		// cube double tapped
-		if (data >= 512 && data <= 517) {
-			cubeSideup = data - 511;
-			this.doubletapCubeTriggerDevice.trigger(this, {
-					cubeSideup_number: cubeSideup
-				}, {
-					cube_double_tapped: parseInt(cubeSideup, 0).toString()
-				})
-				.then(() => this.log(`triggered cube_double_tapped, action=double tapped with ${cubeSideup} up`))
-				.catch(err => this.error('Error triggering double_tapped', err));
+		if (cubeAction.motion === 'DoubleTap') {
+			this.cubeDoubleTapTriggerDevice.trigger(this, null, cubeAction)
+				.then(() => this.log('triggered cube_double_tapped, cubeAction:', cubeAction))
+				.catch(err => this.error('Error triggering cube_double_tapped', err));
 		}
-
-		// cube flipped 90 not working yet: not al values found
-		// const index = flip90options[data];
-		if (flip90options[data] !== void 0) {
-			// this.log('indexwaarde: ', index);
-			cubeDegreeflipped = flip90options[data].direction;
-			cubeSideup = flip90options[data].side;
-			this.log(`Cube flipped 90 degrees ${cubeDegreeflipped} with ${cubeSideup} on Top`);
+		/*
+		// cube double tapped
+		if (cubeAction.motion === 'Catch') {
+			this.cubeCatchTriggerDevice.trigger(this, null, null)
+				.then(() => this.log('triggered cube_catched))
+				.catch(err => this.error('Error triggering cube_catched', err));
 		}
-
-
-		// cube flipped 180
-		if (data >= 128 && data <= 133) {
-			cubeDegreeflipped = 180;
-			cubeSideup = 133 - data;
-
-		}
+		*/
 
 	}
 
 	turnedAttribReport(data) {
 		this.log('turned', data);
+		const cubeAction = {
+			motion: 'Rotate',
+			sourceFace: null,
+			targetFace: this.getCapabilityValue('cube_state_face'),
+		};
+
+		this.setCapabilityValue('cube_state_motion', cubeAction.motion);
+
 		// cube turned
-		if (data === 500) {
-			this.turnedCubeTriggerDevice.trigger(this, null, null)
-				.then(() => this.log('triggered cube_turned'))
+		if (cubeAction.motion === 'Rotate') {
+			this.cubeTurnTriggerDevice.trigger(this, null, cubeAction)
+				.then(() => this.log('triggered cube_turned, cubeAction:', cubeAction))
 				.catch(err => this.error('Error triggering cube_turned', err));
 		}
 	}
@@ -350,10 +268,8 @@ module.exports = AqaraCubeSensor;
 // [ManagerDrivers] [cube] [0] ---- cid : genAnalogInput
 // [ManagerDrivers] [cube] [0] ---- sid : attrs
 // [ManagerDrivers] [cube] [0] ------------------------------------------
-
 // [ManagerDrivers] [cube] [0] --- genBasic
 // [ManagerDrivers] [cube] [0] ---- 65281 : !O (!�!�$!e�!�!.�!(�!
-
 // [ManagerDrivers] [cube] [0] --- genAnalogInput
 // [ManagerDrivers] [cube] [0] ---- 65285 : 500
 // [ManagerDrivers] [cube] [0] ---- cid : genAnalogInput
