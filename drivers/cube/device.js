@@ -133,7 +133,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		const motionType = (data >> 6) & 0b1111; // 0 (shake), 1 (flip 90), 2 (flip 180), 4 (slide), 8 (double tap)
 		const sourceFace = ((data >> 3) & 0b111) + 1; // sourceFace (1-6)
 		// in case of Shake event retrieve last known cube_state_face
-		const targetFace = motionArray[motionType].motion !== 'Shake' ? (data & 0b111) + 1 : this.getCapabilityValue('cube_state_face'); // targetFace (1-6)
+		const targetFace = motionArray[motionType].motion !== 'Shake' ? (data & 0b111) + 1 : (this.getCapabilityValue('cube_state_face') || 6); // targetFace (1-6)
 
 		this.log('data reported: ', data, 'motionType', motionArray[motionType].motion, 'sourceFace', sourceFace, 'targetFace', targetFace);
 
@@ -195,7 +195,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		const cubeAction = {
 			motion: 'Rotate',
 			sourceFace: null,
-			targetFace: this.getCapabilityValue('cube_state_face'),
+			targetFace: (this.getCapabilityValue('cube_state_face') || '6'),
 		};
 
 		this.setCapabilityValue('cube_state_motion', cubeAction.motion);
