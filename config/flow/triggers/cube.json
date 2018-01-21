@@ -1,5 +1,49 @@
 [
 	{
+		"id": "cube_motion",
+		"title": {
+			"en": "Cube motion",
+			"nl": "Cube beweging"
+		},
+		"args": [
+			{
+				"name": "device",
+				"type": "device",
+				"filter": "driver_id=cube"
+			}
+		],
+		"tokens": [
+			{
+				"name": "motion",
+				"type": "string",
+				"title": {
+					"en": "Cube Motion",
+					"nl": "Cube beweging"
+				},
+				"example": {
+					"en": "Shake",
+					"nl": "Schudden"
+				}
+			},
+			{
+				"name": "sourceFace",
+				"type": "number",
+				"title": {
+					"en": "source Face"
+				},
+				"example": 1
+			},
+			{
+				"name": "targetFace",
+				"type": "number",
+				"title": {
+					"en": "target Face"
+				},
+				"example": 5
+			}
+		]
+	},
+	{
 		"id": "cube_shake",
 		"title": {
 			"en": "Cube shaked",

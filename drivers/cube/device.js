@@ -121,6 +121,9 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
+		// cube is motion report
+		this.cubeMotionTriggerDevice = new Homey.FlowCardTriggerDevice('cube_motion');
+		this.cubeMotionTriggerDevice.register();
 		/*
 		// cube is catched
 		this.catchCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_catched');
@@ -187,6 +190,13 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				.catch(err => this.error('Error triggering cube_catched', err));
 		}
 		*/
+		this.cubeMotionTriggerDevice.trigger(this, {
+				motion: cubeAction.motion,
+				sourceFace: sourceFace,
+				targetFace: targetFace,
+			})
+			.then(() => this.log('triggered cube_motion'))
+			.catch(err => this.error('Error triggering cube_double_tapped', err));
 
 	}
 
@@ -206,6 +216,14 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				.then(() => this.log('triggered cube_turned, cubeAction:', cubeAction))
 				.catch(err => this.error('Error triggering cube_turned', err));
 		}
+
+		this.cubeMotionTriggerDevice.trigger(this, {
+				motion: cubeAction.motion,
+				sourceFace: 0,
+				targetFace: parseInt(cubeAction.targetFace),
+			})
+			.then(() => this.log('triggered cube_motion'))
+			.catch(err => this.error('Error triggering cube_double_tapped', err));
 	}
 }
 
