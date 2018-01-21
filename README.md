@@ -32,11 +32,10 @@ Please file Pull Requests on the *development* branch of this repository and wit
 **Notes:**
 * Battery operated devices will not yet show the **battery level**; this will be added in a future release (manufacturer specific ZigBee implementation)    
 * The Smart socket plug and Aqara Smart Socket ZigBee version report the actual power (W), **consumed energy (kWh)** will be added in a future release (manufacturer specific ZigBee implementation)    
-*
 
 ## Devices Work in Progress (reports received)
 * Curtain Controller ([GitHub issue](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/30))
-* Cube
+* [Cube](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (Slide, Shake, Double Tap, Rotate (action, not angle), Flip 90°, Flip 180°), see [device readme for details](docs/README_cube.md)
 
 ## Devices Work in Progress (inclusion is possible, require a [ZigBee Shepherd change (by Athom)](https://github.com/athombv/homey/issues/2005))
 * MiJia Honeywell Smoke Detector White
@@ -59,6 +58,9 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.2.1
+* Add support for Xiaomi Cube (Slide, Shake, Double Tap, Rotate (action, not angle), Flip 90°, Flip 180°)   
+
 ### v 0.2.0
 * Add support for Smart socket plug ZigBee edition (onoff, measure_power)   
 * Add support for Aqara Smart Light Wall Switch Single / Double (onoff)   
