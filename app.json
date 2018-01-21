@@ -447,7 +447,7 @@
         ]
       },
       {
-        "id": "cube_motion",
+        "id": "cube_Motion",
         "title": {
           "en": "Cube motion",
           "nl": "Cube beweging"
@@ -491,7 +491,7 @@
         ]
       },
       {
-        "id": "cube_shake",
+        "id": "cube_Shake",
         "title": {
           "en": "Cube shaked",
           "nl": "Cube geschud"
@@ -560,7 +560,7 @@
         ]
       },
       {
-        "id": "cube_flip90",
+        "id": "cube_Flip90",
         "title": {
           "en": "Cube flipped 90°",
           "nl": "Cube 90° gekanteld"
@@ -684,7 +684,7 @@
         ]
       },
       {
-        "id": "cube_flip180",
+        "id": "cube_Flip180",
         "title": {
           "en": "Cube flipped 180°",
           "nl": "Cube 180° gekanteld"
@@ -753,7 +753,7 @@
         ]
       },
       {
-        "id": "cube_slide",
+        "id": "cube_Slide",
         "title": {
           "en": "Cube slided",
           "nl": "Cube verschoven"
@@ -822,7 +822,7 @@
         ]
       },
       {
-        "id": "cube_doubleTap",
+        "id": "cube_DoubleTap",
         "title": {
           "en": "Cube double tapped",
           "nl": "Cube twee keer kloppen"
@@ -891,7 +891,7 @@
         ]
       },
       {
-        "id": "cube_rotate",
+        "id": "cube_Rotate",
         "title": {
           "en": "Cube rotated",
           "nl": "Cube gedraaid"

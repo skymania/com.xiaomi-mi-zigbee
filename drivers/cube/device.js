@@ -64,7 +64,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		}, 0);
 
 		// Cube is shaked
-		this.cubeShakeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_shake');
+		this.cubeShakeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_Shake');
 		this.cubeShakeTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
@@ -73,7 +73,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			});
 
 		// Cube is flipped 90 degrees
-		this.cubeFlip90TriggerDevice = new Homey.FlowCardTriggerDevice('cube_flip90');
+		this.cubeFlip90TriggerDevice = new Homey.FlowCardTriggerDevice('cube_Flip90');
 		this.cubeFlip90TriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
@@ -86,7 +86,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			});
 
 		// Cube is flipped 180 degrees
-		this.cubeFlip180TriggerDevice = new Homey.FlowCardTriggerDevice('cube_flip180');
+		this.cubeFlip180TriggerDevice = new Homey.FlowCardTriggerDevice('cube_Flip180');
 		this.cubeFlip180TriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
@@ -95,7 +95,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			});
 
 		// cube is slided
-		this.cubeSlideTriggerDevice = new Homey.FlowCardTriggerDevice('cube_slide');
+		this.cubeSlideTriggerDevice = new Homey.FlowCardTriggerDevice('cube_Slide');
 		this.cubeSlideTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
@@ -104,7 +104,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			});
 
 		// cube is double tapped
-		this.cubeDoubleTapTriggerDevice = new Homey.FlowCardTriggerDevice('cube_doubleTap');
+		this.cubeDoubleTapTriggerDevice = new Homey.FlowCardTriggerDevice('cube_DoubleTap');
 		this.cubeDoubleTapTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
@@ -113,7 +113,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			});
 
 		// cube is turned
-		this.cubeRotateTriggerDevice = new Homey.FlowCardTriggerDevice('cube_rotate');
+		this.cubeRotateTriggerDevice = new Homey.FlowCardTriggerDevice('cube_Rotate');
 		this.cubeRotateTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
@@ -122,7 +122,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			});
 
 		// cube is motion report
-		this.cubeMotionTriggerDevice = new Homey.FlowCardTriggerDevice('cube_motion');
+		this.cubeMotionTriggerDevice = new Homey.FlowCardTriggerDevice('cube_Motion');
 		this.cubeMotionTriggerDevice.register();
 		/*
 		// cube is catched
@@ -146,9 +146,19 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			targetFace: targetFace.toString(),
 		};
 
+		// set corresponding capability values
 		this.setCapabilityValue('cube_state_motion', cubeAction.motion);
 		this.setCapabilityValue('cube_state_face', cubeAction.targetFace);
 
+		// Trigger the corresponding triggerdevice matching to the motion
+		if (cubeAction.motion) {
+			this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, null, cubeAction)
+				.then(() => this.log(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
+				.catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
+		}
+
+		/*
+		// OLD fractored triggers
 		// cube shaked
 		if (cubeAction.motion === 'Shake') {
 			this.cubeShakeTriggerDevice.trigger(this, null, cubeAction)
@@ -190,13 +200,15 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				.catch(err => this.error('Error triggering cube_catched', err));
 		}
 		*/
+
+		// Trigger generic motion token trigger card
 		this.cubeMotionTriggerDevice.trigger(this, {
 				motion: cubeAction.motion,
 				sourceFace: sourceFace,
 				targetFace: targetFace,
 			})
-			.then(() => this.log('triggered cube_motion'))
-			.catch(err => this.error('Error triggering cube_double_tapped', err));
+			.then(() => this.log('Triggered cubeMotionTriggerDevice'))
+			.catch(err => this.error('Error triggering cubeMotionTriggerDevice', err));
 
 	}
 
@@ -208,22 +220,33 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			targetFace: (this.getCapabilityValue('cube_state_face') || '6'),
 		};
 
+		// set corresponding capability values
 		this.setCapabilityValue('cube_state_motion', cubeAction.motion);
 
+		// Trigger the corresponding triggerdevice matching to the motion
+		if (cubeAction.motion) {
+			this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, null, cubeAction)
+				.then(() => this.log(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
+				.catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
+		}
+
+		/*
 		// cube turned
 		if (cubeAction.motion === 'Rotate') {
 			this.cubeRotateTriggerDevice.trigger(this, null, cubeAction)
 				.then(() => this.log('triggered cubeRotate, cubeAction:', cubeAction))
 				.catch(err => this.error('Error triggering cubeRotate', err));
 		}
+		*/
 
+		// Trigger generic motion token trigger card
 		this.cubeMotionTriggerDevice.trigger(this, {
 				motion: cubeAction.motion,
 				sourceFace: 0,
 				targetFace: parseInt(cubeAction.targetFace),
 			})
-			.then(() => this.log('triggered cube_motion'))
-			.catch(err => this.error('Error triggering cube_double_tapped', err));
+			.then(() => this.log('Triggered cubeMotionTriggerDevice'))
+			.catch(err => this.error('Error triggering cubeMotionTriggerDevice', err));
 	}
 }
 
