@@ -1,14 +1,50 @@
 {
 	"id": "cube",
-	"branch": "development",
+	"branch": "master",
 	"name": {
 		"en": "Cube",
 		"nl": "Cube"
 	},
 	"class": "sensor",
 	"capabilities": [
+		"measure_battery",
+		"cube_state_motion",
+		"cube_state_face",
+		"cube_measure_rotation",
+		"cube_measure_relative_rotation",
 		"alarm_battery"
 	],
+	"mobile": {
+		"components": [
+			{
+				"id": "icon",
+				"capabilities": []
+			},
+			{
+				"id": "battery",
+				"capabilities": ["measure_battery"]
+			},
+			{
+				"id": "sensor",
+				"capabilities": [
+					"cube_state_motion",
+					"cube_state_face",
+					"cube_measure_rotation",
+					"cube_measure_relative_rotation",
+					"alarm_battery"
+				],
+				"options": {
+					"showTitle": true,
+					"icons": {
+						"cube_state_motion": "/drivers/cube/assets/icon.svg",
+						"cube_state_face": "/drivers/cube/assets/icon_face.svg",
+						"cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg",
+						"cube_measure_relative_rotation": "/drivers/cube/assets/icon_rotate.svg"
+					}
+				}
+			}
+		]
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": ["lumi.sensor_cube"],
