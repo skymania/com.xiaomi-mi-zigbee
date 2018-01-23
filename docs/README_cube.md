@@ -2,16 +2,16 @@
 
 ## Device specific readme for the Xiaomi cube
 
-### Cube face numbering
-    +---+
-    | 1 |
-+---+---+---+
-| 5 | 6 | 2 |
-+---+---+---+
-    | 4 |
-    +---+
-    | 3 |
-    +---+
+### Face numbering
+      +---+
+      | 1 |
+ 	+---+---+---+
+ 	| 5 | 6 | 2 |
+ 	+---+---+---+
+      | 4 |
+      +---+
+      | 3 |
+      +---+
 where side 6 holds the MI logo and side 4 has the battery door.
 
 ### Device capabilities and limitations
