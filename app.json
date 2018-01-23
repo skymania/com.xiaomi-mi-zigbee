@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "compatibility": ">=1.5.4",
   "sdk": 2,
   "author": {
@@ -56,6 +56,19 @@
       "setable": false,
       "units": {
         "en": "°"
+      },
+      "decimals": 2
+    },
+    "cube_measure_relative_rotation": {
+      "type": "number",
+      "title": {
+        "en": "Relative rotation",
+        "nl": "Relatieve draaihoek"
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "%"
       },
       "decimals": 2
     },
@@ -1155,6 +1168,7 @@
         "cube_state_motion",
         "cube_state_face",
         "cube_measure_rotation",
+        "cube_measure_relative_rotation",
         "alarm_battery"
       ],
       "mobile": {
@@ -1175,6 +1189,7 @@
               "cube_state_motion",
               "cube_state_face",
               "cube_measure_rotation",
+              "cube_measure_relative_rotation",
               "alarm_battery"
             ],
             "options": {
@@ -1182,7 +1197,8 @@
               "icons": {
                 "cube_state_motion": "/drivers/cube/assets/icon.svg",
                 "cube_state_face": "/drivers/cube/assets/icon_face.svg",
-                "cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg"
+                "cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg",
+                "cube_measure_relative_rotation": "/drivers/cube/assets/icon_rotate.svg"
               }
             }
           }
