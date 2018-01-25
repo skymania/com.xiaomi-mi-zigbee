@@ -59,7 +59,8 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 ### v 0.2.1
-* Add support for Xiaomi Cube (Slide, Shake, Double Tap, Rotate (action, not angle yet), Flip 90°, Flip 180°)   
+* Add support for Xiaomi Cube (Slide, Shake, Double Tap, Rotate (action, not angle yet), Flip 90°, Flip 180°).   
+*note:* Cubes included based on previous development builds need to be re-included   
 
 ### v 0.2.0
 * Add support for Smart socket plug ZigBee edition (onoff, measure_power)   
