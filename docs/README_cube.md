@@ -24,7 +24,8 @@ The Cube reports several motions
 * Rotate
 * Shake
 
-While using the cube, please keep the following in mind; The cube does not send with all motions it's orientation (which face is facing upwards).
+While using the cube, please keep the following in mind:
+The cube does not send with all motions it's orientation (which face is facing upwards).
 
 The cube sends it's orientation only on these motions:
 * Flip 90 degrees
@@ -32,13 +33,18 @@ The cube sends it's orientation only on these motions:
 * Slide
 * Double Tap
 
-The cube does not sent it's orientation for the following two motions; therefore it is based on the last known orientation:
+The cube does not sent it's orientation for the following two motions:
 * Rotate
 * Shake
 
+For the Rotate and Shake motions, the reported orientation is based on the last known orientation.
+
 The cube does not send any data if gesture is unrecognized - rotating the cube randomly in the air and placing it down will most likely not send any event.
-Due to the above rotation and shake events can execute for wrong faces if the flip gestures are not performed correctly (like rotating the cube randomly in the air)
+Therefore the Cube can trigger an event based on the wrong orientation if the flip motions are not performed correctly (like rotating the cube randomly in the air).
+
 
 ### Driver implementation
-* The Cube currently still does not report the rotation angle. A change is needed at Athom side to enable this; see #29.
-Rotation angle capability has been added to avoid the need for re-inclusion of the devices, once this issue will be resolved.
+* Rotation angle reports of the Cube are not processed correctly by Homey's ZigBee core. A change is needed at Athom side to enable this; see https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/29.
+* Battery reports are not send by the Cube in the default ZigBee cluster reports. A change is needed at Athom side to start utilizing the manufacturer specific reporting; see https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/25
+
+In order to avoid that users need to re-include the Cube (and re-build all their flows), both the rotation angle as well as battery (measure and alarm) capabilities have been included. Until above issues have been resolved, these capabilities will show `-`. Once these issue have been resolved, the drivers will be updated and data reported will be shown without required action for the user (other then updating the app).
