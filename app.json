@@ -59,19 +59,6 @@
       },
       "decimals": 2
     },
-    "cube_measure_relative_rotation": {
-      "type": "number",
-      "title": {
-        "en": "Relative rotation",
-        "nl": "Relatieve draaihoek"
-      },
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "%"
-      },
-      "decimals": 2
-    },
     "cube_state_motion": {
       "type": "enum",
       "title": {
@@ -1174,7 +1161,6 @@
         "cube_state_motion",
         "cube_state_face",
         "cube_measure_rotation",
-        "cube_measure_relative_rotation",
         "alarm_battery"
       ],
       "mobile": {
@@ -1195,7 +1181,6 @@
               "cube_state_motion",
               "cube_state_face",
               "cube_measure_rotation",
-              "cube_measure_relative_rotation",
               "alarm_battery"
             ],
             "options": {
@@ -1203,8 +1188,7 @@
               "icons": {
                 "cube_state_motion": "/drivers/cube/assets/icon.svg",
                 "cube_state_face": "/drivers/cube/assets/icon_face.svg",
-                "cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg",
-                "cube_measure_relative_rotation": "/drivers/cube/assets/icon_rotate.svg"
+                "cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg"
               }
             }
           }
