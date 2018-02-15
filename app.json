@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.2.1",
+  "version": "0.2.2",
   "compatibility": ">=1.5.4",
   "sdk": 2,
   "author": {
@@ -1212,35 +1212,6 @@
       "images": {
         "large": "/drivers/cube/assets/images/large.png",
         "small": "/drivers/cube/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "curtain",
-      "name": {
-        "en": "Curtain Controller",
-        "nl": "Curtain Controller"
-      },
-      "class": "windowcoverings",
-      "capabilities": [
-        "onoff"
-      ],
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.curtain",
-        "deviceId": 514,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/curtain/assets/learn.svg",
-          "instruction": {
-            "en": "Press 3 times quickly to hear the device ring 3 times",
-            "nl": "Press 3 times quickly to hear the device ring 3 times"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/curtain/assets/images/large.png",
-        "small": "/drivers/curtain/assets/images/small.png"
       },
       "settings": []
     },
