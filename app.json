@@ -1,7 +1,7 @@
 {
   "id": "com.xiaomi-mi",
   "name": {
-    "en": "Xiaomi Mi ZigBee (>=1.5.4)"
+    "en": "Xiaomi Mi ZigBee"
   },
   "description": {
     "en": "Control Xiaomi Mi ZigBee devices",
@@ -10,8 +10,8 @@
   "category": [
     "lights"
   ],
-  "version": "0.2.2",
-  "compatibility": ">=1.5.4",
+  "version": "0.2.3",
+  "compatibility": ">=1.5.7",
   "sdk": 2,
   "author": {
     "name": "Ted Tolboom",
@@ -963,6 +963,26 @@
               }
             ]
           }
+        ],
+        "tokens": [
+          {
+            "name": "rotationAngle",
+            "type": "number",
+            "title": {
+              "en": "Rotation Angle °",
+              "nl": "Rotatiehoek °"
+            },
+            "example": 124.51
+          },
+          {
+            "name": "relativeRotationAngle",
+            "type": "number",
+            "title": {
+              "en": "Relative Angle %",
+              "nl": "Relatieve hoek %"
+            },
+            "example": 0.92
+          }
         ]
       }
     ],
@@ -1204,14 +1224,61 @@
         "learnmode": {
           "image": "/drivers/cube/assets/learn.svg",
           "instruction": {
-            "en": "Long press the power button to open more than 5 seconds until the light flashes three times after release",
-            "nl": "Long press the power button to open more than 5 seconds until the light flashes three times after release"
+            "en": "Hold the Cube during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de Cube in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
           }
         }
       },
       "images": {
         "large": "/drivers/cube/assets/images/large.png",
         "small": "/drivers/cube/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "cube_relative_angle",
+          "type": "number",
+          "label": {
+            "en": "Relative rotation angle (xx° = 100%)",
+            "nl": "Relatieve hoekverdraaing (xx° = 100%)"
+          },
+          "hint": {
+            "en": "This setting will translate the actual measured rotation angle in a relative rotation angle that can be used to increase or decrease dim-level / volume.\nxx° = 100%\nRange: 1 - 360, default: 180 [°]",
+            "nl": "Deze instelling vertaalt de gemeten hoekverdraaing in een relatieve hoekverdraaing die gebruikt kan worden voor het verhogen of verlagen van het volume.\nxx° = 100%\nBereik: 1 - 360, standaard: 180 [°]"
+          },
+          "value": 180,
+          "attr": {
+            "min": 1,
+            "max": 360
+          }
+        }
+      ]
+    },
+    {
+      "id": "curtain",
+      "name": {
+        "en": "Curtain Controller",
+        "nl": "Curtain Controller"
+      },
+      "class": "windowcoverings",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain",
+        "deviceId": 514,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/curtain/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain/assets/images/large.png",
+        "small": "/drivers/curtain/assets/images/small.png"
       },
       "settings": []
     },
@@ -1446,12 +1513,12 @@
             "nl": "Schakel bewegingsalarm uit na"
           },
           "hint": {
-            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.",
-            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
           },
           "value": 300,
           "attr": {
-            "min": 1,
+            "min": 60,
             "max": 86400
           }
         }
@@ -1495,16 +1562,79 @@
             "nl": "Schakel bewegingsalarm uit na"
           },
           "hint": {
-            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.",
-            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
           },
           "value": 300,
           "attr": {
-            "min": 1,
+            "min": 60,
             "max": 86400
           }
         }
       ]
+    },
+    {
+      "id": "sensor_natgas",
+      "name": {
+        "en": "Gas Leak detector",
+        "nl": "Gas Leak detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_co",
+        "measure_temperature",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_natgas",
+        "deviceId": 257,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_natgas/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_natgas/assets/images/large.png",
+        "small": "/drivers/sensor_natgas/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_smoke",
+      "name": {
+        "en": "Smoke detector",
+        "nl": "Smoke detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_smoke",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_smoke",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_smoke/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_smoke/assets/images/large.png",
+        "small": "/drivers/sensor_smoke/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "sensor_switch.aq2",
@@ -1581,6 +1711,37 @@
           }
         }
       ]
+    },
+    {
+      "id": "sensor_wleak.aq1",
+      "name": {
+        "en": "Aqara Water sensor",
+        "nl": "Aqara Water sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_water",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_wleak.aq1",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "weather",

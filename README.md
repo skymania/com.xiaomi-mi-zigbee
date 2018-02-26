@@ -58,6 +58,11 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.2.3
+* Updated app dependency to latest Stable Homey Software release (>= 1.5.7)
+* Update ZigBee meshdriver to 1.2.7   
+* UPDATE based on commits
+
 ### v 0.2.2
 * Update relative link in readme.md to direct link (Homey apps compatible)   
 * Update app manifest for supported Devices   
