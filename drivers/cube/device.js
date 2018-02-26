@@ -51,12 +51,10 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, this.flippedAttribReport.bind(this), 1);
 
 		// Register the AttributeReportListener - Flip motionType
-		this.registerAttrReportListener('genAnalogInput', '65285', 1, 60, null, this.turnedAttribReport.bind(this), 2);
+		// this.registerAttrReportListener('genAnalogInput', '65285', 1, 60, null, this.turnedAttribReport.bind(this), 2);
 
 		// Register the AttributeReportListener - Rotation angle
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, value => {
-			this.log('genAnalogInput cluster 2, presentValue', value);
-		}, 2);
+		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, this.rotatedAttribReport.bind(this), 2);
 
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null, value => {
@@ -247,6 +245,38 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			})
 			.then(() => this.log('Triggered cubeMotionTriggerDevice'))
 			.catch(err => this.error('Error triggering cubeMotionTriggerDevice', err));
+	}
+
+	rotatedAttribReport(data) {
+		this.log('rotated', data);
+		const cubeAction = {
+			motion: 'Rotate',
+			sourceFace: null,
+			targetFace: (this.getCapabilityValue('cube_state_face') || '6'),
+			rotationAngle: data,
+			relativeRotationAngle: data / this.getSetting('cube_relative_angle'),
+		};
+
+		// set corresponding capability values
+		this.setCapabilityValue('cube_state_motion', cubeAction.motion);
+		this.setCapabilityValue('cube_measure_rotation', cubeAction.rotationAngle);
+
+		// Trigger the corresponding triggerdevice matching to the motion
+		if (cubeAction.motion) {
+			this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, cubeAction, cubeAction)
+				.then(() => this.log(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
+				.catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
+		}
+
+		// Trigger generic motion token trigger card
+		this.cubeMotionTriggerDevice.trigger(this, {
+				motion: cubeAction.motion,
+				sourceFace: 0,
+				targetFace: parseInt(cubeAction.targetFace),
+			})
+			.then(() => this.log('Triggered cubeMotionTriggerDevice'))
+			.catch(err => this.error('Error triggering cubeMotionTriggerDevice', err));
+
 	}
 }
 

@@ -60,5 +60,22 @@
 		"small": "/drivers/cube/assets/images/small.png"
 	},
 	"settings": [
+		{
+			"id": "cube_relative_angle",
+			"type": "number",
+			"label": {
+				"en": "Relative rotation angle (xx° = 100%)",
+				"nl": "Relatieve hoekverdraaing (xx° = 100%)"
+			},
+			"hint": {
+				"en": "This setting will translate the actual measured rotation angle in a relative rotation angle that can be used to increase or decrease dim-level / volume.\nxx° = 100%\nRange: 1 - 360, default: 180 [°]",
+				"nl": "Deze instelling vertaalt de gemeten hoekverdraaing in een relatieve hoekverdraaing die gebruikt kan worden voor het verhogen of verlagen van het volume.\nxx° = 100%\nBereik: 1 - 360, standaard: 180 [°]"
+			},
+			"value": 180,
+			"attr": {
+				"min": 1,
+				"max": 360
+			}
+		}
 	]
 }
