@@ -57,16 +57,14 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, this.rotatedAttribReport.bind(this), 2);
 
 		// Register the AttributeReportListener - Lifeline
-		this.registerAttrReportListener('genBasic', '65281', 1, 60, null, value => {
-			this.log('genBasic, 65281', value, typeof (value));
-		}, 0);
+		this.registerAttrReportListener('genBasic', '65281', 1, 60, null, this.onLifelineReport.bind(this), 0);
 
 		// Cube is shaked
 		this.cubeShakeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_Shake');
 		this.cubeShakeTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('cubeShake (args, state):', args, state);
+				// this.log('cubeShake (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -75,7 +73,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeFlip90TriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('cubeFlip90 (args, state):', args, state);
+				// this.log('cubeFlip90 (args, state):', args, state);
 				return Promise.resolve(
 					(args.sourceFace === '0' && args.targetFace === state.targetFace) || // any side to target side
 					(args.sourceFace === state.sourceFace && args.targetFace === '0') || // source side to any side
@@ -88,7 +86,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeFlip180TriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('cubeFlip180 (args, state):', args, state);
+				// this.log('cubeFlip180 (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -97,7 +95,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeSlideTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('cubeSlide (args, state):', args, state);
+				// this.log('cubeSlide (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -106,7 +104,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeDoubleTapTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('cubeDoubleTap (args, state):', args, state);
+				// this.log('cubeDoubleTap (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -115,7 +113,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeRotateTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('cubeRotate (args, state):', args, state);
+				// this.log('cubeRotate (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -128,6 +126,22 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.catchCubeTriggerDevice.register();
 		*/
 	}
+	onLifelineReport(value) {
+		const bytes = new Buffer(value, 'ascii')
+		this.log('vals', bytes, bytes[21], bytes[22], (bytes[21] + (bytes[22] << 8)), bytes[25], bytes[26])
+		// battery reports
+		var batRaw = (bytes[2] + (bytes[3] << 8));
+		const rawVolts = batRaw / 100.0;
+
+		var minVolts = 2.5;
+		var maxVolts = 3.0;
+
+		let pct = (rawVolts - minVolts) / (maxVolts - minVolts)
+		let roundedPct = Math.min(100, Math.round(pct * 100));
+		this.log('lifeline - battery', batRaw, rawVolts, roundedPct);
+		this.setCapabilityValue('measure_battery', roundedPct);
+	}
+
 
 	flippedAttribReport(data) {
 		// data in binary first 4 bits indicate type of motion, following group of 3 bits indicate the face of the cube
@@ -248,13 +262,14 @@ class AqaraCubeSensor extends ZigBeeDevice {
 	}
 
 	rotatedAttribReport(data) {
-		this.log('rotated', data);
+		this.log('rotated', data, data > 0);
+
 		const cubeAction = {
 			motion: 'Rotate',
 			sourceFace: null,
 			targetFace: (this.getCapabilityValue('cube_state_face') || '6'),
 			rotationAngle: data,
-			relativeRotationAngle: data / this.getSetting('cube_relative_angle'),
+			relativeRotationAngle: data > 0 ? Math.min((data / (this.getSetting('cube_relative_angles') || 180)), 1) : Math.max((data / (this.getSetting('cube_relative_angles') || 180)), -1),
 		};
 
 		// set corresponding capability values
