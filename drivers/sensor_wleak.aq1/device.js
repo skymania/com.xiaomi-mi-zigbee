@@ -6,10 +6,10 @@ class AqaraWaterSensor extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		/*
 		this.registerCapability('alarm_water', 'genOta', {
