@@ -12,6 +12,7 @@
   ],
   "version": "0.2.3",
   "compatibility": ">=1.5.7",
+  "athomForumDiscussionId": 4120,
   "sdk": 2,
   "author": {
     "name": "Ted Tolboom",
@@ -36,8 +37,7 @@
   "contributing": {
     "donate": {
       "paypal": {
-        "username": "TedTolboom",
-        "currency": "EUR"
+        "username": "TedTolboom"
       }
     }
   },
