@@ -127,6 +127,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		*/
 	}
 	onLifelineReport(value) {
+		/*
 		const bytes = new Buffer(value, 'ascii')
 		this.log('vals', bytes, bytes[21], bytes[22], (bytes[21] + (bytes[22] << 8)), bytes[25], bytes[26])
 		// battery reports
@@ -140,6 +141,41 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		let roundedPct = Math.min(100, Math.round(pct * 100));
 		this.log('lifeline - battery', batRaw, rawVolts, roundedPct);
 		this.setCapabilityValue('measure_battery', roundedPct);
+
+		const rawData = new Buffer(value, 'ascii');
+		const data = {};
+		let index = 0;
+		while (index < rawData.length) {
+			const type = rawData.readUInt8(index + 1);
+			const byteLength = (type & 0x7) + 1;
+			const isSigned = Boolean((type >> 3) & 1);
+			data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+			index += byteLength + 2;
+		}
+		*/
+		const parsedData = parseData(new Buffer(value, 'ascii'));
+
+		// battery reportParser
+		const parsedVolts = parsedData['1'] / 100.0;
+		var minVolts = 2.5;
+		var maxVolts = 3.0;
+
+		let parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+		this.log('lifeline - battery', parsedBatPct);
+		this.setCapabilityValue('measure_battery', parsedBatPct);
+
+		function parseData(rawData) {
+			const data = {};
+			let index = 0;
+			while (index < rawData.length) {
+				const type = rawData.readUInt8(index + 1);
+				const byteLength = (type & 0x7) + 1;
+				const isSigned = Boolean((type >> 3) & 1);
+				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				index += byteLength + 2;
+			}
+			return data;
+		}
 	}
 
 

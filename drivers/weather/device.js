@@ -13,19 +13,36 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 		const minIntTemp = this.getSetting('minIntTemp') || 60;
 		const maxIntTemp = this.getSetting('maxIntTemp') || 3600;
-		const repChangeTemp = this.getSetting('repChangeTemp') || 50; // note: 1 = 0.01 [°C]
+		const repChangeTemp = this.getSetting('repChangeTemp') || 20; // note: 1 = 0.01 [°C]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', minIntTemp, maxIntTemp, repChangeTemp,
-			this.onTemperatureReport.bind(this), 0);
+				this.onTemperatureReport.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - msTemperatureMeasurement');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - msTemperatureMeasurement', err);
+			});
+
 
 		const minIntHum = this.getSetting('minIntHum') || 60;
 		const maxIntHum = this.getSetting('maxIntHum') || 3600;
-		const repChangeHum = this.getSetting('repChangeHum') || 100; // note: 1 = 0.01 [%]
+		const repChangeHum = this.getSetting('repChangeHum') || 50; // note: 1 = 0.01 [%]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', minIntHum, maxIntHum, repChangeHum,
-			this.onHumidityReport.bind(this), 0);
+				this.onHumidityReport.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - msRelativeHumidity');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - msRelativeHumidity', err);
+			});
 
 		const minIntPres = this.getSetting('minIntPres') || 60;
 		const maxIntPres = this.getSetting('maxIntPres') || 3600;
@@ -33,10 +50,27 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msPressureMeasurement', '16', minIntPres, maxIntPres, repChangePres,
-			this.onPressureReport.bind(this), 0);
+				this.onPressureReport.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - msPressureMeasurement');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - msPressureMeasurement', err);
+			});
 
 		// Register the AttributeReportListener - Lifeline
-		this.registerAttrReportListener('genBasic', '65281', 1, 60, null, this.onLifelineReport.bind(this), 0);
+		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
+				this.onLifelineReport.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - lifeline');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - lifeline', err);
+			});
 	}
 
 	onTemperatureReport(value) {
@@ -58,6 +92,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 	}
 
 	onLifelineReport(value) {
+		/*
 		const bytes = new Buffer(value, 'ascii')
 		this.log('raw', value + " -- " + bytes.toString('hex'));
 		this.log('vals', bytes, bytes[29], bytes[30], (bytes[31] + (bytes[32] << 8)));
@@ -85,6 +120,47 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// pressure reports
 		var presRaw = (bytes[29] + (bytes[30] << 8) + (bytes[31] << 8) + (bytes[32] << 8));
 		this.log('lifeline - pressure', presRaw);
+
+		this.log('=== parsedData:', );
+
+    */
+		const parsedData = parseData(new Buffer(value, 'ascii'));
+
+		// battery reportParser
+		const parsedVolts = parsedData['1'] / 100.0;
+		var minVolts = 2.5;
+		var maxVolts = 3.0;
+
+		let parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+		this.log('lifeline - battery', parsedBatPct);
+		// this.setCapabilityValue('measure_battery', parsedBatPct);
+
+		// temperature reportParser
+		const parsedTemp = parsedData['100'] / 100.0;
+		this.log('lifeline - temperature', parsedTemp);
+		this.setCapabilityValue('measure_temperature', parsedTemp);
+
+		// humidity reportParser
+		const parsedHum = parsedData['101'] / 100.0;
+		this.log('lifeline - humidity', parsedHum);
+		this.setCapabilityValue('measure_humidity', parsedHum);
+
+		// pressure reportParser
+		const parsedPres = parsedData['102'] / 100.0;
+		this.log('lifeline - pressure', parsedPres);
+
+		function parseData(rawData) {
+			const data = {};
+			let index = 0;
+			while (index < rawData.length) {
+				const type = rawData.readUInt8(index + 1);
+				const byteLength = (type & 0x7) + 1;
+				const isSigned = Boolean((type >> 3) & 1);
+				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				index += byteLength + 2;
+			}
+			return data;
+		}
 	}
 }
 
