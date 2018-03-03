@@ -65,11 +65,11 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 				this.onLifelineReport.bind(this), 0)
 			.then(() => {
 				// Registering attr reporting succeeded
-				this.log('registered attr report listener - lifeline');
+				this.log('registered attr report listener - genBasic - Lifeline');
 			})
 			.catch(err => {
 				// Registering attr reporting failed
-				this.error('failed to register attr report listener - lifeline', err);
+				this.error('failed to register attr report listener - genBasic - Lifeline', err);
 			});
 	}
 
@@ -133,7 +133,12 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 		let parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
 		this.log('lifeline - battery', parsedBatPct);
-		// this.setCapabilityValue('measure_battery', parsedBatPct);
+		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
+			// Set Battery capability
+			this.setCapabilityValue('measure_battery', parsedBatPct);
+			// Set Battery alarm if battery percentatge is below 20%
+			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+		}
 
 		// temperature reportParser
 		const parsedTemp = parsedData['100'] / 100.0;
