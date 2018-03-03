@@ -298,14 +298,14 @@ class AqaraCubeSensor extends ZigBeeDevice {
 	}
 
 	rotatedAttribReport(data) {
-		this.log('rotated', data, data > 0);
+		this.log('rotated', data);
 
 		const cubeAction = {
 			motion: 'Rotate',
 			sourceFace: null,
 			targetFace: (this.getCapabilityValue('cube_state_face') || '6'),
-			rotationAngle: data,
-			relativeRotationAngle: data > 0 ? Math.min((data / (this.getSetting('cube_relative_angles') || 180)), 1) : Math.max((data / (this.getSetting('cube_relative_angles') || 180)), -1),
+			rotationAngle: Math.round(data * 100) / 100,
+			relativeRotationAngle: Math.round((data > 0 ? Math.min((data / (this.getSetting('cube_relative_angles') || 180)), 1) : Math.max((data / (this.getSetting('cube_relative_angles') || 180)), -1)) * 100) / 100,
 		};
 
 		// set corresponding capability values
