@@ -81,7 +81,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genBasic - Lifeline', err);
-			});;
+			});
 
 		// Cube is shaked
 		this.cubeShakeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_Shake');
