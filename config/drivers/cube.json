@@ -68,13 +68,30 @@
 				"nl": "Relatieve hoekverdraaing (xx° = 100%)"
 			},
 			"hint": {
-				"en": "This setting will translate the actual measured rotation angle in a relative rotation angle that can be used to increase or decrease dim-level / volume.\nxx° = 100%\nRange: 1 - 360, default: 180 [°]",
-				"nl": "Deze instelling vertaalt de gemeten hoekverdraaing in een relatieve hoekverdraaing die gebruikt kan worden voor het verhogen of verlagen van het volume.\nxx° = 100%\nBereik: 1 - 360, standaard: 180 [°]"
+				"en": "This setting will translate the actual measured rotation angle in a relative rotation angle that can be used to increase or decrease dim-level / volume.\nxx° = 100%\nRange: 90 - 360, \ndefault: 180 [°]",
+				"nl": "Deze instelling vertaalt de gemeten hoekverdraaing in een relatieve hoekverdraaing die gebruikt kan worden voor het verhogen of verlagen van het volume.\nxx° = 100%\nBereik: 90 - 360, \nstandaard: 180 [°]"
 			},
 			"value": 180,
 			"attr": {
-				"min": 1,
+				"min": 90,
 				"max": 360
+			}
+		},
+		{
+			"id": "battery_threshold",
+			"type": "number",
+			"label": {
+				"en": "Battery alarm threshold (%)",
+				"nl": "Batterij alarm waarde (%)"
+			},
+			"hint": {
+				"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+				"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+			},
+			"value": 20,
+			"attr": {
+				"min": 1,
+				"max": 90
 			}
 		}
 	]
