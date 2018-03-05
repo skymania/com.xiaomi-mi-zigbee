@@ -1,6 +1,6 @@
 # Xiaomi-mi Smart Home (Zigbee)
 
-### This app requires Homey SW release 1.5.4 or higher
+### This app requires Homey SW release 1.5.7 or higher
 
 This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Home Devices](https://xiaomi-mi.com/).  
 <a href="https://github.com/TedTolboom/com.xiaomi-mi-zigbee">
@@ -20,7 +20,7 @@ Please file Pull Requests on the *development* branch of this repository and wit
 * [Temperature/Humidity Sensor](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-temperature-humidity-sensor/) (temperature, relative humidity)
 * [Wireless switch](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-wireless-switch/) (1x - 4x click, Key Held, Key released)  
 * [Smart socket plug ZigBee edition](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-socket-plug-2-zigbee-edition-white/) (onoff, measure_power)
-* [Cube](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (Slide, Shake, Double Tap, Rotate (action, not angle), Flip 90°, Flip 180°), see [device readme for details](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/blob/master/docs/README_cube.md)
+* [Cube](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (Slide, Shake, Double Tap, Rotate (**angle, relative angle**), Flip 90°, Flip 180°), see [device readme for details](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/blob/master/docs/README_cube.md)
 
 * [Aqara Window/Door Sensor](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-window-door-sensor/) (contact alarm)
 * [Aqara Human Body Sensor](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (motion alarm, luminance)
@@ -61,7 +61,10 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 ### v 0.2.3
 * Updated app dependency to latest Stable Homey Software release (>= 1.5.7)
 * Update ZigBee meshdriver to 1.2.7   
-* UPDATE based on commits
+* Add support for the Xiaomi Cube rotation angle (and relative angle) capability, fix issue [#29](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/29)
+* Add additional ID's for Aqara Smart Light Wall Switch Single / Double, fix issue [#20](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/20))
+* Add additional ID's for Aqara Wireless Switch, fix issue [#38](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/38))   
+* Fix issue where unsupported options are presented in the trigger card of the Aqara Wireless Remote Switch Single, related to [#37](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/37)
 
 ### v 0.2.2
 * Update relative link in readme.md to direct link (Homey apps compatible)   
@@ -76,27 +79,3 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 * Add support for Aqara Smart Light Wall Switch Single / Double (onoff)   
 * Add support for Aqara Smart Socket ZigBee Version (onoff, measure_power)   
 * Add explicitly in app title dependency on Homey SW release (>= 1.5.4)   
-
-### v 0.1.4
-* Add 1x click of both buttons for Aqara Wireless Remote Switch Double  
-* Increase luminance sensor sensitivity for Aqara Human Body Sensor   
-
-### v 0.1.3
-* Add second deviceID for Aqara Window/Door Sensor
-* Fix deviceID's (and update driver name) for Aqara Wireless Remote Switch Single   
-
-### v 0.1.2
-* Add support for Aqara Wireless Remote Switch (Single / Double)
-* Add support for Temperature / Humidity sensor
-* Add support for Xiaomi Occupancy sensor    
-* Contain issue with (Aqara) Wireless switch (re-)triggering multiple times due to latency in Zigbee network (3s re-trigger timeout added)   
-* Add dedicated Flow trigger for Xiaomi wireless switch to make 'Key Held' exclusively available (flow repair needed)   
-* Add 'Key Held threshold' parameter for Xiaomi wireless switch   
-
-### v 0.1.1
-* Wireless Switch (round) - Add 'Key Held' and 'Key released' triggers
-* Aqara Weather sensor - Add correct learn picture
-* All devices - Update inclusion instructions
-
-### v 0.1.0
-* App store release with support for the both Door/Window sensors, both wireless switches, Aqara Human Body sensor, Aqara Weather sensor
