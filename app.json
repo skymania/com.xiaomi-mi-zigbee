@@ -189,7 +189,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_switch.aq2|sensor_86sw1lu"
+            "filter": "driver_id=sensor_switch.aq2"
           },
           {
             "name": "scene",
@@ -221,6 +221,37 @@
                 "label": {
                   "en": "Pressed 4x",
                   "nl": "4x ingedrukt"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "button1_scene",
+        "title": {
+          "en": "A scene has been activated",
+          "nl": "Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_86sw1lu"
+          },
+          {
+            "name": "scene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Key Pressed 1 time",
+                "label": {
+                  "en": "Pressed 1x",
+                  "nl": "1x ingedrukt"
                 }
               }
             ]
@@ -1081,9 +1112,13 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.ctrl_neutral1"
+          "lumi.ctrl_neutral1",
+          "lumi.ctrl_ln1.aq1"
         ],
-        "deviceId": 6,
+        "deviceId": [
+          6,
+          81
+        ],
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/ctrl_neutral1/assets/learn.svg",
@@ -1152,9 +1187,13 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.ctrl_neutral2"
+          "lumi.ctrl_neutral2",
+          "lumi.ctrl_ln2.aq1"
         ],
-        "deviceId": 6,
+        "deviceId": [
+          6,
+          81
+        ],
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/ctrl_neutral2/assets/learn.svg",
@@ -1278,8 +1317,37 @@
       },
       "class": "windowcoverings",
       "capabilities": [
-        "onoff"
+        "onoff",
+        "windowcoverings_state"
       ],
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": [
+              "onoff"
+            ]
+          },
+          {
+            "id": "ternary",
+            "capabilities": [
+              "windowcoverings_state"
+            ],
+            "options": {
+              "icons": {
+                "top": false,
+                "middle": false,
+                "bottom": false
+              },
+              "values": {
+                "top": "upOpen",
+                "middle": "stop",
+                "bottom": "downClose"
+              }
+            }
+          }
+        ]
+      },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.curtain",
@@ -1288,8 +1356,8 @@
         "learnmode": {
           "image": "/drivers/curtain/assets/learn.svg",
           "instruction": {
-            "en": "Press 3 times quickly to hear the device ring 3 times",
-            "nl": "Press 3 times quickly to hear the device ring 3 times"
+            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on"
           }
         }
       },
@@ -1367,7 +1435,25 @@
         "large": "/drivers/sens/assets/images/large.png",
         "small": "/drivers/sens/assets/images/small.png"
       },
-      "settings": []
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
+        }
+      ]
     },
     {
       "id": "sensor_86sw1lu",
@@ -1434,7 +1520,9 @@
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_contact"
+        "alarm_contact",
+        "alarm_battery",
+        "measure_battery"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -1454,7 +1542,26 @@
       "images": {
         "large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
         "small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
+        }
+      ]
     },
     {
       "id": "sensor_magnet",
@@ -1537,6 +1644,23 @@
           "attr": {
             "min": 60,
             "max": 86400
+          }
+        },
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
           }
         }
       ]
@@ -1660,11 +1784,15 @@
         "nl": "Aqara Wireless switch"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "alarm_battery",
+        "measure_battery"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.sensor_switch.aq2"
+          "lumi.sensor_switch.aq2",
+          "lumi.sensor_swit"
         ],
         "deviceId": 24321,
         "profileId": 260,
@@ -1680,7 +1808,25 @@
         "large": "/drivers/sensor_switch.aq2/assets/images/large.png",
         "small": "/drivers/sensor_switch.aq2/assets/images/small.png"
       },
-      "settings": []
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
+        }
+      ]
     },
     {
       "id": "sensor_switch",
