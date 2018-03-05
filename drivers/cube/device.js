@@ -42,10 +42,10 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 class AqaraCubeSensor extends ZigBeeDevice {
 	async onMeshInit() {
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		// Register the AttributeReportListener - Shake, Catch, Flip 90, Flip 180, Slide and Double tap motionType
 		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, this.flippedAttribReport.bind(this), 1)
@@ -57,9 +57,6 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genMultistateInput - Motion', err);
 			});
-
-		// Register the AttributeReportListener - Flip motionType
-		// this.registerAttrReportListener('genAnalogInput', '65285', 1, 60, null, this.turnedAttribReport.bind(this), 2);
 
 		// Register the AttributeReportListener - Rotation angle
 		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, this.rotatedAttribReport.bind(this), 2)
@@ -144,6 +141,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		// cube motion report
 		this.cubeMotionTriggerDevice = new Homey.FlowCardTriggerDevice('cube_Motion');
 		this.cubeMotionTriggerDevice.register();
+
 		/*
 		// cube is catched
 		this.catchCubeTriggerDevice = new Homey.FlowCardTriggerDevice('cube_catched');
@@ -151,8 +149,10 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		*/
 	}
 	onLifelineReport(value) {
-
+		this.log('lifeline report', new Buffer(value, 'ascii'));
+		/*
 		const parsedData = parseData(new Buffer(value, 'ascii'));
+		// this.log('parsedData', parsedData);
 
 		// battery reportParser
 		const parsedVolts = parsedData['1'] / 100.0;
@@ -178,6 +178,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 			}
 			return data;
 		}
+		*/
 	}
 
 	flippedAttribReport(data) {

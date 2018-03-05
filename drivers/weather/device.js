@@ -6,10 +6,10 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		const minIntTemp = this.getSetting('minIntTemp') || 60;
 		const maxIntTemp = this.getSetting('maxIntTemp') || 3600;
@@ -92,46 +92,17 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 	}
 
 	onLifelineReport(value) {
+		this.log('lifeline report', new Buffer(value, 'ascii'));
 		/*
-		const bytes = new Buffer(value, 'ascii')
-		this.log('raw', value + " -- " + bytes.toString('hex'));
-		this.log('vals', bytes, bytes[29], bytes[30], (bytes[31] + (bytes[32] << 8)));
-		// battery reports
-		var batRaw = (bytes[2] + (bytes[3] << 8));
-		const rawVolts = batRaw / 100.0;
-
-		var minVolts = 2.5;
-		var maxVolts = 3.0;
-
-		let pct = (rawVolts - minVolts) / (maxVolts - minVolts)
-		let roundedPct = Math.min(100, Math.round(pct * 100));
-		this.log('lifeline - battery', batRaw, rawVolts, roundedPct);
-
-		// temperature reports
-		var tempRaw = (bytes[21] + (bytes[22] << 8));
-		if ((tempRaw & 0x8000) != 0) tempRaw -= 0x10000;
-		const temp = tempRaw / 100.0;
-		this.log('lifeline - temperature', temp);
-
-		// humidity reports
-		const hum = (bytes[25] + (bytes[26] << 8)) / 100.0;
-		this.log('lifeline - humidity', hum);
-
-		// pressure reports
-		var presRaw = (bytes[29] + (bytes[30] << 8) + (bytes[31] << 8) + (bytes[32] << 8));
-		this.log('lifeline - pressure', presRaw);
-
-		this.log('=== parsedData:', );
-
-    */
 		const parsedData = parseData(new Buffer(value, 'ascii'));
+		this.log('parsedData', parsedData);
 
-		// battery reportParser
+		// battery reportParser (ID 1)
 		const parsedVolts = parsedData['1'] / 100.0;
-		var minVolts = 2.5;
-		var maxVolts = 3.0;
+		const minVolts = 2.5;
+		const maxVolts = 3.0;
 
-		let parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
 		this.log('lifeline - battery', parsedBatPct);
 		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
 			// Set Battery capability
@@ -140,32 +111,37 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
 		}
 
-		// temperature reportParser
+		// temperature reportParser (ID 100)
 		const parsedTemp = parsedData['100'] / 100.0;
 		this.log('lifeline - temperature', parsedTemp);
 		this.setCapabilityValue('measure_temperature', parsedTemp);
 
-		// humidity reportParser
+		// humidity reportParser (ID 101)
 		const parsedHum = parsedData['101'] / 100.0;
 		this.log('lifeline - humidity', parsedHum);
 		this.setCapabilityValue('measure_humidity', parsedHum);
 
-		// pressure reportParser
-		const parsedPres = parsedData['102'] / 100.0;
-		this.log('lifeline - pressure', parsedPres);
+		// pressure reportParser (ID 102) - reported number not reliable
+		// const parsedPres = parsedData['102'] / 100.0;
+		// this.log('lifeline - pressure', parsedPres);
 
 		function parseData(rawData) {
 			const data = {};
 			let index = 0;
+			// let byteLength = 0
 			while (index < rawData.length) {
 				const type = rawData.readUInt8(index + 1);
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
-				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				// extract the relevant objects (1) Battery, (100) Temperature, (101) Humidity
+				if ([1, 100, 101].includes(rawData.readUInt8(index))) {
+					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				}
 				index += byteLength + 2;
 			}
 			return data;
 		}
+		*/
 	}
 }
 
@@ -174,42 +150,53 @@ module.exports = AqaraWeatherSensor;
 // WSDCGQ11LM_weather
 
 /*
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ZigBeeDevice has been inited
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ------------------------------------------
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] Node: 00881eb0-f819-44c5-ade7-87b56d3f7a14
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] - Battery: false
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] - Endpoints: 0
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] -- Clusters:
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] --- zapp
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] --- genBasic
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- 65281 : !�
-f+R�                                                                    !�C!5$d)�e!
+Node overview:
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ------------------------------------------
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] Node: 6364d680-e95a-4276-89eb-39f1a614f1e1
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] - Battery: false
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] - Endpoints: 0
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] -- Clusters:
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] --- zapp
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] --- genBasic
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ---- 65281 : !�
+f+��                                                                    !�!<$d)
 !
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- cid : genBasic
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- modelId : lumi.weather
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] --- genIdentify
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- cid : genIdentify
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] --- genGroups
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- cid : genGroups
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] --- msTemperatureMeasurement
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- cid : msTemperatureMeasurement
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 1856
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] --- msPressureMeasurement
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- 16 : 10148
-2018-02-28 22:13:08 [log] [ManagerDrivers] [weather] [0] ---- 20 : -1
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ---- cid : msPressureMeasurement
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 1014
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] --- msRelativeHumidity
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ---- cid : msRelativeHumidity
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 3153
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] --- manuSpecificCluster
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ---- cid : manuSpecificCluster
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
-2018-02-28 22:13:09 [log] [ManagerDrivers] [weather] [0] ------------------------------------------
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ---- cid : genBasic
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ---- modelId : lumi.weather
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] --- genIdentify
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ---- cid : genIdentify
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] --- genGroups
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ---- cid : genGroups
+2018-03-03 15:04:39 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] --- msTemperatureMeasurement
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- cid : msTemperatureMeasurement
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 2061
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] --- msPressureMeasurement
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- 16 : 9947
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- 20 : -1
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- cid : msPressureMeasurement
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 994
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] --- msRelativeHumidity
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- cid : msRelativeHumidity
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- measuredValue : 3485
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] --- manuSpecificCluster
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- cid : manuSpecificCluster
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
+2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ------------------------------------------
+
+65281 - 0xFF01 report:
+{ '1': 3069,		= Battery voltage
+  '4': 5117,
+  '5': 61,
+  '6': 1,
+  '10': 0,
+  '100': 2094,	= temperature
+  '101': 3676,	= humidity
+  '102': 130557 = pressure - reported number not reliable
+}
 */
