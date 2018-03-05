@@ -7,8 +7,33 @@
 	},
 	"class": "windowcoverings",
 	"capabilities": [
-		"onoff"
+		"onoff",
+		"windowcoverings_state"
 	],
+	"mobile": {
+		"components": [
+			{
+				"id": "icon",
+				"capabilities": ["onoff"]
+			},
+			{
+				"id": "ternary",
+				"capabilities": ["windowcoverings_state"],
+				"options": {
+					"icons": {
+						"top": false,
+						"middle": false,
+						"bottom": false
+					},
+					"values": {
+						"top": "upOpen",
+						"middle": "stop",
+						"bottom": "downClose"
+					}
+				}
+			}
+		]
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.curtain",
@@ -17,8 +42,8 @@
 		"learnmode": {
 			"image": "/drivers/curtain/assets/learn.svg",
 			"instruction": {
-				"en": "Press 3 times quickly to hear the device ring 3 times",
-				"nl": "Press 3 times quickly to hear the device ring 3 times"
+				"en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+				"nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on"
 			}
 		}
 	},

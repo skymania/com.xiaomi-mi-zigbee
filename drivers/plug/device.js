@@ -24,12 +24,6 @@ class AqaraPlug extends ZigBeeDevice {
 			}
 		}, 0);
 
-		/*
-		this.registerReportListener('genOnOff', 'onOff', report => {
-			this.log(report);
-		}, 0);
-		*/
-
 		// measure_power
 		// Register measure_power capability
 		this.registerCapability('measure_power', 'genAnalogInput', {
@@ -60,8 +54,59 @@ class AqaraPlug extends ZigBeeDevice {
 
 		// measure_voltage
 
+		// Register the AttributeReportListener - Lifeline
+		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
+				this.onLifelineReport.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - genBasic - Lifeline');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - genBasic - Lifeline', err);
+			});
+
 	}
 
+	onLifelineReport(value) {
+		this.log('parsedData', new Buffer(value, 'ascii'));
+		/*
+		const parsedData = parseData(new Buffer(value, 'ascii'));
+		this.log('parsedData', parsedData);
+
+		// battery reportParser (ID 1)
+		const parsedVolts = parsedData['1'] / 100.0;
+		const minVolts = 2.5;
+		const maxVolts = 3.0;
+
+		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+		this.log('lifeline - battery', parsedBatPct);
+		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
+			// Set Battery capability
+			this.setCapabilityValue('measure_battery', parsedBatPct);
+			// Set Battery alarm if battery percentatge is below 20%
+			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+		}
+
+		// Luminance reportParser (ID 100)
+		// const parsedLuminance = (parsedData['100']);
+		// this.log('lifeline - luminacen', parsedLuminance);
+		// this.setCapabilityValue('measure_luminance', parsedLuminance);
+
+		function parseData(rawData) {
+			const data = {};
+			let index = 0;
+			while (index < rawData.length) {
+				const type = rawData.readUInt8(index + 1);
+				const byteLength = (type & 0x7) + 1;
+				const isSigned = Boolean((type >> 3) & 1);
+				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				index += byteLength + 2;
+			}
+			return data;
+		}
+		*/
+	}
 }
 
 module.exports = AqaraPlug;
@@ -170,4 +215,14 @@ module.exports = AqaraPlug;
 2018-01-14 09:13:50 [log] [ManagerDrivers] [plug] [0] ---- cid : genBinaryInput
 2018-01-14 09:13:50 [log] [ManagerDrivers] [plug] [0] ---- sid : attrs
 2018-01-14 09:13:50 [log] [ManagerDrivers] [plug] [0] ------------------------------------------
+
+{ '3': 32,							= soc_temperature
+  '5': 4,
+  '7': 0,
+  '8': 4886,
+  '9': 770,
+  '59': 7289341,
+  '62': 103021886,
+  '100': 1,
+  '253': 16 }
 */

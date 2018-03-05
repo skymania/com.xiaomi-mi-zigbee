@@ -1,7 +1,7 @@
 {
   "id": "com.xiaomi-mi",
   "name": {
-    "en": "Xiaomi Mi ZigBee (>=1.5.4)"
+    "en": "Xiaomi Mi ZigBee"
   },
   "description": {
     "en": "Control Xiaomi Mi ZigBee devices",
@@ -10,8 +10,9 @@
   "category": [
     "lights"
   ],
-  "version": "0.2.2",
-  "compatibility": ">=1.5.4",
+  "version": "0.2.3",
+  "compatibility": ">=1.5.7",
+  "athomForumDiscussionId": 4120,
   "sdk": 2,
   "author": {
     "name": "Ted Tolboom",
@@ -36,8 +37,7 @@
   "contributing": {
     "donate": {
       "paypal": {
-        "username": "TedTolboom",
-        "currency": "EUR"
+        "username": "TedTolboom"
       }
     }
   },
@@ -189,7 +189,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_switch.aq2|sensor_86sw1lu"
+            "filter": "driver_id=sensor_switch.aq2"
           },
           {
             "name": "scene",
@@ -221,6 +221,37 @@
                 "label": {
                   "en": "Pressed 4x",
                   "nl": "4x ingedrukt"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "button1_scene",
+        "title": {
+          "en": "A scene has been activated",
+          "nl": "Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_86sw1lu"
+          },
+          {
+            "name": "scene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Key Pressed 1 time",
+                "label": {
+                  "en": "Pressed 1x",
+                  "nl": "1x ingedrukt"
                 }
               }
             ]
@@ -963,6 +994,26 @@
               }
             ]
           }
+        ],
+        "tokens": [
+          {
+            "name": "rotationAngle",
+            "type": "number",
+            "title": {
+              "en": "Rotation Angle °",
+              "nl": "Rotatiehoek °"
+            },
+            "example": 124.51
+          },
+          {
+            "name": "relativeRotationAngle",
+            "type": "number",
+            "title": {
+              "en": "Relative Angle %",
+              "nl": "Relatieve hoek %"
+            },
+            "example": 0.92
+          }
         ]
       }
     ],
@@ -1061,9 +1112,13 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.ctrl_neutral1"
+          "lumi.ctrl_neutral1",
+          "lumi.ctrl_ln1.aq1"
         ],
-        "deviceId": 6,
+        "deviceId": [
+          6,
+          81
+        ],
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/ctrl_neutral1/assets/learn.svg",
@@ -1132,9 +1187,13 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.ctrl_neutral2"
+          "lumi.ctrl_neutral2",
+          "lumi.ctrl_ln2.aq1"
         ],
-        "deviceId": 6,
+        "deviceId": [
+          6,
+          81
+        ],
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/ctrl_neutral2/assets/learn.svg",
@@ -1204,14 +1263,107 @@
         "learnmode": {
           "image": "/drivers/cube/assets/learn.svg",
           "instruction": {
-            "en": "Long press the power button to open more than 5 seconds until the light flashes three times after release",
-            "nl": "Long press the power button to open more than 5 seconds until the light flashes three times after release"
+            "en": "Hold the Cube during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de Cube in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
           }
         }
       },
       "images": {
         "large": "/drivers/cube/assets/images/large.png",
         "small": "/drivers/cube/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "cube_relative_angle",
+          "type": "number",
+          "label": {
+            "en": "Relative rotation angle (xx° = 100%)",
+            "nl": "Relatieve hoekverdraaing (xx° = 100%)"
+          },
+          "hint": {
+            "en": "This setting will translate the actual measured rotation angle in a relative rotation angle that can be used to increase or decrease dim-level / volume.\nxx° = 100%\nRange: 90 - 360, \ndefault: 180 [°]",
+            "nl": "Deze instelling vertaalt de gemeten hoekverdraaing in een relatieve hoekverdraaing die gebruikt kan worden voor het verhogen of verlagen van het volume.\nxx° = 100%\nBereik: 90 - 360, \nstandaard: 180 [°]"
+          },
+          "value": 180,
+          "attr": {
+            "min": 90,
+            "max": 360
+          }
+        },
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "curtain",
+      "name": {
+        "en": "Curtain Controller",
+        "nl": "Curtain Controller"
+      },
+      "class": "windowcoverings",
+      "capabilities": [
+        "onoff",
+        "windowcoverings_state"
+      ],
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": [
+              "onoff"
+            ]
+          },
+          {
+            "id": "ternary",
+            "capabilities": [
+              "windowcoverings_state"
+            ],
+            "options": {
+              "icons": {
+                "top": false,
+                "middle": false,
+                "bottom": false
+              },
+              "values": {
+                "top": "upOpen",
+                "middle": "stop",
+                "bottom": "downClose"
+              }
+            }
+          }
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain",
+        "deviceId": 514,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/curtain/assets/learn.svg",
+          "instruction": {
+            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain/assets/images/large.png",
+        "small": "/drivers/curtain/assets/images/small.png"
       },
       "settings": []
     },
@@ -1283,7 +1435,25 @@
         "large": "/drivers/sens/assets/images/large.png",
         "small": "/drivers/sens/assets/images/small.png"
       },
-      "settings": []
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
+        }
+      ]
     },
     {
       "id": "sensor_86sw1lu",
@@ -1350,7 +1520,9 @@
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_contact"
+        "alarm_contact",
+        "alarm_battery",
+        "measure_battery"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -1370,7 +1542,26 @@
       "images": {
         "large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
         "small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
+        }
+      ]
     },
     {
       "id": "sensor_magnet",
@@ -1446,13 +1637,30 @@
             "nl": "Schakel bewegingsalarm uit na"
           },
           "hint": {
-            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.",
-            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
           },
           "value": 300,
           "attr": {
-            "min": 1,
+            "min": 60,
             "max": 86400
+          }
+        },
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
           }
         }
       ]
@@ -1495,16 +1703,79 @@
             "nl": "Schakel bewegingsalarm uit na"
           },
           "hint": {
-            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.",
-            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
           },
           "value": 300,
           "attr": {
-            "min": 1,
+            "min": 60,
             "max": 86400
           }
         }
       ]
+    },
+    {
+      "id": "sensor_natgas",
+      "name": {
+        "en": "Gas Leak detector",
+        "nl": "Gas Leak detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_co",
+        "measure_temperature",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_natgas",
+        "deviceId": 257,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_natgas/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_natgas/assets/images/large.png",
+        "small": "/drivers/sensor_natgas/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_smoke",
+      "name": {
+        "en": "Smoke detector",
+        "nl": "Smoke detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_smoke",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_smoke",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_smoke/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_smoke/assets/images/large.png",
+        "small": "/drivers/sensor_smoke/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "sensor_switch.aq2",
@@ -1513,11 +1784,15 @@
         "nl": "Aqara Wireless switch"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "alarm_battery",
+        "measure_battery"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.sensor_switch.aq2"
+          "lumi.sensor_switch.aq2",
+          "lumi.sensor_swit"
         ],
         "deviceId": 24321,
         "profileId": 260,
@@ -1533,7 +1808,25 @@
         "large": "/drivers/sensor_switch.aq2/assets/images/large.png",
         "small": "/drivers/sensor_switch.aq2/assets/images/small.png"
       },
-      "settings": []
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
+        }
+      ]
     },
     {
       "id": "sensor_switch",
@@ -1583,6 +1876,37 @@
       ]
     },
     {
+      "id": "sensor_wleak.aq1",
+      "name": {
+        "en": "Aqara Water sensor",
+        "nl": "Aqara Water sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_water",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_wleak.aq1",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
       "id": "weather",
       "name": {
         "en": "Aqara Temperature and Humidity Sensor",
@@ -1590,9 +1914,11 @@
       },
       "class": "sensor",
       "capabilities": [
+        "measure_battery",
         "measure_temperature",
         "measure_pressure",
-        "measure_humidity"
+        "measure_humidity",
+        "alarm_battery"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -1615,7 +1941,26 @@
       "images": {
         "large": "/drivers/weather/assets/images/large.png",
         "small": "/drivers/weather/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
+        }
+      ]
     }
   ]
 }

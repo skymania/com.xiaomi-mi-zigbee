@@ -50,8 +50,8 @@
 		"learnmode": {
 			"image": "/drivers/cube/assets/learn.svg",
 			"instruction": {
-				"en": "Long press the power button to open more than 5 seconds until the light flashes three times after release",
-				"nl": "Long press the power button to open more than 5 seconds until the light flashes three times after release"
+				"en": "Hold the Cube during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+				"nl": "Houd tijdens het toevoegen de Cube in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
 			}
 		}
 	},
@@ -60,5 +60,39 @@
 		"small": "/drivers/cube/assets/images/small.png"
 	},
 	"settings": [
+		{
+			"id": "cube_relative_angle",
+			"type": "number",
+			"label": {
+				"en": "Relative rotation angle (xx° = 100%)",
+				"nl": "Relatieve hoekverdraaing (xx° = 100%)"
+			},
+			"hint": {
+				"en": "This setting will translate the actual measured rotation angle in a relative rotation angle that can be used to increase or decrease dim-level / volume.\nxx° = 100%\nRange: 90 - 360, \ndefault: 180 [°]",
+				"nl": "Deze instelling vertaalt de gemeten hoekverdraaing in een relatieve hoekverdraaing die gebruikt kan worden voor het verhogen of verlagen van het volume.\nxx° = 100%\nBereik: 90 - 360, \nstandaard: 180 [°]"
+			},
+			"value": 180,
+			"attr": {
+				"min": 90,
+				"max": 360
+			}
+		},
+		{
+			"id": "battery_threshold",
+			"type": "number",
+			"label": {
+				"en": "Battery alarm threshold (%)",
+				"nl": "Batterij alarm waarde (%)"
+			},
+			"hint": {
+				"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+				"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+			},
+			"value": 20,
+			"attr": {
+				"min": 1,
+				"max": 90
+			}
+		}
 	]
 }

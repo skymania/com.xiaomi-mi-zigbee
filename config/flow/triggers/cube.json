@@ -510,6 +510,26 @@
 					}
 				]
 			 }
-		 ]
+		 ],
+		"tokens": [
+			{
+				"name": "rotationAngle",
+				"type": "number",
+				"title": {
+					"en": "Rotation Angle °",
+					"nl": "Rotatiehoek °"
+				},
+				"example": 124.51
+ 			},
+			{
+				"name": "relativeRotationAngle",
+				"type": "number",
+				"title": {
+					"en": "Relative Angle %",
+					"nl": "Relatieve hoek %"
+				},
+				"example": 0.92
+ 			}
+		]
 	}
 ]
