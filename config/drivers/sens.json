@@ -30,5 +30,22 @@
 		"small": "/drivers/sens/assets/images/small.png"
 	},
 	"settings": [
-	]
+		{
+			"id": "battery_threshold",
+			"type": "number",
+			"label": {
+				"en": "Battery alarm threshold (%)",
+				"nl": "Batterij alarm waarde (%)"
+			},
+			"hint": {
+				"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+				"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+			},
+			"value": 20,
+			"attr": {
+				"min": 1,
+				"max": 90
+			}
+		}
+  ]
 }
