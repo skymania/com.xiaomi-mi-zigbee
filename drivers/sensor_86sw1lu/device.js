@@ -19,15 +19,10 @@ class AqaraLightSwitchSingle extends ZigBeeDevice {
 			.register();
 
 		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
-		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genOnOff - onOff');
-			})
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genOnOff - onOff', err);
-			});
+		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this);
+
+		this._attrReportListeners['0_genBasic'] = this._attrReportListeners['0_genBasic'] || {};
+		this._attrReportListeners['0_genBasic']['65281'] = this.onLifelineReport.bind(this);
 
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,

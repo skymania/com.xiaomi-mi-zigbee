@@ -58,6 +58,9 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.2.4
+* Fix issue where Aqara Wireless Remote Switch Single init results in app crash, issue [#46](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/46)   
+
 ### v 0.2.3
 * Updated app dependency to latest Stable Homey Software release (>= 1.5.7)
 * Update ZigBee meshdriver to 1.2.7   
