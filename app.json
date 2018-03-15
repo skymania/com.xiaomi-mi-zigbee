@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.2.4",
+  "version": "0.2.5",
   "compatibility": ">=1.5.7",
   "athomForumDiscussionId": 4120,
   "sdk": 2,
@@ -582,7 +582,7 @@
                 "id": "5",
                 "label": {
                   "en": "side 5 up",
-                  "nl": "side 5 boven"
+                  "nl": "zijde 5 boven"
                 }
               },
               {
@@ -1437,6 +1437,24 @@
       },
       "settings": [
         {
+          "id": "temperature_offset",
+          "type": "number",
+          "label": {
+            "en": "Temperature offset (°C)",
+            "nl": "Temperatuur compensatie (°C)"
+          },
+          "hint": {
+            "en": "Set a correction to compensate a temperature offset.\nRange: -10 - 10, step size 0.1, \ndefault: 0 [°C]",
+            "nl": "Stel een correctiewaarde in om een temperature verschil te compenseren.\nBereik: -10 - 10, stap grootte 0.1, \nstandaard: 0 [°C]"
+          },
+          "value": 0,
+          "attr": {
+            "min": -10,
+            "max": 10,
+            "step": 0.1
+          }
+        },
+        {
           "id": "battery_threshold",
           "type": "number",
           "label": {
@@ -1943,6 +1961,24 @@
         "small": "/drivers/weather/assets/images/small.png"
       },
       "settings": [
+        {
+          "id": "temperature_offset",
+          "type": "number",
+          "label": {
+            "en": "Temperature offset (°C)",
+            "nl": "Temperatuur compensatie (°C)"
+          },
+          "hint": {
+            "en": "Set a correction to compensate a temperature offset.\nRange: -10 - 10, step size 0.1, \ndefault: 0 [°C]",
+            "nl": "Stel een correctiewaarde in om een temperature verschil te compenseren.\nBereik: -10 - 10, stap grootte 0.1, \nstandaard: 0 [°C]"
+          },
+          "value": 0,
+          "attr": {
+            "min": -10,
+            "max": 10,
+            "step": 0.1
+          }
+        },
         {
           "id": "battery_threshold",
           "type": "number",
