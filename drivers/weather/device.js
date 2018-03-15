@@ -75,8 +75,9 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 	onTemperatureReport(value) {
 		const parsedValue = Math.round((value / 100) * 10) / 10;
-		this.log('measure_temperature', parsedValue);
-		this.setCapabilityValue('measure_temperature', parsedValue);
+		const temperatureOffset = this.getSetting('temperature_offset') || 0;
+		this.log('measure_temperature', parsedValue, '+ temperature offset', temperatureOffset);
+		this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
 	}
 
 	onHumidityReport(value) {
@@ -113,8 +114,9 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 		// temperature reportParser (ID 100)
 		const parsedTemp = parsedData['100'] / 100.0;
-		this.log('lifeline - temperature', parsedTemp);
-		this.setCapabilityValue('measure_temperature', parsedTemp);
+		const temperatureOffset = this.getSetting('temperature_offset') || 0;
+		this.log('lifeline - temperature', parsedTemp, '+ temperature offset', temperatureOffset);
+		this.setCapabilityValue('measure_temperature', parsedTemp + temperatureOffset);
 
 		// humidity reportParser (ID 101)
 		const parsedHum = parsedData['101'] / 100.0;
