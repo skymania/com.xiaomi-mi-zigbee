@@ -1,31 +1,32 @@
 'use strict';
 
-// supported scenes and their reported attribute numbers
-const sceneArray = {
-	1: {
-		scene: 'Key Pressed 1 time'
-	},
-	2: {
-		scene: 'Key Pressed 2 times'
-	},
-	16: {
-		scene: 'Key Held Down'
-	},
-	17: {
-		scene: 'Key Released'
-	},
-	18: {
-		scene: 'Shaken'
-	},
-};
-
 const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 let lastKey = null;
 
 class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
-	onMeshInit() {
+	async onMeshInit() {
+
+		// supported scenes and their reported attribute numbers
+		this.sceneArray = {
+			1: {
+				scene: 'Key Pressed 1 time'
+			},
+			2: {
+				scene: 'Key Pressed 2 times'
+			},
+			16: {
+				scene: 'Key Held Down'
+			},
+			17: {
+				scene: 'Key Released'
+			},
+			18: {
+				scene: 'Shaken'
+			},
+		};
+
 		// enable debugging
 		this.enableDebug();
 
@@ -57,9 +58,9 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 			});
 
 		// define and register FlowCardTriggers
-		this._onSceneAutocomplete = this._onSceneAutocomplete.bind(this);
+		// this._onSceneAutocomplete = this._onSceneAutocomplete.bind(this);
 
-		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene_autocomplete');
+		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('trigger_button1_scene');
 		this.triggerButton1_scene
 			.register()
 			.registerRunListener((args, state) => {
@@ -78,12 +79,12 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 
 		this.log('genOnOff - onOff', data, 'lastKey', lastKey);
 
-		this.log('debug', sceneArray[data].scene);
+		this.log('debug', this.sceneArray[data].scene, this.sceneArray.includes(data.parseInt()));
 		if (lastKey !== data) {
 			lastKey = data;
 
 			const remoteValue = {
-				scene: sceneArray[data].scene,
+				scene: this.sceneArray[data].scene,
 			};
 			this.log('Scene trigger', remoteValue.scene);
 			// Trigger the trigger card with 1 dropdown option
@@ -98,13 +99,15 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 	}
 
 	_onSceneAutocomplete(query) {
+		this.log(this.getName());
 		let resultArray = [];
-		for (let sceneID in sceneArray) {
-			this.log(sceneArray[sceneID], sceneArray[sceneID].scene);
+		this.log(this.sceneArray);
+		for (let sceneID in this.sceneArray) {
+			this.log(this.sceneArray[sceneID], this.sceneArray[sceneID].scene);
 
 			resultArray.push({
-				id: sceneArray[sceneID].scene,
-				name: Homey.__(sceneArray[sceneID].scene),
+				id: this.sceneArray[sceneID].scene,
+				name: Homey.__(this.sceneArray[sceneID].scene),
 			})
 		}
 		this.log('resultArray', resultArray);

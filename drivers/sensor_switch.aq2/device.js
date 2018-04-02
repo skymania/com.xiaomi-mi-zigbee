@@ -1,16 +1,34 @@
 'use strict';
+
 const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 let lastKey = null;
 
 class AqaraWirelessSwitch extends ZigBeeDevice {
-	onMeshInit() {
+	async onMeshInit() {
+		this.log(this.getName());
+		// supported scenes and their reported attribute numbers
+		this.sceneArray = {
+			1: {
+				scene: 'Key Pressed 1 time'
+			},
+			2: {
+				scene: 'Key Pressed 2 times'
+			},
+			3: {
+				scene: 'Key Pressed 3 times'
+			},
+			4: {
+				scene: 'Key Pressed 4 times'
+			},
+		};
+
 		// enable debugging
-		// this.enableDebug();
+		this.enableDebug();
 
 		// print the node's info to the console
-		// this.printNode();
+		this.printNode();
 
 		this.registerAttrReportListener('genOnOff', 0x8000, 1, 3600, 1,
 				this.onOnOffListener.bind(this), 0)
@@ -47,12 +65,16 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 			});
 
 		// define and register FlowCardTriggers
-		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene');
+		// this._onSceneAutocomplete = this._onSceneAutocomplete.bind(this);
+
+		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('trigger_button1_scene');
 		this.triggerButton1_scene
 			.register()
 			.registerRunListener((args, state) => {
-				return Promise.resolve(args.scene === state.scene);
-			});
+				return Promise.resolve(args.scene.id === state.scene);
+			})
+			.getArgument('scene')
+			.registerAutocompleteListener(this._onSceneAutocomplete.bind(this));
 
 		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
 		this.triggerButton1_button
@@ -62,10 +84,14 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 
 	onOnOffListener(data) {
 		this.log('genOnOff - onOff', data, 'lastKey', lastKey);
+
+		this.log('debug', this.sceneArray[data].scene);
+
 		if (lastKey !== data) {
 			lastKey = data;
 			let remoteValue = null;
 
+			/*
 			if (data === 1) {
 				remoteValue = {
 					scene: 'Key Pressed 1 time',
@@ -77,6 +103,10 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 					scene: `Key Pressed ${data} times`,
 				};
 			}
+			*/
+			const remoteValue = {
+				scene: this.sceneArray[data].scene,
+			};
 
 			if (remoteValue !== null) {
 				this.log('Scene trigger', remoteValue.scene);
@@ -90,6 +120,22 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 				}, 3000);
 			}
 		}
+	}
+
+	_onSceneAutocomplete(query) {
+		this.log(this.getName());
+		let resultArray = [];
+		this.log(this.sceneArray);
+		for (let sceneID in this.sceneArray) {
+			this.log(this.sceneArray[sceneID], this.sceneArray[sceneID].scene);
+
+			resultArray.push({
+				id: this.sceneArray[sceneID].scene,
+				name: Homey.__(this.sceneArray[sceneID].scene),
+			})
+		}
+		this.log('resultArray', resultArray);
+		return resultArray;
 	}
 
 	onLifelineReport(value) {
