@@ -58,7 +58,7 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 			});
 
 		// define and register FlowCardTriggers
-		// this._onSceneAutocomplete = this._onSceneAutocomplete.bind(this);
+		this._onSceneAutocomplete = this._onSceneAutocomplete.bind(this);
 
 		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('trigger_button1_scene');
 		this.triggerButton1_scene
