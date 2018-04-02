@@ -58,6 +58,9 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.2.6
+* Add support for Aqara Wireless switch with Gyro      
+
 ### v 0.2.5
 * Add temperature offset correction setting for the Xiaomi temperature & humidity sensor and the Aqara temperature & humidity sensor   
 * Fix typo in Xiaomi Cube flow trigger card
