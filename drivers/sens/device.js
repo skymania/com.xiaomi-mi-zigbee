@@ -20,17 +20,9 @@ class XiaomiTempSensor extends ZigBeeDevice {
 		this._attrReportListeners['0_msRelativeHumidity']['measuredValue'] =
 			this.onHumidityReport.bind(this);
 
-		// Register the AttributeReportListener - Lifeline
-		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
-				this.onLifelineReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
-			})
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genBasic - Lifeline', err);
-			});
+		this._attrReportListeners['0_genBasic'] = this._attrReportListeners['0_genBasic'] || {};
+		this._attrReportListeners['0_genBasic']['65281'] =
+			this.onLifelineReport.bind(this);
 
 	}
 
