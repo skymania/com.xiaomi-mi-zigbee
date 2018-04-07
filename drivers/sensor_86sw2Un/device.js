@@ -8,17 +8,29 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 
 	onMeshInit() {
 
-		// define and register FlowCardTriggers
-		this.triggerButton2_scene = new Homey.FlowCardTriggerDevice('button2_scene');
-		this.triggerButton2_scene
-			.register()
-			.registerRunListener((args, state) => {
-				return Promise.resolve(args.button === state.button && args.scene === state.scene);
-			});
+		// enable debugging
+		this.enableDebug();
 
-		this.triggerButton2_button = new Homey.FlowCardTriggerDevice('button2_button');
-		this.triggerButton2_button
-			.register();
+		// print the node's info to the console
+		this.printNode();
+
+		this.buttonMap = {
+			0: {
+				button: 'Left button'
+			},
+			1: {
+				button: 'Right button'
+			},
+			2: {
+				button: 'Both buttons'
+			},
+		};
+
+		this.sceneMap = {
+			0: {
+				scene: 'Key Pressed 1 time'
+			},
+		};
 
 		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
 		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this);
@@ -32,17 +44,17 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 		this._attrReportListeners['0_genBasic'] = this._attrReportListeners['0_genBasic'] || {};
 		this._attrReportListeners['0_genBasic']['65281'] = this.onLifelineReport.bind(this);
 
-		// Register the AttributeReportListener - Lifeline
-		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
-				this.onLifelineReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
-			})
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genBasic - Lifeline', err);
+		// define and register FlowCardTriggers
+		this.triggerButton2_scene = new Homey.FlowCardTriggerDevice('button2_scene');
+		this.triggerButton2_scene
+			.register()
+			.registerRunListener((args, state) => {
+				return Promise.resolve(args.button === state.button && args.scene === state.scene);
 			});
+
+		this.triggerButton2_button = new Homey.FlowCardTriggerDevice('button2_button');
+		this.triggerButton2_button
+			.register();
 
 	}
 	onOnOffListener(data) {
@@ -59,7 +71,7 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 		}
 	}
 	onOnOffListener2(data) {
-		this.log('genOnOff - onOff', data, 'Right button');
+		this.log('genOnOff - onOff', data, 'Right button', endpoint);
 		if (data === 0) {
 			const remoteValue = {
 				button: 'Right button',
@@ -72,7 +84,7 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 		}
 	}
 	onOnOffListener3(data) {
-		this.log('genOnOff - onOff', data, 'Both buttons');
+		this.log('genOnOff - onOff', data, 'Both buttons', endpoint);
 		if (data === 0) {
 			const remoteValue = {
 				button: 'Both buttons',
@@ -83,6 +95,38 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 			// Trigger the trigger card with tokens
 			this.triggerButton2_button.trigger(this, remoteValue, null);
 		}
+	}
+	onSceneAutocomplete(query, args, callback) {
+		let resultArray = [];
+		for (let sceneID in this.sceneMap) {
+			resultArray.push({
+				id: this.sceneMap[sceneID].scene,
+				name: Homey.__(this.sceneMap[sceneID].scene),
+			});
+		}
+		// filter for query
+		resultArray = resultArray.filter(result => {
+			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+		});
+		this.log(resultArray);
+		return Promise.resolve(resultArray);
+	}
+
+	onButtonAutocomplete(query, args, callback) {
+		let resultArray = [];
+		for (let sceneID in this.buttonMap) {
+			resultArray.push({
+				id: this.buttonMap[sceneID].button,
+				name: Homey.__(this.buttonMap[sceneID].button),
+			});
+		}
+
+		// filter for query
+		resultArray = resultArray.filter(result => {
+			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+		});
+		this.log(resultArray);
+		return Promise.resolve(resultArray);
 	}
 
 	onLifelineReport(value) {

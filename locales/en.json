@@ -5,5 +5,8 @@
 	"Key Pressed 4 times": "Pressed 4x",
 	"Key Held Down": "Held Down",
 	"Key Released": "Released",
-	"Shaken": "Shaken"
+	"Shaken": "Shaken",
+	"Left button": "Left button",
+	"Right button": "Right button",
+	"Both buttons": "Both buttons"
 }

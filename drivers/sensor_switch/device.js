@@ -1,4 +1,5 @@
 'use strict';
+
 const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
@@ -6,8 +7,66 @@ let keyHeld = false;
 let lastKey = null;
 
 class XiaomiWirelessSwitch extends ZigBeeDevice {
-	onMeshInit() {
+	async onMeshInit() {
+
+		// enable debugging
+		this.enableDebug();
+
+		// print the node's info to the console
+		this.printNode();
+
+		// supported scenes and their reported attribute numbers
+		this.sceneMap = {
+			1: {
+				scene: 'Key Pressed 1 time'
+			},
+			2: {
+				scene: 'Key Pressed 2 times'
+			},
+			3: {
+				scene: 'Key Pressed 3 times'
+			},
+			4: {
+				scene: 'Key Pressed 4 times'
+			},
+			0: {
+				scene: 'Key Held Down'
+			},
+			17: {
+				scene: 'Key Released'
+			},
+		};
+
+		this.registerAttrReportListener('genOnOff', 0x8000, 1, 3600, 1,
+				this.onOnOffListener.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - genOnOff - 0x8000');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - genOnOff - 0x8000', err);
+			});
+
+		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
+				this.onOnOffListener.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - genOnOff - onOff');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - genOnOff - onOff', err);
+			});
+
 		// define and register FlowCardTriggers
+		this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
+
+		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
+		this.triggerButton1_button
+			.register();
+
+		// DEPRECATED flowCardTrigger for scene
 		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene_held');
 		this.triggerButton1_scene
 			.register()
@@ -15,60 +74,78 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 				this.log(args.scene, state.scene, args.scene === state.scene);
 				return Promise.resolve(args.scene === state.scene);
 			});
-		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
-		this.triggerButton1_button
-			.register();
 
-		this.registerAttrReportListener('genOnOff', 0x8000, 1, 3600, 1, this.onOnOffListener.bind(this), 0);
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1, this.onOnOffListener.bind(this), 0);
 	}
-
 
 	onOnOffListener(data) {
 		this.log('genOnOff - onOff', data, 'lastKey', lastKey);
 		if (lastKey !== data) {
 			lastKey = data;
 			let remoteValue = null;
-			if (data === 0) {
-				keyHeld = false;
-				this.buttonHeldTimeout = setTimeout(() => {
-					keyHeld = true;
+
+			if (Object.keys(this.sceneMap).includes(data.toString())) {
+
+				if (data === 0) {
+					keyHeld = false;
+					this.buttonHeldTimeout = setTimeout(() => {
+						keyHeld = true;
+						remoteValue = {
+							scene: this.sceneMap[data].scene,
+						};
+						this.log('Scene trigger', remoteValue.scene);
+
+						// Trigger the trigger card with 1 dropdown option
+						Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
+
+						// Trigger the trigger card with tokens
+						this.triggerButton1_button.trigger(this, remoteValue, null);
+
+						// DEPRECATED Trigger the trigger card with 1 dropdown option
+						this.triggerButton1_scene.trigger(this, null, remoteValue);
+					}, (this.getSetting('button_long_press_threshold') || 1000));
+				}
+				else {
+					clearTimeout(this.buttonHeldTimeout);
 					remoteValue = {
-						scene: 'Key Held Down',
+						scene: this.sceneMap[keyHeld && data === 1 ? 17 : data].scene,
 					};
+				}
+
+				if (remoteValue !== null) {
 					this.log('Scene trigger', remoteValue.scene);
+
 					// Trigger the trigger card with 1 dropdown option
-					this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
+					Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
+
 					// Trigger the trigger card with tokens
 					this.triggerButton1_button.trigger(this, remoteValue, null);
-				}, (this.getSetting('button_long_press_threshold') || 1000));
-			}
 
-			if (data === 1) {
-				clearTimeout(this.buttonHeldTimeout);
-				remoteValue = {
-					scene: `${keyHeld ? 'Key Released' : 'Key Pressed 1 time'}`,
-				};
-			}
+					// DEPRECATED Trigger the trigger card with 1 dropdown option
+					this.triggerButton1_scene.trigger(this, null, remoteValue);
 
-			if (data > 1) {
-				remoteValue = {
-					scene: `Key Pressed ${data} times`,
-				};
-			}
-
-			if (remoteValue !== null) {
-				this.log('Scene trigger', remoteValue.scene);
-				// Trigger the trigger card with 1 dropdown option
-				this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
-				// Trigger the trigger card with tokens
-				this.triggerButton1_button.trigger(this, remoteValue, null);
-				// reset lastKey after the last trigger
-				this.buttonLastKeyTimeout = setTimeout(() => {
-					lastKey = null;
-				}, 3000);
+					// reset lastKey after the last trigger
+					this.buttonLastKeyTimeout = setTimeout(() => {
+						lastKey = null;
+					}, 3000);
+				}
 			}
 		}
+	}
+
+	onSceneAutocomplete(query, args, callback) {
+		let resultArray = [];
+		for (let sceneID in this.sceneMap) {
+			resultArray.push({
+				id: this.sceneMap[sceneID].scene,
+				name: Homey.__(this.sceneMap[sceneID].scene),
+			})
+		}
+		// filter for query
+		resultArray = resultArray.filter(result => {
+			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+		});
+		this.log(resultArray);
+		return Promise.resolve(resultArray);
 	}
 }
 module.exports = XiaomiWirelessSwitch;
