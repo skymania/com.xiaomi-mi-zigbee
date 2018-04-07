@@ -1,16 +1,34 @@
 'use strict';
+
 const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 let lastKey = null;
 
-class AqaraWirelessSwitch extends ZigBeeDevice {
-	onMeshInit() {
+class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
+	async onMeshInit() {
+
 		// enable debugging
-		// this.enableDebug();
+		this.enableDebug();
 
 		// print the node's info to the console
-		// this.printNode();
+		this.printNode();
+
+		// supported scenes and their reported attribute numbers
+		this.sceneMap = {
+			1: {
+				scene: 'Key Pressed 1 time'
+			},
+			2: {
+				scene: 'Key Pressed 2 times'
+			},
+			3: {
+				scene: 'Key Pressed 3 times'
+			},
+			4: {
+				scene: 'Key Pressed 4 times'
+			},
+		};
 
 		this.registerAttrReportListener('genOnOff', 0x8000, 1, 3600, 1,
 				this.onOnOffListener.bind(this), 0)
@@ -47,6 +65,13 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 			});
 
 		// define and register FlowCardTriggers
+		this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
+
+		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
+		this.triggerButton1_button
+			.register();
+
+		// DEPRECATED flowCardTrigger for scene
 		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene');
 		this.triggerButton1_scene
 			.register()
@@ -54,18 +79,16 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 				return Promise.resolve(args.scene === state.scene);
 			});
 
-		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
-		this.triggerButton1_button
-			.register();
-
 	}
 
 	onOnOffListener(data) {
-		this.log('genOnOff - onOff', data, 'lastKey', lastKey);
+		this.log('genOnOff - onOff', data, this.sceneMap[data].scene, 'lastKey', lastKey);
+
 		if (lastKey !== data) {
 			lastKey = data;
-			let remoteValue = null;
+			// let remoteValue = null;
 
+			/*
 			if (data === 1) {
 				remoteValue = {
 					scene: 'Key Pressed 1 time',
@@ -77,13 +100,22 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 					scene: `Key Pressed ${data} times`,
 				};
 			}
-
-			if (remoteValue !== null) {
+			*/
+			this.log(Object.keys(this.sceneMap), Object.keys(this.sceneMap).includes(data.toString()))
+			if (Object.keys(this.sceneMap).includes(data.toString())) {
+				const remoteValue = {
+					scene: this.sceneMap[data].scene,
+				};
 				this.log('Scene trigger', remoteValue.scene);
+
 				// Trigger the trigger card with 1 dropdown option
-				this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
+				Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
 				// Trigger the trigger card with tokens
 				this.triggerButton1_button.trigger(this, remoteValue, null);
+
+				// DEPRECATED Trigger the trigger card with 1 dropdown option
+				this.triggerButton1_scene.trigger(this, null, remoteValue);
+
 				// reset lastKey after the last trigger
 				this.buttonLastKeyTimeout = setTimeout(() => {
 					lastKey = null;
@@ -92,11 +124,28 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 		}
 	}
 
+	onSceneAutocomplete(query, args, callback) {
+		let resultArray = [];
+		for (let sceneID in this.sceneMap) {
+			resultArray.push({
+				id: this.sceneMap[sceneID].scene,
+				name: Homey.__(this.sceneMap[sceneID].scene),
+			})
+		}
+		// filter for query
+		resultArray = resultArray.filter(result => {
+			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+		});
+		this.log(resultArray);
+		return Promise.resolve(resultArray);
+	}
+
 	onLifelineReport(value) {
 		this.log('lifeline report', new Buffer(value, 'ascii'));
+
 		/*
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		// this.log('parsedData', parsedData);
+		this.log('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
 		const parsedVolts = parsedData['1'] / 100.0;
@@ -129,10 +178,11 @@ class AqaraWirelessSwitch extends ZigBeeDevice {
 			}
 			return data;
 		}
-		*/
+*/
+
 	}
 }
-module.exports = AqaraWirelessSwitch;
+module.exports = AqaraWirelessSwitchAq2;
 
 // WXKG11LM_sensor_switch.aq2
 /*

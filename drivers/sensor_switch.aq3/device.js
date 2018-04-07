@@ -1,47 +1,48 @@
 'use strict';
 
-// supported scenes and their reported attribute numbers
-const sceneArray = {
-	1: {
-		scene: 'Key Pressed 1 time'
-	},
-	2: {
-		scene: 'Key Pressed 2 times'
-	},
-	16: {
-		scene: 'Key Held Down'
-	},
-	17: {
-		scene: 'Key Released'
-	},
-	18: {
-		scene: 'Shaken'
-	},
-};
-
 const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 let lastKey = null;
 
 class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
-	onMeshInit() {
+	async onMeshInit() {
+
 		// enable debugging
 		this.enableDebug();
 
 		// print the node's info to the console
 		this.printNode();
 
+		// supported scenes and their reported attribute numbers
+		this.sceneMap = {
+			1: {
+				scene: 'Key Pressed 1 time'
+			},
+			2: {
+				scene: 'Key Pressed 2 times'
+			},
+			16: {
+				scene: 'Key Held Down'
+			},
+			17: {
+				scene: 'Key Released'
+			},
+			18: {
+				scene: 'Shaken'
+			},
+		};
+
 		// Scene reports are provided by the genMultistateInput cluster / presentValue attribute
 		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 3600, 1,
-				this.onSceneListener.bind(this), 0)
+				this.onOnOffListener.bind(this), 0)
 			.then(() => {
 				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genOnOff - 0x8000');
+				this.log('registered attr report listener - genMultistateInput - presentValue');
 			})
 			.catch(err => {
 				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genOnOff - 0x8000', err);
+				this.error('failed to register attr report listener - genMultistateInput - presentValue', err);
 			});
 
 		// Register the AttributeReportListener - Lifeline
@@ -57,16 +58,16 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 			});
 
 		// define and register FlowCardTriggers
-		this._onSceneAutocomplete = this._onSceneAutocomplete.bind(this);
+		this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
 
-		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene_autocomplete');
-		this.triggerButton1_scene
-			.register()
-			.registerRunListener((args, state) => {
-				return Promise.resolve(args.scene.id === state.scene);
-			})
-			.getArgument('scene')
-			.registerAutocompleteListener(this._onSceneAutocomplete);
+		//this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('trigger_button1_scene');
+		//this.triggerButton1_scene
+		//	.register()
+		//	.registerRunListener((args, state) => {
+		//		return Promise.resolve(args.scene.id === state.scene);
+		//	})
+		//	.getArgument('scene')
+		//	.registerAutocompleteListener(this._onSceneAutocomplete);
 
 		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
 		this.triggerButton1_button
@@ -74,41 +75,43 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 
 	}
 
-	onSceneListener(data) {
+	onOnOffListener(data) {
+		this.log('genOnOff - onOff', data, this.sceneMap[data].scene, 'lastKey', lastKey);
 
-		this.log('genOnOff - onOff', data, 'lastKey', lastKey);
-
-		this.log('debug', sceneArray[data].scene);
 		if (lastKey !== data) {
 			lastKey = data;
-
-			const remoteValue = {
-				scene: sceneArray[data].scene,
-			};
-			this.log('Scene trigger', remoteValue.scene);
-			// Trigger the trigger card with 1 dropdown option
-			this.triggerButton1_scene.trigger(this, this.triggerButton1_scene.getArgumentValues, remoteValue);
-			// Trigger the trigger card with tokens
-			this.triggerButton1_button.trigger(this, remoteValue, null);
-			// reset lastKey after the last trigger
-			this.buttonLastKeyTimeout = setTimeout(() => {
-				lastKey = null;
-			}, 3000);
+			if (Object.keys(this.sceneMap).includes(data.toString())) {
+				const remoteValue = {
+					scene: this.sceneMap[data].scene,
+				};
+				this.log('Scene trigger', remoteValue.scene);
+				// Trigger the trigger card with 1 dropdown option
+				Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
+				// Trigger the trigger card with tokens
+				this.triggerButton1_button.trigger(this, remoteValue, null);
+				// reset lastKey after the last trigger
+				this.buttonLastKeyTimeout = setTimeout(() => {
+					lastKey = null;
+				}, 3000);
+			}
 		}
 	}
 
-	_onSceneAutocomplete(query) {
-		let resultArray = [];
-		for (let sceneID in sceneArray) {
-			this.log(sceneArray[sceneID], sceneArray[sceneID].scene);
+	onSceneAutocomplete(query, args, callback) {
 
+		let resultArray = [];
+		for (let sceneID in this.sceneMap) {
 			resultArray.push({
-				id: sceneArray[sceneID].scene,
-				name: Homey.__(sceneArray[sceneID].scene),
+				id: this.sceneMap[sceneID].scene,
+				name: Homey.__(this.sceneMap[sceneID].scene),
 			})
 		}
-		this.log('resultArray', resultArray);
-		return resultArray;
+		// filter for query
+		resultArray = resultArray.filter(result => {
+			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+		});
+		this.log(resultArray);
+		return Promise.resolve(resultArray);
 	}
 
 	onLifelineReport(value) {

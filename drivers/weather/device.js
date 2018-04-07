@@ -12,8 +12,8 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// this.printNode();
 
 		const minIntTemp = this.getSetting('minIntTemp') || 60;
-		const maxIntTemp = this.getSetting('maxIntTemp') || 3600;
-		const repChangeTemp = this.getSetting('repChangeTemp') || 20; // note: 1 = 0.01 [°C]
+		const maxIntTemp = this.getSetting('maxIntTemp') || 0;
+		const repChangeTemp = this.getSetting('repChangeTemp') || 1; // note: 1 = 0.01 [°C]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', minIntTemp, maxIntTemp, repChangeTemp,
@@ -29,8 +29,8 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 
 
 		const minIntHum = this.getSetting('minIntHum') || 60;
-		const maxIntHum = this.getSetting('maxIntHum') || 3600;
-		const repChangeHum = this.getSetting('repChangeHum') || 50; // note: 1 = 0.01 [%]
+		const maxIntHum = this.getSetting('maxIntHum') || 0;
+		const repChangeHum = this.getSetting('repChangeHum') || 1; // note: 1 = 0.01 [%]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', minIntHum, maxIntHum, repChangeHum,
@@ -45,8 +45,8 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 			});
 
 		const minIntPres = this.getSetting('minIntPres') || 60;
-		const maxIntPres = this.getSetting('maxIntPres') || 3600;
-		const repChangePres = this.getSetting('repChangePres') || 100; // note: 1 = 0.01 [%]
+		const maxIntPres = this.getSetting('maxIntPres') || 0;
+		const repChangePres = this.getSetting('repChangePres') || 1; // note: 1 = 0.01 [%]
 
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msPressureMeasurement', '16', minIntPres, maxIntPres, repChangePres,

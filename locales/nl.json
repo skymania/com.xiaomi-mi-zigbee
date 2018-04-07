@@ -5,5 +5,8 @@
 	"Key Pressed 4 times": "4x ingedrukt",
 	"Key Held Down": "Lang ingedrukt",
 	"Key Released": "Losgelaten",
-	"Shaken": "Geschud"
+	"Shaken": "Geschud",
+	"Left button": "Linker knop",
+	"Right button": "Rechter knop",
+	"Both buttons": "Beide knoppen"
 }
