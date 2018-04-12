@@ -9,12 +9,12 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 	async onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
-		// supported scenes and their reported attribute numbers
+		// supported scenes and their reported attribute numbers (all based on reported data)
 		this.sceneMap = {
 			1: {
 				scene: 'Key Pressed 1 time'
@@ -60,29 +60,20 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 		// define and register FlowCardTriggers
 		this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
 
-		//this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('trigger_button1_scene');
-		//this.triggerButton1_scene
-		//	.register()
-		//	.registerRunListener((args, state) => {
-		//		return Promise.resolve(args.scene.id === state.scene);
-		//	})
-		//	.getArgument('scene')
-		//	.registerAutocompleteListener(this._onSceneAutocomplete);
-
 		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
 		this.triggerButton1_button
 			.register();
 
 	}
 
-	onOnOffListener(data) {
-		this.log('genOnOff - onOff', data, this.sceneMap[data].scene, 'lastKey', lastKey);
+	onOnOffListener(repScene) {
+		this.log('genOnOff - onOff', repScene, this.sceneMap[repScene].scene, 'lastKey', lastKey);
 
-		if (lastKey !== data) {
-			lastKey = data;
-			if (Object.keys(this.sceneMap).includes(data.toString())) {
+		if (lastKey !== repScene) {
+			lastKey = repScene;
+			if (Object.keys(this.sceneMap).includes(repScene.toString())) {
 				const remoteValue = {
-					scene: this.sceneMap[data].scene,
+					scene: this.sceneMap[repScene].scene,
 				};
 				this.log('Scene trigger', remoteValue.scene);
 				// Trigger the trigger card with 1 dropdown option
@@ -155,40 +146,6 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 	}
 }
 module.exports = AqaraWirelessSwitchAq3;
-
-/*
-'values': [
-	{
-		'id': 'Key Pressed 1 time',
-		'label': {
-			'en': 'Pressed 1x',
-			'nl': '1x ingedrukt'
-		}
-	},
-	{
-		'id': 'Key Pressed 2 times',
-		'label': {
-			'en': 'Pressed 2x',
-			'nl': '2x ingedrukt'
-		}
-	},
-	{
-		'id': 'Key Pressed 3 times',
-		'label': {
-			'en': 'Pressed 3x',
-			'nl': '3x ingedrukt'
-		}
-	},
-	{
-		'id': 'Key Pressed 4 times',
-		'label': {
-			'en': 'Pressed 4x',
-			'nl': '4x ingedrukt'
-		}
-	}
-]
-*/
-
 
 // WXKG12LM_sensor_switch.aq3
 /*

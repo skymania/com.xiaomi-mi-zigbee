@@ -9,10 +9,10 @@ class AqaraLightSwitchSingle extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		this.sceneMap = {
 			0: {
@@ -43,12 +43,12 @@ class AqaraLightSwitchSingle extends ZigBeeDevice {
 
 	}
 
-	onOnOffListener(data) {
-		this.log('genOnOff - onOff', data);
+	onOnOffListener(repScene) {
+		this.log('genOnOff - onOff', repScene);
 
-		if (Object.keys(this.sceneMap).includes(data.toString())) {
+		if (Object.keys(this.sceneMap).includes(repScene.toString())) {
 			const remoteValue = {
-				scene: this.sceneMap[data].scene,
+				scene: this.sceneMap[repScene].scene,
 			};
 			// Trigger the trigger card with 1 dropdown option
 			Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);

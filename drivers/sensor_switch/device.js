@@ -10,12 +10,12 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 	async onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
-		// supported scenes and their reported attribute numbers
+		// supported scenes and their reported attribute numbers (1 - 4 based on reported data, 90,91 custom code)
 		this.sceneMap = {
 			1: {
 				scene: 'Key Pressed 1 time'
@@ -29,10 +29,10 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 			4: {
 				scene: 'Key Pressed 4 times'
 			},
-			0: {
+			90: {
 				scene: 'Key Held Down'
 			},
-			17: {
+			91: {
 				scene: 'Key Released'
 			},
 		};
@@ -77,57 +77,52 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 
 	}
 
-	onOnOffListener(data) {
-		this.log('genOnOff - onOff', data, 'lastKey', lastKey);
-		if (lastKey !== data) {
-			lastKey = data;
+	onOnOffListener(repScene) {
+		this.log('genOnOff - onOff', repScene, 'lastKey', lastKey, 'keyHeld', keyHeld);
+		if (lastKey !== repScene) {
+			lastKey = repScene;
 			let remoteValue = null;
 
-			if (Object.keys(this.sceneMap).includes(data.toString())) {
-
-				if (data === 0) {
-					keyHeld = false;
-					this.buttonHeldTimeout = setTimeout(() => {
-						keyHeld = true;
-						remoteValue = {
-							scene: this.sceneMap[data].scene,
-						};
-						this.log('Scene trigger', remoteValue.scene);
-
-						// Trigger the trigger card with 1 dropdown option
-						Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
-
-						// Trigger the trigger card with tokens
-						this.triggerButton1_button.trigger(this, remoteValue, null);
-
-						// DEPRECATED Trigger the trigger card with 1 dropdown option
-						this.triggerButton1_scene.trigger(this, null, remoteValue);
-					}, (this.getSetting('button_long_press_threshold') || 1000));
-				}
-				else {
-					clearTimeout(this.buttonHeldTimeout);
+			if (repScene === 0) {
+				keyHeld = false;
+				this.buttonHeldTimeout = setTimeout(() => {
+					keyHeld = true;
 					remoteValue = {
-						scene: this.sceneMap[keyHeld && data === 1 ? 17 : data].scene,
+						scene: this.sceneMap[90].scene,
 					};
-				}
-
-				if (remoteValue !== null) {
 					this.log('Scene trigger', remoteValue.scene);
 
-					// Trigger the trigger card with 1 dropdown option
+					// Trigger the trigger card with 1 autocomplete option
 					Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
-
 					// Trigger the trigger card with tokens
 					this.triggerButton1_button.trigger(this, remoteValue, null);
 
 					// DEPRECATED Trigger the trigger card with 1 dropdown option
 					this.triggerButton1_scene.trigger(this, null, remoteValue);
 
-					// reset lastKey after the last trigger
-					this.buttonLastKeyTimeout = setTimeout(() => {
-						lastKey = null;
-					}, 3000);
-				}
+				}, (this.getSetting('button_long_press_threshold') || 1000));
+			}
+			if (repScene !== 0 && Object.keys(this.sceneMap).includes(repScene.toString())) {
+
+				clearTimeout(this.buttonHeldTimeout);
+				remoteValue = {
+					scene: this.sceneMap[keyHeld && repScene === 1 ? 91 : repScene].scene,
+				};
+
+				this.log('Scene trigger', remoteValue.scene, repScene);
+
+				// Trigger the trigger card with 1 dropdown option
+				Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
+				// Trigger the trigger card with tokens
+				this.triggerButton1_button.trigger(this, remoteValue, null);
+
+				// DEPRECATED Trigger the trigger card with 1 dropdown option
+				this.triggerButton1_scene.trigger(this, null, remoteValue);
+
+				// reset lastKey after the last trigger
+				this.buttonLastKeyTimeout = setTimeout(() => {
+					lastKey = null;
+				}, 3000);
 			}
 		}
 	}

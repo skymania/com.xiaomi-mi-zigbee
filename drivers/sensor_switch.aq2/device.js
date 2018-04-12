@@ -9,12 +9,12 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 	async onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
-		// supported scenes and their reported attribute numbers
+		// supported scenes and their reported attribute numbers (all based on reported data)
 		this.sceneMap = {
 			1: {
 				scene: 'Key Pressed 1 time'
@@ -81,30 +81,15 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 
 	}
 
-	onOnOffListener(data) {
-		this.log('genOnOff - onOff', data, this.sceneMap[data].scene, 'lastKey', lastKey);
+	onOnOffListener(repScene) {
+		this.log('genOnOff - onOff', repScene, this.sceneMap[repScene].scene, 'lastKey', lastKey);
 
-		if (lastKey !== data) {
-			lastKey = data;
-			// let remoteValue = null;
+		if (lastKey !== repScene) {
+			lastKey = repScene;
 
-			/*
-			if (data === 1) {
-				remoteValue = {
-					scene: 'Key Pressed 1 time',
-				};
-			}
-
-			if (data > 1) {
-				remoteValue = {
-					scene: `Key Pressed ${data} times`,
-				};
-			}
-			*/
-			this.log(Object.keys(this.sceneMap), Object.keys(this.sceneMap).includes(data.toString()))
-			if (Object.keys(this.sceneMap).includes(data.toString())) {
+			if (Object.keys(this.sceneMap).includes(repScene.toString())) {
 				const remoteValue = {
-					scene: this.sceneMap[data].scene,
+					scene: this.sceneMap[repScene].scene,
 				};
 				this.log('Scene trigger', remoteValue.scene);
 

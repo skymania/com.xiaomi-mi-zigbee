@@ -9,37 +9,37 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		this.buttonMap = {
-			0: {
-				button: 'Left button'
+			Left: {
+				button: 'Left button',
 			},
-			1: {
-				button: 'Right button'
+			Right: {
+				button: 'Right button',
 			},
-			2: {
-				button: 'Both buttons'
+			Both: {
+				button: 'Both buttons',
 			},
 		};
 
 		this.sceneMap = {
 			0: {
-				scene: 'Key Pressed 1 time'
+				scene: 'Key Pressed 1 time',
 			},
 		};
-
+		// >>>> possible to use this.onOnOffListener.bind(this, 'Left') ???
 		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
-		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this);
+		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this, 'Left');
 
 		this._attrReportListeners['1_genOnOff'] = this._attrReportListeners['1_genOnOff'] || {};
-		this._attrReportListeners['1_genOnOff']['onOff'] = this.onOnOffListener2.bind(this);
+		this._attrReportListeners['1_genOnOff']['onOff'] = this.onOnOffListener.bind(this, 'Right');
 
 		this._attrReportListeners['2_genOnOff'] = this._attrReportListeners['2_genOnOff'] || {};
-		this._attrReportListeners['2_genOnOff']['onOff'] = this.onOnOffListener3.bind(this);
+		this._attrReportListeners['2_genOnOff']['onOff'] = this.onOnOffListener.bind(this, 'Both');
 
 		this._attrReportListeners['0_genBasic'] = this._attrReportListeners['0_genBasic'] || {};
 		this._attrReportListeners['0_genBasic']['65281'] = this.onLifelineReport.bind(this);
@@ -57,45 +57,23 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 			.register();
 
 	}
-	onOnOffListener(data) {
-		this.log('genOnOff - onOff', data, 'Left button');
-		if (data === 0) {
+	onOnOffListener(repButton, repScene) {
+		this.log('genOnOff - onOff', repScene, repButton, 'button');
+		if (Object.keys(this.sceneMap).includes(repScene.toString())) {
 			const remoteValue = {
-				button: 'Left button',
-				scene: 'Key Pressed 1 time',
+				button: this.buttonMap[repButton].button,
+				scene: this.sceneMap[repScene].scene,
 			};
-			// Trigger the trigger card with 1 dropdown option
-			this.triggerButton2_scene.trigger(this, this.triggerButton2_scene.getArgumentValues, remoteValue);
+			this.log('genOnOff - onOff', remoteValue);
+			// Trigger the trigger card with 2 autocomplete options
+			Homey.app.triggerButton2_scene.trigger(this, null, remoteValue);
 			// Trigger the trigger card with tokens
 			this.triggerButton2_button.trigger(this, remoteValue, null);
+			// DEPRECATED Trigger the trigger card with 2 dropdown options
+			this.triggerButton2_scene.trigger(this, null, remoteValue);
 		}
 	}
-	onOnOffListener2(data) {
-		this.log('genOnOff - onOff', data, 'Right button', endpoint);
-		if (data === 0) {
-			const remoteValue = {
-				button: 'Right button',
-				scene: 'Key Pressed 1 time',
-			};
-			// Trigger the trigger card with 1 dropdown option
-			this.triggerButton2_scene.trigger(this, this.triggerButton2_scene.getArgumentValues, remoteValue);
-			// Trigger the trigger card with tokens
-			this.triggerButton2_button.trigger(this, remoteValue, null);
-		}
-	}
-	onOnOffListener3(data) {
-		this.log('genOnOff - onOff', data, 'Both buttons', endpoint);
-		if (data === 0) {
-			const remoteValue = {
-				button: 'Both buttons',
-				scene: 'Key Pressed 1 time',
-			};
-			// Trigger the trigger card with 1 dropdown option
-			this.triggerButton2_scene.trigger(this, this.triggerButton2_scene.getArgumentValues, remoteValue);
-			// Trigger the trigger card with tokens
-			this.triggerButton2_button.trigger(this, remoteValue, null);
-		}
-	}
+
 	onSceneAutocomplete(query, args, callback) {
 		let resultArray = [];
 		for (let sceneID in this.sceneMap) {
