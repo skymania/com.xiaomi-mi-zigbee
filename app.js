@@ -21,7 +21,7 @@ class XiaomiZigbee extends Homey.App {
 		this.triggerButton2_scene
 			.register()
 			.registerRunListener((args, state) => {
-				return Promise.resolve(args.button === state.button && args.scene === state.scene);
+				return Promise.resolve(args.button.id === state.button && args.scene.id === state.scene);
 			})
 		this.triggerButton2_scene
 			.getArgument('scene')
