@@ -1,2098 +1,2098 @@
 {
-	"id": "com.xiaomi-mi",
-	"name": {
-		"en": "Xiaomi Mi ZigBee"
-	},
-	"description": {
-		"en": "Control Xiaomi Mi ZigBee devices",
-		"nl": "Bestuur Xiaomi Mi ZigBee apparaten"
-	},
-	"category": [
+  "id": "com.xiaomi-mi",
+  "name": {
+    "en": "Xiaomi Mi ZigBee"
+  },
+  "description": {
+    "en": "Control Xiaomi Mi ZigBee devices",
+    "nl": "Bestuur Xiaomi Mi ZigBee apparaten"
+  },
+  "category": [
     "lights"
   ],
-	"version": "0.3.0",
-	"compatibility": ">=1.5.7",
-	"athomForumDiscussionId": 4120,
-	"sdk": 2,
-	"author": {
-		"name": "Ted Tolboom",
-		"email": "dTNL.Homey@gmail.com"
-	},
-	"contributors": {
-		"developers": [
-			{
-				"name": "Sprut",
-				"email": "sprut.1@me.com"
+  "version": "0.3.0",
+  "compatibility": ">=1.5.7",
+  "athomForumDiscussionId": 4120,
+  "sdk": 2,
+  "author": {
+    "name": "Ted Tolboom",
+    "email": "dTNL.Homey@gmail.com"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Sprut",
+        "email": "sprut.1@me.com"
       },
-			{
-				"name": "Kasteleman",
-				"email": "kasteleman@gmail.com"
+      {
+        "name": "Kasteleman",
+        "email": "kasteleman@gmail.com"
       },
-			{
-				"name": "Ted Tolboom",
-				"email": "dTNL.Homey@gmail.com"
+      {
+        "name": "Ted Tolboom",
+        "email": "dTNL.Homey@gmail.com"
       }
     ]
-	},
-	"contributing": {
-		"donate": {
-			"paypal": {
-				"username": "TedTolboom"
-			}
-		}
-	},
-	"images": {
-		"large": "/assets/images/large.png",
-		"small": "/assets/images/small.png"
-	},
-	"capabilities": {
-		"cube_measure_rotation": {
-			"type": "number",
-			"title": {
-				"en": "Rotation",
-				"nl": "Draaihoek"
-			},
-			"getable": true,
-			"setable": false,
-			"units": {
-				"en": "°"
-			},
-			"decimals": 2
-		},
-		"cube_state_motion": {
-			"type": "enum",
-			"title": {
-				"en": "Motion",
-				"nl": "Beweging"
-			},
-			"getable": true,
-			"setable": false,
-			"values": [
-				{
-					"id": "Shake",
-					"title": {
-						"en": "Shake",
-						"nl": "Schudden"
-					}
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "TedTolboom"
+      }
+    }
+  },
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "capabilities": {
+    "cube_measure_rotation": {
+      "type": "number",
+      "title": {
+        "en": "Rotation",
+        "nl": "Draaihoek"
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "°"
+      },
+      "decimals": 2
+    },
+    "cube_state_motion": {
+      "type": "enum",
+      "title": {
+        "en": "Motion",
+        "nl": "Beweging"
+      },
+      "getable": true,
+      "setable": false,
+      "values": [
+        {
+          "id": "Shake",
+          "title": {
+            "en": "Shake",
+            "nl": "Schudden"
+          }
         },
-				{
-					"id": "Flip90",
-					"title": {
-						"en": "Flip 90°",
-						"nl": "Flip 90°"
-					}
+        {
+          "id": "Flip90",
+          "title": {
+            "en": "Flip 90°",
+            "nl": "Flip 90°"
+          }
         },
-				{
-					"id": "Flip180",
-					"title": {
-						"en": "Flip 180°",
-						"nl": "Flip 180°"
-					}
+        {
+          "id": "Flip180",
+          "title": {
+            "en": "Flip 180°",
+            "nl": "Flip 180°"
+          }
         },
-				{
-					"id": "Slide",
-					"title": {
-						"en": "Slide",
-						"nl": "Schuiven"
-					}
+        {
+          "id": "Slide",
+          "title": {
+            "en": "Slide",
+            "nl": "Schuiven"
+          }
         },
-				{
-					"id": "DoubleTap",
-					"title": {
-						"en": "Double tap",
-						"nl": "Kloppen"
-					}
+        {
+          "id": "DoubleTap",
+          "title": {
+            "en": "Double tap",
+            "nl": "Kloppen"
+          }
         },
-				{
-					"id": "Rotate",
-					"title": {
-						"en": "Rotate",
-						"nl": "Roteren"
-					}
+        {
+          "id": "Rotate",
+          "title": {
+            "en": "Rotate",
+            "nl": "Roteren"
+          }
         },
-				{
-					"id": "Catch",
-					"title": {
-						"en": "Catch",
-						"nl": "Vangen"
-					}
+        {
+          "id": "Catch",
+          "title": {
+            "en": "Catch",
+            "nl": "Vangen"
+          }
         }
       ]
-		},
-		"cube_state_face": {
-			"type": "enum",
-			"title": {
-				"en": "Face up",
-				"nl": "Zijde boven"
-			},
-			"getable": true,
-			"setable": false,
-			"values": [
-				{
-					"id": "1",
-					"title": {
-						"en": "Face 1",
-						"nl": "Zijde 1"
-					}
+    },
+    "cube_state_face": {
+      "type": "enum",
+      "title": {
+        "en": "Face up",
+        "nl": "Zijde boven"
+      },
+      "getable": true,
+      "setable": false,
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Face 1",
+            "nl": "Zijde 1"
+          }
         },
-				{
-					"id": "2",
-					"title": {
-						"en": "Face 2",
-						"nl": "Zijde 2"
-					}
+        {
+          "id": "2",
+          "title": {
+            "en": "Face 2",
+            "nl": "Zijde 2"
+          }
         },
-				{
-					"id": "3",
-					"title": {
-						"en": "Face 3",
-						"nl": "Zijde 3"
-					}
+        {
+          "id": "3",
+          "title": {
+            "en": "Face 3",
+            "nl": "Zijde 3"
+          }
         },
-				{
-					"id": "4",
-					"title": {
-						"en": "Face 4",
-						"nl": "Zijde 4"
-					}
+        {
+          "id": "4",
+          "title": {
+            "en": "Face 4",
+            "nl": "Zijde 4"
+          }
         },
-				{
-					"id": "5",
-					"title": {
-						"en": "Face 5",
-						"nl": "Zijde 5"
-					}
+        {
+          "id": "5",
+          "title": {
+            "en": "Face 5",
+            "nl": "Zijde 5"
+          }
         },
-				{
-					"id": "6",
-					"title": {
-						"en": "Face 6",
-						"nl": "Zijde 6"
-					}
+        {
+          "id": "6",
+          "title": {
+            "en": "Face 6",
+            "nl": "Zijde 6"
+          }
         }
       ]
-		}
-	},
-	"flow": {
-		"triggers": [
-			{
-				"id": "button1_scene",
-				"title": {
-					"en": "DEPRECATED A scene has been activated",
-					"nl": "VEROUDERD Een scene is geactiveerd"
-				},
-				"hint": {
-					"en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
-					"nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_switch.aq2"
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "button1_scene",
+        "title": {
+          "en": "DEPRECATED A scene has been activated",
+          "nl": "VEROUDERD Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_switch.aq2"
           },
-					{
-						"name": "scene",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "Key Pressed 1 time",
-								"label": {
-									"en": "Pressed 1x",
-									"nl": "1x ingedrukt"
-								}
+          {
+            "name": "scene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Key Pressed 1 time",
+                "label": {
+                  "en": "Pressed 1x",
+                  "nl": "1x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 2 times",
-								"label": {
-									"en": "Pressed 2x",
-									"nl": "2x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 2 times",
+                "label": {
+                  "en": "Pressed 2x",
+                  "nl": "2x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 3 times",
-								"label": {
-									"en": "Pressed 3x",
-									"nl": "3x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 3 times",
+                "label": {
+                  "en": "Pressed 3x",
+                  "nl": "3x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 4 times",
-								"label": {
-									"en": "Pressed 4x",
-									"nl": "4x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 4 times",
+                "label": {
+                  "en": "Pressed 4x",
+                  "nl": "4x ingedrukt"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "button1_scene",
-				"title": {
-					"en": "DEPRECATED A scene has been activated",
-					"nl": "VEROUDERD Een scene is geactiveerd"
-				},
-				"hint": {
-					"en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
-					"nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_86sw1lu"
+      {
+        "id": "button1_scene",
+        "title": {
+          "en": "DEPRECATED A scene has been activated",
+          "nl": "VEROUDERD Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_86sw1lu"
           },
-					{
-						"name": "scene",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "Key Pressed 1 time",
-								"label": {
-									"en": "Pressed 1x",
-									"nl": "1x ingedrukt"
-								}
+          {
+            "name": "scene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Key Pressed 1 time",
+                "label": {
+                  "en": "Pressed 1x",
+                  "nl": "1x ingedrukt"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "button1_scene_held",
-				"title": {
-					"en": "DEPRECATED A scene has been activated",
-					"nl": "VEROUDERD Een scene is geactiveerd"
-				},
-				"hint": {
-					"en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
-					"nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_switch"
+      {
+        "id": "button1_scene_held",
+        "title": {
+          "en": "DEPRECATED A scene has been activated",
+          "nl": "VEROUDERD Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_switch"
           },
-					{
-						"name": "scene",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "Key Pressed 1 time",
-								"label": {
-									"en": "Pressed 1x",
-									"nl": "1x ingedrukt"
-								}
+          {
+            "name": "scene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Key Pressed 1 time",
+                "label": {
+                  "en": "Pressed 1x",
+                  "nl": "1x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 2 times",
-								"label": {
-									"en": "Pressed 2x",
-									"nl": "2x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 2 times",
+                "label": {
+                  "en": "Pressed 2x",
+                  "nl": "2x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 3 times",
-								"label": {
-									"en": "Pressed 3x",
-									"nl": "3x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 3 times",
+                "label": {
+                  "en": "Pressed 3x",
+                  "nl": "3x ingedrukt"
+                }
               },
-							{
-								"id": "Key Pressed 4 times",
-								"label": {
-									"en": "Pressed 4x",
-									"nl": "4x ingedrukt"
-								}
+              {
+                "id": "Key Pressed 4 times",
+                "label": {
+                  "en": "Pressed 4x",
+                  "nl": "4x ingedrukt"
+                }
               },
-							{
-								"id": "Key Held Down",
-								"label": {
-									"en": "Held Down",
-									"nl": "Lang ingedrukt"
-								}
+              {
+                "id": "Key Held Down",
+                "label": {
+                  "en": "Held Down",
+                  "nl": "Lang ingedrukt"
+                }
               },
-							{
-								"id": "Key Released",
-								"label": {
-									"en": "Released",
-									"nl": "Losgelaten"
-								}
+              {
+                "id": "Key Released",
+                "label": {
+                  "en": "Released",
+                  "nl": "Losgelaten"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "button1_button",
-				"title": {
-					"en": "A button has been pressed",
-					"nl": "Een knop is ingedrukt"
-				},
-				"hint": {
-					"en": "This card will trigger on any button pressed and provides the scene tokens.",
-					"nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_switch.aq3|sensor_86sw1lu"
+      {
+        "id": "button1_button",
+        "title": {
+          "en": "A button has been pressed",
+          "nl": "Een knop is ingedrukt"
+        },
+        "hint": {
+          "en": "This card will trigger on any button pressed and provides the scene tokens.",
+          "nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_switch.aq3|sensor_86sw1lu"
           }
         ],
-				"tokens": [
-					{
-						"name": "scene",
-						"type": "string",
-						"title": {
-							"en": "scene",
-							"nl": "scene"
-						},
-						"example": {
-							"en": "Button pressed (test)"
-						}
+        "tokens": [
+          {
+            "name": "scene",
+            "type": "string",
+            "title": {
+              "en": "scene",
+              "nl": "scene"
+            },
+            "example": {
+              "en": "Button pressed (test)"
+            }
           }
         ]
       },
-			{
-				"id": "button2_scene",
-				"title": {
-					"en": "DEPRECATED A scene has been activated",
-					"nl": "VEROUDERD Een scene is geactiveerd"
-				},
-				"hint": {
-					"en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
-					"nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_86sw2Un"
+      {
+        "id": "button2_scene",
+        "title": {
+          "en": "DEPRECATED A scene has been activated",
+          "nl": "VEROUDERD Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_86sw2Un"
           },
-					{
-						"name": "button",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "Left button",
-								"label": {
-									"en": "Left button",
-									"nl": "Linker knop"
-								}
+          {
+            "name": "button",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Left button",
+                "label": {
+                  "en": "Left button",
+                  "nl": "Linker knop"
+                }
               },
-							{
-								"id": "Right button",
-								"label": {
-									"en": "Right button",
-									"nl": "Rechter knop"
-								}
+              {
+                "id": "Right button",
+                "label": {
+                  "en": "Right button",
+                  "nl": "Rechter knop"
+                }
               },
-							{
-								"id": "Both buttons",
-								"label": {
-									"en": "Both buttons",
-									"nl": "Beide knoppen"
-								}
+              {
+                "id": "Both buttons",
+                "label": {
+                  "en": "Both buttons",
+                  "nl": "Beide knoppen"
+                }
               }
             ]
           },
-					{
-						"name": "scene",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "Key Pressed 1 time",
-								"label": {
-									"en": "Pressed 1x",
-									"nl": "1x ingedrukt"
-								}
+          {
+            "name": "scene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Key Pressed 1 time",
+                "label": {
+                  "en": "Pressed 1x",
+                  "nl": "1x ingedrukt"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "button2_button",
-				"title": {
-					"en": "A button has been pressed",
-					"nl": "Een knop is ingedrukt"
-				},
-				"hint": {
-					"en": "This card will trigger on any button pressed and provides the scene tokens.",
-					"nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_86sw2Un"
+      {
+        "id": "button2_button",
+        "title": {
+          "en": "A button has been pressed",
+          "nl": "Een knop is ingedrukt"
+        },
+        "hint": {
+          "en": "This card will trigger on any button pressed and provides the scene tokens.",
+          "nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_86sw2Un"
           }
         ],
-				"tokens": [
-					{
-						"name": "button",
-						"type": "string",
-						"title": {
-							"en": "button",
-							"nl": "knop"
-						},
-						"example": {
-							"en": "0"
-						}
+        "tokens": [
+          {
+            "name": "button",
+            "type": "string",
+            "title": {
+              "en": "button",
+              "nl": "knop"
+            },
+            "example": {
+              "en": "0"
+            }
           },
-					{
-						"name": "scene",
-						"type": "string",
-						"title": {
-							"en": "scene",
-							"nl": "scene"
-						},
-						"example": {
-							"en": "Button pressed (test)"
-						}
+          {
+            "name": "scene",
+            "type": "string",
+            "title": {
+              "en": "scene",
+              "nl": "scene"
+            },
+            "example": {
+              "en": "Button pressed (test)"
+            }
           }
         ]
       },
-			{
-				"id": "trigger_button1_scene",
-				"title": {
-					"en": "A scene has been activated",
-					"nl": "Een scene is geactiveerd"
-				},
-				"hint": {
-					"en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
-					"nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_switch.aq3|sensor_86sw1lu"
+      {
+        "id": "trigger_button1_scene",
+        "title": {
+          "en": "A scene has been activated",
+          "nl": "Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_switch.aq3|sensor_86sw1lu"
           },
-					{
-						"name": "scene",
-						"type": "autocomplete"
+          {
+            "name": "scene",
+            "type": "autocomplete"
           }
         ]
       },
-			{
-				"id": "trigger_button2_scene",
-				"title": {
-					"en": "A scene has been activated",
-					"nl": "Een scene is geactiveerd"
-				},
-				"hint": {
-					"en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
-					"nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=sensor_86sw2Un"
+      {
+        "id": "trigger_button2_scene",
+        "title": {
+          "en": "A scene has been activated",
+          "nl": "Een scene is geactiveerd"
+        },
+        "hint": {
+          "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor_86sw2Un"
           },
-					{
-						"name": "button",
-						"type": "autocomplete"
+          {
+            "name": "button",
+            "type": "autocomplete"
           },
-					{
-						"name": "scene",
-						"type": "autocomplete"
+          {
+            "name": "scene",
+            "type": "autocomplete"
           }
         ]
       },
-			{
-				"id": "ctrl_neutral2_switch2_turned_on",
-				"title": {
-					"en": "Right Switch On",
-					"nl": "Rechter Schakelaar Op"
-				},
-				"args": [
-					{
-						"type": "device",
-						"name": "ctrl_neutral2",
-						"filter": "driver_id=ctrl_neutral2"
+      {
+        "id": "ctrl_neutral2_switch2_turned_on",
+        "title": {
+          "en": "Right Switch On",
+          "nl": "Rechter Schakelaar Op"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       },
-			{
-				"id": "ctrl_neutral2_switch2_turned_off",
-				"title": {
-					"en": "Right Switch Off",
-					"nl": "Rechter Schakelaar Uit"
-				},
-				"args": [
-					{
-						"type": "device",
-						"name": "ctrl_neutral2",
-						"filter": "driver_id=ctrl_neutral2"
+      {
+        "id": "ctrl_neutral2_switch2_turned_off",
+        "title": {
+          "en": "Right Switch Off",
+          "nl": "Rechter Schakelaar Uit"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       },
-			{
-				"id": "cube_Motion",
-				"title": {
-					"en": "Cube motion",
-					"nl": "Cube beweging"
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=cube"
+      {
+        "id": "cube_Motion",
+        "title": {
+          "en": "Cube motion",
+          "nl": "Cube beweging"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
           }
         ],
-				"tokens": [
-					{
-						"name": "motion",
-						"type": "string",
-						"title": {
-							"en": "Cube Motion",
-							"nl": "Cube beweging"
-						},
-						"example": {
-							"en": "Shake",
-							"nl": "Schudden"
-						}
+        "tokens": [
+          {
+            "name": "motion",
+            "type": "string",
+            "title": {
+              "en": "Cube Motion",
+              "nl": "Cube beweging"
+            },
+            "example": {
+              "en": "Shake",
+              "nl": "Schudden"
+            }
           },
-					{
-						"name": "sourceFace",
-						"type": "number",
-						"title": {
-							"en": "source Face"
-						},
-						"example": 1
+          {
+            "name": "sourceFace",
+            "type": "number",
+            "title": {
+              "en": "source Face"
+            },
+            "example": 1
           },
-					{
-						"name": "targetFace",
-						"type": "number",
-						"title": {
-							"en": "target Face"
-						},
-						"example": 5
+          {
+            "name": "targetFace",
+            "type": "number",
+            "title": {
+              "en": "target Face"
+            },
+            "example": 5
           }
         ]
       },
-			{
-				"id": "cube_Shake",
-				"title": {
-					"en": "Cube shaked",
-					"nl": "Cube geschud"
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=cube"
+      {
+        "id": "cube_Shake",
+        "title": {
+          "en": "Cube shaked",
+          "nl": "Cube geschud"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
           },
-					{
-						"name": "targetFace",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "0",
-								"label": {
-									"en": "any side up",
-									"nl": "willekeurige zijde"
-								}
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
               },
-							{
-								"id": "1",
-								"label": {
-									"en": "side 1 up",
-									"nl": "zijde 1 boven"
-								}
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
               },
-							{
-								"id": "2",
-								"label": {
-									"en": "side 2 up",
-									"nl": "zijde 2 boven"
-								}
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
               },
-							{
-								"id": "3",
-								"label": {
-									"en": "side 3 up",
-									"nl": "zijde 3 boven"
-								}
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
               },
-							{
-								"id": "4",
-								"label": {
-									"en": "side 4 up",
-									"nl": "zijde 4  boven"
-								}
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
               },
-							{
-								"id": "5",
-								"label": {
-									"en": "side 5 up",
-									"nl": "zijde 5 boven"
-								}
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "zijde 5 boven"
+                }
               },
-							{
-								"id": "6",
-								"label": {
-									"en": "side 6 up",
-									"nl": "zijde 6 boven"
-								}
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "cube_Flip90",
-				"title": {
-					"en": "Cube flipped 90°",
-					"nl": "Cube 90° gekanteld"
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=cube"
+      {
+        "id": "cube_Flip90",
+        "title": {
+          "en": "Cube flipped 90°",
+          "nl": "Cube 90° gekanteld"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
           },
-					{
-						"name": "sourceFace",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "0",
-								"label": {
-									"en": "from any side",
-									"nl": "van iedere zijde"
-								}
+          {
+            "name": "sourceFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "from any side",
+                  "nl": "van iedere zijde"
+                }
               },
-							{
-								"id": "1",
-								"label": {
-									"en": "from side 1",
-									"nl": "van zijde 1"
-								}
+              {
+                "id": "1",
+                "label": {
+                  "en": "from side 1",
+                  "nl": "van zijde 1"
+                }
               },
-							{
-								"id": "2",
-								"label": {
-									"en": "from side 2",
-									"nl": "van zijde 2"
-								}
+              {
+                "id": "2",
+                "label": {
+                  "en": "from side 2",
+                  "nl": "van zijde 2"
+                }
               },
-							{
-								"id": "3",
-								"label": {
-									"en": "from side 3",
-									"nl": "van zijde 3"
-								}
+              {
+                "id": "3",
+                "label": {
+                  "en": "from side 3",
+                  "nl": "van zijde 3"
+                }
               },
-							{
-								"id": "4",
-								"label": {
-									"en": "from side 4",
-									"nl": "van zijde 4"
-								}
+              {
+                "id": "4",
+                "label": {
+                  "en": "from side 4",
+                  "nl": "van zijde 4"
+                }
               },
-							{
-								"id": "5",
-								"label": {
-									"en": "from side 5",
-									"nl": "van side 5"
-								}
+              {
+                "id": "5",
+                "label": {
+                  "en": "from side 5",
+                  "nl": "van side 5"
+                }
               },
-							{
-								"id": "6",
-								"label": {
-									"en": "from side 6",
-									"nl": "van zijde 6"
-								}
+              {
+                "id": "6",
+                "label": {
+                  "en": "from side 6",
+                  "nl": "van zijde 6"
+                }
               }
             ]
           },
-					{
-						"name": "targetFace",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "0",
-								"label": {
-									"en": "to any side",
-									"nl": "naar iedere zijde"
-								}
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "to any side",
+                  "nl": "naar iedere zijde"
+                }
               },
-							{
-								"id": "1",
-								"label": {
-									"en": "to 1",
-									"nl": "naar 1"
-								}
+              {
+                "id": "1",
+                "label": {
+                  "en": "to 1",
+                  "nl": "naar 1"
+                }
               },
-							{
-								"id": "2",
-								"label": {
-									"en": "to 2",
-									"nl": "naar 2"
-								}
+              {
+                "id": "2",
+                "label": {
+                  "en": "to 2",
+                  "nl": "naar 2"
+                }
               },
-							{
-								"id": "3",
-								"label": {
-									"en": "to 3",
-									"nl": "naar 3"
-								}
+              {
+                "id": "3",
+                "label": {
+                  "en": "to 3",
+                  "nl": "naar 3"
+                }
               },
-							{
-								"id": "4",
-								"label": {
-									"en": "to 4",
-									"nl": "naar 4"
-								}
+              {
+                "id": "4",
+                "label": {
+                  "en": "to 4",
+                  "nl": "naar 4"
+                }
               },
-							{
-								"id": "5",
-								"label": {
-									"en": "to 5",
-									"nl": "naar 5"
-								}
+              {
+                "id": "5",
+                "label": {
+                  "en": "to 5",
+                  "nl": "naar 5"
+                }
               },
-							{
-								"id": "6",
-								"label": {
-									"en": "to 6",
-									"nl": "naar 6"
-								}
-              }
-            ]
-          }
-        ]
-      },
-			{
-				"id": "cube_Flip180",
-				"title": {
-					"en": "Cube flipped 180°",
-					"nl": "Cube 180° gekanteld"
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=cube"
-          },
-					{
-						"name": "targetFace",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "0",
-								"label": {
-									"en": "any side up",
-									"nl": "willekeurige zijde"
-								}
-              },
-							{
-								"id": "1",
-								"label": {
-									"en": "side 1 up",
-									"nl": "zijde 1 boven"
-								}
-              },
-							{
-								"id": "2",
-								"label": {
-									"en": "side 2 up",
-									"nl": "zijde 2 boven"
-								}
-              },
-							{
-								"id": "3",
-								"label": {
-									"en": "side 3 up",
-									"nl": "zijde 3 boven"
-								}
-              },
-							{
-								"id": "4",
-								"label": {
-									"en": "side 4 up",
-									"nl": "zijde 4  boven"
-								}
-              },
-							{
-								"id": "5",
-								"label": {
-									"en": "side 5 up",
-									"nl": "side 5 boven"
-								}
-              },
-							{
-								"id": "6",
-								"label": {
-									"en": "side 6 up",
-									"nl": "zijde 6 boven"
-								}
+              {
+                "id": "6",
+                "label": {
+                  "en": "to 6",
+                  "nl": "naar 6"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "cube_Slide",
-				"title": {
-					"en": "Cube slided",
-					"nl": "Cube verschoven"
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=cube"
+      {
+        "id": "cube_Flip180",
+        "title": {
+          "en": "Cube flipped 180°",
+          "nl": "Cube 180° gekanteld"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
           },
-					{
-						"name": "targetFace",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "0",
-								"label": {
-									"en": "any side up",
-									"nl": "willekeurige zijde"
-								}
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
               },
-							{
-								"id": "1",
-								"label": {
-									"en": "side 1 up",
-									"nl": "zijde 1 boven"
-								}
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
               },
-							{
-								"id": "2",
-								"label": {
-									"en": "side 2 up",
-									"nl": "zijde 2 boven"
-								}
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
               },
-							{
-								"id": "3",
-								"label": {
-									"en": "side 3 up",
-									"nl": "zijde 3 boven"
-								}
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
               },
-							{
-								"id": "4",
-								"label": {
-									"en": "side 4 up",
-									"nl": "zijde 4  boven"
-								}
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
               },
-							{
-								"id": "5",
-								"label": {
-									"en": "side 5 up",
-									"nl": "side 5 boven"
-								}
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
+                }
               },
-							{
-								"id": "6",
-								"label": {
-									"en": "side 6 up",
-									"nl": "zijde 6 boven"
-								}
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "cube_DoubleTap",
-				"title": {
-					"en": "Cube double tapped",
-					"nl": "Cube twee keer kloppen"
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=cube"
+      {
+        "id": "cube_Slide",
+        "title": {
+          "en": "Cube slided",
+          "nl": "Cube verschoven"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
           },
-					{
-						"name": "targetFace",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "0",
-								"label": {
-									"en": "any side up",
-									"nl": "willekeurige zijde"
-								}
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
               },
-							{
-								"id": "1",
-								"label": {
-									"en": "side 1 up",
-									"nl": "zijde 1 boven"
-								}
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
               },
-							{
-								"id": "2",
-								"label": {
-									"en": "side 2 up",
-									"nl": "zijde 2 boven"
-								}
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
               },
-							{
-								"id": "3",
-								"label": {
-									"en": "side 3 up",
-									"nl": "zijde 3 boven"
-								}
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
               },
-							{
-								"id": "4",
-								"label": {
-									"en": "side 4 up",
-									"nl": "zijde 4  boven"
-								}
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
               },
-							{
-								"id": "5",
-								"label": {
-									"en": "side 5 up",
-									"nl": "side 5 boven"
-								}
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
+                }
               },
-							{
-								"id": "6",
-								"label": {
-									"en": "side 6 up",
-									"nl": "zijde 6 boven"
-								}
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
               }
             ]
           }
         ]
       },
-			{
-				"id": "cube_Rotate",
-				"title": {
-					"en": "Cube rotated",
-					"nl": "Cube gedraaid"
-				},
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=cube"
+      {
+        "id": "cube_DoubleTap",
+        "title": {
+          "en": "Cube double tapped",
+          "nl": "Cube twee keer kloppen"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
           },
-					{
-						"name": "targetFace",
-						"type": "dropdown",
-						"values": [
-							{
-								"id": "0",
-								"label": {
-									"en": "any side up",
-									"nl": "willekeurige zijde"
-								}
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
               },
-							{
-								"id": "1",
-								"label": {
-									"en": "side 1 up",
-									"nl": "zijde 1 boven"
-								}
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
               },
-							{
-								"id": "2",
-								"label": {
-									"en": "side 2 up",
-									"nl": "zijde 2 boven"
-								}
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
               },
-							{
-								"id": "3",
-								"label": {
-									"en": "side 3 up",
-									"nl": "zijde 3 boven"
-								}
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
               },
-							{
-								"id": "4",
-								"label": {
-									"en": "side 4 up",
-									"nl": "zijde 4  boven"
-								}
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
               },
-							{
-								"id": "5",
-								"label": {
-									"en": "side 5 up",
-									"nl": "side 5 boven"
-								}
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
+                }
               },
-							{
-								"id": "6",
-								"label": {
-									"en": "side 6 up",
-									"nl": "zijde 6 boven"
-								}
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cube_Rotate",
+        "title": {
+          "en": "Cube rotated",
+          "nl": "Cube gedraaid"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven"
+                }
               }
             ]
           }
         ],
-				"tokens": [
-					{
-						"name": "rotationAngle",
-						"type": "number",
-						"title": {
-							"en": "Rotation Angle °",
-							"nl": "Rotatiehoek °"
-						},
-						"example": 124.51
+        "tokens": [
+          {
+            "name": "rotationAngle",
+            "type": "number",
+            "title": {
+              "en": "Rotation Angle °",
+              "nl": "Rotatiehoek °"
+            },
+            "example": 124.51
           },
-					{
-						"name": "relativeRotationAngle",
-						"type": "number",
-						"title": {
-							"en": "Relative Angle %",
-							"nl": "Relatieve hoek %"
-						},
-						"example": 0.92
+          {
+            "name": "relativeRotationAngle",
+            "type": "number",
+            "title": {
+              "en": "Relative Angle %",
+              "nl": "Relatieve hoek %"
+            },
+            "example": 0.92
           }
         ]
       }
     ],
-		"conditions": [
-			{
-				"id": "ctrl_neutral2_switch2_is_on",
-				"title": {
-					"en": "Right switch is !{{on|off}}",
-					"nl": "Rechter schakelaar is !{{ingeschakeld|uitgeschakeld}}"
-				},
-				"args": [
-					{
-						"type": "device",
-						"name": "ctrl_neutral2",
-						"filter": "driver_id=ctrl_neutral2"
+    "conditions": [
+      {
+        "id": "ctrl_neutral2_switch2_is_on",
+        "title": {
+          "en": "Right switch is !{{on|off}}",
+          "nl": "Rechter schakelaar is !{{ingeschakeld|uitgeschakeld}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       }
     ],
-		"actions": [
-			{
-				"id": "ctrl_neutral2_turn_on_switch2",
-				"title": {
-					"en": "Turn On Right Switch",
-					"nl": "Op Rechter Schakelaar"
-				},
-				"args": [
-					{
-						"type": "device",
-						"name": "ctrl_neutral2",
-						"filter": "driver_id=ctrl_neutral2"
+    "actions": [
+      {
+        "id": "ctrl_neutral2_turn_on_switch2",
+        "title": {
+          "en": "Turn On Right Switch",
+          "nl": "Op Rechter Schakelaar"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       },
-			{
-				"id": "ctrl_neutral2_turn_off_switch2",
-				"title": {
-					"en": "Turn Off Right Switch",
-					"nl": "Uit Rechter Schakelaar"
-				},
-				"args": [
-					{
-						"type": "device",
-						"name": "ctrl_neutral2",
-						"filter": "driver_id=ctrl_neutral2"
+      {
+        "id": "ctrl_neutral2_turn_off_switch2",
+        "title": {
+          "en": "Turn Off Right Switch",
+          "nl": "Uit Rechter Schakelaar"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "ctrl_neutral2",
+            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       }
     ]
-	},
-	"drivers": [
-		{
-			"id": "ctrl_86plug.aq1",
-			"name": {
-				"en": "Aqara Smart Socket",
-				"nl": "Aqara Smart Socket"
-			},
-			"class": "socket",
-			"capabilities": [
+  },
+  "drivers": [
+    {
+      "id": "ctrl_86plug.aq1",
+      "name": {
+        "en": "Aqara Smart Socket",
+        "nl": "Aqara Smart Socket"
+      },
+      "class": "socket",
+      "capabilities": [
         "onoff",
         "measure_power",
         "measure_voltage",
         "meter_power"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.ctrl_86plug.aq1"
         ],
-				"deviceId": 81,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/ctrl_86plug.aq1/assets/learn.svg",
-					"instruction": {
-						"en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
-						"nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/ctrl_86plug.aq1/assets/images/large.png",
-				"small": "/drivers/ctrl_86plug.aq1/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 81,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/ctrl_86plug.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_86plug.aq1/assets/images/large.png",
+        "small": "/drivers/ctrl_86plug.aq1/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "ctrl_neutral1",
-			"name": {
-				"en": "Aqara Wall Switch Single",
-				"nl": "Aqara Wall Switch Single"
-			},
-			"class": "socket",
-			"capabilities": [
+    {
+      "id": "ctrl_neutral1",
+      "name": {
+        "en": "Aqara Wall Switch Single",
+        "nl": "Aqara Wall Switch Single"
+      },
+      "class": "socket",
+      "capabilities": [
         "onoff"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.ctrl_neutral1",
           "lumi.ctrl_ln1.aq1"
         ],
-				"deviceId": [
+        "deviceId": [
           6,
           81
         ],
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/ctrl_neutral1/assets/learn.svg",
-					"instruction": {
-						"en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
-						"nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/ctrl_neutral1/assets/images/large.png",
-				"small": "/drivers/ctrl_neutral1/assets/images/small.png"
-			}
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/ctrl_neutral1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_neutral1/assets/images/large.png",
+        "small": "/drivers/ctrl_neutral1/assets/images/small.png"
+      }
     },
-		{
-			"id": "ctrl_neutral2",
-			"name": {
-				"en": "Aqara Wall Switch Double",
-				"nl": "Aqara Wall Switch Double"
-			},
-			"class": "socket",
-			"capabilities": [
+    {
+      "id": "ctrl_neutral2",
+      "name": {
+        "en": "Aqara Wall Switch Double",
+        "nl": "Aqara Wall Switch Double"
+      },
+      "class": "socket",
+      "capabilities": [
         "onoff",
         "onoff.1"
       ],
-			"capabilitiesOptions": {
-				"onoff": {
-					"title": {
-						"en": "Switch 1"
-					},
-					"greyout": false
-				},
-				"onoff.1": {
-					"title": {
-						"en": "Switch 2"
-					},
-					"greyout": false
-				}
-			},
-			"mobile": {
-				"components": [
-					{
-						"id": "icon",
-						"capabilities": []
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Switch 1"
           },
-					{
-						"id": "toggle",
-						"capabilities": [
+          "greyout": false
+        },
+        "onoff.1": {
+          "title": {
+            "en": "Switch 2"
+          },
+          "greyout": false
+        }
+      },
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": []
+          },
+          {
+            "id": "toggle",
+            "capabilities": [
               "onoff"
             ],
-						"options": {
-							"showTitle": true
-						}
+            "options": {
+              "showTitle": true
+            }
           },
-					{
-						"id": "toggle",
-						"capabilities": [
+          {
+            "id": "toggle",
+            "capabilities": [
               "onoff.1"
             ],
-						"options": {
-							"showTitle": true
-						}
+            "options": {
+              "showTitle": true
+            }
           }
         ]
-			},
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.ctrl_neutral2",
           "lumi.ctrl_ln2.aq1"
         ],
-				"deviceId": [
+        "deviceId": [
           6,
           81
         ],
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/ctrl_neutral2/assets/learn.svg",
-					"instruction": {
-						"en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
-						"nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/ctrl_neutral2/assets/images/large.png",
-				"small": "/drivers/ctrl_neutral2/assets/images/small.png"
-			}
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/ctrl_neutral2/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_neutral2/assets/images/large.png",
+        "small": "/drivers/ctrl_neutral2/assets/images/small.png"
+      }
     },
-		{
-			"id": "cube",
-			"name": {
-				"en": "Cube",
-				"nl": "Cube"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "cube",
+      "name": {
+        "en": "Cube",
+        "nl": "Cube"
+      },
+      "class": "sensor",
+      "capabilities": [
         "measure_battery",
         "cube_state_motion",
         "cube_state_face",
         "cube_measure_rotation",
         "alarm_battery"
       ],
-			"mobile": {
-				"components": [
-					{
-						"id": "icon",
-						"capabilities": []
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": []
           },
-					{
-						"id": "battery",
-						"capabilities": [
+          {
+            "id": "battery",
+            "capabilities": [
               "measure_battery"
             ]
           },
-					{
-						"id": "sensor",
-						"capabilities": [
+          {
+            "id": "sensor",
+            "capabilities": [
               "cube_state_motion",
               "cube_state_face",
               "cube_measure_rotation",
               "alarm_battery"
             ],
-						"options": {
-							"showTitle": true,
-							"icons": {
-								"cube_state_motion": "/drivers/cube/assets/icon.svg",
-								"cube_state_face": "/drivers/cube/assets/icon_face.svg",
-								"cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg"
-							}
-						}
+            "options": {
+              "showTitle": true,
+              "icons": {
+                "cube_state_motion": "/drivers/cube/assets/icon.svg",
+                "cube_state_face": "/drivers/cube/assets/icon_face.svg",
+                "cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg"
+              }
+            }
           }
         ]
-			},
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_cube"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/cube/assets/learn.svg",
-					"instruction": {
-						"en": "Hold the Cube during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de Cube in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/cube/assets/images/large.png",
-				"small": "/drivers/cube/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "cube_relative_angle",
-					"type": "number",
-					"label": {
-						"en": "Relative rotation angle (xx° = 100%)",
-						"nl": "Relatieve hoekverdraaing (xx° = 100%)"
-					},
-					"hint": {
-						"en": "This setting will translate the actual measured rotation angle in a relative rotation angle that can be used to increase or decrease dim-level / volume.\nxx° = 100%\nRange: 90 - 360, \ndefault: 180 [°]",
-						"nl": "Deze instelling vertaalt de gemeten hoekverdraaing in een relatieve hoekverdraaing die gebruikt kan worden voor het verhogen of verlagen van het volume.\nxx° = 100%\nBereik: 90 - 360, \nstandaard: 180 [°]"
-					},
-					"value": 180,
-					"attr": {
-						"min": 90,
-						"max": 360
-					}
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/cube/assets/learn.svg",
+          "instruction": {
+            "en": "Hold the Cube during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de Cube in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/cube/assets/images/large.png",
+        "small": "/drivers/cube/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "cube_relative_angle",
+          "type": "number",
+          "label": {
+            "en": "Relative rotation angle (xx° = 100%)",
+            "nl": "Relatieve hoekverdraaing (xx° = 100%)"
+          },
+          "hint": {
+            "en": "This setting will translate the actual measured rotation angle in a relative rotation angle that can be used to increase or decrease dim-level / volume.\nxx° = 100%\nRange: 90 - 360, \ndefault: 180 [°]",
+            "nl": "Deze instelling vertaalt de gemeten hoekverdraaing in een relatieve hoekverdraaing die gebruikt kan worden voor het verhogen of verlagen van het volume.\nxx° = 100%\nBereik: 90 - 360, \nstandaard: 180 [°]"
+          },
+          "value": 180,
+          "attr": {
+            "min": 90,
+            "max": 360
+          }
         },
-				{
-					"id": "battery_threshold",
-					"type": "number",
-					"label": {
-						"en": "Battery alarm threshold (%)",
-						"nl": "Batterij alarm waarde (%)"
-					},
-					"hint": {
-						"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-						"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-					},
-					"value": 20,
-					"attr": {
-						"min": 1,
-						"max": 90
-					}
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
         }
       ]
     },
-		{
-			"id": "curtain",
-			"name": {
-				"en": "Curtain Controller",
-				"nl": "Curtain Controller"
-			},
-			"class": "windowcoverings",
-			"capabilities": [
+    {
+      "id": "curtain",
+      "name": {
+        "en": "Curtain Controller",
+        "nl": "Curtain Controller"
+      },
+      "class": "windowcoverings",
+      "capabilities": [
         "onoff",
         "windowcoverings_state"
       ],
-			"mobile": {
-				"components": [
-					{
-						"id": "icon",
-						"capabilities": [
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": [
               "onoff"
             ]
           },
-					{
-						"id": "ternary",
-						"capabilities": [
+          {
+            "id": "ternary",
+            "capabilities": [
               "windowcoverings_state"
             ],
-						"options": {
-							"icons": {
-								"top": false,
-								"middle": false,
-								"bottom": false
-							},
-							"values": {
-								"top": "upOpen",
-								"middle": "stop",
-								"bottom": "downClose"
-							}
-						}
+            "options": {
+              "icons": {
+                "top": false,
+                "middle": false,
+                "bottom": false
+              },
+              "values": {
+                "top": "upOpen",
+                "middle": "stop",
+                "bottom": "downClose"
+              }
+            }
           }
         ]
-			},
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.curtain",
-				"deviceId": 514,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/curtain/assets/learn.svg",
-					"instruction": {
-						"en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
-						"nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/curtain/assets/images/large.png",
-				"small": "/drivers/curtain/assets/images/small.png"
-			},
-			"settings": []
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain",
+        "deviceId": 514,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/curtain/assets/learn.svg",
+          "instruction": {
+            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain/assets/images/large.png",
+        "small": "/drivers/curtain/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "plug",
-			"name": {
-				"en": "Smart socket plug",
-				"nl": "Smart socket plug"
-			},
-			"class": "socket",
-			"capabilities": [
+    {
+      "id": "plug",
+      "name": {
+        "en": "Smart socket plug",
+        "nl": "Smart socket plug"
+      },
+      "class": "socket",
+      "capabilities": [
         "onoff",
         "measure_power",
         "measure_voltage",
         "meter_power"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.plug"
         ],
-				"deviceId": 81,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/plug/assets/learn.svg",
-					"instruction": {
-						"en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
-						"nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/plug/assets/images/large.png",
-				"small": "/drivers/plug/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 81,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/plug/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/plug/assets/images/large.png",
+        "small": "/drivers/plug/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sens",
-			"name": {
-				"en": "Temperature/Humidity sensor",
-				"nl": "Temperature/Humidity sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sens",
+      "name": {
+        "en": "Temperature/Humidity sensor",
+        "nl": "Temperature/Humidity sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "measure_temperature",
         "measure_humidity",
         "measure_battery",
         "alarm_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sens"
         ],
-				"deviceId": [
+        "deviceId": [
           24321
         ],
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sens/assets/learn_temp.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sens/assets/images/large.png",
-				"small": "/drivers/sens/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "temperature_offset",
-					"type": "number",
-					"label": {
-						"en": "Temperature offset (°C)",
-						"nl": "Temperatuur compensatie (°C)"
-					},
-					"hint": {
-						"en": "Set a correction to compensate a temperature offset.\nRange: -10 - 10, step size 0.1, \ndefault: 0 [°C]",
-						"nl": "Stel een correctiewaarde in om een temperature verschil te compenseren.\nBereik: -10 - 10, stap grootte 0.1, \nstandaard: 0 [°C]"
-					},
-					"value": 0,
-					"attr": {
-						"min": -10,
-						"max": 10,
-						"step": 0.1
-					}
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sens/assets/learn_temp.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sens/assets/images/large.png",
+        "small": "/drivers/sens/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "temperature_offset",
+          "type": "number",
+          "label": {
+            "en": "Temperature offset (°C)",
+            "nl": "Temperatuur compensatie (°C)"
+          },
+          "hint": {
+            "en": "Set a correction to compensate a temperature offset.\nRange: -10 - 10, step size 0.1, \ndefault: 0 [°C]",
+            "nl": "Stel een correctiewaarde in om een temperature verschil te compenseren.\nBereik: -10 - 10, stap grootte 0.1, \nstandaard: 0 [°C]"
+          },
+          "value": 0,
+          "attr": {
+            "min": -10,
+            "max": 10,
+            "step": 0.1
+          }
         },
-				{
-					"id": "battery_threshold",
-					"type": "number",
-					"label": {
-						"en": "Battery alarm threshold (%)",
-						"nl": "Batterij alarm waarde (%)"
-					},
-					"hint": {
-						"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-						"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-					},
-					"value": 20,
-					"attr": {
-						"min": 1,
-						"max": 90
-					}
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
         }
       ]
     },
-		{
-			"id": "sensor_86sw1lu",
-			"name": {
-				"en": "Aqara Wireless Remote Switch Single",
-				"nl": "Aqara Wireless Remote Switch Single"
-			},
-			"class": "sensor",
-			"capabilities": [],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+    {
+      "id": "sensor_86sw1lu",
+      "name": {
+        "en": "Aqara Wireless Remote Switch Single",
+        "nl": "Aqara Wireless Remote Switch Single"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_86sw1lu"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_86sw1lu/assets/learn.svg",
-					"instruction": {
-						"en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-						"nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_86sw1lu/assets/images/large.png",
-				"small": "/drivers/sensor_86sw1lu/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_86sw1lu/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_86sw1lu/assets/images/large.png",
+        "small": "/drivers/sensor_86sw1lu/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_86sw2Un",
-			"name": {
-				"en": "Aqara Wireless Remote Switch Double",
-				"nl": "Aqara Wireless Remote Switch Double"
-			},
-			"class": "sensor",
-			"capabilities": [],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+    {
+      "id": "sensor_86sw2Un",
+      "name": {
+        "en": "Aqara Wireless Remote Switch Double",
+        "nl": "Aqara Wireless Remote Switch Double"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_86sw2Un"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_86sw2Un/assets/learn.svg",
-					"instruction": {
-						"en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-						"nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_86sw2Un/assets/images/large.png",
-				"small": "/drivers/sensor_86sw2Un/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_86sw2Un/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_86sw2Un/assets/images/large.png",
+        "small": "/drivers/sensor_86sw2Un/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_magnet.aq2",
-			"name": {
-				"en": "Aqara Window/Door Sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_magnet.aq2",
+      "name": {
+        "en": "Aqara Window/Door Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_contact",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_magnet.aq2"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_magnet.aq2/assets/learn_door.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
-				"small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "battery_threshold",
-					"type": "number",
-					"label": {
-						"en": "Battery alarm threshold (%)",
-						"nl": "Batterij alarm waarde (%)"
-					},
-					"hint": {
-						"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-						"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-					},
-					"value": 20,
-					"attr": {
-						"min": 1,
-						"max": 90
-					}
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_magnet.aq2/assets/learn_door.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
         }
       ]
     },
-		{
-			"id": "sensor_magnet",
-			"name": {
-				"en": "Door/Window sensor",
-				"nl": "Door/Window sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_magnet",
+      "name": {
+        "en": "Door/Window sensor",
+        "nl": "Door/Window sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_contact",
         "measure_battery",
         "alarm_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_magnet"
         ],
-				"deviceId": 260,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_magnet/assets/learn_door.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_magnet/assets/images/large.png",
-				"small": "/drivers/sensor_magnet/assets/images/small.png"
-			},
-			"settings": []
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_magnet/assets/learn_door.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_magnet/assets/images/large.png",
+        "small": "/drivers/sensor_magnet/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_motion.aq2",
-			"name": {
-				"en": "Aqara Human Body Sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_motion.aq2",
+      "name": {
+        "en": "Aqara Human Body Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_motion",
         "measure_luminance",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_motion.aq2",
-				"deviceId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_motion.aq2",
+        "deviceId": [
           260,
           263
         ],
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_motion.aq2/assets/images/large.png",
-				"small": "/drivers/sensor_motion.aq2/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "alarm_motion_reset_window",
-					"type": "number",
-					"label": {
-						"en": "Disable motion alarm after",
-						"nl": "Schakel bewegingsalarm uit na"
-					},
-					"hint": {
-						"en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
-						"nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
-					},
-					"value": 300,
-					"attr": {
-						"min": 60,
-						"max": 86400
-					}
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_motion.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_motion.aq2/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "alarm_motion_reset_window",
+          "type": "number",
+          "label": {
+            "en": "Disable motion alarm after",
+            "nl": "Schakel bewegingsalarm uit na"
+          },
+          "hint": {
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
+          },
+          "value": 300,
+          "attr": {
+            "min": 60,
+            "max": 86400
+          }
         },
-				{
-					"id": "battery_threshold",
-					"type": "number",
-					"label": {
-						"en": "Battery alarm threshold (%)",
-						"nl": "Batterij alarm waarde (%)"
-					},
-					"hint": {
-						"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-						"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-					},
-					"value": 20,
-					"attr": {
-						"min": 1,
-						"max": 90
-					}
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
         }
       ]
     },
-		{
-			"id": "sensor_motion",
-			"name": {
-				"en": "Occupancy sensor",
-				"nl": "Occupancy sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_motion",
+      "name": {
+        "en": "Occupancy sensor",
+        "nl": "Occupancy sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_motion",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_motion",
-				"deviceId": 260,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_motion/assets/learn_motion.svg",
-					"instruction": {
-						"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_motion/assets/images/large.png",
-				"small": "/drivers/sensor_motion/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "alarm_motion_reset_window",
-					"type": "number",
-					"label": {
-						"en": "Disable motion alarm after",
-						"nl": "Schakel bewegingsalarm uit na"
-					},
-					"hint": {
-						"en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
-						"nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
-					},
-					"value": 300,
-					"attr": {
-						"min": 60,
-						"max": 86400
-					}
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_motion",
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_motion/assets/learn_motion.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_motion/assets/images/large.png",
+        "small": "/drivers/sensor_motion/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "alarm_motion_reset_window",
+          "type": "number",
+          "label": {
+            "en": "Disable motion alarm after",
+            "nl": "Schakel bewegingsalarm uit na"
+          },
+          "hint": {
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
+          },
+          "value": 300,
+          "attr": {
+            "min": 60,
+            "max": 86400
+          }
         }
       ]
     },
-		{
-			"id": "sensor_natgas",
-			"name": {
-				"en": "Gas Leak detector",
-				"nl": "Gas Leak detector"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_natgas",
+      "name": {
+        "en": "Gas Leak detector",
+        "nl": "Gas Leak detector"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_co",
         "measure_temperature",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_natgas",
-				"deviceId": 257,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_natgas/assets/learn.svg",
-					"instruction": {
-						"en": "Press 3 times quickly to hear the device ring 3 times",
-						"nl": "Press 3 times quickly to hear the device ring 3 times"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_natgas/assets/images/large.png",
-				"small": "/drivers/sensor_natgas/assets/images/small.png"
-			},
-			"settings": []
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_natgas",
+        "deviceId": 257,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_natgas/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_natgas/assets/images/large.png",
+        "small": "/drivers/sensor_natgas/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_smoke",
-			"name": {
-				"en": "Smoke detector",
-				"nl": "Smoke detector"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_smoke",
+      "name": {
+        "en": "Smoke detector",
+        "nl": "Smoke detector"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_smoke",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_smoke",
-				"deviceId": 1026,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_smoke/assets/learn.svg",
-					"instruction": {
-						"en": "Press 3 times quickly to hear the device ring 3 times",
-						"nl": "Press 3 times quickly to hear the device ring 3 times"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_smoke/assets/images/large.png",
-				"small": "/drivers/sensor_smoke/assets/images/small.png"
-			},
-			"settings": []
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_smoke",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_smoke/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_smoke/assets/images/large.png",
+        "small": "/drivers/sensor_smoke/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "sensor_switch.aq2",
-			"name": {
-				"en": "Aqara Wireless switch",
-				"nl": "Aqara Wireless switch"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_switch.aq2",
+      "name": {
+        "en": "Aqara Wireless switch",
+        "nl": "Aqara Wireless switch"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_switch.aq2"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_switch.aq2/assets/learn_switch.svg",
-					"instruction": {
-						"en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_switch.aq2/assets/images/large.png",
-				"small": "/drivers/sensor_switch.aq2/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "battery_threshold",
-					"type": "number",
-					"label": {
-						"en": "Battery alarm threshold (%)",
-						"nl": "Batterij alarm waarde (%)"
-					},
-					"hint": {
-						"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-						"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-					},
-					"value": 20,
-					"attr": {
-						"min": 1,
-						"max": 90
-					}
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_switch.aq2/assets/learn_switch.svg",
+          "instruction": {
+            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_switch.aq2/assets/images/large.png",
+        "small": "/drivers/sensor_switch.aq2/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
         }
       ]
     },
-		{
-			"id": "sensor_switch.aq3",
-			"name": {
-				"en": "Aqara Wireless switch (Gyro)",
-				"nl": "Aqara Wireless switch (Gyro)"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_switch.aq3",
+      "name": {
+        "en": "Aqara Wireless switch (Gyro)",
+        "nl": "Aqara Wireless switch (Gyro)"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_switch.aq3",
           "lumi.sensor_swit"
         ],
-				"deviceId": 24321,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_switch.aq3/assets/learn_switch.svg",
-					"instruction": {
-						"en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_switch.aq3/assets/images/large.png",
-				"small": "/drivers/sensor_switch.aq3/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "battery_threshold",
-					"type": "number",
-					"label": {
-						"en": "Battery alarm threshold (%)",
-						"nl": "Batterij alarm waarde (%)"
-					},
-					"hint": {
-						"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-						"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-					},
-					"value": 20,
-					"attr": {
-						"min": 1,
-						"max": 90
-					}
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_switch.aq3/assets/learn_switch.svg",
+          "instruction": {
+            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_switch.aq3/assets/images/large.png",
+        "small": "/drivers/sensor_switch.aq3/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
         }
       ]
     },
-		{
-			"id": "sensor_switch",
-			"name": {
-				"en": "Wireless switch",
-				"nl": "Wireless switch"
-			},
-			"class": "sensor",
-			"capabilities": [],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+    {
+      "id": "sensor_switch",
+      "name": {
+        "en": "Wireless switch",
+        "nl": "Wireless switch"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.sensor_switch"
         ],
-				"deviceId": 260,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_switch/assets/learn_button.svg",
-					"instruction": {
-						"en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-						"nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_switch/assets/images/large.png",
-				"small": "/drivers/sensor_switch/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "button_long_press_threshold",
-					"type": "number",
-					"label": {
-						"en": "Button long-press threshold",
-						"nl": "Lang ingedrukt drempelwaarde"
-					},
-					"hint": {
-						"en": "This setting will determine the threshold used to determine if a button is held or only single clicked.\nDepending on the distance between the switch and Homey, this threshold, \nneeds to be increased to compensate for latency or\n can be decreased to improve fast response.\nDefault: 1000 ms\nRange: 300 - 5000 ms",
-						"nl": "Deze instelling bepaald de drempelwaarde op basis waarvan bepaald wordt of een knop ingedrukt gehouden wordt of een enkele keer ingedrukt is.\nAfhankelijk van de afstand tussen switch en Homey, zal deze drempelwaarde, \nverhoogd moeten worden om communicatie tijd te compenseren or\n verlaagd worden om de reactietijd te verkorten.\nStandaard: 1000 ms\nBereik: 300 - 5000 ms"
-					},
-					"value": 1000,
-					"attr": {
-						"min": 300,
-						"max": 5000
-					}
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_switch/assets/learn_button.svg",
+          "instruction": {
+            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_switch/assets/images/large.png",
+        "small": "/drivers/sensor_switch/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "button_long_press_threshold",
+          "type": "number",
+          "label": {
+            "en": "Button long-press threshold",
+            "nl": "Lang ingedrukt drempelwaarde"
+          },
+          "hint": {
+            "en": "This setting will determine the threshold used to determine if a button is held or only single clicked.\nDepending on the distance between the switch and Homey, this threshold, \nneeds to be increased to compensate for latency or\n can be decreased to improve fast response.\nDefault: 1000 ms\nRange: 300 - 5000 ms",
+            "nl": "Deze instelling bepaald de drempelwaarde op basis waarvan bepaald wordt of een knop ingedrukt gehouden wordt of een enkele keer ingedrukt is.\nAfhankelijk van de afstand tussen switch en Homey, zal deze drempelwaarde, \nverhoogd moeten worden om communicatie tijd te compenseren or\n verlaagd worden om de reactietijd te verkorten.\nStandaard: 1000 ms\nBereik: 300 - 5000 ms"
+          },
+          "value": 1000,
+          "attr": {
+            "min": 300,
+            "max": 5000
+          }
         }
       ]
     },
-		{
-			"id": "sensor_wleak.aq1",
-			"name": {
-				"en": "Aqara Water sensor",
-				"nl": "Aqara Water sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "sensor_wleak.aq1",
+      "name": {
+        "en": "Aqara Water sensor",
+        "nl": "Aqara Water sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "alarm_water",
         "alarm_battery",
         "measure_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": "lumi.sensor_wleak.aq1",
-				"deviceId": 1026,
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
-					"instruction": {
-						"en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
-						"nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
-				"small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
-			},
-			"settings": []
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_wleak.aq1",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+      },
+      "settings": []
     },
-		{
-			"id": "weather",
-			"name": {
-				"en": "Aqara Temperature and Humidity Sensor",
-				"nl": "Aqara Temperature and Humidity Sensor"
-			},
-			"class": "sensor",
-			"capabilities": [
+    {
+      "id": "weather",
+      "name": {
+        "en": "Aqara Temperature and Humidity Sensor",
+        "nl": "Aqara Temperature and Humidity Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
         "measure_battery",
         "measure_temperature",
         "measure_pressure",
         "measure_humidity",
         "alarm_battery"
       ],
-			"zigbee": {
-				"manufacturerName": "LUMI",
-				"productId": [
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
           "lumi.weather"
         ],
-				"deviceId": [
+        "deviceId": [
           770,
           24321
         ],
-				"profileId": 260,
-				"learnmode": {
-					"image": "/drivers/weather/assets/learn_weather.svg",
-					"instruction": {
-						"en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-						"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
-					}
-				}
-			},
-			"images": {
-				"large": "/drivers/weather/assets/images/large.png",
-				"small": "/drivers/weather/assets/images/small.png"
-			},
-			"settings": [
-				{
-					"id": "temperature_offset",
-					"type": "number",
-					"label": {
-						"en": "Temperature offset (°C)",
-						"nl": "Temperatuur compensatie (°C)"
-					},
-					"hint": {
-						"en": "Set a correction to compensate a temperature offset.\nRange: -10 - 10, step size 0.1, \ndefault: 0 [°C]",
-						"nl": "Stel een correctiewaarde in om een temperature verschil te compenseren.\nBereik: -10 - 10, stap grootte 0.1, \nstandaard: 0 [°C]"
-					},
-					"value": 0,
-					"attr": {
-						"min": -10,
-						"max": 10,
-						"step": 0.1
-					}
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/weather/assets/learn_weather.svg",
+          "instruction": {
+            "en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "temperature_offset",
+          "type": "number",
+          "label": {
+            "en": "Temperature offset (°C)",
+            "nl": "Temperatuur compensatie (°C)"
+          },
+          "hint": {
+            "en": "Set a correction to compensate a temperature offset.\nRange: -10 - 10, step size 0.1, \ndefault: 0 [°C]",
+            "nl": "Stel een correctiewaarde in om een temperature verschil te compenseren.\nBereik: -10 - 10, stap grootte 0.1, \nstandaard: 0 [°C]"
+          },
+          "value": 0,
+          "attr": {
+            "min": -10,
+            "max": 10,
+            "step": 0.1
+          }
         },
-				{
-					"id": "battery_threshold",
-					"type": "number",
-					"label": {
-						"en": "Battery alarm threshold (%)",
-						"nl": "Batterij alarm waarde (%)"
-					},
-					"hint": {
-						"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-						"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-					},
-					"value": 20,
-					"attr": {
-						"min": 1,
-						"max": 90
-					}
+        {
+          "id": "battery_threshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold (%)",
+            "nl": "Batterij alarm waarde (%)"
+          },
+          "hint": {
+            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+          },
+          "value": 20,
+          "attr": {
+            "min": 1,
+            "max": 90
+          }
         }
       ]
     }

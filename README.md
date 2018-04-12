@@ -61,10 +61,10 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 ## Change Log:
 ### v 0.3.0
 * Add support for Aqara Wireless switch with Gyro (product type no: WXKG12LM)   
-**Note:** switches with this type no. that were included before will need to be re-included in order to work properly   
-* Replaced old scene trigger cards with autocomplete cards (old ones are marked as DEPRECATED) to fix reported issues   
-**Note:** please rebuild your flows based on these new trigger cards. The DEPRECATED cards will be removed in a next release   
-* Update ZigBee meshdriver to 1.2.11   
+**Note:** Switches with this type no. that were included before will need to be re-included in order to work properly   
+* Replaced old scene trigger cards with autocomplete cards to fix reported issues   
+**Note:** The old (marked DEPRECATED) cards will be removed in a next release; please rebuild your flows based on the new cards  
+* Update ZigBee meshdriver to 1.2.12   
 
 ### v 0.2.5
 * Add temperature offset correction setting for the Xiaomi temperature & humidity sensor and the Aqara temperature & humidity sensor   
