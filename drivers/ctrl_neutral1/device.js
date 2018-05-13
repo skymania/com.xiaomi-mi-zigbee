@@ -41,3 +41,7 @@ class AqaraWallSwitchSingle extends ZigBeeDevice {
 }
 
 module.exports = AqaraWallSwitchSingle;
+
+/*
+Product ID: QBKG04LM
+*/
