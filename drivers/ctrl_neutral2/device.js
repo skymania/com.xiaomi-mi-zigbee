@@ -6,7 +6,7 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 class AqaraWallSwitchDouble extends ZigBeeDevice {
 
-	onMeshInit() {
+	async onMeshInit() {
 		// enable debugging
 		// this.enableDebug();
 
@@ -18,14 +18,14 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 			endpoint: 1
 		});
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
-			this.switchOneAttrListener.bind(this), 3, true);
+			this.switchOneAttrListener.bind(this), 1, true);
 
 		// Register capabilities and reportListeners for Right switch
 		this.registerCapability('onoff.1', 'genOnOff', {
 			endpoint: 2
 		});
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
-			this.switchTwoAttrListener.bind(this), 4, true);
+			this.switchTwoAttrListener.bind(this), 2, true);
 
 		// Register measure_power capabilities and reportListeners for Left switch
 		this.registerCapability('measure_power', 'genAnalogInput', {
@@ -44,47 +44,47 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 		this._triggerSwitchTwoOn = new Homey.FlowCardTriggerDevice('ctrl_neutral2_switch2_turned_on').register();
 		this._triggerSwitchTwoOff = new Homey.FlowCardTriggerDevice('ctrl_neutral2_switch2_turned_off').register();
 
-		// Register conditions for flows
-		this._conditionSwitchTwo = new Homey.FlowCardCondition("ctrl_neutral2_switch2_is_on").register()
-			.registerRunListener((args, state) => {
-				return Promise.resolve(this.getCapabilityValue('onoff.1'));
-			})
-
-		// Register actions for flows
-		this._actionSwitchTwoOn = new Homey.FlowCardAction('ctrl_neutral2_turn_on_switch2').register()
-			.registerRunListener((args, state) => {
-				return this.triggerCapabilityListener('onoff.1', true, {});
-			});
-		this._actionSwitchTwoOff = new Homey.FlowCardAction('ctrl_neutral2_turn_off_switch2').register()
-			.registerRunListener((args, state) => {
-				return this.triggerCapabilityListener('onoff.1', false, {});
-			});
-
 	}
+
+	/*
+	switchTwoOnActionListener(args, state) {
+		this.log('FlowCardAction triggered to switch on');
+		this.triggerCapabilityListener('onoff.1', true);
+	}
+
+	switchTwoOffActionListener(args, state) {
+		this.log('FlowCardAction triggered to switch off');
+		this.triggerCapabilityListener('onoff.1', false);
+	}
+	*/
 
 	// Method to handle changes to attributes
 	switchOneAttrListener(data) {
 		this.log('[AqaraLightControlDouble] [switchOneAttrListener] Received data =', data);
-		if (data > 0) {
-			let currentValue = this.getCapabilityValue('onoff');
-			this.log('[AqaraLightControlDouble] [switchOneAttrListener] Setting capability value to', !currentValue);
-			this.setCapabilityValue('onoff', !currentValue);
-		}
+		// if (data) {
+		//	let currentValue = this.getCapabilityValue('onoff');
+		//	this.log('[AqaraLightControlDouble] [switchOneAttrListener] Setting capability value to', data);
+		this.setCapabilityValue('onoff', data === 1);
+		//}
 	}
 
 	switchTwoAttrListener(data) {
 		this.log('[AqaraLightControlDouble] [switchTwoAttrListener] Received data =', data);
-		if (data > 0) {
-			let currentValue = this.getCapabilityValue('onoff.1');
-			this.log('[AqaraLightControlDouble] [switchTwoAttrListener] Setting capability value to', !currentValue);
-			this.setCapabilityValue('onoff.1', !currentValue);
-			if (!currentValue === true) this._triggerSwitchTwoOn.trigger(this, {}, {}).catch(this.error);
-			else this._triggerSwitchTwoOff.trigger(this, {}, {}).catch(this.error);
+		// if (data) {
+		let currentValue = this.getCapabilityValue('onoff.1');
+		// this.log('[AqaraLightControlDouble] [switchTwoAttrListener] Setting capability value to', data);
+		this.setCapabilityValue('onoff.1', data === 1);
+		if (currentValue !== data) {
+			this[`_triggerSwitchTwo${data === 1 ? 'On' : 'Off'}`].trigger(this, {}, {}).catch(this.error);
+			// data ? this._triggerSwitchTwoOn.trigger(this, {}, {}).catch(this.error) : this._triggerSwitchTwoOff.trigger(this, {}, {}).catch(this.error);
 		}
+		//}
 	}
 
+	/*
 	// Overload parent method to trigger flows when capabilities' changes
 	async _registerCapabilityListenerHandler(capabilitySetObj, capabilityId, value, opts) {
+		this.log('_registerCapabilityListenerHandler triggered');
 		return super._registerCapabilityListenerHandler(capabilitySetObj, capabilityId, value, opts)
 			.then(res => this.switchCapabilityListener(capabilityId, value))
 	}
@@ -103,6 +103,7 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 			}
 		}
 	}
+	*/
 
 	// Temporary till until Zigbee Meshdriver bug is fixed. See https://github.com/athombv/homey/issues/2137
 	// Rewrite parent method to overcome Zigbee Meshdriver bug.
@@ -152,6 +153,7 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 module.exports = AqaraWallSwitchDouble;
 
 /*
+Product ID: QBKG03LM
 2018-01-14 10:00:22 [log] [ManagerDrivers] [ctrl_neutral2] [0] ZigBeeDevice has been inited
 2018-01-14 10:00:22 [log] [ManagerDrivers] [ctrl_neutral2] [0] ------------------------------------------
 2018-01-14 10:00:22 [log] [ManagerDrivers] [ctrl_neutral2] [0] Node: f0892c11-3cf9-4448-acb8-30691a9c43a3
