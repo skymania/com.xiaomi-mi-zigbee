@@ -1069,8 +1069,8 @@
       {
         "id": "ctrl_neutral2_switch2_is_on",
         "title": {
-          "en": "Right switch is !{{on|off}}",
-          "nl": "Rechter schakelaar is !{{ingeschakeld|uitgeschakeld}}"
+          "en": "Is turned !{{on|off}} (right switch)",
+          "nl": "Is !{{ingeschakeld|uitgeschakeld}} (rechter schakelaar)"
         },
         "args": [
           {
@@ -1085,8 +1085,8 @@
       {
         "id": "ctrl_neutral2_turn_on_switch2",
         "title": {
-          "en": "Turn On Right Switch",
-          "nl": "Op Rechter Schakelaar"
+          "en": "Turn on (right switch)",
+          "nl": "Zet aan (rechter schakelaar)"
         },
         "args": [
           {
@@ -1099,8 +1099,8 @@
       {
         "id": "ctrl_neutral2_turn_off_switch2",
         "title": {
-          "en": "Turn Off Right Switch",
-          "nl": "Uit Rechter Schakelaar"
+          "en": "Turn off (right switch)",
+          "nl": "Zet uit (rechter schakelaar)"
         },
         "args": [
           {
