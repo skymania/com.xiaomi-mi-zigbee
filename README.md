@@ -61,8 +61,11 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 ### v 0.3.1
-* Fix issue where Aqara Smart Light Wall Switch (**L**) right button is not activated by FlowCard, issue [#64](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/64). Existing flows for this device will need to be rebuild   
-* Fix issue / add support for Aqara Smart Light Wall Switch (**LN**), issue [#60](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/60). Re-inclusion of devices with Zigbee Product ID `lumi.ctrl_ln1.aq1` and `lumi.ctrl_ln2.aq1` is needed   
+* Fix issue where Aqara Smart Light Wall Switch (**L**) right button is not activated by FlowCard, issue [#64](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/64).   
+Existing flows for this device will need to be rebuild   
+* Fix issue / add support for Aqara Smart Light Wall Switch (**LN**), issue [#60](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/60).   
+Re-inclusion of devices with Zigbee Product ID `lumi.ctrl_ln1.aq1` and `lumi.ctrl_ln2.aq1` is needed   
+
 **Note:** The old (marked DEPRECATED) flow cards of the wireless switches will be removed in a next release; please rebuild your flows based on the new cards   
 
 ### v 0.3.0
