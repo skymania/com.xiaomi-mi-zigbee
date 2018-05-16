@@ -2,9 +2,8 @@
 
 const Homey = require('homey');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
-//const ZigBeeLightDevice = require('homey-meshdriver').ZigBeeLightDevice;
 
-class AqaraWallSwitchDouble extends ZigBeeDevice {
+class AqaraWallSwitchDoubleL extends ZigBeeDevice {
 
 	async onMeshInit() {
 		// enable debugging
@@ -27,6 +26,7 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
 			this.switchTwoAttrListener.bind(this), 2, true);
 
+		/*
 		// Register measure_power capabilities and reportListeners for Left switch
 		this.registerCapability('measure_power', 'genAnalogInput', {
 			get: 'presentValue',
@@ -39,10 +39,7 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 			this.log('genAnalogInput - presentValue (power)', data);
 			this.setCapabilityValue('measure_power', data);
 		}, 6);
-
-		// Register triggers for flows
-		this._triggerSwitchTwoOn = new Homey.FlowCardTriggerDevice('ctrl_neutral2_switch2_turned_on').register();
-		this._triggerSwitchTwoOff = new Homey.FlowCardTriggerDevice('ctrl_neutral2_switch2_turned_off').register();
+		*/
 
 	}
 
@@ -75,7 +72,7 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 		// this.log('[AqaraLightControlDouble] [switchTwoAttrListener] Setting capability value to', data);
 		this.setCapabilityValue('onoff.1', data === 1);
 		if (currentValue !== data) {
-			this[`_triggerSwitchTwo${data === 1 ? 'On' : 'Off'}`].trigger(this, {}, {}).catch(this.error);
+			Homey.app[`_triggerSwitchTwoTurned${data === 1 ? 'On' : 'Off'}`].trigger(this, {}, {}).catch(this.error);
 			// data ? this._triggerSwitchTwoOn.trigger(this, {}, {}).catch(this.error) : this._triggerSwitchTwoOff.trigger(this, {}, {}).catch(this.error);
 		}
 		//}
@@ -150,7 +147,7 @@ class AqaraWallSwitchDouble extends ZigBeeDevice {
 
 }
 
-module.exports = AqaraWallSwitchDouble;
+module.exports = AqaraWallSwitchDoubleL;
 
 /*
 Product ID: QBKG03LM

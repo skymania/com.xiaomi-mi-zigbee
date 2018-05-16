@@ -2,8 +2,8 @@
 	"id": "ctrl_neutral1",
 	"branch": "master",
 	"name": {
-		"en": "Aqara Wall Switch Single",
-		"nl": "Aqara Wall Switch Single"
+		"en": "Aqara Wall Switch Single (L)",
+		"nl": "Aqara Wall Switch Single (L)"
 	},
 	"class": "socket",
 	"capabilities": [
@@ -11,8 +11,8 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.ctrl_neutral1", "lumi.ctrl_ln1.aq1"],
-		"deviceId": [6, 81],
+		"productId": ["lumi.ctrl_neutral1"],
+		"deviceId": [6],
 		"profileId": 260,
 		"learnmode": {
 			"image": "/drivers/ctrl_neutral1/assets/learn.svg",

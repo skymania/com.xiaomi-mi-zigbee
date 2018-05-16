@@ -2,8 +2,8 @@
 	"id": "ctrl_neutral2",
 	"branch": "master",
 	"name": {
-		"en": "Aqara Wall Switch Double",
-		"nl": "Aqara Wall Switch Double"
+		"en": "Aqara Wall Switch Double (L)",
+		"nl": "Aqara Wall Switch Double (L)"
 	},
 	"class": "socket",
 	"capabilities": [
@@ -48,8 +48,8 @@
 	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.ctrl_neutral2", "lumi.ctrl_ln2.aq1"],
-		"deviceId": [6, 81],
+		"productId": ["lumi.ctrl_neutral2"],
+		"deviceId": [6],
 		"profileId": 260,
 		"learnmode": {
 			"image": "/drivers/ctrl_neutral2/assets/learn.svg",
