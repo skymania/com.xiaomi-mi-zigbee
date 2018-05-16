@@ -25,7 +25,8 @@ Please file Pull Requests on the *development* branch of this repository and wit
 * [Aqara Window/Door Sensor](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-window-door-sensor/) (contact alarm)
 * [Aqara Human Body Sensor](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (motion alarm, luminance)
 * [Aqara Temperature and Humidity Sensor](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (temperature, relative humidity, atmospheric pressure)
-* [Aqara Smart Light Wall Switch Single](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-single-key/) / [Double](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-double-key/) (onoff)
+* [Aqara Smart Light Wall Switch (L) Single](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-single-key/) / [Double](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-double-key/) (onoff)
+* [Aqara Smart Light Wall Switch (LN) Single](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-single-key/) / [Double](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-double-key/) (onoff)
 * [Aqara Smart Socket ZigBee Version](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-socket-zigbee-version/) (onoff, measure_power)
 * [Aqara Wireless switch (WXKG11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x - 4x click)   
 [Aqara Wireless switch with Gyro (WXKG12LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x, 2x click, key held, key released, Shaken)
@@ -59,6 +60,11 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.3.1
+* Fix issue where Aqara Smart Light Wall Switch (**L**) right button is not activated by FlowCard, issue [#64](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/64). Existing flows for this device will need to be rebuild   
+* Fix issue / add support for Aqara Smart Light Wall Switch (**LN**), issue [#60](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/60). Re-inclusion of devices with Zigbee Product ID `lumi.ctrl_ln1.aq1` and `lumi.ctrl_ln2.aq1` is needed   
+**Note:** The old (marked DEPRECATED) flow cards of the wireless switches will be removed in a next release; please rebuild your flows based on the new cards   
+
 ### v 0.3.0
 * Add support for Aqara Wireless switch with Gyro (product type no: WXKG12LM)   
 **Note:** Switches with this type no. that were included before will need to be re-included in order to work properly   

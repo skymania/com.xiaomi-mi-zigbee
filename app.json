@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.3.0",
+  "version": "0.3.1",
   "compatibility": ">=1.5.7",
   "athomForumDiscussionId": 4120,
   "sdk": 2,
@@ -20,6 +20,10 @@
   },
   "contributors": {
     "developers": [
+      {
+        "name": "Edwin Tan (Automate Asia)",
+        "email": "Edwin.Tan@automate.asia"
+      },
       {
         "name": "Sprut",
         "email": "sprut.1@me.com"
@@ -175,6 +179,34 @@
   },
   "flow": {
     "triggers": [
+      {
+        "id": "trigger_switch2_turned_on",
+        "title": {
+          "en": "Turned on (right switch)",
+          "nl": "Ingeschakeld (rechter schakelaar)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
+          }
+        ]
+      },
+      {
+        "id": "trigger_switch2_turned_off",
+        "title": {
+          "en": "Turned off (right switch)",
+          "nl": "Uitgeschakeld (rechter schakelaar)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
+          }
+        ]
+      },
       {
         "id": "button1_scene",
         "title": {
@@ -500,34 +532,6 @@
           {
             "name": "scene",
             "type": "autocomplete"
-          }
-        ]
-      },
-      {
-        "id": "ctrl_neutral2_switch2_turned_on",
-        "title": {
-          "en": "Right Switch On",
-          "nl": "Rechter Schakelaar Op"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "ctrl_neutral2",
-            "filter": "driver_id=ctrl_neutral2"
-          }
-        ]
-      },
-      {
-        "id": "ctrl_neutral2_switch2_turned_off",
-        "title": {
-          "en": "Right Switch Off",
-          "nl": "Rechter Schakelaar Uit"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "ctrl_neutral2",
-            "filter": "driver_id=ctrl_neutral2"
           }
         ]
       },
@@ -1067,7 +1071,7 @@
     ],
     "conditions": [
       {
-        "id": "ctrl_neutral2_switch2_is_on",
+        "id": "condition_switch2_is_on",
         "title": {
           "en": "Is turned !{{on|off}} (right switch)",
           "nl": "Is !{{ingeschakeld|uitgeschakeld}} (rechter schakelaar)"
@@ -1075,15 +1079,15 @@
         "args": [
           {
             "type": "device",
-            "name": "ctrl_neutral2",
-            "filter": "driver_id=ctrl_neutral2"
+            "name": "device",
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
           }
         ]
       }
     ],
     "actions": [
       {
-        "id": "ctrl_neutral2_turn_on_switch2",
+        "id": "action_turn_on_switch2",
         "title": {
           "en": "Turn on (right switch)",
           "nl": "Zet aan (rechter schakelaar)"
@@ -1091,13 +1095,13 @@
         "args": [
           {
             "type": "device",
-            "name": "ctrl_neutral2",
-            "filter": "driver_id=ctrl_neutral2"
+            "name": "device",
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
           }
         ]
       },
       {
-        "id": "ctrl_neutral2_turn_off_switch2",
+        "id": "action_turn_off_switch2",
         "title": {
           "en": "Turn off (right switch)",
           "nl": "Zet uit (rechter schakelaar)"
@@ -1105,8 +1109,8 @@
         "args": [
           {
             "type": "device",
-            "name": "ctrl_neutral2",
-            "filter": "driver_id=ctrl_neutral2"
+            "name": "device",
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
           }
         ]
       }
@@ -1148,10 +1152,10 @@
       "settings": []
     },
     {
-      "id": "ctrl_neutral1",
+      "id": "ctrl_ln1.aq1",
       "name": {
-        "en": "Aqara Wall Switch Single",
-        "nl": "Aqara Wall Switch Single"
+        "en": "Aqara Wall Switch Single (LN)",
+        "nl": "Aqara Wall Switch Single (LN)"
       },
       "class": "socket",
       "capabilities": [
@@ -1160,16 +1164,14 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.ctrl_neutral1",
           "lumi.ctrl_ln1.aq1"
         ],
         "deviceId": [
-          6,
           81
         ],
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/ctrl_neutral1/assets/learn.svg",
+          "image": "/drivers/ctrl_ln1.aq1/assets/learn.svg",
           "instruction": {
             "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
             "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
@@ -1177,15 +1179,15 @@
         }
       },
       "images": {
-        "large": "/drivers/ctrl_neutral1/assets/images/large.png",
-        "small": "/drivers/ctrl_neutral1/assets/images/small.png"
+        "large": "/drivers/ctrl_ln1.aq1/assets/images/large.png",
+        "small": "/drivers/ctrl_ln1.aq1/assets/images/small.png"
       }
     },
     {
-      "id": "ctrl_neutral2",
+      "id": "ctrl_ln2.aq1",
       "name": {
-        "en": "Aqara Wall Switch Double",
-        "nl": "Aqara Wall Switch Double"
+        "en": "Aqara Wall Switch Double (LN)",
+        "nl": "Aqara Wall Switch Double (LN)"
       },
       "class": "socket",
       "capabilities": [
@@ -1235,12 +1237,115 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
-          "lumi.ctrl_neutral2",
           "lumi.ctrl_ln2.aq1"
         ],
         "deviceId": [
-          6,
           81
+        ],
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/ctrl_ln2.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_ln2.aq1/assets/images/large.png",
+        "small": "/drivers/ctrl_ln2.aq1/assets/images/small.png"
+      }
+    },
+    {
+      "id": "ctrl_neutral1",
+      "name": {
+        "en": "Aqara Wall Switch Single (L)",
+        "nl": "Aqara Wall Switch Single (L)"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.ctrl_neutral1"
+        ],
+        "deviceId": [
+          6
+        ],
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/ctrl_neutral1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_neutral1/assets/images/large.png",
+        "small": "/drivers/ctrl_neutral1/assets/images/small.png"
+      }
+    },
+    {
+      "id": "ctrl_neutral2",
+      "name": {
+        "en": "Aqara Wall Switch Double (L)",
+        "nl": "Aqara Wall Switch Double (L)"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "onoff.1"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Switch 1"
+          },
+          "greyout": false
+        },
+        "onoff.1": {
+          "title": {
+            "en": "Switch 2"
+          },
+          "greyout": false
+        }
+      },
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": []
+          },
+          {
+            "id": "toggle",
+            "capabilities": [
+              "onoff"
+            ],
+            "options": {
+              "showTitle": true
+            }
+          },
+          {
+            "id": "toggle",
+            "capabilities": [
+              "onoff.1"
+            ],
+            "options": {
+              "showTitle": true
+            }
+          }
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.ctrl_neutral2"
+        ],
+        "deviceId": [
+          6
         ],
         "profileId": 260,
         "learnmode": {
