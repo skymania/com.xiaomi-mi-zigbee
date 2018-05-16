@@ -1,6 +1,6 @@
 [
 	{
-		"id": "ctrl_neutral2_turn_on_switch2",
+		"id": "action_turn_on_switch2",
 		"title": {
 			"en": "Turn on (right switch)",
 			"nl": "Zet aan (rechter schakelaar)"
@@ -8,13 +8,13 @@
 		"args": [
 			{
 				"type": "device",
-				"name": "ctrl_neutral2",
-				"filter": "driver_id=ctrl_neutral2"
+				"name": "device",
+				"filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
       }
     ]
   },
 	{
-		"id": "ctrl_neutral2_turn_off_switch2",
+		"id": "action_turn_off_switch2",
 		"title": {
 			"en": "Turn off (right switch)",
 			"nl": "Zet uit (rechter schakelaar)"
@@ -22,8 +22,8 @@
 		"args": [
 			{
 				"type": "device",
-				"name": "ctrl_neutral2",
-				"filter": "driver_id=ctrl_neutral2"
+				"name": "device",
+				"filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
       }
     ]
   }

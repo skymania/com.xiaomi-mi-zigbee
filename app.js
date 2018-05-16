@@ -28,26 +28,32 @@ class XiaomiZigbee extends Homey.App {
 			.getArgument('button')
 			.registerAutocompleteListener((query, args, callback) => args.device.onButtonAutocomplete(query, args, callback));
 
-		// Register conditions for flows
-		this._conditionSwitchTwo = new Homey.FlowCardCondition('ctrl_neutral2_switch2_is_on')
-			.register()
-			.registerRunListener((args, state) =>
-				Promise.resolve(args.ctrl_neutral2.getCapabilityValue('onoff.1')));
 
-		// Register actions for flows
-		this._actionSwitchTwoOn = new Homey.FlowCardAction('ctrl_neutral2_turn_on_switch2')
+		// Register triggers for flows
+		this._triggerSwitchTwoTurnedOn = new Homey.FlowCardTriggerDevice('trigger_switch2_turned_on').register();
+		this._triggerSwitchTwoTurnedOff = new Homey.FlowCardTriggerDevice('trigger_switch2_turned_off').register();
+
+		// Register conditions for flows
+		this._conditionSwitchTwoIsOn = new Homey.FlowCardCondition('condition_switch2_is_on')
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('FlowCardAction triggered to switch on');
-				return args.ctrl_neutral2.triggerCapabilityListener('onoff.1', true, {});
+				this.log('FlowCardCondition evalutated for', args.device.getName(), ', device state: ', args.device.getCapabilityValue('onoff.1'));
+				return args.device.getCapabilityValue('onoff.1');
 			});
 
 		// Register actions for flows
-		this._actionSwitchTwoOn = new Homey.FlowCardAction('ctrl_neutral2_turn_off_switch2')
+		this._actionSwitchTwoTurnOff = new Homey.FlowCardAction('action_turn_on_switch2')
 			.register()
 			.registerRunListener((args, state) => {
-				this.log('FlowCardAction triggered to switch off');
-				return args.ctrl_neutral2.triggerCapabilityListener('onoff.1', false, {});
+				this.log('FlowCardAction triggered for ', args.device.getName(), 'to switch on');
+				return args.device.triggerCapabilityListener('onoff.1', true, {});
+			});
+
+		this._actionSwitchTwoTurnOff = new Homey.FlowCardAction('action_turn_off_switch2')
+			.register()
+			.registerRunListener((args, state) => {
+				this.log('FlowCardAction triggered for ', args.device.getName(), 'to switch off');
+				return args.device.triggerCapabilityListener('onoff.1', false, {});
 			});
 
 	}
