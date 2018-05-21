@@ -20,12 +20,6 @@ const Homey = require('homey');
 
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
-// https://github.com/bspranger/Xiaomi/blob/master/devicetypes/a4refillpad/xiaomi-aqara-door-window-sensor.src/xiaomi-aqara-door-window-sensor.groovy
-//  fingerprint profileId: "0104", deviceId: "0104",
-// inClusters: "0000, 0003",
-// outClusters: "0000, 0004",
-// manufacturer: "LUMI", model: "lumi.sensor_magnet.aq2", deviceJoinName: "Xiaomi Aqara Door Sensor"
-
 class AqaraCurtain extends ZigBeeDevice {
 	onMeshInit() {
 
@@ -38,19 +32,14 @@ class AqaraCurtain extends ZigBeeDevice {
 		this.registerCapability('onoff', 'genOnOff');
 
 		if (this.hasCapability('windowcoverings_state')) {
-			this.log('registering closuresWindowCovering');
 			this.registerCapability('windowcoverings_state', 'closuresWindowCovering', {
 				set: value => commandMap[value].command,
-				setParser(value) {
-					this.log(value);
-					return {};
-				},
+				setParser: () => ({}),
 				endpoint: 0,
 			});
 		}
 
 		if (this.hasCapability('dim')) {
-			this.log('registering dim');
 			this.registerCapability('dim', 'closuresWindowCovering', {
 				set: 'goToLiftPercentage',
 				setParser(value) {
@@ -69,26 +58,16 @@ class AqaraCurtain extends ZigBeeDevice {
 				},
 			});
 
-			this.registerAttrReportListener('genAnalogOutput', 'presentValue', 1, 3600, 1,
-				data => {
-					this.log('Received position change:', data);
-					clearTimeout(this.CurtainTernaryTimeout);
-					this.setCapabilityValue('dim', data / 100);
-
-					// update onOff capability
-					if (this.getCapabilityValue('onoff') !== data > 0) {
-						this.setCapabilityValue('onoff', data > 0);
-					}
-					// update Ternary buttons
-					this.buttonLastKeyTimeout = setTimeout(() => {
-						if (data === 0 || data === 100) {
-							this.setCapabilityValue('windowcoverings_state', data === 0 ? 'up' : 'down');
-						}
-						else {
-							this.setCapabilityValue('windowcoverings_state', 'idle');
-						}
-					}, 5000);
-				}, 0, true);
+			// Register the AttributeReportListener - Shake, Catch, Flip 90, Flip 180, Slide and Double tap motionType
+			this.registerAttrReportListener('genAnalogOutput', 'presentValue', 1, 3600, 1, this.onCurtainPositionAttrReport.bind(this), 0)
+				.then(() => {
+					// Registering attr reporting succeeded
+					this.log('registered attr report listener - genAnalogOutput - presentValue');
+				})
+				.catch(err => {
+					// Registering attr reporting failed
+					this.error('failed to register attr report listener - genAnalogOutput - presentValue', err);
+				});
 		}
 
 		// Register the AttributeReportListener - Lifeline
@@ -102,6 +81,21 @@ class AqaraCurtain extends ZigBeeDevice {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genBasic - Lifeline', err);
 			});
+	}
+
+	onCurtainPositionAttrReport(data) {
+		this.log('Received position change:', data);
+		clearTimeout(this.curtainTernaryTimeout);
+		this.setCapabilityValue('dim', data / 100);
+
+		// update onOff capability
+		if (this.getCapabilityValue('onoff') !== data > 0) {
+			this.setCapabilityValue('onoff', data > 0);
+		}
+		// update Ternary buttons
+		this.curtainTernaryTimeout = setTimeout(() => {
+			this.setCapabilityValue('windowcoverings_state', 'idle');
+		}, 3000);
 	}
 
 	onLifelineReport(value) {
