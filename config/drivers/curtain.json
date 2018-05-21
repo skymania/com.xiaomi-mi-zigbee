@@ -8,6 +8,7 @@
 	"class": "windowcoverings",
 	"capabilities": [
 		"onoff",
+		"dim",
 		"windowcoverings_state"
 	],
 	"mobile": {
@@ -17,18 +18,22 @@
 				"capabilities": ["onoff"]
 			},
 			{
+				"id": "slider",
+				"capabilities": ["dim"]
+			},
+			{
 				"id": "ternary",
 				"capabilities": ["windowcoverings_state"],
 				"options": {
 					"icons": {
-						"top": false,
-						"middle": false,
-						"bottom": false
+						"top": "/drivers/curtain/assets/curtain_open.svg",
+						"middle": "/drivers/curtain/assets/curtain_hold.svg",
+						"bottom": "/drivers/curtain/assets/curtain_close.svg"
 					},
 					"values": {
-						"top": "upOpen",
-						"middle": "stop",
-						"bottom": "downClose"
+						"top": "up",
+						"middle": "idle",
+						"bottom": "down"
 					}
 				}
 			}
