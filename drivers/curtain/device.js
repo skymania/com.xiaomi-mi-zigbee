@@ -125,6 +125,7 @@ class AqaraCurtain extends ZigBeeDevice {
 module.exports = AqaraCurtain;
 
 /*
+Product type no: ZNCLDJ11LM)
 2018-05-21 11:25:46 [log] [ManagerDrivers] [curtain] [0] ------------------------------------------
 2018-05-21 11:25:46 [log] [ManagerDrivers] [curtain] [0] Node: 9cff46eb-2a17-4b37-942a-f3550817e42f
 2018-05-21 11:25:46 [log] [ManagerDrivers] [curtain] [0] - Battery: false
