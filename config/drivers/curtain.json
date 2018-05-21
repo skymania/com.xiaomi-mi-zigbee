@@ -1,6 +1,6 @@
 {
 	"id": "curtain",
-	"branch": "development",
+	"branch": "master",
 	"name": {
 		"en": "Curtain Controller",
 		"nl": "Curtain Controller"
