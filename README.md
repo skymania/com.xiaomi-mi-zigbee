@@ -22,6 +22,7 @@ Please file Pull Requests on the *development* branch of this repository and wit
 * [Smart socket plug ZigBee edition](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-socket-plug-2-zigbee-edition-white/) (onoff, measure_power)
 * [Cube](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (Slide, Shake, Double Tap, Rotate (**angle, relative angle**), Flip 90°, Flip 180°), see [device readme for details](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/blob/master/docs/README_cube.md)
 
+* [Aqara Curtain Controller](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-curtain-controller-white/) (open, close, idle, setpoint)   
 * [Aqara Window/Door Sensor](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-window-door-sensor/) (contact alarm)
 * [Aqara Human Body Sensor](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (motion alarm, luminance)
 * [Aqara Temperature and Humidity Sensor](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (temperature, relative humidity, atmospheric pressure)
@@ -36,10 +37,7 @@ Please file Pull Requests on the *development* branch of this repository and wit
 * Battery operated devices will not yet show the **battery level**; this will be added in a future release (manufacturer specific ZigBee implementation)    
 * The Smart socket plug and Aqara Smart Socket ZigBee version report the actual power (W), **consumed energy (kWh)** will be added in a future release (manufacturer specific ZigBee implementation)    
 
-## Devices Work in Progress (reports received)
-* Curtain Controller ([GitHub issue](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/30))
-
-## Devices Work in Progress (inclusion is possible, require a [ZigBee Shepherd change (by Athom)](https://github.com/athombv/homey/issues/2005))
+## Devices Work in Progress (awaiting additional clusters in Homey's Zigbee implementation)
 * MiJia Honeywell Smoke Detector White
 * MiJia Honeywell Gas Leak Detector
 * MiJia Aqara Water sensor
@@ -60,7 +58,8 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
-### v 0.3.1
+### v 0.4.0
+* Add support for the 'Aqara Curtain controller' (product type no: ZNCLDJ11LM)   
 * Fix issue where Aqara Smart Light Wall Switch (**L**) right button is not activated by FlowCard, issue [#64](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/64).   
 Existing flows for this device will need to be rebuild   
 * Fix issue / add support for Aqara Smart Light Wall Switch (**LN**), issue [#60](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/60).   
