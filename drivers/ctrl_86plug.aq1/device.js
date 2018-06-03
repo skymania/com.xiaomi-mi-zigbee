@@ -24,12 +24,6 @@ class AqaraSocket extends ZigBeeDevice {
 			}
 		}, 0);
 
-		/*
-		this.registerReportListener('genOnOff', 'onOff', report => {
-			this.log(report);
-		}, 0);
-		*/
-
 		// measure_power
 		// Register measure_power capability
 		this.registerCapability('measure_power', 'genAnalogInput', {
@@ -40,7 +34,6 @@ class AqaraSocket extends ZigBeeDevice {
 
 		// Report is send if status is changed or after 5 min
 		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 300, 1, data => {
-			// this.log('genAnalogInput - presentValue (power)', data);
 			this.setCapabilityValue('measure_power', data);
 		}, 1);
 

@@ -1,9 +1,9 @@
 {
-	"id": "ctrl_neutral1",
+	"id": "ctrl_ln1.aq1",
 	"branch": "master",
 	"name": {
-		"en": "Aqara Wall Switch Single (L)",
-		"nl": "Aqara Wall Switch Single (L)"
+		"en": "Aqara Wall Switch Single (LN)",
+		"nl": "Aqara Wall Switch Single (LN)"
 	},
 	"class": "socket",
 	"capabilities": [
@@ -11,11 +11,11 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.ctrl_neutral1"],
-		"deviceId": [6],
+		"productId": ["lumi.ctrl_ln1.aq1"],
+		"deviceId": [81],
 		"profileId": 260,
 		"learnmode": {
-			"image": "/drivers/ctrl_neutral1/assets/learn.svg",
+			"image": "/drivers/ctrl_ln1.aq1/assets/learn.svg",
 			"instruction": {
 				"en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
 				"nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
@@ -23,7 +23,7 @@
 		}
 	},
 	"images": {
-		"large": "/drivers/ctrl_neutral1/assets/images/large.png",
-		"small": "/drivers/ctrl_neutral1/assets/images/small.png"
+		"large": "/drivers/ctrl_ln1.aq1/assets/images/large.png",
+		"small": "/drivers/ctrl_ln1.aq1/assets/images/small.png"
 	}
 }

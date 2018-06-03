@@ -2,7 +2,7 @@
 
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
-class AqaraWallSwitchSingleL extends ZigBeeDevice {
+class AqaraWallSwitchSingleLN extends ZigBeeDevice {
 
 	onMeshInit() {
 
@@ -28,8 +28,8 @@ class AqaraWallSwitchSingleL extends ZigBeeDevice {
 
 }
 
-module.exports = AqaraWallSwitchSingleL;
+module.exports = AqaraWallSwitchSingleLN;
 
 /*
-Product ID: QBKG04LM
+Product ID: QBKG11LM
 */
