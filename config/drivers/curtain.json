@@ -9,8 +9,21 @@
 	"capabilities": [
 		"onoff",
 		"dim",
+		"windowcoverings_set",
 		"windowcoverings_state"
 	],
+	"capabilitiesOptions": {
+		"onoff": {
+			"title": {
+				"en": "Curtain open"
+			}
+		},
+		"dim": {
+			"title": {
+				"en": "Open level"
+			}
+		}
+	},
 	"mobile": {
 		"components": [
 			{
