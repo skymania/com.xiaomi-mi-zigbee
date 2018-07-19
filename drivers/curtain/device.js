@@ -212,4 +212,19 @@ Product type no: ZNCLDJ11LM)
 2018-05-21 11:25:46 [log] [ManagerDrivers] [curtain] [0] ------------------------------------------
 
 2018-03-04 16:56:10 [log] [ManagerDrivers] [curtain] [0] lifeline report <Buffer 03 28 1e 05 21 06 00 64 20 fd 08 21 09 11 07 27 00 00 00 00 00 00 00 00 09 21 00 01>
+
+Changing settings of Curtain controller
+Cluster: 	genBasic (0x0000)
+Attribute: Unknown (0x0401)
+Values
+	Manual open/close	Direction	Operation			HEX stream
+A	Enabled						Positive	Clear Stroke	0001 0000 0000 00
+B	Disabled					Positive	Clear Stroke	0001 0000 0001 00
+C	Enabled						Reverse		Clear Stroke	0001 0001 0000 00
+D	Disabled					Reverse		Clear Stroke	0001 0001 0001 00
+E	Enabled						Positive	Normal				0008 0000 0000 00
+F	Disabled					Positive	Normal				0008 0000 0001 00
+G	Enabled						Reverse		Normal				0008 0001 0000 00
+H	Disabled					Reverse		Normal				0008 0001 0001 00
+
 */
