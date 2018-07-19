@@ -25,12 +25,26 @@ class AqaraSocket extends ZigBeeDevice {
 		}, 0);
 
 		// measure_power
+		// applicationType : 589824 = 0x090000 Power in Watts
 		// Register measure_power capability
-		this.registerCapability('measure_power', 'genAnalogInput', {
-			get: 'presentValue',
-			report: 'presentValue',
-			reportParser: value => value,
-		}, 1);
+		if (this.hasCapability('measure_power')) {
+			this.registerCapability('measure_power', 'genAnalogInput', {
+				get: 'presentValue',
+				report: 'presentValue',
+				reportParser: value => value,
+			}, 1);
+		}
+
+		// meter_power
+		// applicationType : 720896 = 0x0B0000 Energy in kWH
+		// Register meter_power capability
+		if (this.hasCapability('meter_power')) {
+			this.registerCapability('meter_power', 'genAnalogInput', {
+				get: 'presentValue',
+				report: 'presentValue',
+				reportParser: value => value,
+			}, 2);
+		}
 
 		// Report is send if status is changed or after 5 min
 		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 300, 1, data => {
@@ -163,4 +177,22 @@ module.exports = AqaraSocket;
 2018-01-14 09:13:50 [log] [ManagerDrivers] [plug] [0] ---- cid : genBinaryInput
 2018-01-14 09:13:50 [log] [ManagerDrivers] [plug] [0] ---- sid : attrs
 2018-01-14 09:13:50 [log] [ManagerDrivers] [plug] [0] ------------------------------------------
+
+Cluster: genBasic (0x0000)
+Atribute: Unknown (0xfff0)
+Data Type: Octet String (0x41), length: 9
+Disabled indicator: 	aa8005d14739031001
+Enabled indicator:  	aa8005d14738031000
+
+Power failure memory
+enabled:  						aa8005d1472a011001
+disabled: 						aa8005d14729011000	aa8005d1472b011000
+
+Charging protection
+enabled:							aa8005d1472c021001
+disabled:							aa8005d1472d021000
+
+Cluster: genAnalogInput (0x000c)
+Attribute: Max Present Value (0x0041)
+Data Type: Single Precision Floating Point (0x39)
 */

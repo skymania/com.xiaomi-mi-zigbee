@@ -18,6 +18,28 @@ class AqaraWallSwitchSingleLN extends ZigBeeDevice {
 		});
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
 			this.switchOneAttrListener.bind(this), 0, true);
+
+		// measure_power
+		// applicationType : 589824 = 0x090000 Power in Watts
+		// Register measure_power capability
+		if (this.hasCapability('measure_power')) {
+			this.registerCapability('measure_power', 'genAnalogInput', {
+				get: 'presentValue',
+				report: 'presentValue',
+				reportParser: value => value,
+			}, 2);
+		}
+
+		// meter_power
+		// applicationType : 720896 = 0x0B0000 Energy in kWH
+		// Register meter_power capability
+		if (this.hasCapability('meter_power')) {
+			this.registerCapability('meter_power', 'genAnalogInput', {
+				get: 'presentValue',
+				report: 'presentValue',
+				reportParser: value => value,
+			}, 1);
+		}
 	}
 
 	// Method to handle changes to attributes

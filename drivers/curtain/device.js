@@ -81,6 +81,14 @@ class AqaraCurtain extends ZigBeeDevice {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genBasic - Lifeline', err);
 			});
+
+		this.node.endpoints[0].clusters.genBasic.write(0x1025, '00080001000000')
+			.then(res => {
+				this.log('write Open / Close manually: ', res);
+			})
+			.catch(err => {
+				this.error('write Open / Close manually: ', err);
+			});
 	}
 
 	onCurtainPositionAttrReport(data) {
