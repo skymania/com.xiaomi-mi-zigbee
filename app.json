@@ -290,155 +290,6 @@
         ]
       },
       {
-        "id": "button1_scene",
-        "title": {
-          "en": "DEPRECATED A scene has been activated",
-          "nl": "VEROUDERD Een scene is geactiveerd"
-        },
-        "hint": {
-          "en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
-          "nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "filter": "driver_id=sensor_switch.aq2"
-          },
-          {
-            "name": "scene",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "Key Pressed 1 time",
-                "label": {
-                  "en": "Pressed 1x",
-                  "nl": "1x ingedrukt"
-                }
-              },
-              {
-                "id": "Key Pressed 2 times",
-                "label": {
-                  "en": "Pressed 2x",
-                  "nl": "2x ingedrukt"
-                }
-              },
-              {
-                "id": "Key Pressed 3 times",
-                "label": {
-                  "en": "Pressed 3x",
-                  "nl": "3x ingedrukt"
-                }
-              },
-              {
-                "id": "Key Pressed 4 times",
-                "label": {
-                  "en": "Pressed 4x",
-                  "nl": "4x ingedrukt"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "button1_scene",
-        "title": {
-          "en": "DEPRECATED A scene has been activated",
-          "nl": "VEROUDERD Een scene is geactiveerd"
-        },
-        "hint": {
-          "en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
-          "nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "filter": "driver_id=sensor_86sw1lu"
-          },
-          {
-            "name": "scene",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "Key Pressed 1 time",
-                "label": {
-                  "en": "Pressed 1x",
-                  "nl": "1x ingedrukt"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "button1_scene_held",
-        "title": {
-          "en": "DEPRECATED A scene has been activated",
-          "nl": "VEROUDERD Een scene is geactiveerd"
-        },
-        "hint": {
-          "en": "THIS CARD WILL BE REMOVED IN THE NEXT UPDATE!\nThis card will only get triggered if the scene matches the state of the dropdown fields.",
-          "nl": "DEZE TRIGGER WORDT IN EEN VOLGENDE UPDATE VERWIJDERD!\nDeze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "filter": "driver_id=sensor_switch"
-          },
-          {
-            "name": "scene",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "Key Pressed 1 time",
-                "label": {
-                  "en": "Pressed 1x",
-                  "nl": "1x ingedrukt"
-                }
-              },
-              {
-                "id": "Key Pressed 2 times",
-                "label": {
-                  "en": "Pressed 2x",
-                  "nl": "2x ingedrukt"
-                }
-              },
-              {
-                "id": "Key Pressed 3 times",
-                "label": {
-                  "en": "Pressed 3x",
-                  "nl": "3x ingedrukt"
-                }
-              },
-              {
-                "id": "Key Pressed 4 times",
-                "label": {
-                  "en": "Pressed 4x",
-                  "nl": "4x ingedrukt"
-                }
-              },
-              {
-                "id": "Key Held Down",
-                "label": {
-                  "en": "Held Down",
-                  "nl": "Lang ingedrukt"
-                }
-              },
-              {
-                "id": "Key Released",
-                "label": {
-                  "en": "Released",
-                  "nl": "Losgelaten"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
         "id": "button1_button",
         "title": {
           "en": "A button has been pressed",
@@ -466,64 +317,6 @@
             "example": {
               "en": "Button pressed (test)"
             }
-          }
-        ]
-      },
-      {
-        "id": "button2_scene",
-        "title": {
-          "en": "DEPRECATED A scene has been activated",
-          "nl": "VEROUDERD Een scene is geactiveerd"
-        },
-        "hint": {
-          "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
-          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
-        },
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "filter": "driver_id=sensor_86sw2Un"
-          },
-          {
-            "name": "button",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "Left button",
-                "label": {
-                  "en": "Left button",
-                  "nl": "Linker knop"
-                }
-              },
-              {
-                "id": "Right button",
-                "label": {
-                  "en": "Right button",
-                  "nl": "Rechter knop"
-                }
-              },
-              {
-                "id": "Both buttons",
-                "label": {
-                  "en": "Both buttons",
-                  "nl": "Beide knoppen"
-                }
-              }
-            ]
-          },
-          {
-            "name": "scene",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "Key Pressed 1 time",
-                "label": {
-                  "en": "Pressed 1x",
-                  "nl": "1x ingedrukt"
-                }
-              }
-            ]
           }
         ]
       },
@@ -1179,7 +972,32 @@
         ]
       },
       {
-        "id": "tilt_reference",
+        "id": "sensor_vibration",
+        "title": {
+          "en": "The vibration strength changed",
+          "nl": "Het trillings niveau is veranderd"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vibration.aq1"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "vibration",
+            "type": "number",
+            "title": {
+              "en": "vibration strength",
+              "nl": "trillings niveau"
+            },
+            "example": 45
+          }
+        ]
+      },
+      {
+        "id": "sensor_tilt_reference",
         "title": {
           "en": "Tilt angles to reference plane",
           "nl": "Kantelhoeken tov referentievlak"
@@ -1227,7 +1045,7 @@
         ]
       },
       {
-        "id": "tilt_delta",
+        "id": "sensor_tilt_delta",
         "title": {
           "en": "Tilt angles to previous position",
           "nl": "Kantelhoeken tov vorige positie"
@@ -2479,8 +2297,8 @@
               "measure_tilt",
               "measure_tilt.relative",
               "measure_vibration",
-              "alarm_vibration",
               "alarm_tilt",
+              "alarm_vibration",
               "alarm_drop",
               "alarm_battery"
             ],
@@ -2494,12 +2312,6 @@
                 "alarm_drop": "/drivers/vibration.aq1/assets/alarm_drop.svg"
               }
             }
-          },
-          {
-            "id": "toggle",
-            "capabilities": [
-              "locked"
-            ]
           }
         ]
       },
