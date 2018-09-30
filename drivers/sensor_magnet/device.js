@@ -11,7 +11,7 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
 		// this.printNode();
 
 		// Listen for attribute changes on the genOnOff cluster
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
+		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, null,
 				this.onContactReport.bind(this), 0)
 			.then(() => {
 				// Registering attr reporting succeeded
@@ -22,7 +22,7 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
 				this.error('failed to register attr report listener - genOnOff - Contact', err);
 			});
 
-		this.registerAttrReportListener('genBasic', '65282', 1, 60, 1, data => {
+		this.registerAttrReportListener('genBasic', '65282', 1, 60, null, data => {
 			this.log('65282', data);
 		}, 0);
 	}

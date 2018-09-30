@@ -66,15 +66,6 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 		this.triggerButton1_button
 			.register();
 
-		// DEPRECATED flowCardTrigger for scene
-		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene_held');
-		this.triggerButton1_scene
-			.register()
-			.registerRunListener((args, state) => {
-				this.log(args.scene, state.scene, args.scene === state.scene);
-				return Promise.resolve(args.scene === state.scene);
-			});
-
 	}
 
 	onOnOffListener(repScene) {
@@ -97,9 +88,6 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 					// Trigger the trigger card with tokens
 					this.triggerButton1_button.trigger(this, remoteValue, null);
 
-					// DEPRECATED Trigger the trigger card with 1 dropdown option
-					this.triggerButton1_scene.trigger(this, null, remoteValue);
-
 				}, (this.getSetting('button_long_press_threshold') || 1000));
 			}
 			if (repScene !== 0 && Object.keys(this.sceneMap).includes(repScene.toString())) {
@@ -115,9 +103,6 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 				Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
 				// Trigger the trigger card with tokens
 				this.triggerButton1_button.trigger(this, remoteValue, null);
-
-				// DEPRECATED Trigger the trigger card with 1 dropdown option
-				this.triggerButton1_scene.trigger(this, null, remoteValue);
 
 				// reset lastKey after the last trigger
 				this.buttonLastKeyTimeout = setTimeout(() => {

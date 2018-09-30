@@ -254,4 +254,26 @@ Product ID: QBKG03LM
 2018-01-14 10:00:24 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- statusFlags : 0
 2018-01-14 10:00:24 [log] [ManagerDrivers] [ctrl_neutral2] [0] ---- applicationType : 590336
 2018-01-14 10:00:24 [log] [ManagerDrivers] [ctrl_neutral2] [0] ------------------------------------------
+
+Left button to a wireless switch:
+Cluster: genBasic (0x0000)
+Atribute: Unknown (0xff22) 65314
+Data Type: 8-bit unsigned (0x20)
+	disabled (regular switch): 18
+	enabled: 254
+
+Right button to a wireless switch:
+Cluster: genBasic (0x0000)
+Atribute: Unknown (0xff23) 65315
+Data Type: 8-bit unsigned (0x20)
+	disabled (regular switch): 18
+	enabled: 254
+
+When converted to a wireless switch:
+Cluster: genOnOff (0x0006)
+Atribute: onOff (0x0000)
+1x click: Double attribute (off (0x00) + on (0x01))
+2x click: data value 2 (0x02)
+Hold: Off (0x00)
+Release: ON (0x01)
 */
