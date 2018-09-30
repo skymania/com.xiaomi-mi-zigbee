@@ -32,7 +32,7 @@ Please file Pull Requests on the *development* branch of this repository and wit
 * [Aqara Wireless switch (WXKG11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x - 4x click)   
 * [Aqara Wireless switch with Gyro (WXKG12LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x, 2x click, key held, key released, Shaken)
 * [Aqara Wireless Remote Switch Single (WXKG03LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-single-key/) / [Double (WXKG02LM)](https://xiaomi-mi.com/sockets-and-sensors/remote-switch-for-aqara-smart-light-wall-switch-double-key/) (1x click for each button and combined)     
-* [Aqara Vibration Sensor (DJT11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (tilt motion, vibration motion, drop motion, tilt angles (to reference plane), tilt angles (to previous position), tilt alarm, vibration alarm, drop alarm   
+* [Aqara Vibration Sensor (DJT11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (tilt-, vibration-, drop-motion, tilt angles (to reference plane), tilt angles (to previous position), vibration strength, tilt-, vibration-, drop-alarm)      
 
 **Notes:**
 * Battery operated devices will not yet show the **battery level**; this will be added in a future release (manufacturer specific ZigBee implementation)    
@@ -60,7 +60,7 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 ### v 0.4.2
-* Add support for the Aqara Vibration Sensor (DJT11LM), with capabilities ((relative) tilt angles, vibration strength, tilt-, vibration-, drop- alarm)   
+* Add support for the Aqara Vibration Sensor (DJT11LM), with capabilities tilt-, vibration-, drop-motion, tilt angles (to reference plane), tilt angles (to previous position), vibration strength, tilt-, vibration-, drop-alarm   
 * Removing the old, no longer working, (marked DEPRECATED) cards as announced in as of release v 0.3.0   
 * Optimizing the attribute report settings   
 * Update ZigBee meshdriver to 1.2.27      
