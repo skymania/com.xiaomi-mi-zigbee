@@ -1,12 +1,12 @@
 {
-  "id": "vibration.aq1",
-  "branch": "master",
-  "name": {
-    "en": "Aqara Vibration Sensor",
-    "nl": "Aqara Vibration Sensor"
-  },
-  "class": "sensor",
-  "capabilities": [
+	"id": "vibration.aq1",
+	"branch": "master",
+	"name": {
+		"en": "Aqara Vibration Sensor",
+		"nl": "Aqara Vibration Sensor"
+	},
+	"class": "sensor",
+	"capabilities": [
 		"measure_tilt",
 		"measure_tilt.relative",
     "measure_vibration",
@@ -16,198 +16,192 @@
 		"alarm_battery",
 		"measure_battery"
   ],
-  "capabilitiesOptions": {
-    "measure_tilt.relative": {
-      "title": {
-        "en": "Relative tilt angle"
-      }
-    }
-  },
-  "mobile": {
-    "components": [
-      {
-        "id": "icon",
-        "capabilities": []
+	"capabilitiesOptions": {
+		"measure_tilt.relative": {
+			"title": {
+				"en": "Relative tilt angle"
+			}
+		}
+	},
+	"mobile": {
+		"components": [
+			{
+				"id": "icon",
+				"capabilities": []
 			},
-      {
-        "id": "battery",
-        "capabilities": [
+			{
+				"id": "battery",
+				"capabilities": [
 					"measure_battery"
 				]
 			},
-      {
-        "id": "sensor",
-        "capabilities": [
+			{
+				"id": "sensor",
+				"capabilities": [
           "measure_tilt",
       		"measure_tilt.relative",
-          "measure_vibration",
-      		"alarm_vibration",
-      		"alarm_tilt",
+					"measure_vibration",
+					"alarm_tilt",
+					"alarm_vibration",
       		"alarm_drop",
       		"alarm_battery"
 				],
-        "options": {
-          "icons": {
-            "measure_tilt": "/drivers/vibration.aq1/assets/measure_tilt.svg",
-            "measure_tilt.relative": "/drivers/vibration.aq1/assets/measure_tilt.svg",
-            "measure_vibration": "/drivers/vibration.aq1/assets/measure_vibration.svg",
-            "alarm_vibration": "/drivers/vibration.aq1/assets/alarm_vibration.svg",
-            "alarm_tilt": "/drivers/vibration.aq1/assets/alarm_tilt.svg",
-            "alarm_drop": "/drivers/vibration.aq1/assets/alarm_drop.svg"
-          }
-        }
-			},
-      {
-        "id": "toggle",
-        "capabilities": [
-					"locked"
-				]
+				"options": {
+					"icons": {
+						"measure_tilt": "/drivers/vibration.aq1/assets/measure_tilt.svg",
+						"measure_tilt.relative": "/drivers/vibration.aq1/assets/measure_tilt.svg",
+						"measure_vibration": "/drivers/vibration.aq1/assets/measure_vibration.svg",
+						"alarm_vibration": "/drivers/vibration.aq1/assets/alarm_vibration.svg",
+						"alarm_tilt": "/drivers/vibration.aq1/assets/alarm_tilt.svg",
+						"alarm_drop": "/drivers/vibration.aq1/assets/alarm_drop.svg"
+					}
+				}
 			}
 		]
-  },
-  "zigbee": {
-    "manufacturerName": "LUMI",
-    "productId": [
+	},
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": [
       "lumi.vibration.aq1"
     ],
-    "deviceId": [
+		"deviceId": [
       10
     ],
-    "profileId": 260,
-    "learnmode": {
-      "image": "/drivers/vibration.aq1/assets/learn_vibration.svg",
-      "instruction": {
-        "en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 5 seconds until the blue light flashes three times",
-        "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert"
-      }
-    }
-  },
-  "images": {
-    "large": "/drivers/vibration.aq1/assets/images/large.png",
-    "small": "/drivers/vibration.aq1/assets/images/small.png"
-  },
-  "settings": [
-    {
-      "type": "group",
-      "label": {
-        "en": "Tilt settings"
-      },
-      "children": [
-        {
-          "id": "setReferenceVector",
-          "type": "checkbox",
-          "value": false,
-          "label": {
-            "en": "Set tilt reference vector"
-          },
-          "hint": {
-            "en": "Set the tilt reference vector with the next tilt movement"
-          }
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/vibration.aq1/assets/learn_vibration.svg",
+			"instruction": {
+				"en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 5 seconds until the blue light flashes three times",
+				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/vibration.aq1/assets/images/large.png",
+		"small": "/drivers/vibration.aq1/assets/images/small.png"
+	},
+	"settings": [
+		{
+			"type": "group",
+			"label": {
+				"en": "Tilt settings"
+			},
+			"children": [
+				{
+					"id": "setReferenceVector",
+					"type": "checkbox",
+					"value": false,
+					"label": {
+						"en": "Set tilt reference vector"
+					},
+					"hint": {
+						"en": "Set the tilt reference vector with the next tilt movement"
+					}
 				},
-        {
-          "id": "tiltReferenceVector",
-          "type": "label",
-          "label": {
-            "en": "Tilt reference vector"
-          },
-          "value": "90,90,0",
-          "hint": {
-            "en": "This textbox will show the stored tilt reference vector. This is a read only setting; don't change"
-          }
+				{
+					"id": "tiltReferenceVector",
+					"type": "label",
+					"label": {
+						"en": "Tilt reference vector"
+					},
+					"value": "90,90,0",
+					"hint": {
+						"en": "This textbox will show the stored tilt reference vector. This is a read only setting; don't change"
+					}
   			},
-        {
-          "id": "capabilityTiltAngles",
-          "type": "radio",
-          "label": {
-            "en": "Tilt angles in mobile interface"
-          },
-          "value": "signed",
-          "values": [
-            {
-              "id": "signed",
-              "label": {
-                "en": "Show signed tilt angles"
-              }
+				{
+					"id": "capabilityTiltAngles",
+					"type": "radio",
+					"label": {
+						"en": "Tilt angles in mobile interface"
+					},
+					"value": "signed",
+					"values": [
+						{
+							"id": "signed",
+							"label": {
+								"en": "Show signed tilt angles"
+							}
             },
-            {
-              "id": "absolute",
-              "label": {
-                "en": "Show absolute tilt angles"
-              }
+						{
+							"id": "absolute",
+							"label": {
+								"en": "Show absolute tilt angles"
+							}
             }
           ]
         }
 			]
     },
-    {
-      "type": "group",
-      "label": {
-        "en": "Alarm settings"
-      },
-      "children": [
-        {
-          "id": "alarm_vibration_cancellation_delay",
-          "type": "number",
-          "label": {
-            "en": "Vibration alarm cancellation delay"
-          },
-          "hint": {
-            "en": "Alarm cancellation delay after vibration motion has been detected.\nDefault: 30 s\nRange: 10 - 3600 s"
-          },
-          "value": 30,
-          "attr": {
-            "min": 10,
-            "max": 3600
-          }
+		{
+			"type": "group",
+			"label": {
+				"en": "Alarm settings"
+			},
+			"children": [
+				{
+					"id": "alarm_vibration_cancellation_delay",
+					"type": "number",
+					"label": {
+						"en": "Vibration alarm cancellation delay"
+					},
+					"hint": {
+						"en": "Alarm cancellation delay after vibration motion has been detected.\nDefault: 30 s\nRange: 10 - 3600 s"
+					},
+					"value": 30,
+					"attr": {
+						"min": 10,
+						"max": 3600
+					}
 		    },
-        {
-          "id": "alarm_tilt_cancellation_delay",
-          "type": "number",
-          "label": {
-            "en": "Tilt alarm cancellation delay"
-          },
-          "hint": {
-            "en": "Alarm cancellation delay after tilt motion has been detected.\nDefault: 30 s\nRange: 10 - 3600 s"
-          },
-          "value": 30,
-          "attr": {
-            "min": 10,
-            "max": 3600
-          }
+				{
+					"id": "alarm_tilt_cancellation_delay",
+					"type": "number",
+					"label": {
+						"en": "Tilt alarm cancellation delay"
+					},
+					"hint": {
+						"en": "Alarm cancellation delay after tilt motion has been detected.\nDefault: 30 s\nRange: 10 - 3600 s"
+					},
+					"value": 30,
+					"attr": {
+						"min": 10,
+						"max": 3600
+					}
 		    },
-        {
-          "id": "alarm_drop_cancellation_delay",
-          "type": "number",
-          "label": {
-            "en": "Drop alarm cancellation delay"
-          },
-          "hint": {
-            "en": "Alarm cancellation delay after drop motion has been detected.\nDefault: 30 s\nRange: 10 - 3600 s"
-          },
-          "value": 30,
-          "attr": {
-            "min": 10,
-            "max": 3600
-          }
+				{
+					"id": "alarm_drop_cancellation_delay",
+					"type": "number",
+					"label": {
+						"en": "Drop alarm cancellation delay"
+					},
+					"hint": {
+						"en": "Alarm cancellation delay after drop motion has been detected.\nDefault: 30 s\nRange: 10 - 3600 s"
+					},
+					"value": 30,
+					"attr": {
+						"min": 10,
+						"max": 3600
+					}
 		    }
 			]
 		},
-    {
-      "id": "battery_threshold",
-      "type": "number",
-      "label": {
-        "en": "Battery alarm threshold (%)",
-        "nl": "Batterij alarm waarde (%)"
-      },
-      "hint": {
-        "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-        "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-      },
-      "value": 20,
-      "attr": {
-        "min": 1,
-        "max": 90
-      }
+		{
+			"id": "battery_threshold",
+			"type": "number",
+			"label": {
+				"en": "Battery alarm threshold (%)",
+				"nl": "Batterij alarm waarde (%)"
+			},
+			"hint": {
+				"en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+				"nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+			},
+			"value": 20,
+			"attr": {
+				"min": 1,
+				"max": 90
+			}
 		}
 	]
 }

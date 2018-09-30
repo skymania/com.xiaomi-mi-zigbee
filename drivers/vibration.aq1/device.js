@@ -1,7 +1,5 @@
 'use strict';
 
-// Add FlowCardTriggers (motion trigger, tilt trigger, alarm (re)set)
-// Add icons
 // clean up code onTiltReportRAW
 
 const motionArray = {
@@ -29,69 +27,57 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 		// print the node's info to the console
 		this.printNode();
 
-		// Register attribute listener for occupancy
+		// Register attribute listener for motion report
 		this.registerAttrReportListener('closuresDoorLock', '85', 1, 60, null,
 				this.onMotionReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - closuresDoorLock_85');
-			})
 			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - closuresDoorLock_85', err);
+				this.error('failed to register attr report listener - Motion report (85)', err);
 			});
 
-		// Register attribute listener for occupancy
+		// Register attribute listener for direct Tilt report
 		this.registerAttrReportListener('closuresDoorLock', '1283', 1, 60, null,
-				this.onMotionReport_1283.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - closuresDoorLock_1283');
-			})
+				this.onTiltReport.bind(this), 0)
 			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - closuresDoorLock_1283', err);
+				this.error('failed to register attr report listener - Tilt report (1283)', err);
 			});
 
 		// Register attribute listener for occupancy
 		this.registerAttrReportListener('closuresDoorLock', '1285', 1, 60, null,
-				this.onMotionReport_1285.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - closuresDoorLock_1285');
-			})
+				this.onVibrationReport.bind(this), 0)
 			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - closuresDoorLock_1285', err);
+				this.error('failed to register attr report listener - Vibration report (1285)', err);
 			});
 
 		// Register attribute listener for occupancy
 		this.registerAttrReportListener('closuresDoorLock', '1288', 1, 60, null,
 				this.onTiltReportRAW.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - closuresDoorLock_1288');
-			})
 			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - closuresDoorLock_1288', err);
+				this.error('failed to register attr report listener - RAW Tilt report (1288)', err);
 			});
 
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
 				this.onLifelineReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
-			})
 			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genBasic - Lifeline', err);
+				this.error('failed to register attr report listener - Lifeline report (65281)', err);
 			});
+
+		this.log('All AttributeReportListeners registered');
 
 		// sensor motion trigger
 		this.sensorMotionTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_motion');
 		this.sensorMotionTriggerDevice.register();
+
+		// sensor vibration trigger
+		this.sensorVibrationTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_vibration');
+		this.sensorVibrationTriggerDevice.register();
+
+		// sensor vibration triggers
+		this.tiltDeltaTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_tilt_delta');
+		this.tiltDeltaTriggerDevice.register();
+
+		this.tiltReferenceTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_tilt_reference');
+		this.tiltReferenceTriggerDevice.register();
 
 		// Vibration alarm triggers
 		this.alarm_vibrationTrueTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_vibration_true');
@@ -114,12 +100,7 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 		this.alarm_dropFalseTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_drop_false');
 		this.alarm_dropFalseTriggerDevice.register();
 
-		this.tiltDeltaTriggerDevice = new Homey.FlowCardTriggerDevice('tilt_delta');
-		this.tiltDeltaTriggerDevice.register();
-
-		this.tiltReferenceTriggerDevice = new Homey.FlowCardTriggerDevice('tilt_reference');
-		this.tiltReferenceTriggerDevice.register();
-
+		this.log('All Flowcards registered');
 	}
 
 	onMotionReport(value) {
@@ -130,16 +111,15 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 		this.sensorMotionTriggerDevice.trigger(this, {
 				motion: motionType
 			})
-			.then(() => this.log('Triggered sensorMotionTriggerDevice with token', motionType))
+			// .then(() => this.log('Triggered sensorMotionTriggerDevice with token', motionType))
 			.catch(err => this.error('Error triggering sensorMotionTriggerDevice', err));
 
 		//
 		if (this.getCapabilityValue(`alarm_${motionType}`) !== true) {
-			// >>> this.log('triggering alarm', motionType);
 			this.setCapabilityValue(`alarm_${motionType}`, true);
 			// Trigger alarm trigger card (trigger alarm)
 			this[`alarm_${motionType}TrueTriggerDevice`].trigger(this, null, null)
-				.then(() => this.log(`Triggered alarm_${motionType}TrueTriggerDevice`))
+				.then(() => this.log(`Triggered alarm_${motionType} and alarm_${motionType}TrueTriggerDevice`))
 				.catch(err => this.error(`Error triggering alarm_${motionType}TrueTriggerDevice`, err));
 		}
 		// restart alarm cancellation timer
@@ -147,21 +127,29 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 
 		// start alarm cancellation timer
 		this[`alarm${motionType}Timeout`] = setTimeout(() => {
-			// >>> this.log('resetting alarm', motionType);
 			this.setCapabilityValue(`alarm_${motionType}`, false);
 			// Trigger alarm trigger card (reset alarm)
 			this[`alarm_${motionType}FalseTriggerDevice`].trigger(this, null, null)
-				.then(() => this.log(`Triggered alarm_${motionType}FalseTriggerDevice`))
+				.then(() => this.log(`Reset alarm_${motionType} and triggered alarm_${motionType}FalseTriggerDevice`))
 				.catch(err => this.error(`Error triggering alarm_${motionType}FalseTriggerDevice`, err));
 		}, (this.getSetting(`alarm_${motionType}_cancellation_delay`) || 30) * 1000);
 	}
 
-	onMotionReport_1283(value) {
-		this.log('tilt angle:', value);
+	onTiltReport(value) {
+		this.log('Reported tilt angle:', value);
 	}
 
-	onMotionReport_1285(value) {
-		this.log('onMotionReport_1285', value);
+	onVibrationReport(value) {
+		const toInt16 = v => Int16Array.from([v])[0];
+		const parsedValue = toInt16(value >> 16 & 0xffff);
+		this.log('vibration report received:', value, parsedValue);
+		this.setCapabilityValue('measure_vibration', parsedValue);
+
+		this.sensorVibrationTriggerDevice.trigger(this, {
+				vibration: parsedValue
+			})
+			// .then(() => this.log('Triggered sensorVibrationTriggerDevice with token', parsedValue))
+			.catch(err => this.error('Error triggering sensorVibrationTriggerDevice', err));
 	}
 
 	onTiltReportRAW(value) {
@@ -229,7 +217,7 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 
 		this.log('Tilt angles relative to previous position:', tiltDeltaToken.Tilt_x, '(Tilt_x)', tiltDeltaToken.Tilt_y, '(Tilt_y)', tiltDeltaToken.Tilt_max, '(max(Tilt))', tiltDeltaToken.Tilt_abs, '(abs(Tilt))');
 
-		this.setCapabilityValue('measure_tilt.delta', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltDeltaToken.Tilt_max : tiltDeltaToken.Tilt_abs);
+		this.setCapabilityValue('measure_tilt.relative', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltDeltaToken.Tilt_max : tiltDeltaToken.Tilt_abs);
 
 		// Trigger generic motion token trigger card
 		this.tiltDeltaTriggerDevice.trigger(this, tiltDeltaToken)
@@ -252,9 +240,6 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 				setReferenceVector: false,
 			});
 
-			// this.setSettings({
-			//	setReferenceVector: false,
-			// });
 		}
 	}
 
@@ -312,6 +297,61 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 		*/
 	}
 
+	/* Unable to write the sensor sensitivity value, when not defined
+	JSON section:
+	{
+		"id": "vibrationSensitivity",
+		"type": "dropdown",
+		"label": {
+			"en": "Adjust vibration sensitivity"
+		},
+		"hint": {
+			"en": "Adjust the vibration sensor sensitivity.\nPress the device button before or directly after pressing save."
+		},
+		"value": "11",
+		"values": [
+			{
+				"id": "1",
+				"label": {
+					"en": "High vibration sensitivity"
+				}
+			},
+			{
+				"id": "11",
+				"label": {
+					"en": "Medium vibration sensitivity"
+				}
+			},
+			{
+				"id": "21",
+				"label": {
+					"en": "Low vibration sensitivity"
+				}
+			}
+		]
+	},
+
+	onSettings(oldSettingsObj, newSettingsObj, changedKeysArr, callback) {
+		this.log(changedKeysArr);
+		this.log('newSettingsObj', newSettingsObj);
+		this.log('oldSettingsObj', oldSettingsObj);
+		this.log('test: ', changedKeysArr.includes('vibrationSensitivity'));
+		// localTemperatureCalibration changed
+		if (changedKeysArr.includes('vibrationSensitivity') && newSettingsObj.vibrationSensitivity) {
+			this.log('vibrationSensitivity: ', newSettingsObj.vibrationSensitivity);
+			this.log('genBasic', this.node.endpoints[0].clusters.genBasic);
+			callback(null, true);
+			this.node.endpoints[0].clusters.genBasic.write('65293')
+				.then(result => {
+					this.log('vibrationSensitivity: ', result);
+				})
+				.catch(err => {
+					this.log('could not write vibrationSensitivity', err);
+				});
+		}
+	}
+	*/
+
 }
 
 module.exports = AqaraVibrationSensor;
@@ -330,7 +370,7 @@ PresentValue (0x0055) (Uint16)	-> 1 = vibration, 2 = tilt, 3 = drop
 settings
 
 Write attribute: 0xff0d,
-High sensitivity: Uint8 = 1, Medium: Uint8 = 11, Low: Uint8 = 21
+High sensitivity: Uint8 = 1 (0x01), Medium: Uint8 = 11 (0x0b), Low: Uint8 = 21 (0x15)
 
 Node overview:
 2018-09-01 09:15:14 [log] [ManagerDrivers] [vibration.aq1] [0] ZigBeeDevice has been inited
