@@ -33,14 +33,6 @@ class AqaraLightSwitchSingle extends ZigBeeDevice {
 		this.triggerButton1_button
 			.register();
 
-		// DEPRECATED flowCardTrigger for scene
-		this.triggerButton1_scene = new Homey.FlowCardTriggerDevice('button1_scene');
-		this.triggerButton1_scene
-			.register()
-			.registerRunListener((args, state) => {
-				return Promise.resolve(args.scene === state.scene);
-			});
-
 	}
 
 	onOnOffListener(repScene) {
@@ -54,9 +46,6 @@ class AqaraLightSwitchSingle extends ZigBeeDevice {
 			Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
 			// Trigger the trigger card with tokens
 			this.triggerButton1_button.trigger(this, remoteValue, null);
-
-			// DEPRECATED Trigger the trigger card with 1 dropdown option
-			this.triggerButton1_scene.trigger(this, null, remoteValue);
 		}
 	}
 

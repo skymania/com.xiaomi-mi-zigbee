@@ -44,14 +44,6 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 		this._attrReportListeners['0_genBasic'] = this._attrReportListeners['0_genBasic'] || {};
 		this._attrReportListeners['0_genBasic']['65281'] = this.onLifelineReport.bind(this);
 
-		// define and register FlowCardTriggers
-		this.triggerButton2_scene = new Homey.FlowCardTriggerDevice('button2_scene');
-		this.triggerButton2_scene
-			.register()
-			.registerRunListener((args, state) => {
-				return Promise.resolve(args.button === state.button && args.scene === state.scene);
-			});
-
 		this.triggerButton2_button = new Homey.FlowCardTriggerDevice('button2_button');
 		this.triggerButton2_button
 			.register();
@@ -69,8 +61,6 @@ class AqaraLightSwitchDouble extends ZigBeeDevice {
 			Homey.app.triggerButton2_scene.trigger(this, null, remoteValue);
 			// Trigger the trigger card with tokens
 			this.triggerButton2_button.trigger(this, remoteValue, null);
-			// DEPRECATED Trigger the trigger card with 2 dropdown options
-			this.triggerButton2_scene.trigger(this, null, remoteValue);
 		}
 	}
 
