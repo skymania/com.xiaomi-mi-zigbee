@@ -17,7 +17,7 @@ class AqaraSocket extends ZigBeeDevice {
 		this.registerCapability('onoff', 'genOnOff');
 
 		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 300, 10, data => {
+		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, null, data => {
 			if (this.getCapabilityValue('onoff') !== (data === 1)) {
 				this.log('genOnOff - onOff', data);
 				this.setCapabilityValue('onoff', data === 1);
@@ -47,7 +47,7 @@ class AqaraSocket extends ZigBeeDevice {
 		}
 
 		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 300, 1, data => {
+		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
 			this.setCapabilityValue('measure_power', data);
 		}, 1);
 
@@ -60,7 +60,7 @@ class AqaraSocket extends ZigBeeDevice {
 		}, 2);
 
 		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 300, 1800, 1, data => {
+		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
 			this.log('genAnalogInput - presentValue (meter)', data);
 			this.setCapabilityValue('meter_power', data);
 		}, 2);
