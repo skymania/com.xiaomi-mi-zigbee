@@ -12,7 +12,7 @@
 			{
 				"name": "device",
 				"type": "device",
-				"filter": "driver_id=sensor_86sw2Un"
+				"filter": "driver_id=sensor_86sw2Un|remote.b286acn01"
 				}
 			],
 		"tokens": [

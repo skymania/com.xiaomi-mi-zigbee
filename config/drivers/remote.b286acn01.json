@@ -1,0 +1,30 @@
+{
+	"id": "remote.b286acn01",
+	"branch": "master",
+	"name": {
+		"en": "Aqara Wireless Switch Double (2018)",
+		"nl": "Aqara Wireless Switch Double (2018)"
+	},
+	"class": "sensor",
+	"capabilities": [
+	],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": ["lumi.remote.b286acn01"],
+		"deviceId": 24321,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/remote.b286acn01/assets/learn.svg",
+			"instruction": {
+				"en": "Long press any of the buttons for more than 10 seconds until the blue light flashes three times after release",
+				"nl": "Houd een van de knoppen ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert"
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/remote.b286acn01/assets/images/large.png",
+		"small": "/drivers/remote.b286acn01/assets/images/small.png"
+	},
+	"settings": [
+	]
+}
