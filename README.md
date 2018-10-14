@@ -25,7 +25,7 @@ Please file Pull Requests on the *development* branch of this repository and wit
 * [Aqara Curtain Controller (ZNCLDJ11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-curtain-controller-white/) (open, close, idle, setpoint (100% = open, 0% = closed))   
 * [Aqara Window/Door Sensor (MCCGQ11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-window-door-sensor/) (contact alarm)
 * [Aqara Human Body Sensor (RTCGQ11LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (motion alarm, luminance)
-* [Aqara Temperature and Humidity Sensor (WSDCGQ11LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-human-body-sensor/) (temperature, relative humidity, atmospheric pressure)
+* [Aqara Temperature and Humidity Sensor (WSDCGQ11LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-temperature-and-humidity-sensor/) (temperature, relative humidity, atmospheric pressure)
 * [Aqara Smart Light Wall Switch (L) Single (QBKG04LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-single-key/) / [Double (QBKG03LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-double-key/) (onoff)
 * [Aqara Smart Light Wall Switch (LN) Single (QBKG11LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-single-key/) / [Double (QBKG12LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-double-key/) (onoff)
 * [Aqara Smart Socket ZigBee Version (QBCZ11LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-socket-zigbee-version/) (onoff, measure_power)
