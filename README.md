@@ -20,7 +20,7 @@ Please file Pull Requests on the *development* branch of this repository and wit
 * [Temperature/Humidity Sensor (WSDCGQ01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-temperature-humidity-sensor/) (temperature, relative humidity)
 * [Wireless switch (WXKG01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-wireless-switch/) (1x - 4x click, Key Held, Key released)  
 * [Smart socket plug ZigBee edition (ZNCZ02LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-socket-plug-2-zigbee-edition-white/) (onoff, measure_power)
-* [Cube (MFKZQ01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (Slide, Shake, Double Tap, Rotate (**angle, relative angle**), Flip 90°, Flip 180°), see [device readme for details](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/blob/master/docs/README_cube.md)
+* [Cube (MFKZQ01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (Slide, Shake, Double Tap, Rotate (angle, relative angle), Flip 90°, Flip 180°), see [device readme for details](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/blob/master/docs/README_cube.md)
 
 * [Aqara Curtain Controller (ZNCLDJ11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-curtain-controller-white/) (open, close, idle, setpoint (100% = open, 0% = closed))   
 * [Aqara Window/Door Sensor (MCCGQ11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-window-door-sensor/) (contact alarm)
@@ -29,9 +29,11 @@ Please file Pull Requests on the *development* branch of this repository and wit
 * [Aqara Smart Light Wall Switch (L) Single (QBKG04LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-single-key/) / [Double (QBKG03LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-double-key/) (onoff)
 * [Aqara Smart Light Wall Switch (LN) Single (QBKG11LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-single-key/) / [Double (QBKG12LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-zigbee-version-double-key/) (onoff)
 * [Aqara Smart Socket ZigBee Version (QBCZ11LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-socket-zigbee-version/) (onoff, measure_power)
-* [Aqara Wireless switch (WXKG11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x - 4x click)   
+* [Aqara Wireless switch (WXKG11LM, productID `sensor_switch.aq2`)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x - 4x click)   
+* [Aqara Wireless Mini Switch (2018) (WXKG11LM, productID `sensor_switch.aq2`)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x, 2x click, key held, key released)   
 * [Aqara Wireless switch with Gyro (WXKG12LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-aqara-smart-wireless-switch/) (1x, 2x click, key held, key released, Shaken)
-* [Aqara Wireless Remote Switch Single (WXKG03LM)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-single-key/) / [Double (WXKG02LM)](https://xiaomi-mi.com/sockets-and-sensors/remote-switch-for-aqara-smart-light-wall-switch-double-key/) (1x click for each button and combined)     
+* [Aqara Wireless Remote Switch Single (WXKG03LM, productID `sensor_86sw1lu`)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-single-key/) / [Double (WXKG02LM, productID `sensor_86sw2Un`)](https://xiaomi-mi.com/sockets-and-sensors/remote-switch-for-aqara-smart-light-wall-switch-double-key/) (1x click for each button and combined)     
+* [Aqara Wireless Switch Single (2018) (WXKG03LM, productID `remote.b186acn01`)](https://xiaomi-mi.com/sockets-and-sensors/aqara-smart-light-wall-switch-single-key/) / [Double (2018) (WXKG02LM, productID `remote.b286acn01`)](https://xiaomi-mi.com/sockets-and-sensors/remote-switch-for-aqara-smart-light-wall-switch-double-key/) (1x, 2x click, long press for each button and combined)   
 * [Aqara Vibration Sensor (DJT11LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-home-cube-white/) (tilt-, vibration-, drop-motion, tilt angles (to reference plane), tilt angles (to previous position), vibration strength, tilt-, vibration-, drop-alarm)      
 
 **Notes:**
@@ -59,6 +61,14 @@ Any requests please post them in the [Xiaomi-mi Zigbee topic on the Athom Forum]
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+### v 0.4.3
+* Add support for the Aqara Wireless Mini Switch (2018) (WXKG11LM, productID `sensor_switch.aq2`), issue [#89](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/89)    
+* Add support for the Aqara Wireless Switch Single (2018) (WXKG03LM, productID `remote.b186acn01`), issue [#88](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/88)    
+* Add support for the Aqara Wireless Switch Double (2018) (WXKG02LM, productID `remote.b286acn01`), issue [#88](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/88)    
+**Note:** These devices are released by Xiaomi / Aqara with the same product code, but different firmware & capabilities. It is not possible based on the device label to determine which version you have, only based on the Zigbee productID once added to Homey   
+* Fix issue where alarm triggers for Aqara vibration sensor were triggered twice, issue [#97](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/97)   
+* Add settings option to determine amount of decimals reported for temperature & humidity, feature request [#98](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/98)   
+
 ### v 0.4.2
 * Add support for the Aqara Vibration Sensor (DJT11LM), with capabilities tilt-, vibration-, drop-motion, tilt angles (to reference plane), tilt angles (to previous position), vibration strength, tilt-, vibration-, drop-alarm   
 * Removing the old, no longer working, (marked DEPRECATED) cards as announced in as of release v 0.3.0   
