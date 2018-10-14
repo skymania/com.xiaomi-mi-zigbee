@@ -14,10 +14,6 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', 1, 60, null,
 				this.onTemperatureReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - msTemperatureMeasurement');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - msTemperatureMeasurement', err);
@@ -26,10 +22,6 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', 1, 60, null,
 				this.onHumidityReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - msRelativeHumidity');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - msRelativeHumidity', err);
@@ -38,10 +30,6 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// Register the AttributeReportListener
 		this.registerAttrReportListener('msPressureMeasurement', '16', 1, 60, null,
 				this.onPressureReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - msPressureMeasurement');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - msPressureMeasurement', err);
@@ -50,10 +38,6 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
 				this.onLifelineReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genBasic - Lifeline', err);
@@ -61,14 +45,15 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 	}
 
 	onTemperatureReport(value) {
-		const parsedValue = Math.round((value / 100) * 10) / 10;
+		const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((value / 100) * 100) / 100 : Math.round((value / 100) * 10) / 10;
+		// const parsedValue = Math.round((value / 100) * 10) / 10;
 		const temperatureOffset = this.getSetting('temperature_offset') || 0;
 		this.log('measure_temperature', parsedValue, '+ temperature offset', temperatureOffset);
 		this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
 	}
 
 	onHumidityReport(value) {
-		const parsedValue = Math.round((value / 100) * 10) / 10;
+		const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((value / 100) * 100) / 100 : Math.round((value / 100) * 10) / 10;
 		this.log('measure_humidity', parsedValue);
 		this.setCapabilityValue('measure_humidity', parsedValue);
 	}

@@ -49,6 +49,50 @@
 			}
 		},
 		{
+			"id": "temperature_decimals",
+			"type": "radio",
+			"label": {
+				"en": "Temperature reporting"
+			},
+			"value": "1",
+			"values": [
+				{
+					"id": "1",
+					"label": {
+						"en": "Report temperature value with 1 decimal (22.1 °C)"
+					}
+				},
+				{
+					"id": "2",
+					"label": {
+						"en": "Report temperature value with 2 decimals (22.07 °C)"
+					}
+				}
+			]
+		},
+		{
+			"id": "humidity_decimals",
+			"type": "radio",
+			"label": {
+				"en": "Humidity reporting"
+			},
+			"value": "1",
+			"values": [
+				{
+					"id": "1",
+					"label": {
+						"en": "Report humidity value with 1 decimal (65.3 %)"
+					}
+				},
+				{
+					"id": "2",
+					"label": {
+						"en": "Report humidity value with 2 decimals (65.34 %)"
+					}
+				}
+			]
+		},
+		{
 			"id": "battery_threshold",
 			"type": "number",
 			"label": {
