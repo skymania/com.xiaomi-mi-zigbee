@@ -49,10 +49,6 @@ class AqaraCubeSensor extends ZigBeeDevice {
 
 		// Register the AttributeReportListener - Shake, Catch, Flip 90, Flip 180, Slide and Double tap motionType
 		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, this.flippedAttribReport.bind(this), 1)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genMultistateInput - Motion');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genMultistateInput - Motion', err);
@@ -60,10 +56,6 @@ class AqaraCubeSensor extends ZigBeeDevice {
 
 		// Register the AttributeReportListener - Rotation angle
 		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, this.rotatedAttribReport.bind(this), 2)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genAnalogInput - Rotate');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genAnalogInput - Rotate', err);
@@ -71,10 +63,6 @@ class AqaraCubeSensor extends ZigBeeDevice {
 
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null, this.onLifelineReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genBasic - Lifeline', err);

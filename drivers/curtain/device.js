@@ -24,10 +24,10 @@ class AqaraCurtain extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		this.registerCapability('onoff', 'genOnOff');
 
@@ -60,10 +60,6 @@ class AqaraCurtain extends ZigBeeDevice {
 
 			// Register the AttributeReportListener - Shake, Catch, Flip 90, Flip 180, Slide and Double tap motionType
 			this.registerAttrReportListener('genAnalogOutput', 'presentValue', 1, 3600, 1, this.onCurtainPositionAttrReport.bind(this), 0)
-				.then(() => {
-					// Registering attr reporting succeeded
-					this.log('registered attr report listener - genAnalogOutput - presentValue');
-				})
 				.catch(err => {
 					// Registering attr reporting failed
 					this.error('failed to register attr report listener - genAnalogOutput - presentValue', err);
@@ -73,10 +69,6 @@ class AqaraCurtain extends ZigBeeDevice {
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
 				this.onLifelineReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genBasic - Lifeline', err);
