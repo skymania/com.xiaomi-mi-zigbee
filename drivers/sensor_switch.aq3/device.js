@@ -36,10 +36,6 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 		// Scene reports are provided by the genMultistateInput cluster / presentValue attribute
 		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 3600, 1,
 				this.onOnOffListener.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genMultistateInput - presentValue');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genMultistateInput - presentValue', err);
@@ -48,10 +44,6 @@ class AqaraWirelessSwitchAq3 extends ZigBeeDevice {
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
 				this.onLifelineReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genBasic - Lifeline', err);

@@ -5,7 +5,7 @@ const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 let lastKey = null;
 
-class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
+class AqaraRemoteb1acn01 extends ZigBeeDevice {
 	async onMeshInit() {
 
 		// enable debugging
@@ -22,31 +22,33 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 			2: {
 				scene: 'Key Pressed 2 times'
 			},
-			3: {
-				scene: 'Key Pressed 3 times'
+			0: {
+				scene: 'Key Held Down'
 			},
-			4: {
-				scene: 'Key Pressed 4 times'
+			255: {
+				scene: 'Key Released'
 			},
 		};
 
-		this.registerAttrReportListener('genOnOff', 0x8000, 1, 3600, 1,
-				this.onOnOffListener.bind(this), 0)
+		// Scene reports are provided by the genMultistateInput cluster / presentValue attribute
+		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 3600, 1,
+				this.onSceneListener.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - genMultistateInput - presentValue');
+			})
 			.catch(err => {
 				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genOnOff - 0x8000', err);
-			});
-
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
-				this.onOnOffListener.bind(this), 0)
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genOnOff - onOff', err);
+				this.error('failed to register attr report listener - genMultistateInput - presentValue', err);
 			});
 
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
 				this.onLifelineReport.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this.log('registered attr report listener - genBasic - Lifeline');
+			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genBasic - Lifeline', err);
@@ -61,23 +63,20 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 
 	}
 
-	onOnOffListener(repScene) {
-		this.log('genOnOff - onOff', repScene, this.sceneMap[repScene].scene, 'lastKey', lastKey);
+	onSceneListener(repScene) {
+		this.log('genMultistateInput', repScene, this.sceneMap[repScene].scene, 'lastKey', lastKey);
 
 		if (lastKey !== repScene) {
 			lastKey = repScene;
-
 			if (Object.keys(this.sceneMap).includes(repScene.toString())) {
 				const remoteValue = {
 					scene: this.sceneMap[repScene].scene,
 				};
 				this.log('Scene trigger', remoteValue.scene);
-
 				// Trigger the trigger card with 1 dropdown option
 				Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
 				// Trigger the trigger card with tokens
 				this.triggerButton1_button.trigger(this, remoteValue, null);
-
 				// reset lastKey after the last trigger
 				this.buttonLastKeyTimeout = setTimeout(() => {
 					lastKey = null;
@@ -87,6 +86,7 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 	}
 
 	onSceneAutocomplete(query, args, callback) {
+
 		let resultArray = [];
 		for (let sceneID in this.sceneMap) {
 			resultArray.push({
@@ -104,10 +104,9 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 
 	onLifelineReport(value) {
 		this.log('lifeline report', new Buffer(value, 'ascii'));
-
 		/*
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		this.log('parsedData', parsedData);
+		// this.log('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
 		const parsedVolts = parsedData['1'] / 100.0;
@@ -140,44 +139,33 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 			}
 			return data;
 		}
-*/
-
+		*/
 	}
 }
-module.exports = AqaraWirelessSwitchAq2;
+module.exports = AqaraRemoteb1acn01;
 
-// WXKG11LM_sensor_switch.aq2
+// WXKG11LM_ remote.b1acn01
 /*
 Node overview:
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ------------------------------------------
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] Node: 31956e48-9b41-47f5-a9b3-66ca8e09c15c
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] - Battery: false
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] - Endpoints: 0
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] -- Clusters:
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- zapp
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- genBasic
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- 65281 : !�
-                                                                                  (!�!"$
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ------------------------------------------
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] Node: f5b42996-97aa-45d8-a8c4-b45772286c06
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] - Battery: false
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] - Endpoints: 0
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] -- Clusters:
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- zapp
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genBasic
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- 65281 : !�
+                                                                               (!�!�$
 !
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- cid : genBasic
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- sid : attrs
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- modelId : lumi.sensor_switch.aq2
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- genGroups
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- cid : genGroups
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- sid : attrs
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- genOnOff
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- cid : genOnOff
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- sid : attrs
-2018-03-03 16:10:55 [log] [ManagerDrivers] [sensor_switch.aq2] [0] --- manuSpecificCluster
-2018-03-03 16:10:56 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- cid : manuSpecificCluster
-2018-03-03 16:10:56 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ---- sid : attrs
-2018-03-03 16:10:56 [log] [ManagerDrivers] [sensor_switch.aq2] [0] ------------------------------------------
-
-65281 - 0xFF01 report:
-{ '1': 3069,	=	Battery
-'3': 23, 			= soc_temperature
-'4': 5117,
-'5': 34,
-'6': 0,
-'10': 0 }
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genBasic
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- modelId : lumi.remote.b1acn01
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genIdentify
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genIdentify
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genMultistateInput
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genMultistateInput
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- presentValue : 255
+2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ------------------------------------------
 */

@@ -1,9 +1,9 @@
 {
-	"id": "sensor_switch.aq2",
+	"id": "remote.b1acn01",
 	"branch": "master",
 	"name": {
-		"en": "Aqara Wireless switch",
-		"nl": "Aqara Wireless switch"
+		"en": "Aqara Wireless Mini Switch (2018)",
+		"nl": "Aqara Wireless Mini Switch (2018)"
 	},
 	"class": "sensor",
 	"capabilities": [
@@ -12,11 +12,11 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.sensor_switch.aq2"],
-		"deviceId": 24321,
+		"productId": ["lumi.remote.b1acn01"],
+		"deviceId": 259,
 		"profileId": 260,
 		"learnmode": {
-			"image": "/drivers/sensor_switch.aq2/assets/learn_switch.svg",
+			"image": "/drivers/remote.b1acn01/assets/learn_switch.svg",
 			"instruction": {
 				"en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
 				"nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
@@ -24,8 +24,8 @@
 		}
 	},
 	"images": {
-		"large": "/drivers/sensor_switch.aq2/assets/images/large.png",
-		"small": "/drivers/sensor_switch.aq2/assets/images/small.png"
+		"large": "/drivers/remote.b1acn01/assets/images/large.png",
+		"small": "/drivers/remote.b1acn01/assets/images/small.png"
 	},
 	"settings": [
 		{

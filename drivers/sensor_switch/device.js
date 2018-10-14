@@ -39,10 +39,6 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 
 		this.registerAttrReportListener('genOnOff', 0x8000, 1, 3600, 1,
 				this.onOnOffListener.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genOnOff - 0x8000');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genOnOff - 0x8000', err);
@@ -50,10 +46,6 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
 				this.onOnOffListener.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genOnOff - onOff');
-			})
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genOnOff - onOff', err);
