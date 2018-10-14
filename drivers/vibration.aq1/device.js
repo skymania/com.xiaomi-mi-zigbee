@@ -22,10 +22,10 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
 
 		// Register attribute listener for motion report
 		this.registerAttrReportListener('closuresDoorLock', '85', 1, 60, null,
@@ -117,10 +117,6 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 		//
 		if (this.getCapabilityValue(`alarm_${motionType}`) !== true) {
 			this.setCapabilityValue(`alarm_${motionType}`, true);
-			// Trigger alarm trigger card (trigger alarm)
-			this[`alarm_${motionType}TrueTriggerDevice`].trigger(this, null, null)
-				.then(() => this.log(`Triggered alarm_${motionType} and alarm_${motionType}TrueTriggerDevice`))
-				.catch(err => this.error(`Error triggering alarm_${motionType}TrueTriggerDevice`, err));
 		}
 		// restart alarm cancellation timer
 		clearTimeout(this[`alarm${motionType}Timeout`]);
@@ -128,10 +124,6 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 		// start alarm cancellation timer
 		this[`alarm${motionType}Timeout`] = setTimeout(() => {
 			this.setCapabilityValue(`alarm_${motionType}`, false);
-			// Trigger alarm trigger card (reset alarm)
-			this[`alarm_${motionType}FalseTriggerDevice`].trigger(this, null, null)
-				.then(() => this.log(`Reset alarm_${motionType} and triggered alarm_${motionType}FalseTriggerDevice`))
-				.catch(err => this.error(`Error triggering alarm_${motionType}FalseTriggerDevice`, err));
 		}, (this.getSetting(`alarm_${motionType}_cancellation_delay`) || 30) * 1000);
 	}
 
