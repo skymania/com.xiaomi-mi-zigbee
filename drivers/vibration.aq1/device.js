@@ -1,3 +1,4 @@
+//lifeline validated
 'use strict';
 
 // clean up code onTiltReportRAW
@@ -62,8 +63,6 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 				this.error('failed to register attr report listener - Lifeline report (65281)', err);
 			});
 
-		this.log('All AttributeReportListeners registered');
-
 		// sensor motion trigger
 		this.sensorMotionTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_motion');
 		this.sensorMotionTriggerDevice.register();
@@ -100,12 +99,11 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 		this.alarm_dropFalseTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_drop_false');
 		this.alarm_dropFalseTriggerDevice.register();
 
-		this.log('All Flowcards registered');
 	}
 
 	onMotionReport(value) {
 		const motionType = motionArray[value].motion;
-		this.log('motion detected', motionType, value);
+		this.log('closuresDoorLock - 85 (motion)', motionType, value);
 
 		// Trigger generic motion token trigger card
 		this.sensorMotionTriggerDevice.trigger(this, {
@@ -128,13 +126,13 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 	}
 
 	onTiltReport(value) {
-		this.log('Reported tilt angle:', value);
+		this.log('closuresDoorLock - 1283 (tilt angle):', value);
 	}
 
 	onVibrationReport(value) {
 		const toInt16 = v => Int16Array.from([v])[0];
 		const parsedValue = toInt16(value >> 16 & 0xffff);
-		this.log('vibration report received:', value, parsedValue);
+		this.log('closuresDoorLock - 1285 (vibration):', value, parsedValue);
 		this.setCapabilityValue('measure_vibration', parsedValue);
 
 		this.sensorVibrationTriggerDevice.trigger(this, {
@@ -163,7 +161,7 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 		const Ayr = Math.acos(Ry / R) / RAD;
 		const Azr = Math.acos(Rz / R) / RAD;
 		const Ameasured = [Axr, Ayr, Azr];
-		this.log('onMotionReportRAW:', value, 'Measured angles', Ameasured);
+		this.log('closuresDoorLock - 1288 (Tilt RAW):', value, 'Measured angles', Ameasured);
 
 		// 2. Calculate angles normalized force vector relative to reference plane
 		const Areference = this.getStoreValue('Areference') || [90, 90, 0];
@@ -236,57 +234,44 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 	}
 
 	onLifelineReport(value) {
-		this.log('lifeline report', new Buffer(value, 'ascii'));
-		/*
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
+
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		this.log('parsedData', parsedData);
+		this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
-		const parsedVolts = parsedData['1'] / 100.0;
-		const minVolts = 2.5;
-		const maxVolts = 3.0;
+		if (parsedData.hasOwnProperty('1')) {
+			const parsedVolts = parsedData['1'] / 1000;
+			const minVolts = 2.5;
+			const maxVolts = 3.0;
 
-		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-		this.log('lifeline - battery', parsedBatPct);
-		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-			// Set Battery capability
-			this.setCapabilityValue('measure_battery', parsedBatPct);
-			// Set Battery alarm if battery percentatge is below 20%
-			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+			this.log('lifeline - battery', parsedBatPct);
+			if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
+				// Set Battery capability
+				this.setCapabilityValue('measure_battery', parsedBatPct);
+				// Set Battery alarm if battery percentatge is below 20%
+				this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			}
 		}
-
-		// temperature reportParser (ID 100)
-		const parsedTemp = parsedData['100'] / 100.0;
-		const temperatureOffset = this.getSetting('temperature_offset') || 0;
-		this.log('lifeline - temperature', parsedTemp, '+ temperature offset', temperatureOffset);
-		this.setCapabilityValue('measure_temperature', parsedTemp + temperatureOffset);
-
-		// humidity reportParser (ID 101)
-		const parsedHum = parsedData['101'] / 100.0;
-		this.log('lifeline - humidity', parsedHum);
-		this.setCapabilityValue('measure_humidity', parsedHum);
-
-		// pressure reportParser (ID 102) - reported number not reliable
-		// const parsedPres = parsedData['102'] / 100.0;
-		// this.log('lifeline - pressure', parsedPres);
 
 		function parseData(rawData) {
 			const data = {};
 			let index = 0;
 			// let byteLength = 0
-			while (index < rawData.length) {
+			while (index < rawData.length - 2) {
 				const type = rawData.readUInt8(index + 1);
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
-				// extract the relevant objects (1) Battery, (100) Temperature, (101) Humidity
-				if ([1, 100, 101].includes(rawData.readUInt8(index))) {
+				// extract the relevant objects (1) Battery
+				if ([1].includes(rawData.readUInt8(index))) {
 					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
 				}
 				index += byteLength + 2;
 			}
 			return data;
 		}
-		*/
+
 	}
 
 	/* Unable to write the sensor sensitivity value, when not defined
@@ -443,7 +428,13 @@ Tilting the sensor on one side ~ 90 degrees
 2018-09-01 09:29:55 [log] [ManagerDrivers] [vibration.aq1] [0] tilt angle: 82
 2018-09-01 09:29:56 [log] [ManagerDrivers] [vibration.aq1] [0] onMotionReport_1288 [ 1193, 4294770707 ]
 
-
-
+{ '1': 3069,	=	battery
+  '3': 32,
+  '4': 5117,
+  '5': 84,
+  '6': 65538,
+  '8': 776,
+  '10': 0,
+  '253': 4823264854269 }
 
 */

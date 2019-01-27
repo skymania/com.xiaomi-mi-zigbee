@@ -29,60 +29,68 @@ class XiaomiTempSensor extends ZigBeeDevice {
 	onTemperatureReport(value) {
 		const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((value / 100) * 100) / 100 : Math.round((value / 100) * 10) / 10;
 		const temperatureOffset = this.getSetting('temperature_offset') || 0;
-		this.log('measure_temperature', parsedValue, '+ temperature offset', temperatureOffset);
+		this.log('msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
 		this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
 	}
 
 	onHumidityReport(value) {
 		const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((value / 100) * 100) / 100 : Math.round((value / 100) * 10) / 10;
-		this.log('measure_humidity', parsedValue);
+		this.log('msRelativeHumidity - measuredValue (humidity):', parsedValue);
 		this.setCapabilityValue('measure_humidity', parsedValue);
 	}
 
 	onLifelineReport(value) {
-		this.log('lifeline report', new Buffer(value, 'ascii'));
-		/*
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
+
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		// this.log('parsedData', parsedData);
+		this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
-		const parsedVolts = parsedData['1'] / 100.0;
-		const minVolts = 2.5;
-		const maxVolts = 3.0;
+		if (parsedData.hasOwnProperty('1')) {
+			const parsedVolts = parsedData['1'] / 1000;
+			const minVolts = 2.5;
+			const maxVolts = 3.0;
 
-		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-		this.log('lifeline - battery', parsedBatPct);
-		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-			// Set Battery capability
-			this.setCapabilityValue('measure_battery', parsedBatPct);
-			// Set Battery alarm if battery percentatge is below 20%
-			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+			this.log('lifeline - battery', parsedBatPct);
+			if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
+				// Set Battery capability
+				this.setCapabilityValue('measure_battery', parsedBatPct);
+				// Set Battery alarm if battery percentatge is below 20%
+				this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			}
 		}
 
 		// temperature reportParser (ID 100)
-		const parsedTemp = parsedData['100'] / 100.0;
-		const temperatureOffset = this.getSetting('temperature_offset') || 0;
-		this.log('lifeline - temperature', parsedTemp, '+ temperature offset', temperatureOffset);
-		this.setCapabilityValue('measure_temperature', parsedTemp + temperatureOffset);
+		if (parsedData.hasOwnProperty('100')) {
+			const parsedTemp = parsedData['100'] / 100.0;
+			const temperatureOffset = this.getSetting('temperature_offset') || 0;
+			this.log('lifeline - temperature', parsedTemp, '+ temperature offset', temperatureOffset);
+			this.setCapabilityValue('measure_temperature', parsedTemp + temperatureOffset);
+		}
 
 		// humidity reportParser (ID 101)
-		const parsedHum = parsedData['101'] / 100.0;
-		this.log('lifeline - humidity', parsedHum);
-		this.setCapabilityValue('measure_humidity', parsedHum);
+		if (parsedData.hasOwnProperty('101')) {
+			const parsedHum = parsedData['101'] / 100.0;
+			this.log('lifeline - humidity', parsedHum);
+			this.setCapabilityValue('measure_humidity', parsedHum);
+		}
 
 		function parseData(rawData) {
 			const data = {};
 			let index = 0;
-			while (index < rawData.length) {
+			while (index < rawData.length - 2) {
 				const type = rawData.readUInt8(index + 1);
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
-				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				// extract the relevant objects (1) Battery, (100) Temperature, (101) Humidity
+				if ([1, 100, 101].includes(rawData.readUInt8(index))) {
+					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				}
 				index += byteLength + 2;
 			}
 			return data;
 		}
-		*/
 	}
 
 }

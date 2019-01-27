@@ -1,3 +1,4 @@
+//lifeline validated
 'use strict';
 
 const Homey = require('homey');
@@ -71,7 +72,7 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 				const remoteValue = {
 					scene: this.sceneMap[repScene].scene,
 				};
-				this.log('Scene trigger', remoteValue.scene);
+				this._debug('Scene trigger', remoteValue.scene);
 
 				// Trigger the trigger card with 1 dropdown option
 				Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
@@ -98,49 +99,48 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
 		resultArray = resultArray.filter(result => {
 			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
 		});
-		this.log(resultArray);
+		this._debug(resultArray);
 		return Promise.resolve(resultArray);
 	}
 
 	onLifelineReport(value) {
-		this.log('lifeline report', new Buffer(value, 'ascii'));
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
 
-		/*
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		this.log('parsedData', parsedData);
+		this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
-		const parsedVolts = parsedData['1'] / 100.0;
-		const minVolts = 2.5;
-		const maxVolts = 3.0;
+		if (parsedData.hasOwnProperty('1')) {
+			const parsedVolts = parsedData['1'] / 1000;
+			const minVolts = 2.5;
+			const maxVolts = 3.0;
 
-		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-		this.log('lifeline - battery', parsedBatPct);
-		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-			// Set Battery capability
-			this.setCapabilityValue('measure_battery', parsedBatPct);
-			// Set Battery alarm if battery percentatge is below 20%
-			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+			this.log('lifeline - battery', parsedBatPct);
+			if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
+				// Set Battery capability
+				this.setCapabilityValue('measure_battery', parsedBatPct);
+				// Set Battery alarm if battery percentatge is below 20%
+				this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			}
 		}
-
-		// contact alarm reportParser (ID 100)
-		// const parsedContact = (parsedData['100'] === 1);
-		// this.log('lifeline - contact alarm', parsedContact);
-		// this.setCapabilityValue('alarm_contact', parsedContact);
 
 		function parseData(rawData) {
 			const data = {};
 			let index = 0;
-			while (index < rawData.length) {
+			// let byteLength = 0
+			while (index < rawData.length - 2) {
 				const type = rawData.readUInt8(index + 1);
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
-				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				// extract the relevant objects (1) Battery
+				if ([1].includes(rawData.readUInt8(index))) {
+					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				}
 				index += byteLength + 2;
 			}
 			return data;
 		}
-*/
 
 	}
 }

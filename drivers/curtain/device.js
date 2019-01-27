@@ -24,7 +24,7 @@ class AqaraCurtain extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		// this.enableDebug();
+		this.enableDebug();
 
 		// print the node's info to the console
 		// this.printNode();
@@ -76,7 +76,7 @@ class AqaraCurtain extends ZigBeeDevice {
 
 		this.node.endpoints[0].clusters.genBasic.write(0x1025, '00080001000000')
 			.then(res => {
-				this.log('write Open / Close manually: ', res);
+				this._debug('write Open / Close manually: ', res);
 			})
 			.catch(err => {
 				this.error('write Open / Close manually: ', err);
@@ -84,7 +84,7 @@ class AqaraCurtain extends ZigBeeDevice {
 	}
 
 	onCurtainPositionAttrReport(data) {
-		this.log('Received position change:', data);
+		this.log('genAnalogOutput - presentValue (curtain position):', data);
 		clearTimeout(this.curtainTernaryTimeout);
 		this.setCapabilityValue('dim', data / 100);
 
@@ -99,22 +99,29 @@ class AqaraCurtain extends ZigBeeDevice {
 	}
 
 	onLifelineReport(value) {
-		this.log('lifeline report', new Buffer(value, 'ascii'));
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		this.log('parsedData', parsedData);
+		this._debug('parsedData', parsedData);
+
+		// curtain postition (dim) reportParser (ID 100)
+		if (parsedData.hasOwnProperty('100')) {
+			const parsedDim = (parsedData['100'] / 100);
+			this.log('lifeline - curtain position', parsedDim);
+			this.setCapabilityValue('dim', parsedDim);
+		}
 
 		function parseData(rawData) {
 			const data = {};
 			let index = 0;
 			// let byteLength = 0
-			while (index < rawData.length) {
+			while (index < rawData.length - 2) {
 				const type = rawData.readUInt8(index + 1);
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
-				// extract the relevant objects (1) Battery, (100) Temperature, (101) Humidity
-				// if ([1, 100, 101].includes(rawData.readUInt8(index))) {
-				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
-				//}
+				// extract the relevant objects (100) Curtain opening state
+				if ([100].includes(rawData.readUInt8(index))) {
+					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				}
 				index += byteLength + 2;
 			}
 			return data;
