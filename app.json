@@ -10,11 +10,12 @@
   "category": [
     "lights"
   ],
-  "version": "0.4.3",
-  "compatibility": ">=1.5.7",
+  "version": "0.5.0",
+  "compatibility": ">=1.5.13",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
   "sdk": 2,
+  "brandColor": "#f57921",
   "author": {
     "name": "Ted Tolboom",
     "email": "dTNL.Homey@gmail.com"
@@ -53,6 +54,8 @@
   "capabilities": {
     "alarm_tilt": {
       "type": "boolean",
+      "uiComponent": "sensor",
+      "icon": "/drivers/vibration.aq1/assets/alarm_tilt.svg",
       "title": {
         "en": "Tilt Alarm",
         "nl": "Kantelalarm"
@@ -66,6 +69,8 @@
     },
     "alarm_vibration": {
       "type": "boolean",
+      "uiComponent": "sensor",
+      "icon": "/drivers/vibration.aq1/assets/alarm_vibration.svg",
       "title": {
         "en": "Vibration Alarm",
         "nl": "Trillingsalarm"
@@ -79,6 +84,8 @@
     },
     "alarm_drop": {
       "type": "boolean",
+      "uiComponent": "sensor",
+      "icon": "/drivers/vibration.aq1/assets/alarm_drop.svg",
       "title": {
         "en": "Drop Alarm",
         "nl": "Valalarm"
@@ -92,6 +99,8 @@
     },
     "measure_tilt": {
       "type": "number",
+      "uiComponent": "sensor",
+      "icon": "/drivers/vibration.aq1/assets/measure_tilt.svg",
       "title": {
         "en": "Tilt angle",
         "nl": "Kantelhoek"
@@ -105,6 +114,8 @@
     },
     "measure_vibration": {
       "type": "number",
+      "uiComponent": "sensor",
+      "icon": "/drivers/vibration.aq1/assets/measure_vibration.svg",
       "title": {
         "en": "Vibration",
         "nl": "Trilling"
@@ -115,6 +126,8 @@
     },
     "cube_measure_rotation": {
       "type": "number",
+      "uiComponent": "sensor",
+      "icon": "/drivers/cube/assets/icon_rotate.svg",
       "title": {
         "en": "Rotation",
         "nl": "Draaihoek"
@@ -128,6 +141,8 @@
     },
     "cube_state_motion": {
       "type": "enum",
+      "uiComponent": "sensor",
+      "icon": "/drivers/cube/assets/icon.svg",
       "title": {
         "en": "Motion",
         "nl": "Beweging"
@@ -188,6 +203,8 @@
     },
     "cube_state_face": {
       "type": "enum",
+      "uiComponent": "sensor",
+      "icon": "/drivers/cube/assets/icon_face.svg",
       "title": {
         "en": "Face up",
         "nl": "Zijde boven"
@@ -1267,8 +1284,36 @@
       },
       "class": "socket",
       "capabilities": [
-        "onoff"
+        "onoff",
+        "measure_power",
+        "meter_power",
+        "measure_voltage"
       ],
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": []
+          },
+          {
+            "id": "sensor",
+            "capabilities": [
+              "measure_power",
+              "meter_power",
+              "measure_voltage"
+            ]
+          },
+          {
+            "id": "toggle",
+            "capabilities": [
+              "onoff"
+            ],
+            "options": {
+              "showTitle": true
+            }
+          }
+        ]
+      },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
@@ -1300,7 +1345,10 @@
       "class": "socket",
       "capabilities": [
         "onoff",
-        "onoff.1"
+        "onoff.1",
+        "measure_power",
+        "meter_power",
+        "measure_voltage"
       ],
       "capabilitiesOptions": {
         "onoff": {
@@ -1321,6 +1369,14 @@
           {
             "id": "icon",
             "capabilities": []
+          },
+          {
+            "id": "sensor",
+            "capabilities": [
+              "measure_power",
+              "meter_power",
+              "measure_voltage"
+            ]
           },
           {
             "id": "toggle",
@@ -1573,8 +1629,8 @@
     {
       "id": "curtain",
       "name": {
-        "en": "Curtain Controller",
-        "nl": "Curtain Controller"
+        "en": "Aqara Curtain Controller",
+        "nl": "Aqara Curtain Controller"
       },
       "class": "windowcoverings",
       "capabilities": [
@@ -1671,8 +1727,8 @@
         "learnmode": {
           "image": "/drivers/plug/assets/learn.svg",
           "instruction": {
-            "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
-            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+            "en": "Long press the power button to open more than 5 seconds until the led flashes red one time and then flashes blue three times",
+            "nl": "Long press the power button to open more than 5 seconds until the led flashes red one time and then flashes blue three times"
           }
         }
       },
@@ -1967,7 +2023,7 @@
     {
       "id": "sensor_magnet.aq2",
       "name": {
-        "en": "Aqara Window/Door Sensor"
+        "en": "Aqara Door and Window Sensor"
       },
       "class": "sensor",
       "capabilities": [
@@ -2050,7 +2106,7 @@
     {
       "id": "sensor_motion.aq2",
       "name": {
-        "en": "Aqara Human Body Sensor"
+        "en": "Aqara Motion Sensor"
       },
       "class": "sensor",
       "capabilities": [
@@ -2164,6 +2220,69 @@
           }
         }
       ]
+    },
+    {
+      "id": "sensor_natgas",
+      "name": {
+        "en": "Gas Leak detector",
+        "nl": "Gas Leak detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_co",
+        "measure_temperature",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_natgas",
+        "deviceId": 257,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_natgas/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_natgas/assets/images/large.png",
+        "small": "/drivers/sensor_natgas/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_smoke",
+      "name": {
+        "en": "Smoke detector",
+        "nl": "Smoke detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_smoke",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_smoke",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_smoke/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_smoke/assets/images/large.png",
+        "small": "/drivers/sensor_smoke/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "sensor_switch.aq2",
@@ -2312,6 +2431,37 @@
           }
         }
       ]
+    },
+    {
+      "id": "sensor_wleak.aq1",
+      "name": {
+        "en": "Aqara Water sensor",
+        "nl": "Aqara Water sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_water",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_wleak.aq1",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "vibration.aq1",
@@ -2522,8 +2672,7 @@
     {
       "id": "weather",
       "name": {
-        "en": "Aqara Temperature and Humidity Sensor",
-        "nl": "Aqara Temperature and Humidity Sensor"
+        "en": "Aqara Temperature and Humidity Sensor"
       },
       "class": "sensor",
       "capabilities": [
