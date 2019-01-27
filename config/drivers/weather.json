@@ -2,8 +2,7 @@
 	"id": "weather",
 	"branch": "master",
 	"name": {
-		"en": "Aqara Temperature and Humidity Sensor",
-		"nl": "Aqara Temperature and Humidity Sensor"
+		"en": "Aqara Temperature and Humidity Sensor"
 	},
 	"class": "sensor",
 	"capabilities": [

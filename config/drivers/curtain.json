@@ -2,8 +2,8 @@
 	"id": "curtain",
 	"branch": "master",
 	"name": {
-		"en": "Curtain Controller",
-		"nl": "Curtain Controller"
+		"en": "Aqara Curtain Controller",
+		"nl": "Aqara Curtain Controller"
 	},
 	"class": "windowcoverings",
 	"capabilities": [
