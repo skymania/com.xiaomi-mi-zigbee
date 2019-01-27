@@ -44,7 +44,7 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
 				this.onSceneListener.bind(this, 'Left'), 0)
 			.then(() => {
 				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genMultistateInput - presentValue');
+				this._debug('registered attr report listener - genMultistateInput - presentValue');
 			})
 			.catch(err => {
 				// Registering attr reporting failed
@@ -56,7 +56,7 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
 				this.onSceneListener.bind(this, 'Right'), 1)
 			.then(() => {
 				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genMultistateInput - presentValue');
+				this._debug('registered attr report listener - genMultistateInput - presentValue');
 			})
 			.catch(err => {
 				// Registering attr reporting failed
@@ -68,26 +68,24 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
 		this._attrReportListeners['2_genMultistateInput']['presentValue'] =
 			this.onSceneListener.bind(this, 'Both');
 
-		/*
-		// Scene reports are provided by the genMultistateInput cluster / presentValue attribute
-		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 3600, 1,
-				this.onSceneListener.bind(this, 'Both'), 2)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genMultistateInput - presentValue');
-			})
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genMultistateInput - presentValue', err);
-			});
-		*/
-
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
 				this.onLifelineReport.bind(this), 0)
 			.then(() => {
 				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
+				this._debug('registered attr report listener - genBasic - Lifeline');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - genBasic - Lifeline', err);
+			});
+
+		// Register the AttributeReportListener - Lifeline
+		this.registerAttrReportListener('genBasic', '65520', 1, 60, null,
+				data => this._debug(data))
+			.then(() => {
+				// Registering attr reporting succeeded
+				this._debug('registered attr report listener - genBasic - Lifeline');
 			})
 			.catch(err => {
 				// Registering attr reporting failed
@@ -112,7 +110,7 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
 					button: this.buttonMap[repButton].button,
 					scene: this.sceneMap[repScene].scene,
 				};
-				this.log('genMultistateInput - presentValue', remoteValue);
+				this._debug('genMultistateInput - presentValue', remoteValue);
 				// Trigger the trigger card with 2 autocomplete options
 				Homey.app.triggerButton2_scene.trigger(this, null, remoteValue);
 				// Trigger the trigger card with tokens
@@ -137,7 +135,7 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
 		resultArray = resultArray.filter(result => {
 			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
 		});
-		this.log(resultArray);
+		this._debug(resultArray);
 		return Promise.resolve(resultArray);
 	}
 
@@ -154,34 +152,31 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
 		resultArray = resultArray.filter(result => {
 			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
 		});
-		this.log(resultArray);
+		this._debug(resultArray);
 		return Promise.resolve(resultArray);
 	}
 
 	onLifelineReport(value) {
-		this.log('lifeline report', new Buffer(value, 'ascii'));
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
 		/*
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		// this.log('parsedData', parsedData);
+		this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
-		const parsedVolts = parsedData['1'] / 100.0;
-		const minVolts = 2.5;
-		const maxVolts = 3.0;
+		if (parsedData.hasOwnProperty('1')) {
+			const parsedVolts = parsedData['1'] / 1000;
+			const minVolts = 2.5;
+			const maxVolts = 3.0;
 
-		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-		this.log('lifeline - battery', parsedBatPct);
-		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-			// Set Battery capability
-			this.setCapabilityValue('measure_battery', parsedBatPct);
-			// Set Battery alarm if battery percentatge is below 20%
-			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+			this.log('lifeline - battery', parsedBatPct);
+			if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
+				// Set Battery capability
+				this.setCapabilityValue('measure_battery', parsedBatPct);
+				// Set Battery alarm if battery percentatge is below 20%
+				this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			}
 		}
-
-		// contact alarm reportParser (ID 100)
-		// const parsedContact = (parsedData['100'] === 1);
-		// this.log('lifeline - contact alarm', parsedContact);
-		// this.setCapabilityValue('alarm_contact', parsedContact);
 
 		function parseData(rawData) {
 			const data = {};

@@ -22,7 +22,7 @@ class AqaraWallSwitchSingleL extends ZigBeeDevice {
 
 	// Method to handle changes to attributes
 	switchOneAttrListener(data) {
-		this.log('Received data =', data);
+		this.log('genOnOff - onOff:', data === 1);
 		this.setCapabilityValue('onoff', data === 1);
 	}
 
