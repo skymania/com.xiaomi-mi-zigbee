@@ -16,6 +16,9 @@ class AqaraSocket extends ZigBeeDevice {
 		// OnOff capability
 		this.registerCapability('onoff', 'genOnOff');
 
+		// OnOff capability
+		this.registerCapability('onoff', 'genOnOff');
+
 		// Report is send if status is changed or after 5 min
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, null, data => {
 			if (this.getCapabilityValue('onoff') !== (data === 1)) {
@@ -31,7 +34,17 @@ class AqaraSocket extends ZigBeeDevice {
 			this.registerCapability('measure_power', 'genAnalogInput', {
 				get: 'presentValue',
 				report: 'presentValue',
-				reportParser: value => value,
+				reportParser: value => {
+					this.log('genAnalogInput - presentValue (power)', value);
+					return value;
+				},
+				endpoint: 1
+			});
+
+			// Report is send if status is changed or after 5 min
+			this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
+				this._debug('genAnalogInput - presentValue (power)', data); // due to amount of data reported, only logged in debug mode
+				this.setCapabilityValue('measure_power', data);
 			}, 1);
 		}
 
@@ -41,32 +54,86 @@ class AqaraSocket extends ZigBeeDevice {
 		if (this.hasCapability('meter_power')) {
 			this.registerCapability('meter_power', 'genAnalogInput', {
 				get: 'presentValue',
+				getOpts: {
+					// getOnStart: true, // get the initial value on app start (only use for non-battery devices)
+					pollInterval: 600000, // maps to device settings
+					// getOnOnline: true, // use only for battery devices
+				},
 				report: 'presentValue',
-				reportParser: value => value,
+				reportParser: value => {
+					this.log('genAnalogInput - presentValue (meter)', value);
+					return value;
+				},
+				endpoint: 2
+			});
+
+			// Report is send if status is changed or after 5 min
+			this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
+				this.log('genAnalogInput - presentValue (meter)', data);
+				this.setCapabilityValue('meter_power', data);
 			}, 2);
 		}
 
-		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
-			this.setCapabilityValue('measure_power', data);
-		}, 1);
-
-		// meter_power
-		// Register onoff capability
-		this.registerCapability('meter_power', 'genAnalogInput', {
-			get: 'presentValue',
-			report: 'presentValue',
-			reportParser: value => value,
-		}, 2);
-
-		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
-			this.log('genAnalogInput - presentValue (meter)', data);
-			this.setCapabilityValue('meter_power', data);
-		}, 2);
-
 		// measure_voltage
+		if (this.hasCapability('measure_voltage')) {
+			this.registerCapability('measure_voltage', 'genPowerCfg', {
+				get: 'mainsVoltage',
+				getOpts: {
+					// getOnStart: true, // get the initial value on app start (only use for non-battery devices)
+					pollInterval: 600000, // maps to device settings
+					// getOnOnline: true, // use only for battery devices
+				},
+				report: 'mainsVoltage',
+				reportParser: value => {
+					this.log('genAnalogInput - mainsVoltage', value / 10);
+					return value / 10;
+				},
+				endpoint: 0,
+			});
+		}
 
+		// Register the AttributeReportListener - Lifeline
+		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
+				this.onLifelineReport.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this._debug('registered attr report listener - genBasic - Lifeline');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - genBasic - Lifeline', err);
+			});
+
+	}
+
+	onLifelineReport(value) {
+		this._debug('parsedData', new Buffer(value, 'ascii'));
+
+		const parsedData = parseData(new Buffer(value, 'ascii'));
+		this._debug('parsedData', parsedData);
+
+		// switch onoff reportParser (ID 100)
+		if (parsedData.hasOwnProperty('100')) {
+			const parsedOnOff = parsedData['100'] === 1;
+			this.log('lifeline - onoff state', parsedOnOff);
+			this.setCapabilityValue('onoff', parsedOnOff);
+		}
+
+		function parseData(rawData) {
+			const data = {};
+			let index = 0;
+			while (index < rawData.length - 2) {
+				const type = rawData.readUInt8(index + 1);
+				const byteLength = (type & 0x7) + 1;
+				const isSigned = Boolean((type >> 3) & 1);
+				// extract the relevant objects (100) Switch onoff state
+				if ([100].includes(rawData.readUInt8(index))) {
+					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				}
+				index += byteLength + 2;
+			}
+			return data;
+		}
 	}
 
 }
