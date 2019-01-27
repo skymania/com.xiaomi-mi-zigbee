@@ -30,12 +30,12 @@ class AqaraWallSwitchDoubleL extends ZigBeeDevice {
 
 	// Method to handle changes to attributes
 	switchOneAttrListener(data) {
-		this.log('[AqaraLightControlDouble] [switchOneAttrListener] Received data =', data);
+		this.log('genOnOff - onOff (switch 1):', data === 1);
 		this.setCapabilityValue('onoff', data === 1);
 	}
 
 	switchTwoAttrListener(data) {
-		this.log('[AqaraLightControlDouble] [switchTwoAttrListener] Received data =', data);
+		this.log('genOnOff - onOff (switch 2):', data === 1);
 		let currentValue = this.getCapabilityValue('onoff.1');
 		this.setCapabilityValue('onoff.1', data === 1);
 		if (currentValue !== (data === 1)) {

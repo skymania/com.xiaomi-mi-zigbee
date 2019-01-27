@@ -8,6 +8,10 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
 		// Register attribute listener for occupancy
 		this._attrReportListeners['0_msOccupancySensing'] = this._attrReportListeners['0_msOccupancySensing'] || {};
 		this._attrReportListeners['0_msOccupancySensing']['occupancy'] = this.onOccupancyReport.bind(this);
+
+		this._attrReportListeners['0_genBasic'] = this._attrReportListeners['0_genBasic'] || {};
+		this._attrReportListeners['0_genBasic']['65281'] =
+			this.onLifelineReport.bind(this);
 	}
 
 	onOccupancyReport(value) {
@@ -23,6 +27,45 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
 		// Update capability value
 		this.setCapabilityValue('alarm_motion', value === 1);
 	}
+
+	onLifelineReport(value) {
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
+
+		const parsedData = parseData(new Buffer(value, 'ascii'));
+		this._debug('parsedData', parsedData);
+
+		// battery reportParser (ID 1)
+		if (parsedData.hasOwnProperty('1')) {
+			const parsedVolts = parsedData['1'] / 1000;
+			const minVolts = 2.5;
+			const maxVolts = 3.0;
+
+			const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+			this.log('lifeline - battery', parsedBatPct);
+			if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
+				// Set Battery capability
+				this.setCapabilityValue('measure_battery', parsedBatPct);
+				// Set Battery alarm if battery percentatge is below 20%
+				this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			}
+		}
+
+		function parseData(rawData) {
+			const data = {};
+			let index = 0;
+			while (index < rawData.length) {
+				const type = rawData.readUInt8(index + 1);
+				const byteLength = (type & 0x7) + 1;
+				const isSigned = Boolean((type >> 3) & 1);
+				//if ([1, 100, 101].includes(rawData.readUInt8(index))) {
+				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				//}
+				index += byteLength + 2;
+			}
+			return data;
+		}
+	}
+
 }
 
 module.exports = XiaomiHumanBodySensor;

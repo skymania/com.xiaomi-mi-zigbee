@@ -18,8 +18,8 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
 				this.error('failed to register attr report listener - genOnOff - Contact', err);
 			});
 
-		this.registerAttrReportListener('genBasic', '65282', 1, 60, null, data => {
-			this.log('65282', data);
+		this.registerAttrReportListener('genBasic', '65281', 1, 60, null, data => {
+			this.log('65281', data);
 		}, 0);
 	}
 

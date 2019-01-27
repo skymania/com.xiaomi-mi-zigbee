@@ -7,8 +7,34 @@
 	},
 	"class": "socket",
 	"capabilities": [
-		"onoff"
+		"onoff",
+		"measure_power",
+		"meter_power",
+		"measure_voltage"
 	],
+	"mobile": {
+		"components": [
+			{
+				"id": "icon",
+				"capabilities": []
+			},
+			{
+				"id": "sensor",
+				"capabilities": [
+					"measure_power",
+					"meter_power",
+					"measure_voltage"
+				]
+			},
+			{
+				"id": "toggle",
+				"capabilities": ["onoff"],
+				"options": {
+					"showTitle": true
+				}
+			}
+		]
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": ["lumi.ctrl_ln1.aq1"],

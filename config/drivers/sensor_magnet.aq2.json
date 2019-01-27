@@ -2,7 +2,7 @@
 	"id": "sensor_magnet.aq2",
 	"branch": "master",
 	"name": {
-		"en": "Aqara Window/Door Sensor"
+		"en": "Aqara Door and Window Sensor"
 	},
 	"class": "sensor",
 	"capabilities": [

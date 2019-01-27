@@ -8,7 +8,10 @@
 	"class": "socket",
 	"capabilities": [
 		"onoff",
-		"onoff.1"
+		"onoff.1",
+		"measure_power",
+		"meter_power",
+		"measure_voltage"
 	],
 	"capabilitiesOptions": {
 		"onoff": {
@@ -29,6 +32,14 @@
 			{
 				"id": "icon",
 				"capabilities": []
+			},
+			{
+				"id": "sensor",
+				"capabilities": [
+					"measure_power",
+					"meter_power",
+					"measure_voltage"
+				]
 			},
 			{
 				"id": "toggle",

@@ -1,3 +1,4 @@
+//no lifeline
 'use strict';
 
 const Homey = require('homey');
@@ -73,7 +74,7 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 					remoteValue = {
 						scene: this.sceneMap[90].scene,
 					};
-					this.log('Scene trigger', remoteValue.scene);
+					this._debug('Scene trigger', remoteValue.scene);
 
 					// Trigger the trigger card with 1 autocomplete option
 					Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
@@ -89,7 +90,7 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 					scene: this.sceneMap[keyHeld && repScene === 1 ? 91 : repScene].scene,
 				};
 
-				this.log('Scene trigger', remoteValue.scene, repScene);
+				this._debug('Scene trigger', remoteValue.scene, repScene);
 
 				// Trigger the trigger card with 1 dropdown option
 				Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
@@ -116,7 +117,7 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 		resultArray = resultArray.filter(result => {
 			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
 		});
-		this.log(resultArray);
+		this._debug(resultArray);
 		return Promise.resolve(resultArray);
 	}
 }

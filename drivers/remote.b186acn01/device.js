@@ -32,7 +32,7 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 				this.onSceneListener.bind(this), 0)
 			.then(() => {
 				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genMultistateInput - presentValue');
+				this._debug('registered attr report listener - genMultistateInput - presentValue');
 			})
 			.catch(err => {
 				// Registering attr reporting failed
@@ -44,7 +44,7 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 				this.onLifelineReport.bind(this), 0)
 			.then(() => {
 				// Registering attr reporting succeeded
-				this.log('registered attr report listener - genBasic - Lifeline');
+				this._debug('registered attr report listener - genBasic - Lifeline');
 			})
 			.catch(err => {
 				// Registering attr reporting failed
@@ -69,7 +69,7 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 				const remoteValue = {
 					scene: this.sceneMap[repScene].scene,
 				};
-				this.log('Scene trigger', remoteValue.scene);
+				this._debug('Scene trigger', remoteValue.scene);
 				// Trigger the trigger card with 1 dropdown option
 				Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
 				// Trigger the trigger card with tokens
@@ -95,15 +95,15 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 		resultArray = resultArray.filter(result => {
 			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
 		});
-		this.log(resultArray);
+		this._debug(resultArray);
 		return Promise.resolve(resultArray);
 	}
 
 	onLifelineReport(value) {
-		this.log('lifeline report', new Buffer(value, 'ascii'));
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
 		/*
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		// this.log('parsedData', parsedData);
+		// this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
 		const parsedVolts = parsedData['1'] / 100.0;
@@ -111,7 +111,7 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 		const maxVolts = 3.0;
 
 		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-		this.log('lifeline - battery', parsedBatPct);
+		this._debug('lifeline - battery', parsedBatPct);
 		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
 			// Set Battery capability
 			this.setCapabilityValue('measure_battery', parsedBatPct);
@@ -121,7 +121,7 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 
 		// contact alarm reportParser (ID 100)
 		// const parsedContact = (parsedData['100'] === 1);
-		// this.log('lifeline - contact alarm', parsedContact);
+		// this._debug('lifeline - contact alarm', parsedContact);
 		// this.setCapabilityValue('alarm_contact', parsedContact);
 
 		function parseData(rawData) {

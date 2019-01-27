@@ -61,15 +61,15 @@ class AqaraLightSwitchSingle extends ZigBeeDevice {
 		resultArray = resultArray.filter(result => {
 			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
 		});
-		this.log(resultArray);
+		this._debug(resultArray);
 		return Promise.resolve(resultArray);
 	}
 
 	onLifelineReport(value) {
-		this.log('lifeline report', new Buffer(value, 'ascii'));
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
 		/*
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		// this.log('parsedData', parsedData);
+		// this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
 		const parsedVolts = parsedData['1'] / 100.0;

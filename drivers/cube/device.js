@@ -48,7 +48,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		// this.printNode();
 
 		// Register the AttributeReportListener - Shake, Catch, Flip 90, Flip 180, Slide and Double tap motionType
-		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, this.flippedAttribReport.bind(this), 1)
+		this.registerAttrReportListener('genMultistateInput', 'presentValue', 1, 60, null, this.motionAttribReport.bind(this), 1)
 			.catch(err => {
 				// Registering attr reporting failed
 				this.error('failed to register attr report listener - genMultistateInput - Motion', err);
@@ -73,7 +73,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeShakeTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				// this.log('cubeShake (args, state):', args, state);
+				this._debug('cubeShake (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -82,7 +82,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeFlip90TriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				// this.log('cubeFlip90 (args, state):', args, state);
+				this._debug('cubeFlip90 (args, state):', args, state);
 				return Promise.resolve(
 					(args.sourceFace === '0' && args.targetFace === state.targetFace) || // any side to target side
 					(args.sourceFace === state.sourceFace && args.targetFace === '0') || // source side to any side
@@ -95,7 +95,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeFlip180TriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				// this.log('cubeFlip180 (args, state):', args, state);
+				this._debug('cubeFlip180 (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -104,7 +104,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeSlideTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				// this.log('cubeSlide (args, state):', args, state);
+				this._debug('cubeSlide (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -113,7 +113,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeDoubleTapTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				// this.log('cubeDoubleTap (args, state):', args, state);
+				this._debug('cubeDoubleTap (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -122,7 +122,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		this.cubeRotateTriggerDevice
 			.register()
 			.registerRunListener((args, state) => {
-				// this.log('cubeRotate (args, state):', args, state);
+				this._debug('cubeRotate (args, state):', args, state);
 				return Promise.resolve(args.targetFace === state.targetFace || args.targetFace === '0');
 			});
 
@@ -137,46 +137,50 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		*/
 	}
 	onLifelineReport(value) {
-		this.log('lifeline report', new Buffer(value, 'ascii'));
-		/*
+		this._debug('lifeline report', new Buffer(value, 'ascii'));
+
 		const parsedData = parseData(new Buffer(value, 'ascii'));
-		// this.log('parsedData', parsedData);
+		this._debug('parsedData', parsedData);
 
-		// battery reportParser
-		const parsedVolts = parsedData['1'] / 100.0;
-		var minVolts = 2.5;
-		var maxVolts = 3.0;
+		// battery reportParser (ID 1)
+		if (parsedData.hasOwnProperty('1')) {
+			const parsedVolts = parsedData['1'] / 1000;
+			var minVolts = 2.5;
+			var maxVolts = 3.0;
 
-		let parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-		this.log('lifeline - battery', parsedBatPct);
-		// Set Battery capability
-		this.setCapabilityValue('measure_battery', parsedBatPct);
-		// Set Battery alarm if battery percentatge is below 20%
-		this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+			let parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+			this.log('lifeline - battery', parsedBatPct);
+			// Set Battery capability
+			this.setCapabilityValue('measure_battery', parsedBatPct);
+			// Set Battery alarm if battery percentatge is below 20%
+			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
+		}
 
 		function parseData(rawData) {
 			const data = {};
 			let index = 0;
-			while (index < rawData.length) {
+			while (index < rawData.length - 2) {
 				const type = rawData.readUInt8(index + 1);
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
-				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				// extract the relevant objects (1) Battery
+				if ([1].includes(rawData.readUInt8(index))) {
+					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				}
 				index += byteLength + 2;
 			}
 			return data;
 		}
-		*/
 	}
 
-	flippedAttribReport(data) {
+	motionAttribReport(data) {
 		// data in binary first 4 bits indicate type of motion, following group of 3 bits indicate the face of the cube
 		const motionType = (data >> 6) & 0b1111; // 0 (shake), 1 (flip 90), 2 (flip 180), 4 (slide), 8 (double tap)
 		const sourceFace = ((data >> 3) & 0b111) + 1; // sourceFace (1-6)
 		// in case of Shake event retrieve last known cube_state_face
 		const targetFace = motionArray[motionType].motion !== 'Shake' ? (data & 0b111) + 1 : (this.getCapabilityValue('cube_state_face') || 6); // targetFace (1-6)
 
-		this.log('data reported: ', data, 'motionType', motionArray[motionType].motion, 'sourceFace', sourceFace, 'targetFace', targetFace);
+		this.log('genMultistateInput - presentValue (motion): ', data, 'motionType', motionArray[motionType].motion, 'sourceFace', sourceFace, 'targetFace', targetFace);
 
 		const cubeAction = {
 			motion: motionArray[motionType].motion,
@@ -191,7 +195,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		// Trigger the corresponding triggerdevice matching to the motion
 		if (cubeAction.motion) {
 			this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, null, cubeAction)
-				.then(() => this.log(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
+				.then(() => this._debug(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
 				.catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
 		}
 
@@ -201,7 +205,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				sourceFace: sourceFace,
 				targetFace: targetFace,
 			})
-			.then(() => this.log('Triggered cubeMotionTriggerDevice'))
+			.then(() => this._debug('Triggered cubeMotionTriggerDevice'))
 			.catch(err => this.error('Error triggering cubeMotionTriggerDevice', err));
 
 	}
@@ -220,7 +224,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		// Trigger the corresponding triggerdevice matching to the motion
 		if (cubeAction.motion) {
 			this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, null, cubeAction)
-				.then(() => this.log(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
+				.then(() => this._debug(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
 				.catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
 		}
 
@@ -230,12 +234,12 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				sourceFace: 0,
 				targetFace: parseInt(cubeAction.targetFace),
 			})
-			.then(() => this.log('Triggered cubeMotionTriggerDevice'))
+			.then(() => this._debug('Triggered cubeMotionTriggerDevice'))
 			.catch(err => this.error('Error triggering cubeMotionTriggerDevice', err));
 	}
 
 	rotatedAttribReport(data) {
-		this.log('rotated', data);
+		this.log('genAnalogInput - presentValue (rotate)', data);
 
 		const cubeAction = {
 			motion: 'Rotate',
@@ -252,7 +256,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 		// Trigger the corresponding triggerdevice matching to the motion
 		if (cubeAction.motion) {
 			this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, cubeAction, cubeAction)
-				.then(() => this.log(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
+				.then(() => this._debug(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
 				.catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
 		}
 
@@ -262,7 +266,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 				sourceFace: 0,
 				targetFace: parseInt(cubeAction.targetFace),
 			})
-			.then(() => this.log('Triggered cubeMotionTriggerDevice'))
+			.then(() => this._debug('Triggered cubeMotionTriggerDevice'))
 			.catch(err => this.error('Error triggering cubeMotionTriggerDevice', err));
 
 	}
@@ -270,6 +274,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
 
 module.exports = AqaraCubeSensor;
 
+/*
 //	[ManagerDrivers] [cube] [0] ZigBeeDevice has been inited
 // [ManagerDrivers] [cube] [0] ------------------------------------------
 // [ManagerDrivers] [cube] [0] Node: b8b6da9e-7086-489b-b643-60282088ed6c
@@ -335,3 +340,13 @@ module.exports = AqaraCubeSensor;
 // [ManagerDrivers] [cube] [0] ---- sid : attrs
 // [ManagerDrivers] [cube] [0] ---- presentValue : 12.789998054504395
 // [ManagerDrivers] [cube] [0] ------------------------------------------
+
+{ '1': 3069,	=	battery
+  '3': 20,
+  '4': 17405,
+  '5': 253,
+  '6': 3,
+  '10': 0,
+  '253': 3 		= face side up
+}
+*/

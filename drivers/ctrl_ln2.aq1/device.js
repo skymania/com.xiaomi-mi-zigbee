@@ -26,38 +26,125 @@ class AqaraWallSwitchDoubleLN extends ZigBeeDevice {
 		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
 			this.switchTwoAttrListener.bind(this), 1, true);
 
-		// measure_power
+		// measure_power switch
 		// applicationType : 589824 = 0x090000 Power in Watts
 		// Register measure_power capability
 		if (this.hasCapability('measure_power')) {
 			this.registerCapability('measure_power', 'genAnalogInput', {
 				get: 'presentValue',
 				report: 'presentValue',
-				reportParser: value => value,
-			}, 3);
+				reportParser: value => {
+					this.log('genAnalogInput - presentValue (power)', value);
+					return value;
+				},
+				endpoint: 2
+			});
+
+			// Report is send if status is changed or after 5 min
+			this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
+				this._debug('genAnalogInput - presentValue (power)', data); // due to amount of data reported, only logged in debug mode
+				this.setCapabilityValue('measure_power', data);
+			}, 2);
 		}
 
-		// meter_power
+		// meter_power switch
 		// applicationType : 720896 = 0x0B0000 Energy in kWH
 		// Register meter_power capability
 		if (this.hasCapability('meter_power')) {
 			this.registerCapability('meter_power', 'genAnalogInput', {
 				get: 'presentValue',
+				getOpts: {
+					pollInterval: 600000, // maps to device settings
+				},
 				report: 'presentValue',
-				reportParser: value => value,
-			}, 2);
+				reportParser: value => {
+					this.log('genAnalogInput - presentValue (meter)', value);
+					return value;
+				},
+				endpoint: 3
+			});
+
+			// Report is send if status is changed or after 5 min
+			this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
+				this.log('genAnalogInput - presentValue (meter)', data);
+				this.setCapabilityValue('meter_power', data);
+			}, 3);
 		}
 
+		// measure_voltage
+		if (this.hasCapability('measure_voltage')) {
+			this.registerCapability('measure_voltage', 'genPowerCfg', {
+				get: 'mainsVoltage',
+				getOpts: {
+					pollInterval: 600000, // maps to device settings
+				},
+				report: 'mainsVoltage',
+				reportParser: value => {
+					this.log('genAnalogInput - mainsVoltage', value / 10);
+					return value / 10;
+				},
+				endpoint: 0,
+			});
+		}
+
+		// Register the AttributeReportListener - Lifeline
+		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
+				this.onLifelineReport.bind(this), 0)
+			.then(() => {
+				// Registering attr reporting succeeded
+				this._debug('registered attr report listener - genBasic - Lifeline');
+			})
+			.catch(err => {
+				// Registering attr reporting failed
+				this.error('failed to register attr report listener - genBasic - Lifeline', err);
+			});
+
+	}
+
+	onLifelineReport(value) {
+		this._debug('parsedData', new Buffer(value, 'ascii'));
+
+		const parsedData = parseData(new Buffer(value, 'ascii'));
+		this._debug('parsedData', parsedData);
+
+		// state (onoff) switch 1 (ID 100)
+		if (parsedData.hasOwnProperty('100')) {
+			const parsedOnOff = parsedData['100'] === 1;
+			this.log('lifeline - onoff state (switch 1)', parsedOnOff);
+			this.setCapabilityValue('onoff', parsedOnOff);
+		}
+		// state (onoff) switch 2 (ID 101)
+		if (parsedData.hasOwnProperty('101')) {
+			const parsedOnOff = parsedData['101'] === 1;
+			this.log('lifeline - onoff state (switch 2)', parsedOnOff);
+			this.setCapabilityValue('onoff.1', parsedOnOff);
+		}
+
+		function parseData(rawData) {
+			const data = {};
+			let index = 0;
+			while (index < rawData.length - 2) {
+				const type = rawData.readUInt8(index + 1);
+				const byteLength = (type & 0x7) + 1;
+				const isSigned = Boolean((type >> 3) & 1);
+				// extract the relevant objects (100) switch 1 onoff state, (101) switch 2 onof state
+				if ([100, 101].includes(rawData.readUInt8(index))) {
+					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
+				}
+				index += byteLength + 2;
+			}
+			return data;
+		}
 	}
 
 	// Method to handle changes to attributes
 	switchOneAttrListener(data) {
-		this.log('[switchOneAttrListener] Received data =', data);
+		this.log('genOnOff - onOff (switch 1):', data);
 		this.setCapabilityValue('onoff', data === 1);
 	}
 
 	switchTwoAttrListener(data) {
-		this.log('[switchTwoAttrListener] Received data =', data);
+		this.log('genOnOff - onOff (switch 2):', data);
 		let currentValue = this.getCapabilityValue('onoff.1');
 		this.setCapabilityValue('onoff.1', data === 1);
 		if (currentValue !== (data === 1)) {
