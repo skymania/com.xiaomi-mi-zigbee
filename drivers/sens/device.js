@@ -84,7 +84,7 @@ class XiaomiTempSensor extends ZigBeeDevice {
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
 				// extract the relevant objects (1) Battery, (100) Temperature, (101) Humidity
-				if ([1, 100, 101].includes(rawData.readUInt8(index))) {
+				if ([1].includes(rawData.readUInt8(index))) {
 					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
 				}
 				index += byteLength + 2;

@@ -11,9 +11,6 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 [Xiaomi-mi / Aqara Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi-zigbee)                    
 [Xiaomi-mi / Aqara Zigbee app Github repository](https://github.com/TedTolboom/com.xiaomi-mi-zigbee)   
 
-**Note:** This app is using [HomeyConfig composer](https://www.npmjs.com/package/node-homey-config-composer).   
-Please file Pull Requests on the *development* branch of this repository and with respect to the refactored files in _/drivers_ and _/config_ folders.   
-
 ## Supported devices (supported capabilities)
 ### Xiaomi devices   
 * [Door/Window sensor (MCCGQ01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-door-window-sensors/) (contact alarm)
@@ -64,6 +61,10 @@ Any requests please post them in the [Xiaomi / Aqara Zigbee topic on the Athom C
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+
+### v 0.5.1
+* Fix issues where incorrect data is reported by the Xiaom and Aqara Temperature and Humidity Sensors [#125](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/125)   
+
 ### v 0.5.0
 * Enabled Xiaomi lifeline reporting (device dependent interval), adding the following functions:
   - Battery reporting (measurement + alarm) enabled for multiple devices (see device - capability overview)   

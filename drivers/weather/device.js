@@ -7,7 +7,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 	onMeshInit() {
 
 		// enable debugging
-		// this.enableDebug();
+		this.enableDebug();
 
 		// print the node's info to the console
 		// this.printNode();
@@ -115,7 +115,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
 				// extract the relevant objects (1) Battery, (100) Temperature, (101) Humidity, (102) Pressure
-				if ([1, 100, 101, 102].includes(rawData.readUInt8(index))) {
+				if ([1].includes(rawData.readUInt8(index))) {
 					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
 				}
 				index += byteLength + 2;
