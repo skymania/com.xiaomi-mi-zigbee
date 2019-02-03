@@ -62,6 +62,9 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 
+### v 0.5.2
+* Fix issue where motion alarm would be cancelled before the finalizing the motion alarm reset duration    
+
 ### v 0.5.1
 * Fix issues where incorrect data is reported by the Xiaom and Aqara Temperature and Humidity Sensors [#125](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/125)   
 

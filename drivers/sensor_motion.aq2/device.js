@@ -76,12 +76,14 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 			}
 		}
 
+		/*
 		// motion alarm reportParser (ID 100)
 		if (parsedData.hasOwnProperty('100')) {
 			const parsedContact = (parsedData['100'] === 1);
 			this.log('lifeline - motion alarm', parsedContact);
 			this.setCapabilityValue('alarm_motion', parsedContact);
 		}
+		*/
 
 		function parseData(rawData) {
 			const data = {};
@@ -91,7 +93,7 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 				const byteLength = (type & 0x7) + 1;
 				const isSigned = Boolean((type >> 3) & 1);
 				// extract the relevant objects (1) Battery, (100) Motion alarm
-				if ([1, 100].includes(rawData.readUInt8(index))) {
+				if ([1].includes(rawData.readUInt8(index))) {
 					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
 				}
 				index += byteLength + 2;
