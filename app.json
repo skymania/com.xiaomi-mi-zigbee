@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.5.2",
+  "version": "0.5.3",
   "compatibility": ">=1.5.13",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -1703,6 +1703,66 @@
         "small": "/drivers/curtain/assets/images/small.png"
       },
       "settings": []
+    },
+    {
+      "id": "light.aqcn02",
+      "name": {
+        "en": "Aqara LED Bulb",
+        "nl": "Aqara LED Bulb"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "onoff": {
+          "setOnDim": false
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": [
+          "lumi.light.aqcn02"
+        ],
+        "deviceId": 258,
+        "profileId": 260,
+        "learnmode": {
+          "instruction": {
+            "en": "Toggle the bulb on/off 5 times until the bulb blinks twice quickly to start pairing.",
+            "nl": "Zet, om de lamp toe te voegen, de lamp 5 keer achter elkaar uit en weer aan totdat de lamp twee keer snel knippert."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/light.aqcn02/assets/images/large.png",
+        "small": "/drivers/light.aqcn02/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "transition_time",
+          "type": "number",
+          "label": {
+            "en": "Transition Time",
+            "nl": "Overgangstijd"
+          },
+          "hint": {
+            "en": "This setting determines the time in seconds it takes to dim from one level to another.",
+            "nl": "Deze instelling bepaalt de duur in seconden van het dimmen van een niveau naar een ander."
+          },
+          "value": 1,
+          "attr": {
+            "min": 0,
+            "max": 6553
+          }
+        }
+      ]
     },
     {
       "id": "plug",
