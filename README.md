@@ -8,16 +8,16 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 </a>  
 
 ## Links:
-[Xiaomi-mi / Aqara Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi-zigbee)                    
+[Xiaomi-mi / Aqara Zigbee app Athom apps](https://apps.athom.com/app/com.xiaomi-mi)                    
 [Xiaomi-mi / Aqara Zigbee app Github repository](https://github.com/TedTolboom/com.xiaomi-mi-zigbee)   
 
 ## Supported devices (supported capabilities)
 ### Xiaomi devices   
-* [Door/Window sensor (MCCGQ01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-door-window-sensors/) (contact alarm)
-* [Occupancy Sensor (RTCGQ01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-occupancy-sensor/) (motion alarm)
-* [Wireless switch (WXKG01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-wireless-switch/) (1x - 4x click, Key Held, Key released)  
-* [Temperature/Humidity Sensor (WSDCGQ01LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-temperature-humidity-sensor/) (temperature, relative humidity, **battery level**)
-* [Smart socket plug ZigBee edition (ZNCZ02LM)](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-smart-socket-plug-2-zigbee-edition-white/) (onoff, measure_power, **meter_power**, **measure_voltage**)
+* Door/Window sensor (MCCGQ01LM) (contact alarm)
+* Occupancy Sensor (RTCGQ01LM)(motion alarm)
+* Wireless switch (WXKG01LM) (1x - 4x click, Key Held, Key released)  
+* Temperature/Humidity Sensor (WSDCGQ01LM) (temperature, relative humidity, **battery level**)
+* Smart socket plug ZigBee edition (ZNCZ02LM)] (onoff, measure_power, **meter_power**, **measure_voltage**)
 
 ### Aqara devices   
 * [Aqara Curtain Controller (Zigbee) (ZNCLDJ11LM)](https://www.aqara.com/en/curtain_controller-product.html) (open, close, idle, setpoint (100% = open, 0% = closed))   
@@ -30,6 +30,7 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 * [Aqara Wall Outlet (Zigbee) (QBCZ11LM)](https://www.aqara.com/en/wall_outlet-product.html) (onoff, **measure_power**, **meter_power**, **measure_voltage**)
 * [Aqara Wireless switch with Gyro (WXKG12LM)](https://www.aqara.com/en/wireless_mini_switch.html) (1x, 2x click, key held, key released, Shaken, **battery level**)
 * [Aqara Vibration Sensor (DJT11LM)](https://www.aqara.com/en/vibration_sensor-product.html) (tilt-, vibration-, drop-motion, tilt angles (to reference plane), tilt angles (to previous position), vibration strength, tilt-, vibration-, drop-alarm, **battery level**)      
+* [Aqara Tunable LED Bulb (ZNLDP12LM)](https://www.aqara.com/cn/led_light.html) (onoff, dim, light_temperature)      
 
   **Note:**   
   The following devices are sold under the same model number (e.g. WXKG11LM), but have different capabilities.
@@ -61,6 +62,9 @@ Any requests please post them in the [Xiaomi / Aqara Zigbee topic on the Athom C
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+
+### v 0.5.3
+* Add support for the [Aqara Tunable LED Bulb (ZNLDP12LM)](https://www.aqara.com/cn/led_light.html)    
 
 ### v 0.5.2
 * Fix issue where motion alarm would be cancelled before the finalizing the motion alarm reset duration    
