@@ -11,10 +11,10 @@ class AqaraTunableBulb extends ZigBeeLightDevice {
 
       await super.onMeshInit();
       // enable debugging
-      this.enableDebug();
+      // this.enableDebug();
 
       // print the node's info to the console
-      this.printNode();
+      // this.printNode();
 
 
 	}

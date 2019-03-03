@@ -2,28 +2,26 @@
 		"id": "trigger_switch2_turned_on",
 		"title": {
 			"en": "Turned on (right switch)",
-			"nl": "Ingeschakeld (rechter schakelaar)"
+			"nl": "Ingeschakeld (rechter schakelaar)",
+			"de": "Eingeschaltet (rechter Schalter)"
 		},
-		"args": [
-			{
-				"type": "device",
-				"name": "device",
-				"filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
-		}
-	]
-},
+		"args": [{
+			"type": "device",
+			"name": "device",
+			"filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
+		}]
+	},
 	{
 		"id": "trigger_switch2_turned_off",
 		"title": {
 			"en": "Turned off (right switch)",
-			"nl": "Uitgeschakeld (rechter schakelaar)"
+			"nl": "Uitgeschakeld (rechter schakelaar)",
+			"de": "Ausgeschaltet (rechter Schalter)"
 		},
-		"args": [
-			{
-				"type": "device",
-				"name": "device",
-				"filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
-		}
-	]
-}
+		"args": [{
+			"type": "device",
+			"name": "device",
+			"filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
+		}]
+	}
 ]

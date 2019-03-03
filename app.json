@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.5.3",
+  "version": "0.5.4",
   "compatibility": ">=1.5.13",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -22,6 +22,10 @@
   },
   "contributors": {
     "developers": [
+      {
+        "name": "Sebastian Spoerer",
+        "email": "sebastian@programmieramt.de"
+      },
       {
         "name": "Edwin Tan (Automate Asia)",
         "email": "Edwin.Tan@automate.asia"
@@ -282,7 +286,8 @@
         "id": "trigger_switch2_turned_on",
         "title": {
           "en": "Turned on (right switch)",
-          "nl": "Ingeschakeld (rechter schakelaar)"
+          "nl": "Ingeschakeld (rechter schakelaar)",
+          "de": "Eingeschaltet (rechter Schalter)"
         },
         "args": [
           {
@@ -296,7 +301,8 @@
         "id": "trigger_switch2_turned_off",
         "title": {
           "en": "Turned off (right switch)",
-          "nl": "Uitgeschakeld (rechter schakelaar)"
+          "nl": "Uitgeschakeld (rechter schakelaar)",
+          "de": "Ausgeschaltet (rechter Schalter)"
         },
         "args": [
           {
@@ -310,11 +316,13 @@
         "id": "button1_button",
         "title": {
           "en": "A button has been pressed",
-          "nl": "Een knop is ingedrukt"
+          "nl": "Een knop is ingedrukt",
+          "de": "Ein Schalter ist gedrückt"
         },
         "hint": {
           "en": "This card will trigger on any button pressed and provides the scene tokens.",
-          "nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
+          "nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan.",
+          "de": "Diese Karte wird mit jeder gedrücktem Schalter aktiviert und liefert den scene token."
         },
         "args": [
           {
@@ -329,7 +337,8 @@
             "type": "string",
             "title": {
               "en": "scene",
-              "nl": "scene"
+              "nl": "scene",
+              "de": "Szene"
             },
             "example": {
               "en": "Button pressed (test)"
@@ -341,11 +350,13 @@
         "id": "button2_button",
         "title": {
           "en": "A button has been pressed",
-          "nl": "Een knop is ingedrukt"
+          "nl": "Een knop is ingedrukt",
+          "de": "Ein Schalter ist gedrückt"
         },
         "hint": {
           "en": "This card will trigger on any button pressed and provides the scene tokens.",
-          "nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan."
+          "nl": "Deze kaart wordt geactiveerd bij iedere knop die ingedrukt wordt en biedt de scene tokens aan.",
+          "de": "Diese Karte wird mit jeder gedrücktem Schalter aktiviert und liefert den scene token."
         },
         "args": [
           {
@@ -360,7 +371,8 @@
             "type": "string",
             "title": {
               "en": "button",
-              "nl": "knop"
+              "nl": "knop",
+              "de": "Schalter"
             },
             "example": {
               "en": "0"
@@ -371,7 +383,8 @@
             "type": "string",
             "title": {
               "en": "scene",
-              "nl": "scene"
+              "nl": "scene",
+              "de": "Szene"
             },
             "example": {
               "en": "Button pressed (test)"
@@ -383,11 +396,13 @@
         "id": "trigger_button1_scene",
         "title": {
           "en": "A scene has been activated",
-          "nl": "Een scene is geactiveerd"
+          "nl": "Een scene is geactiveerd",
+          "de": "Eine Szene wurde aktiviert"
         },
         "hint": {
           "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
-          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties.",
+          "de": "Diese Karte wird nur aktiviert wenn die Szene mit dem Status im Dropdown-Feld übereinstimmt."
         },
         "args": [
           {
@@ -405,11 +420,13 @@
         "id": "trigger_button2_scene",
         "title": {
           "en": "A scene has been activated",
-          "nl": "Een scene is geactiveerd"
+          "nl": "Een scene is geactiveerd",
+          "de": "Eine Szene wurde aktiviert"
         },
         "hint": {
           "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
-          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties."
+          "nl": "Deze kaart wordt alleen geactiveerd wanneer de scene overeenkomt met de toestand van de gekozen opties.",
+          "de": "Diese Karte wird nur aktiviert wenn die Szene mit dem Status im Dropdown-Feld übereinstimmt."
         },
         "args": [
           {
@@ -431,7 +448,8 @@
         "id": "cube_Motion",
         "title": {
           "en": "Cube motion",
-          "nl": "Cube beweging"
+          "nl": "Cube beweging",
+          "de": "Cube Bewegung"
         },
         "args": [
           {
@@ -446,11 +464,13 @@
             "type": "string",
             "title": {
               "en": "Cube Motion",
-              "nl": "Cube beweging"
+              "nl": "Cube beweging",
+              "de": "Cube Bewegung"
             },
             "example": {
               "en": "Shake",
-              "nl": "Schudden"
+              "nl": "Schudden",
+              "de": "Schütteln"
             }
           },
           {
@@ -475,7 +495,8 @@
         "id": "cube_Shake",
         "title": {
           "en": "Cube shaked",
-          "nl": "Cube geschud"
+          "nl": "Cube geschud",
+          "de": "Cube geschüttelt"
         },
         "args": [
           {
@@ -491,49 +512,56 @@
                 "id": "0",
                 "label": {
                   "en": "any side up",
-                  "nl": "willekeurige zijde"
+                  "nl": "willekeurige zijde",
+                  "de": "Zufällige Seite oben"
                 }
               },
               {
                 "id": "1",
                 "label": {
                   "en": "side 1 up",
-                  "nl": "zijde 1 boven"
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
                 }
               },
               {
                 "id": "2",
                 "label": {
                   "en": "side 2 up",
-                  "nl": "zijde 2 boven"
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
                 }
               },
               {
                 "id": "3",
                 "label": {
                   "en": "side 3 up",
-                  "nl": "zijde 3 boven"
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
                 }
               },
               {
                 "id": "4",
                 "label": {
                   "en": "side 4 up",
-                  "nl": "zijde 4  boven"
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
                 }
               },
               {
                 "id": "5",
                 "label": {
                   "en": "side 5 up",
-                  "nl": "zijde 5 boven"
+                  "nl": "zijde 5 boven",
+                  "de": "Seite 5 oben"
                 }
               },
               {
                 "id": "6",
                 "label": {
                   "en": "side 6 up",
-                  "nl": "zijde 6 boven"
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
                 }
               }
             ]
@@ -544,7 +572,8 @@
         "id": "cube_Flip90",
         "title": {
           "en": "Cube flipped 90°",
-          "nl": "Cube 90° gekanteld"
+          "nl": "Cube 90° gekanteld",
+          "de": "Cube 90° gedreht"
         },
         "args": [
           {
@@ -560,49 +589,56 @@
                 "id": "0",
                 "label": {
                   "en": "from any side",
-                  "nl": "van iedere zijde"
+                  "nl": "van iedere zijde",
+                  "de": "von beliebiger Seite"
                 }
               },
               {
                 "id": "1",
                 "label": {
                   "en": "from side 1",
-                  "nl": "van zijde 1"
+                  "nl": "van zijde 1",
+                  "de": "von Seite 1"
                 }
               },
               {
                 "id": "2",
                 "label": {
                   "en": "from side 2",
-                  "nl": "van zijde 2"
+                  "nl": "van zijde 2",
+                  "de": "von Seite 2"
                 }
               },
               {
                 "id": "3",
                 "label": {
                   "en": "from side 3",
-                  "nl": "van zijde 3"
+                  "nl": "van zijde 3",
+                  "de": "von Seite 3"
                 }
               },
               {
                 "id": "4",
                 "label": {
                   "en": "from side 4",
-                  "nl": "van zijde 4"
+                  "nl": "van zijde 4",
+                  "de": "von Seite 4"
                 }
               },
               {
                 "id": "5",
                 "label": {
                   "en": "from side 5",
-                  "nl": "van side 5"
+                  "nl": "van side 5",
+                  "de": "von Seite 5"
                 }
               },
               {
                 "id": "6",
                 "label": {
                   "en": "from side 6",
-                  "nl": "van zijde 6"
+                  "nl": "van zijde 6",
+                  "de": "von Seite 6"
                 }
               }
             ]
@@ -615,49 +651,56 @@
                 "id": "0",
                 "label": {
                   "en": "to any side",
-                  "nl": "naar iedere zijde"
+                  "nl": "naar iedere zijde",
+                  "de": "zu beliebiger Seite"
                 }
               },
               {
                 "id": "1",
                 "label": {
                   "en": "to 1",
-                  "nl": "naar 1"
+                  "nl": "naar 1",
+                  "de": "zu Seite 1"
                 }
               },
               {
                 "id": "2",
                 "label": {
                   "en": "to 2",
-                  "nl": "naar 2"
+                  "nl": "naar 2",
+                  "de": "zu Seite 2"
                 }
               },
               {
                 "id": "3",
                 "label": {
                   "en": "to 3",
-                  "nl": "naar 3"
+                  "nl": "naar 3",
+                  "de": "zu Seite 3"
                 }
               },
               {
                 "id": "4",
                 "label": {
                   "en": "to 4",
-                  "nl": "naar 4"
+                  "nl": "naar 4",
+                  "de": "zu Seite 4"
                 }
               },
               {
                 "id": "5",
                 "label": {
                   "en": "to 5",
-                  "nl": "naar 5"
+                  "nl": "naar 5",
+                  "de": "zu Seite 5"
                 }
               },
               {
                 "id": "6",
                 "label": {
                   "en": "to 6",
-                  "nl": "naar 6"
+                  "nl": "naar 6",
+                  "de": "zu Seite 6"
                 }
               }
             ]
@@ -684,49 +727,56 @@
                 "id": "0",
                 "label": {
                   "en": "any side up",
-                  "nl": "willekeurige zijde"
+                  "nl": "willekeurige zijde",
+                  "de": "beliebige Seite oben"
                 }
               },
               {
                 "id": "1",
                 "label": {
                   "en": "side 1 up",
-                  "nl": "zijde 1 boven"
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
                 }
               },
               {
                 "id": "2",
                 "label": {
                   "en": "side 2 up",
-                  "nl": "zijde 2 boven"
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
                 }
               },
               {
                 "id": "3",
                 "label": {
                   "en": "side 3 up",
-                  "nl": "zijde 3 boven"
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
                 }
               },
               {
                 "id": "4",
                 "label": {
                   "en": "side 4 up",
-                  "nl": "zijde 4  boven"
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
                 }
               },
               {
                 "id": "5",
                 "label": {
                   "en": "side 5 up",
-                  "nl": "side 5 boven"
+                  "nl": "side 5 boven",
+                  "de": "Seite 5 oben"
                 }
               },
               {
                 "id": "6",
                 "label": {
                   "en": "side 6 up",
-                  "nl": "zijde 6 boven"
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
                 }
               }
             ]
@@ -737,7 +787,8 @@
         "id": "cube_Slide",
         "title": {
           "en": "Cube slided",
-          "nl": "Cube verschoven"
+          "nl": "Cube verschoven",
+          "de": "Cube verschieben"
         },
         "args": [
           {
@@ -753,49 +804,56 @@
                 "id": "0",
                 "label": {
                   "en": "any side up",
-                  "nl": "willekeurige zijde"
+                  "nl": "willekeurige zijde",
+                  "de": "beliebige Seite oben"
                 }
               },
               {
                 "id": "1",
                 "label": {
                   "en": "side 1 up",
-                  "nl": "zijde 1 boven"
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
                 }
               },
               {
                 "id": "2",
                 "label": {
                   "en": "side 2 up",
-                  "nl": "zijde 2 boven"
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
                 }
               },
               {
                 "id": "3",
                 "label": {
                   "en": "side 3 up",
-                  "nl": "zijde 3 boven"
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
                 }
               },
               {
                 "id": "4",
                 "label": {
                   "en": "side 4 up",
-                  "nl": "zijde 4  boven"
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
                 }
               },
               {
                 "id": "5",
                 "label": {
                   "en": "side 5 up",
-                  "nl": "side 5 boven"
+                  "nl": "side 5 boven",
+                  "de": "Seite 5 oben"
                 }
               },
               {
                 "id": "6",
                 "label": {
                   "en": "side 6 up",
-                  "nl": "zijde 6 boven"
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
                 }
               }
             ]
@@ -806,7 +864,8 @@
         "id": "cube_DoubleTap",
         "title": {
           "en": "Cube double tapped",
-          "nl": "Cube twee keer kloppen"
+          "nl": "Cube twee keer kloppen",
+          "de": "Cube zweimal angetippt"
         },
         "args": [
           {
@@ -822,49 +881,56 @@
                 "id": "0",
                 "label": {
                   "en": "any side up",
-                  "nl": "willekeurige zijde"
+                  "nl": "willekeurige zijde",
+                  "de": "beliebige Seite oben"
                 }
               },
               {
                 "id": "1",
                 "label": {
                   "en": "side 1 up",
-                  "nl": "zijde 1 boven"
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
                 }
               },
               {
                 "id": "2",
                 "label": {
                   "en": "side 2 up",
-                  "nl": "zijde 2 boven"
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
                 }
               },
               {
                 "id": "3",
                 "label": {
                   "en": "side 3 up",
-                  "nl": "zijde 3 boven"
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
                 }
               },
               {
                 "id": "4",
                 "label": {
                   "en": "side 4 up",
-                  "nl": "zijde 4  boven"
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
                 }
               },
               {
                 "id": "5",
                 "label": {
                   "en": "side 5 up",
-                  "nl": "side 5 boven"
+                  "nl": "side 5 boven",
+                  "de": "Seite 5 oben"
                 }
               },
               {
                 "id": "6",
                 "label": {
                   "en": "side 6 up",
-                  "nl": "zijde 6 boven"
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
                 }
               }
             ]
@@ -875,7 +941,8 @@
         "id": "cube_Rotate",
         "title": {
           "en": "Cube rotated",
-          "nl": "Cube gedraaid"
+          "nl": "Cube gedraaid",
+          "de": "Cube gedreht"
         },
         "args": [
           {
@@ -891,49 +958,56 @@
                 "id": "0",
                 "label": {
                   "en": "any side up",
-                  "nl": "willekeurige zijde"
+                  "nl": "willekeurige zijde",
+                  "de": "beliebige Seite oben"
                 }
               },
               {
                 "id": "1",
                 "label": {
                   "en": "side 1 up",
-                  "nl": "zijde 1 boven"
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
                 }
               },
               {
                 "id": "2",
                 "label": {
                   "en": "side 2 up",
-                  "nl": "zijde 2 boven"
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
                 }
               },
               {
                 "id": "3",
                 "label": {
                   "en": "side 3 up",
-                  "nl": "zijde 3 boven"
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
                 }
               },
               {
                 "id": "4",
                 "label": {
                   "en": "side 4 up",
-                  "nl": "zijde 4  boven"
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
                 }
               },
               {
                 "id": "5",
                 "label": {
                   "en": "side 5 up",
-                  "nl": "side 5 boven"
+                  "nl": "side 5 boven",
+                  "de": "Seite 5 oben"
                 }
               },
               {
                 "id": "6",
                 "label": {
                   "en": "side 6 up",
-                  "nl": "zijde 6 boven"
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
                 }
               }
             ]
@@ -945,7 +1019,8 @@
             "type": "number",
             "title": {
               "en": "Rotation Angle °",
-              "nl": "Rotatiehoek °"
+              "nl": "Rotatiehoek °",
+              "de": "Drehwinkel °"
             },
             "example": 124.51
           },
@@ -954,7 +1029,8 @@
             "type": "number",
             "title": {
               "en": "Relative Angle %",
-              "nl": "Relatieve hoek %"
+              "nl": "Relatieve hoek %",
+              "de": "Relativer Winkel %"
             },
             "example": 0.92
           }
@@ -964,7 +1040,8 @@
         "id": "sensor_motion",
         "title": {
           "en": "Vibration sensor motion",
-          "nl": "Trillings sensor beweging"
+          "nl": "Trillings sensor beweging",
+          "de": "Bewegung des Vibrationssensors"
         },
         "args": [
           {
@@ -979,11 +1056,13 @@
             "type": "string",
             "title": {
               "en": "motion",
-              "nl": "beweging"
+              "nl": "beweging",
+              "de": "Bewegung"
             },
             "example": {
               "en": "Tilt",
-              "nl": "Kantel"
+              "nl": "Kantel",
+              "de": "Neigung"
             }
           }
         ]
@@ -992,7 +1071,8 @@
         "id": "sensor_vibration",
         "title": {
           "en": "The vibration strength changed",
-          "nl": "Het trillings niveau is veranderd"
+          "nl": "Het trillings niveau is veranderd",
+          "de": "Vibrationsintensität hat sich verändert"
         },
         "args": [
           {
@@ -1007,7 +1087,8 @@
             "type": "number",
             "title": {
               "en": "vibration strength",
-              "nl": "trillings niveau"
+              "nl": "trillings niveau",
+              "de": "Vibrationsintensität"
             },
             "example": 45
           }
@@ -1017,7 +1098,8 @@
         "id": "sensor_tilt_reference",
         "title": {
           "en": "Tilt angles to reference plane",
-          "nl": "Kantelhoeken tov referentievlak"
+          "nl": "Kantelhoeken tov referentievlak",
+          "de": "Neigungswinkel relativ zur Bezugsebene"
         },
         "args": [
           {
@@ -1065,7 +1147,8 @@
         "id": "sensor_tilt_delta",
         "title": {
           "en": "Tilt angles to previous position",
-          "nl": "Kantelhoeken tov vorige positie"
+          "nl": "Kantelhoeken tov vorige positie",
+          "de": "Neigungswinkel zur vorherigen Position"
         },
         "args": [
           {
@@ -1113,7 +1196,8 @@
         "id": "alarm_vibration_true",
         "title": {
           "en": "The vibration alarm turned on",
-          "nl": "Het trillingsalarm gaat aan"
+          "nl": "Het trillingsalarm gaat aan",
+          "de": "Vibrationsalarm wurde ausgelöst"
         },
         "args": [
           {
@@ -1127,7 +1211,8 @@
         "id": "alarm_vibration_false",
         "title": {
           "en": "The vibration alarm turned off",
-          "nl": "Het trillingsalarm gaat uit"
+          "nl": "Het trillingsalarm gaat uit",
+          "de": "Vibrationsalarm wurde ausgeschaltet"
         },
         "args": [
           {
@@ -1141,7 +1226,8 @@
         "id": "alarm_tilt_true",
         "title": {
           "en": "The tilt alarm turned on",
-          "nl": "Het kantelalarm gaat aan"
+          "nl": "Het kantelalarm gaat aan",
+          "de": "Neigungsalarm wurde ausgelöst"
         },
         "args": [
           {
@@ -1155,7 +1241,8 @@
         "id": "alarm_tilt_false",
         "title": {
           "en": "The tilt alarm turned off",
-          "nl": "Het kantelalarm gaat uit"
+          "nl": "Het kantelalarm gaat uit",
+          "de": "Neigungsalarm wurde ausgeschaltet"
         },
         "args": [
           {
@@ -1169,7 +1256,8 @@
         "id": "alarm_drop_true",
         "title": {
           "en": "The drop alarm turned on",
-          "nl": "Het valalarm gaat aan"
+          "nl": "Het valalarm gaat aan",
+          "de": "Sturzalarm wurde ausgelöst"
         },
         "args": [
           {
@@ -1183,7 +1271,8 @@
         "id": "alarm_drop_false",
         "title": {
           "en": "The drop alarm turned off",
-          "nl": "Het valalarm gaat uit"
+          "nl": "Het valalarm gaat uit",
+          "de": "Sturzalarm wurde ausgeschaltet"
         },
         "args": [
           {
@@ -1199,7 +1288,8 @@
         "id": "condition_switch2_is_on",
         "title": {
           "en": "Is turned !{{on|off}} (right switch)",
-          "nl": "Is !{{ingeschakeld|uitgeschakeld}} (rechter schakelaar)"
+          "nl": "Is !{{ingeschakeld|uitgeschakeld}} (rechter schakelaar)",
+          "de": "Ist !{{eingeschaltet|ausgeschaltet}} (rechter Schalter)"
         },
         "args": [
           {
@@ -1215,7 +1305,8 @@
         "id": "action_turn_on_switch2",
         "title": {
           "en": "Turn on (right switch)",
-          "nl": "Zet aan (rechter schakelaar)"
+          "nl": "Zet aan (rechter schakelaar)",
+          "de": "Anschalten (rechter Schalter)"
         },
         "args": [
           {
@@ -1229,7 +1320,8 @@
         "id": "action_turn_off_switch2",
         "title": {
           "en": "Turn off (right switch)",
-          "nl": "Zet uit (rechter schakelaar)"
+          "nl": "Zet uit (rechter schakelaar)",
+          "de": "Ausschalten (rechter Schalter)"
         },
         "args": [
           {
@@ -1246,7 +1338,8 @@
       "id": "ctrl_86plug.aq1",
       "name": {
         "en": "Aqara Smart Socket",
-        "nl": "Aqara Smart Socket"
+        "nl": "Aqara Smart Socket",
+        "de": "Aqara Smarte Steckdose"
       },
       "class": "socket",
       "capabilities": [
@@ -1266,7 +1359,8 @@
           "image": "/drivers/ctrl_86plug.aq1/assets/learn.svg",
           "instruction": {
             "en": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
-            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release"
+            "nl": "Long press the power button to open more than 5 seconds until the red light flashes three times after release",
+            "de": "Drücke den Power Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das rote Licht 3 Mal."
           }
         }
       },
@@ -1280,7 +1374,8 @@
       "id": "ctrl_ln1.aq1",
       "name": {
         "en": "Aqara Wall Switch Single (LN)",
-        "nl": "Aqara Wall Switch Single (LN)"
+        "nl": "Aqara Wall Switch Single (LN)",
+        "de": "Aqara Wall Switch Single (LN)"
       },
       "class": "socket",
       "capabilities": [
@@ -1327,7 +1422,8 @@
           "image": "/drivers/ctrl_ln1.aq1/assets/learn.svg",
           "instruction": {
             "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
           }
         }
       },
@@ -1340,7 +1436,8 @@
       "id": "ctrl_ln2.aq1",
       "name": {
         "en": "Aqara Wall Switch Double (LN)",
-        "nl": "Aqara Wall Switch Double (LN)"
+        "nl": "Aqara Wall Switch Double (LN)",
+        "de": "Aqara Wall Switch Double (LN)"
       },
       "class": "socket",
       "capabilities": [
@@ -1411,7 +1508,8 @@
           "image": "/drivers/ctrl_ln2.aq1/assets/learn.svg",
           "instruction": {
             "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
           }
         }
       },
@@ -1424,7 +1522,8 @@
       "id": "ctrl_neutral1",
       "name": {
         "en": "Aqara Wall Switch Single (L)",
-        "nl": "Aqara Wall Switch Single (L)"
+        "nl": "Aqara Wall Switch Single (L)",
+        "de": "Aqara Wall Switch Single (L)"
       },
       "class": "socket",
       "capabilities": [
@@ -1443,7 +1542,8 @@
           "image": "/drivers/ctrl_neutral1/assets/learn.svg",
           "instruction": {
             "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
           }
         }
       },
@@ -1456,7 +1556,8 @@
       "id": "ctrl_neutral2",
       "name": {
         "en": "Aqara Wall Switch Double (L)",
-        "nl": "Aqara Wall Switch Double (L)"
+        "nl": "Aqara Wall Switch Double (L)",
+        "de": "Aqara Wall Switch Double (L)"
       },
       "class": "socket",
       "capabilities": [
@@ -1516,7 +1617,8 @@
           "image": "/drivers/ctrl_neutral2/assets/learn.svg",
           "instruction": {
             "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
           }
         }
       },
@@ -1529,7 +1631,8 @@
       "id": "cube",
       "name": {
         "en": "Cube",
-        "nl": "Cube"
+        "nl": "Cube",
+        "de": "Würfel"
       },
       "class": "sensor",
       "capabilities": [
@@ -1581,7 +1684,8 @@
           "image": "/drivers/cube/assets/learn.svg",
           "instruction": {
             "en": "Hold the Cube during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de Cube in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+            "nl": "Houd tijdens het toevoegen de Cube in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
+            "de": "Halte den Würfel nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
           }
         }
       },
@@ -1630,7 +1734,8 @@
       "id": "curtain",
       "name": {
         "en": "Aqara Curtain Controller",
-        "nl": "Aqara Curtain Controller"
+        "nl": "Aqara Curtain Controller",
+        "de": "Aqara Curtain Controller"
       },
       "class": "windowcoverings",
       "capabilities": [
@@ -1694,7 +1799,8 @@
           "image": "/drivers/curtain/assets/learn.svg",
           "instruction": {
             "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
-            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on"
+            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "de": "Drücke den Reset Knopf mehr als 5 Sekunden und lasse ihn los sobald das blaue Licht an geht."
           }
         }
       },
@@ -1708,7 +1814,8 @@
       "id": "light.aqcn02",
       "name": {
         "en": "Aqara LED Bulb",
-        "nl": "Aqara LED Bulb"
+        "nl": "Aqara LED Bulb",
+        "de": "Aqara LED Bulb"
       },
       "class": "light",
       "capabilities": [
@@ -1736,7 +1843,8 @@
         "learnmode": {
           "instruction": {
             "en": "Toggle the bulb on/off 5 times until the bulb blinks twice quickly to start pairing.",
-            "nl": "Zet, om de lamp toe te voegen, de lamp 5 keer achter elkaar uit en weer aan totdat de lamp twee keer snel knippert."
+            "nl": "Zet, om de lamp toe te voegen, de lamp 5 keer achter elkaar uit en weer aan totdat de lamp twee keer snel knippert.",
+            "de": "Schalte die Lampe 5 mal an und aus bis die Lampe 2 mal schnell hintereinander blinkt"
           }
         }
       },
@@ -1750,11 +1858,13 @@
           "type": "number",
           "label": {
             "en": "Transition Time",
-            "nl": "Overgangstijd"
+            "nl": "Overgangstijd",
+            "de": "Übergangszeit"
           },
           "hint": {
             "en": "This setting determines the time in seconds it takes to dim from one level to another.",
-            "nl": "Deze instelling bepaalt de duur in seconden van het dimmen van een niveau naar een ander."
+            "nl": "Deze instelling bepaalt de duur in seconden van het dimmen van een niveau naar een ander.",
+            "de": "Diese Einstellung bestimmt wie lange es dauert die Helligkeit zu verändern."
           },
           "value": 1,
           "attr": {
@@ -1768,7 +1878,8 @@
       "id": "plug",
       "name": {
         "en": "Smart socket plug",
-        "nl": "Smart socket plug"
+        "nl": "Smart socket plug",
+        "de": "Smart socket plug"
       },
       "class": "socket",
       "capabilities": [
@@ -1788,7 +1899,8 @@
           "image": "/drivers/plug/assets/learn.svg",
           "instruction": {
             "en": "Long press the power button to open more than 5 seconds until the led flashes red one time and then flashes blue three times",
-            "nl": "Long press the power button to open more than 5 seconds until the led flashes red one time and then flashes blue three times"
+            "nl": "Long press the power button to open more than 5 seconds until the led flashes red one time and then flashes blue three times",
+            "de": "Drücke den Power Knopf mehr als 5 Sekunden und lasse ihn los sobald das rote Licht einmal blinkt. Danach blinkt das blaue Licht zwei mal."
           }
         }
       },
@@ -1802,7 +1914,8 @@
       "id": "remote.b186acn01",
       "name": {
         "en": "Aqara Wireless Switch Single (2018)",
-        "nl": "Aqara Wireless Switch Single (2018)"
+        "nl": "Aqara Wireless Switch Single (2018)",
+        "de": "Aqara Wireless Switch Single (2018)"
       },
       "class": "sensor",
       "capabilities": [],
@@ -1817,7 +1930,8 @@
           "image": "/drivers/remote.b186acn01/assets/learn.svg",
           "instruction": {
             "en": "Long press the button for more than 10 seconds until the blue light flashes three times after release",
-            "nl": "Houd de knop ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd de knop ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert",
+            "de": "Drücke den Knopf länger als 10 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
           }
         }
       },
@@ -1831,7 +1945,8 @@
       "id": "remote.b286acn01",
       "name": {
         "en": "Aqara Wireless Switch Double (2018)",
-        "nl": "Aqara Wireless Switch Double (2018)"
+        "nl": "Aqara Wireless Switch Double (2018)",
+        "de": "Aqara Wireless Switch Double (2018)"
       },
       "class": "sensor",
       "capabilities": [],
@@ -1846,7 +1961,8 @@
           "image": "/drivers/remote.b286acn01/assets/learn.svg",
           "instruction": {
             "en": "Long press any of the buttons for more than 10 seconds until the blue light flashes three times after release",
-            "nl": "Houd een van de knoppen ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd een van de knoppen ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert",
+            "de": "Drücke den Knopf länger als 10 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
           }
         }
       },
@@ -1860,7 +1976,8 @@
       "id": "remote.b1acn01",
       "name": {
         "en": "Aqara Wireless Mini Switch (2018)",
-        "nl": "Aqara Wireless Mini Switch (2018)"
+        "nl": "Aqara Wireless Mini Switch (2018)",
+        "de": "Aqara Wireless Mini Switch (2018)"
       },
       "class": "sensor",
       "capabilities": [
@@ -1878,7 +1995,8 @@
           "image": "/drivers/remote.b1acn01/assets/learn_switch.svg",
           "instruction": {
             "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Schalter nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -1896,7 +2014,8 @@
           },
           "hint": {
             "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]",
+            "de": "Batterie level (%) Zwischen welchen Werten der Batterie Alarm aktiviert wird.\nSpanne: 1 - 90, \ndefault: 20 [%]"
           },
           "value": 20,
           "attr": {
@@ -1932,7 +2051,8 @@
           "image": "/drivers/sens/assets/learn_temp.svg",
           "instruction": {
             "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
           }
         }
       },
@@ -2026,7 +2146,8 @@
       "id": "sensor_86sw1lu",
       "name": {
         "en": "Aqara Wireless Remote Switch Single",
-        "nl": "Aqara Wireless Remote Switch Single"
+        "nl": "Aqara Wireless Remote Switch Single",
+        "de": "Aqara Wireless Remote Switch Single"
       },
       "class": "sensor",
       "capabilities": [],
@@ -2041,7 +2162,8 @@
           "image": "/drivers/sensor_86sw1lu/assets/learn.svg",
           "instruction": {
             "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke den Power Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das rote Licht 3 Mal."
           }
         }
       },
@@ -2055,7 +2177,8 @@
       "id": "sensor_86sw2Un",
       "name": {
         "en": "Aqara Wireless Remote Switch Double",
-        "nl": "Aqara Wireless Remote Switch Double"
+        "nl": "Aqara Wireless Remote Switch Double",
+        "de": "Aqara Wireless Remote Switch Double"
       },
       "class": "sensor",
       "capabilities": [],
@@ -2070,7 +2193,8 @@
           "image": "/drivers/sensor_86sw2Un/assets/learn.svg",
           "instruction": {
             "en": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
-            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release"
+            "nl": "Long press any power button to open more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke den Power Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das rote Licht 3 Mal."
           }
         }
       },
@@ -2102,7 +2226,8 @@
           "image": "/drivers/sensor_magnet.aq2/assets/learn_door.svg",
           "instruction": {
             "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -2134,7 +2259,8 @@
       "id": "sensor_magnet",
       "name": {
         "en": "Door/Window sensor",
-        "nl": "Door/Window sensor"
+        "nl": "Door/Window sensor",
+        "de": "Door/Window sensor"
       },
       "class": "sensor",
       "capabilities": [
@@ -2153,7 +2279,8 @@
           "image": "/drivers/sensor_magnet/assets/learn_door.svg",
           "instruction": {
             "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
           }
         }
       },
@@ -2187,7 +2314,8 @@
           "image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
           "instruction": {
             "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -2236,7 +2364,8 @@
       "id": "sensor_motion",
       "name": {
         "en": "Occupancy sensor",
-        "nl": "Occupancy sensor"
+        "nl": "Occupancy sensor",
+        "de": "Occupancy sensor"
       },
       "class": "sensor",
       "capabilities": [
@@ -2253,7 +2382,8 @@
           "image": "/drivers/sensor_motion/assets/learn_motion.svg",
           "instruction": {
             "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
           }
         }
       },
@@ -2282,6 +2412,72 @@
       ]
     },
     {
+      "id": "sensor_natgas",
+      "name": {
+        "en": "Gas Leak detector",
+        "nl": "Gas Leak detector",
+        "de": "Gas Leak detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_co",
+        "measure_temperature",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_natgas",
+        "deviceId": 257,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_natgas/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times",
+            "de": "Drücke 3 mal schnell hintereinander bis es 3 mal piept"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_natgas/assets/images/large.png",
+        "small": "/drivers/sensor_natgas/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_smoke",
+      "name": {
+        "en": "Smoke detector",
+        "nl": "Smoke detector"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_smoke",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_smoke",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_smoke/assets/learn.svg",
+          "instruction": {
+            "en": "Press 3 times quickly to hear the device ring 3 times",
+            "nl": "Press 3 times quickly to hear the device ring 3 times",
+            "de": "Drücke 3 mal schnell hintereinander bis es 3 mal piept"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_smoke/assets/images/large.png",
+        "small": "/drivers/sensor_smoke/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
       "id": "sensor_switch.aq2",
       "name": {
         "en": "Aqara Wireless switch",
@@ -2303,7 +2499,8 @@
           "image": "/drivers/sensor_switch.aq2/assets/learn_switch.svg",
           "instruction": {
             "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -2354,7 +2551,8 @@
           "image": "/drivers/sensor_switch.aq3/assets/learn_switch.svg",
           "instruction": {
             "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -2401,7 +2599,8 @@
           "image": "/drivers/sensor_switch/assets/learn_button.svg",
           "instruction": {
             "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
           }
         }
       },
@@ -2428,6 +2627,38 @@
           }
         }
       ]
+    },
+    {
+      "id": "sensor_wleak.aq1",
+      "name": {
+        "en": "Aqara Water sensor",
+        "nl": "Aqara Water sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_water",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_wleak.aq1",
+        "deviceId": 1026,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "de": "Drücke den Sensor für 5 Sekunden bis das blaue Licht durchgehend leuchtet"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "vibration.aq1",
@@ -2502,7 +2733,8 @@
           "image": "/drivers/vibration.aq1/assets/learn_vibration.svg",
           "instruction": {
             "en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 5 seconds until the blue light flashes three times",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 5 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -2662,7 +2894,8 @@
           "image": "/drivers/weather/assets/learn_weather.svg",
           "instruction": {
             "en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
