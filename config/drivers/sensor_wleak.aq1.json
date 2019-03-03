@@ -20,7 +20,8 @@
 			"image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
 			"instruction": {
 				"en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
-				"nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
+				"nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+				"de": "Drücke den Sensor für 5 Sekunden bis das blaue Licht durchgehend leuchtet"
 			}
 		}
 	},
@@ -28,6 +29,5 @@
 		"large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
 		"small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
 	},
-	"settings": [
-	]
+	"settings": []
 }

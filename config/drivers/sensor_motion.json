@@ -3,7 +3,8 @@
 	"branch": "master",
 	"name": {
 		"en": "Occupancy sensor",
-		"nl": "Occupancy sensor"
+		"nl": "Occupancy sensor",
+		"de": "Occupancy sensor"
 	},
 	"class": "sensor",
 	"capabilities": [
@@ -20,7 +21,8 @@
 			"image": "/drivers/sensor_motion/assets/learn_motion.svg",
 			"instruction": {
 				"en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen"
+				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
+				"de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
 			}
 		}
 	},
@@ -28,23 +30,21 @@
 		"large": "/drivers/sensor_motion/assets/images/large.png",
 		"small": "/drivers/sensor_motion/assets/images/small.png"
 	},
-	"settings": [
-		{
-			"id": "alarm_motion_reset_window",
-			"type": "number",
-			"label": {
-				"en": "Disable motion alarm after",
-				"nl": "Schakel bewegingsalarm uit na"
-			},
-			"hint": {
-				"en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
-				"nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
-			},
-			"value": 300,
-			"attr": {
-				"min": 60,
-				"max": 86400
-			}
-    }
-	]
+	"settings": [{
+		"id": "alarm_motion_reset_window",
+		"type": "number",
+		"label": {
+			"en": "Disable motion alarm after",
+			"nl": "Schakel bewegingsalarm uit na"
+		},
+		"hint": {
+			"en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
+			"nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
+		},
+		"value": 300,
+		"attr": {
+			"min": 60,
+			"max": 86400
+		}
+	}]
 }

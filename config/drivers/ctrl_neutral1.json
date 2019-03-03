@@ -3,7 +3,8 @@
 	"branch": "master",
 	"name": {
 		"en": "Aqara Wall Switch Single (L)",
-		"nl": "Aqara Wall Switch Single (L)"
+		"nl": "Aqara Wall Switch Single (L)",
+		"de": "Aqara Wall Switch Single (L)"
 	},
 	"class": "socket",
 	"capabilities": [
@@ -18,7 +19,8 @@
 			"image": "/drivers/ctrl_neutral1/assets/learn.svg",
 			"instruction": {
 				"en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
-				"nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release"
+				"nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+				"de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
 			}
 		}
 	},
