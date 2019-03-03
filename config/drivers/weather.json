@@ -6,27 +6,28 @@
 	},
 	"class": "sensor",
 	"capabilities": [
-    "measure_battery",
+		"measure_battery",
 		"measure_temperature",
-    "measure_pressure",
-    "measure_humidity",
+		"measure_pressure",
+		"measure_humidity",
 		"alarm_battery"
-  ],
+	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": [
-      "lumi.weather"
-    ],
+			"lumi.weather"
+		],
 		"deviceId": [
-      770,
-      24321
-    ],
+			770,
+			24321
+		],
 		"profileId": 260,
 		"learnmode": {
 			"image": "/drivers/weather/assets/learn_weather.svg",
 			"instruction": {
 				"en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
-				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert"
+				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+				"de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
 			}
 		}
 	},
@@ -34,8 +35,7 @@
 		"large": "/drivers/weather/assets/images/large.png",
 		"small": "/drivers/weather/assets/images/small.png"
 	},
-	"settings": [
-		{
+	"settings": [{
 			"id": "temperature_offset",
 			"type": "number",
 			"label": {
@@ -60,8 +60,7 @@
 				"en": "Temperature reporting"
 			},
 			"value": "1",
-			"values": [
-				{
+			"values": [{
 					"id": "1",
 					"label": {
 						"en": "Report temperature value with 1 decimal (22.1 °C)"
@@ -82,8 +81,7 @@
 				"en": "Humidity reporting"
 			},
 			"value": "1",
-			"values": [
-				{
+			"values": [{
 					"id": "1",
 					"label": {
 						"en": "Report humidity value with 1 decimal (65.3 %)"

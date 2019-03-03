@@ -9,13 +9,13 @@
 	"capabilities": [
 		"measure_tilt",
 		"measure_tilt.relative",
-    "measure_vibration",
+		"measure_vibration",
 		"alarm_vibration",
 		"alarm_tilt",
 		"alarm_drop",
 		"alarm_battery",
 		"measure_battery"
-  ],
+	],
 	"capabilitiesOptions": {
 		"measure_tilt.relative": {
 			"title": {
@@ -24,8 +24,7 @@
 		}
 	},
 	"mobile": {
-		"components": [
-			{
+		"components": [{
 				"id": "icon",
 				"capabilities": []
 			},
@@ -38,13 +37,13 @@
 			{
 				"id": "sensor",
 				"capabilities": [
-          "measure_tilt",
-      		"measure_tilt.relative",
+					"measure_tilt",
+					"measure_tilt.relative",
 					"measure_vibration",
 					"alarm_tilt",
 					"alarm_vibration",
-      		"alarm_drop",
-      		"alarm_battery"
+					"alarm_drop",
+					"alarm_battery"
 				],
 				"options": {
 					"icons": {
@@ -62,17 +61,18 @@
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": [
-      "lumi.vibration.aq1"
-    ],
+			"lumi.vibration.aq1"
+		],
 		"deviceId": [
-      10
-    ],
+			10
+		],
 		"profileId": 260,
 		"learnmode": {
 			"image": "/drivers/vibration.aq1/assets/learn_vibration.svg",
 			"instruction": {
 				"en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 5 seconds until the blue light flashes three times",
-				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert"
+				"nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert",
+				"de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 5 Sekunden bis das blaue Licht 3 mal blinkt"
 			}
 		}
 	},
@@ -80,14 +80,12 @@
 		"large": "/drivers/vibration.aq1/assets/images/large.png",
 		"small": "/drivers/vibration.aq1/assets/images/small.png"
 	},
-	"settings": [
-		{
+	"settings": [{
 			"type": "group",
 			"label": {
 				"en": "Tilt settings"
 			},
-			"children": [
-				{
+			"children": [{
 					"id": "setReferenceVector",
 					"type": "checkbox",
 					"value": false,
@@ -108,7 +106,7 @@
 					"hint": {
 						"en": "This textbox will show the stored tilt reference vector. This is a read only setting; don't change"
 					}
-  			},
+				},
 				{
 					"id": "capabilityTiltAngles",
 					"type": "radio",
@@ -116,30 +114,28 @@
 						"en": "Tilt angles in mobile interface"
 					},
 					"value": "signed",
-					"values": [
-						{
+					"values": [{
 							"id": "signed",
 							"label": {
 								"en": "Show signed tilt angles"
 							}
-            },
+						},
 						{
 							"id": "absolute",
 							"label": {
 								"en": "Show absolute tilt angles"
 							}
-            }
-          ]
-        }
+						}
+					]
+				}
 			]
-    },
+		},
 		{
 			"type": "group",
 			"label": {
 				"en": "Alarm settings"
 			},
-			"children": [
-				{
+			"children": [{
 					"id": "alarm_vibration_cancellation_delay",
 					"type": "number",
 					"label": {
@@ -153,7 +149,7 @@
 						"min": 10,
 						"max": 3600
 					}
-		    },
+				},
 				{
 					"id": "alarm_tilt_cancellation_delay",
 					"type": "number",
@@ -168,7 +164,7 @@
 						"min": 10,
 						"max": 3600
 					}
-		    },
+				},
 				{
 					"id": "alarm_drop_cancellation_delay",
 					"type": "number",
@@ -183,7 +179,7 @@
 						"min": 10,
 						"max": 3600
 					}
-		    }
+				}
 			]
 		},
 		{
