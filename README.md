@@ -48,6 +48,7 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 
 ## Supported Languages:
 * English
+* German
 * Dutch
 
 ## Acknowledgements:
@@ -62,6 +63,10 @@ Any requests please post them in the [Xiaomi / Aqara Zigbee topic on the Athom C
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+
+### v 0.5.4
+* Add German language support, thanks to the contribution of Sebastian Spoerer    
+* Update Homey meshdriver to v1.2.32   
 
 ### v 0.5.3
 * Add support for the [Aqara Tunable LED Bulb (ZNLDP12LM)](https://www.aqara.com/cn/led_light.html)    

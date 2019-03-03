@@ -3,7 +3,8 @@
   "branch": "master",
   "name": {
     "en": "Aqara LED Bulb",
-    "nl": "Aqara LED Bulb"
+    "nl": "Aqara LED Bulb",
+    "de": "Aqara LED Bulb"
   },
   "class": "light",
   "capabilities": [
@@ -23,13 +24,14 @@
   },
   "zigbee": {
     "manufacturerName": "LUMI",
-		"productId": ["lumi.light.aqcn02"],
-		"deviceId": 258,
-		"profileId": 260,
+    "productId": ["lumi.light.aqcn02"],
+    "deviceId": 258,
+    "profileId": 260,
     "learnmode": {
       "instruction": {
         "en": "Toggle the bulb on/off 5 times until the bulb blinks twice quickly to start pairing.",
-        "nl": "Zet, om de lamp toe te voegen, de lamp 5 keer achter elkaar uit en weer aan totdat de lamp twee keer snel knippert."
+        "nl": "Zet, om de lamp toe te voegen, de lamp 5 keer achter elkaar uit en weer aan totdat de lamp twee keer snel knippert.",
+        "de": "Schalte die Lampe 5 mal an und aus bis die Lampe 2 mal schnell hintereinander blinkt"
       }
     }
   },
@@ -37,23 +39,23 @@
     "large": "/drivers/light.aqcn02/assets/images/large.png",
     "small": "/drivers/light.aqcn02/assets/images/small.png"
   },
-  "settings": [
-    {
-      "id": "transition_time",
-      "type": "number",
-      "label": {
-        "en": "Transition Time",
-        "nl": "Overgangstijd"
-      },
-      "hint": {
-        "en": "This setting determines the time in seconds it takes to dim from one level to another.",
-        "nl": "Deze instelling bepaalt de duur in seconden van het dimmen van een niveau naar een ander."
-      },
-      "value": 1,
-      "attr": {
-        "min": 0,
-        "max": 6553
-      }
+  "settings": [{
+    "id": "transition_time",
+    "type": "number",
+    "label": {
+      "en": "Transition Time",
+      "nl": "Overgangstijd",
+      "de": "Übergangszeit"
+    },
+    "hint": {
+      "en": "This setting determines the time in seconds it takes to dim from one level to another.",
+      "nl": "Deze instelling bepaalt de duur in seconden van het dimmen van een niveau naar een ander.",
+      "de": "Diese Einstellung bestimmt wie lange es dauert die Helligkeit zu verändern."
+    },
+    "value": 1,
+    "attr": {
+      "min": 0,
+      "max": 6553
     }
-  ]
+  }]
 }

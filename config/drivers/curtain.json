@@ -3,7 +3,8 @@
 	"branch": "master",
 	"name": {
 		"en": "Aqara Curtain Controller",
-		"nl": "Aqara Curtain Controller"
+		"nl": "Aqara Curtain Controller",
+		"de": "Aqara Curtain Controller"
 	},
 	"class": "windowcoverings",
 	"capabilities": [
@@ -25,8 +26,7 @@
 		}
 	},
 	"mobile": {
-		"components": [
-			{
+		"components": [{
 				"id": "icon",
 				"capabilities": ["onoff"]
 			},
@@ -61,7 +61,8 @@
 			"image": "/drivers/curtain/assets/learn.svg",
 			"instruction": {
 				"en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
-				"nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on"
+				"nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+				"de": "Drücke den Reset Knopf mehr als 5 Sekunden und lasse ihn los sobald das blaue Licht an geht."
 			}
 		}
 	},
@@ -69,6 +70,5 @@
 		"large": "/drivers/curtain/assets/images/large.png",
 		"small": "/drivers/curtain/assets/images/small.png"
 	},
-	"settings": [
-	]
+	"settings": []
 }

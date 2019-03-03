@@ -1,72 +1,66 @@
-[
-	{
+[{
 		"id": "sensor_motion",
 		"title": {
 			"en": "Vibration sensor motion",
-			"nl": "Trillings sensor beweging"
+			"nl": "Trillings sensor beweging",
+			"de": "Bewegung des Vibrationssensors"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}],
+		"tokens": [{
+			"name": "motion",
+			"type": "string",
+			"title": {
+				"en": "motion",
+				"nl": "beweging",
+				"de": "Bewegung"
+			},
+			"example": {
+				"en": "Tilt",
+				"nl": "Kantel",
+				"de": "Neigung"
 			}
-		],
-		"tokens": [
-			{
-				"name": "motion",
-				"type": "string",
-				"title": {
-					"en": "motion",
-					"nl": "beweging"
-				},
-				"example": {
-					"en": "Tilt",
-					"nl": "Kantel"
-				}
-			}
-		]
+		}]
 	},
 	{
 		"id": "sensor_vibration",
 		"title": {
 			"en": "The vibration strength changed",
-			"nl": "Het trillings niveau is veranderd"
+			"nl": "Het trillings niveau is veranderd",
+			"de": "Vibrationsintensität hat sich verändert"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		],
-		"tokens": [
-			{
-				"name": "vibration",
-				"type": "number",
-				"title": {
-					"en": "vibration strength",
-					"nl": "trillings niveau"
-				},
-				"example": 45
-			}
-		]
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}],
+		"tokens": [{
+			"name": "vibration",
+			"type": "number",
+			"title": {
+				"en": "vibration strength",
+				"nl": "trillings niveau",
+				"de": "Vibrationsintensität"
+			},
+			"example": 45
+		}]
 	},
 	{
 		"id": "sensor_tilt_reference",
 		"title": {
 			"en": "Tilt angles to reference plane",
-			"nl": "Kantelhoeken tov referentievlak"
+			"nl": "Kantelhoeken tov referentievlak",
+			"de": "Neigungswinkel relativ zur Bezugsebene"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		],
-		"tokens": [
-			{
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}],
+		"tokens": [{
 				"name": "Tilt_x",
 				"type": "number",
 				"title": {
@@ -104,17 +98,15 @@
 		"id": "sensor_tilt_delta",
 		"title": {
 			"en": "Tilt angles to previous position",
-			"nl": "Kantelhoeken tov vorige positie"
+			"nl": "Kantelhoeken tov vorige positie",
+			"de": "Neigungswinkel zur vorherigen Position"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		],
-		"tokens": [
-			{
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}],
+		"tokens": [{
 				"name": "Tilt_x",
 				"type": "number",
 				"title": {
@@ -152,84 +144,78 @@
 		"id": "alarm_vibration_true",
 		"title": {
 			"en": "The vibration alarm turned on",
-			"nl": "Het trillingsalarm gaat aan"
+			"nl": "Het trillingsalarm gaat aan",
+			"de": "Vibrationsalarm wurde ausgelöst"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		]
-  },
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}]
+	},
 	{
 		"id": "alarm_vibration_false",
 		"title": {
 			"en": "The vibration alarm turned off",
-			"nl": "Het trillingsalarm gaat uit"
+			"nl": "Het trillingsalarm gaat uit",
+			"de": "Vibrationsalarm wurde ausgeschaltet"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		]
-  },
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}]
+	},
 	{
 		"id": "alarm_tilt_true",
 		"title": {
 			"en": "The tilt alarm turned on",
-			"nl": "Het kantelalarm gaat aan"
+			"nl": "Het kantelalarm gaat aan",
+			"de": "Neigungsalarm wurde ausgelöst"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		]
-  },
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}]
+	},
 	{
 		"id": "alarm_tilt_false",
 		"title": {
 			"en": "The tilt alarm turned off",
-			"nl": "Het kantelalarm gaat uit"
+			"nl": "Het kantelalarm gaat uit",
+			"de": "Neigungsalarm wurde ausgeschaltet"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		]
-  },
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}]
+	},
 	{
 		"id": "alarm_drop_true",
 		"title": {
 			"en": "The drop alarm turned on",
-			"nl": "Het valalarm gaat aan"
+			"nl": "Het valalarm gaat aan",
+			"de": "Sturzalarm wurde ausgelöst"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		]
-  },
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}]
+	},
 	{
 		"id": "alarm_drop_false",
 		"title": {
 			"en": "The drop alarm turned off",
-			"nl": "Het valalarm gaat uit"
+			"nl": "Het valalarm gaat uit",
+			"de": "Sturzalarm wurde ausgeschaltet"
 		},
-		"args": [
-			{
-				"name": "device",
-				"type": "device",
-				"filter": "driver_id=vibration.aq1"
-			}
-		]
-  }
+		"args": [{
+			"name": "device",
+			"type": "device",
+			"filter": "driver_id=vibration.aq1"
+		}]
+	}
 ]
