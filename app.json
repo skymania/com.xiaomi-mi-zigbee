@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.5.4",
+  "version": "0.5.5",
   "compatibility": ">=1.5.13",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -22,10 +22,6 @@
   },
   "contributors": {
     "developers": [
-      {
-        "name": "Sebastian Spoerer",
-        "email": "sebastian@programmieramt.de"
-      },
       {
         "name": "Edwin Tan (Automate Asia)",
         "email": "Edwin.Tan@automate.asia"
@@ -41,6 +37,12 @@
       {
         "name": "Ted Tolboom",
         "email": "dTNL.Homey@gmail.com"
+      }
+    ],
+    "translators": [
+      {
+        "name": "🇩🇪 Sebastian Spoerer",
+        "email": "sebastian@programmieramt.de"
       }
     ]
   },
@@ -1350,9 +1352,7 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.ctrl_86plug.aq1"
-        ],
+        "productId": "lumi.ctrl_86plug.aq1",
         "deviceId": 81,
         "profileId": 260,
         "learnmode": {
@@ -1411,12 +1411,8 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.ctrl_ln1.aq1"
-        ],
-        "deviceId": [
-          81
-        ],
+        "productId": "lumi.ctrl_ln1.aq1",
+        "deviceId": 81,
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/ctrl_ln1.aq1/assets/learn.svg",
@@ -1497,12 +1493,8 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.ctrl_ln2.aq1"
-        ],
-        "deviceId": [
-          81
-        ],
+        "productId": "lumi.ctrl_ln2.aq1",
+        "deviceId": 81,
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/ctrl_ln2.aq1/assets/learn.svg",
@@ -1531,12 +1523,8 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.ctrl_neutral1"
-        ],
-        "deviceId": [
-          6
-        ],
+        "productId": "lumi.ctrl_neutral1",
+        "deviceId": 6,
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/ctrl_neutral1/assets/learn.svg",
@@ -1606,12 +1594,8 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.ctrl_neutral2"
-        ],
-        "deviceId": [
-          6
-        ],
+        "productId": "lumi.ctrl_neutral2",
+        "deviceId": 6,
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/ctrl_neutral2/assets/learn.svg",
@@ -1675,9 +1659,7 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_cube"
-        ],
+        "productId": "lumi.sensor_cube",
         "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
@@ -1835,9 +1817,7 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.light.aqcn02"
-        ],
+        "productId": "lumi.light.aqcn02",
         "deviceId": 258,
         "profileId": 260,
         "learnmode": {
@@ -1890,9 +1870,7 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.plug"
-        ],
+        "productId": "lumi.plug",
         "deviceId": 81,
         "profileId": 260,
         "learnmode": {
@@ -1921,9 +1899,7 @@
       "capabilities": [],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.remote.b186acn01"
-        ],
+        "productId": "lumi.remote.b186acn01",
         "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
@@ -1952,9 +1928,7 @@
       "capabilities": [],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.remote.b286acn01"
-        ],
+        "productId": "lumi.remote.b286acn01",
         "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
@@ -1986,9 +1960,7 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.remote.b1acn01"
-        ],
+        "productId": "lumi.remote.b1acn01",
         "deviceId": 259,
         "profileId": 260,
         "learnmode": {
@@ -2040,9 +2012,7 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sens"
-        ],
+        "productId": "lumi.sens",
         "deviceId": [
           24321
         ],
@@ -2153,9 +2123,7 @@
       "capabilities": [],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_86sw1lu"
-        ],
+        "productId": "lumi.sensor_86sw1lu",
         "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
@@ -2184,9 +2152,7 @@
       "capabilities": [],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_86sw2Un"
-        ],
+        "productId": "lumi.sensor_86sw2Un",
         "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
@@ -2217,9 +2183,7 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_magnet.aq2"
-        ],
+        "productId": "lumi.sensor_magnet.aq2",
         "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
@@ -2270,9 +2234,7 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_magnet"
-        ],
+        "productId": "lumi.sensor_magnet",
         "deviceId": 260,
         "profileId": 260,
         "learnmode": {
@@ -2424,9 +2386,7 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_switch.aq2"
-        ],
+        "productId": "lumi.sensor_switch.aq2",
         "deviceId": 24321,
         "profileId": 260,
         "learnmode": {
@@ -2524,9 +2484,7 @@
       "capabilities": [],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.sensor_switch"
-        ],
+        "productId": "lumi.sensor_switch",
         "deviceId": 260,
         "profileId": 260,
         "learnmode": {
@@ -2624,12 +2582,8 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.vibration.aq1"
-        ],
-        "deviceId": [
-          10
-        ],
+        "productId": "lumi.vibration.aq1",
+        "deviceId": 10,
         "profileId": 260,
         "learnmode": {
           "image": "/drivers/vibration.aq1/assets/learn_vibration.svg",
@@ -2784,9 +2738,7 @@
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": [
-          "lumi.weather"
-        ],
+        "productId": "lumi.weather",
         "deviceId": [
           770,
           24321

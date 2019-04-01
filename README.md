@@ -64,6 +64,9 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 
+### v 0.5.5
+* Fix issue that prevented to include some devices ending in `status.invalid_setting_type`    
+
 ### v 0.5.4
 * Add German language support, thanks to the contribution of Sebastian Spoerer    
 * Update Homey meshdriver to v1.2.32   
