@@ -10,7 +10,7 @@
 	"capabilities": [],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.remote.b186acn01"],
+		"productId": "lumi.remote.b186acn01",
 		"deviceId": 24321,
 		"profileId": 260,
 		"learnmode": {

@@ -14,7 +14,7 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.sens"],
+		"productId": "lumi.sens",
 		"deviceId": [24321],
 		"profileId": 260,
 		"learnmode": {

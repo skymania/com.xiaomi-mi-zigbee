@@ -24,7 +24,7 @@
   },
   "zigbee": {
     "manufacturerName": "LUMI",
-    "productId": ["lumi.light.aqcn02"],
+    "productId": "lumi.light.aqcn02",
     "deviceId": 258,
     "profileId": 260,
     "learnmode": {

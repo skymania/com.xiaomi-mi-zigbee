@@ -10,7 +10,7 @@
 	"capabilities": [],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.sensor_86sw2Un"],
+		"productId": "lumi.sensor_86sw2Un",
 		"deviceId": 24321,
 		"profileId": 260,
 		"learnmode": {

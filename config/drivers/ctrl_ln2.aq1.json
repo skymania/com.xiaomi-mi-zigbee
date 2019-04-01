@@ -59,8 +59,8 @@
 	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.ctrl_ln2.aq1"],
-		"deviceId": [81],
+		"productId": "lumi.ctrl_ln2.aq1",
+		"deviceId": 81,
 		"profileId": 260,
 		"learnmode": {
 			"image": "/drivers/ctrl_ln2.aq1/assets/learn.svg",

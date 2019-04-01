@@ -9,7 +9,7 @@
 	"capabilities": [],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.sensor_switch"],
+		"productId": "lumi.sensor_switch",
 		"deviceId": 260,
 		"profileId": 260,
 		"learnmode": {

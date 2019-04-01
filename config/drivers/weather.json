@@ -14,9 +14,7 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": [
-			"lumi.weather"
-		],
+		"productId": "lumi.weather",
 		"deviceId": [
 			770,
 			24321

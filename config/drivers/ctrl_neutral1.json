@@ -12,8 +12,8 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.ctrl_neutral1"],
-		"deviceId": [6],
+		"productId": "lumi.ctrl_neutral1",
+		"deviceId": 6,
 		"profileId": 260,
 		"learnmode": {
 			"image": "/drivers/ctrl_neutral1/assets/learn.svg",

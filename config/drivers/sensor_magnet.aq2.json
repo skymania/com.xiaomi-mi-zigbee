@@ -12,9 +12,7 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": [
-			"lumi.sensor_magnet.aq2"
-		],
+		"productId": "lumi.sensor_magnet.aq2",
 		"deviceId": 24321,
 		"profileId": 260,
 		"learnmode": {

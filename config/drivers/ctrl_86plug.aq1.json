@@ -15,7 +15,7 @@
 	],
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.ctrl_86plug.aq1"],
+		"productId": "lumi.ctrl_86plug.aq1",
 		"deviceId": 81,
 		"profileId": 260,
 		"learnmode": {

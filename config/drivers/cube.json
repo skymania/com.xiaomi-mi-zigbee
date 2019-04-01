@@ -44,7 +44,7 @@
 	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
-		"productId": ["lumi.sensor_cube"],
+		"productId": "lumi.sensor_cube",
 		"deviceId": 24321,
 		"profileId": 260,
 		"learnmode": {
