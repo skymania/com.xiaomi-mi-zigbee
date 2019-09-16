@@ -11,6 +11,9 @@
     "alarm_battery",
     "measure_battery"
   ],
+	"energy": {
+		"batteries": [ "CR2450" ]
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.sensor_motion.aq2",
@@ -63,6 +66,28 @@
 				"min": 1,
 				"max": 90
 			}
+		},
+		{
+			"type": "group",
+			"label": {
+				"en": "Expert settings",
+				"nl": "Expert instellingen"
+			},
+			"collapsed": true,
+			"children": [
+				{
+				  "id": "hacked_alarm_motion_reset_window",
+				  "type": "checkbox",
+				  "value":false,
+				  "label": {
+				  	"en": "Hacked sensor"
+				  },
+					"hint": {
+						"en": "By soldering two contact points on the PCB it's possible to reduce the motion blind time to 5 seconds instead of the minimum 60 seconds. Enabling this setting will allow you to override the minimum of 60 seconds for cancelling the alarm and will set it to 5 seconds.",
+				    "nl": "Door twee contactpunten op de printplaat te solderen is het mogelijk om de blindtijd van de sensor terug te brengen naar 5 seconden. Inschakelen van deze instelling maakt het mogelijk om de instelling voor het annuleren van de bewegingsmelder te overschrijven tot 5 seconden."
+				  }
+				}
+			]
 		}
   ]
 }
