@@ -10,6 +10,9 @@
 		"alarm_battery",
 		"measure_battery"
 	],
+	"energy": {
+		"batteries": [ "CR1632" ]
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.sensor_magnet.aq2",

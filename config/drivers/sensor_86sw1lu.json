@@ -9,6 +9,9 @@
 	},
 	"class": "sensor",
 	"capabilities": [],
+	"energy": {
+		"batteries": [ "CR2032" ]
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.sensor_86sw1lu",

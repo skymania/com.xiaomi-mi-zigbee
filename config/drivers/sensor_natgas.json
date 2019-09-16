@@ -13,6 +13,9 @@
 		"alarm_battery",
 		"measure_battery"
 	],
+	"energy": {
+		"batteries": [ "CR123A" ]
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.sensor_natgas",

@@ -26,6 +26,9 @@
 				"en": "Switch 2"
 			},
 			"greyout": false
+		},
+		"measure_power": {
+			"approximated": true
 		}
 	},
 	"mobile": {

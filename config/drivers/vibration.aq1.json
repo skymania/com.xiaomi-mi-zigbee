@@ -16,6 +16,9 @@
 		"alarm_battery",
 		"measure_battery"
 	],
+	"energy": {
+		"batteries": [ "CR2032" ]
+	},
 	"capabilitiesOptions": {
 		"measure_tilt.relative": {
 			"title": {

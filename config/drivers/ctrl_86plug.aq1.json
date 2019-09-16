@@ -13,6 +13,11 @@
 		"measure_voltage",
 		"meter_power"
 	],
+	"capabilitiesOptions": {
+		"measure_power": {
+			"approximated": true
+		}
+	},
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.ctrl_86plug.aq1",

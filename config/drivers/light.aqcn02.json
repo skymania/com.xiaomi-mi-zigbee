@@ -12,6 +12,12 @@
     "dim",
     "light_temperature"
   ],
+  "energy": {
+    "approximation": {
+      "usageOn": 9,
+      "usageOff": 0
+    }
+  },
   "capabilitiesOptions": {
     "dim": {
       "opts": {
