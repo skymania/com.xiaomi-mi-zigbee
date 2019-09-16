@@ -30,7 +30,8 @@ This app adds support for the Zigbee Smart Home devices made by [Xiaomi Smart Ho
 * [Aqara Wall Outlet (Zigbee) (QBCZ11LM)](https://www.aqara.com/en/wall_outlet-product.html) (onoff, **measure_power**, **meter_power**, **measure_voltage**)
 * [Aqara Wireless switch with Gyro (WXKG12LM)](https://www.aqara.com/en/wireless_mini_switch.html) (1x, 2x click, key held, key released, Shaken, **battery level**)
 * [Aqara Vibration Sensor (DJT11LM)](https://www.aqara.com/en/vibration_sensor-product.html) (tilt-, vibration-, drop-motion, tilt angles (to reference plane), tilt angles (to previous position), vibration strength, tilt-, vibration-, drop-alarm, **battery level**)      
-* [Aqara Tunable LED Bulb (ZNLDP12LM)](https://www.aqara.com/cn/led_light.html) (onoff, dim, light_temperature)      
+* [Aqara Tunable LED Bulb (ZNLDP12LM)](https://www.aqara.com/cn/led_light.html) (onoff, dim, light_temperature)     
+* [Aqara Double Relay (LLKZMK11LM)](https://www.aqara.com/) (**onoff**, **measure_power**)   
 
   **Note:**   
   The following devices are sold under the same model number (e.g. WXKG11LM), but have different capabilities.
@@ -63,6 +64,11 @@ Any requests please post them in the [Xiaomi / Aqara Zigbee topic on the Athom C
 Please report issues at the [issues section on Github](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues) otherwise in the above mentioned topic.     
 
 ## Change Log:
+
+### v 0.6.0
+* Add support for [Aqara Double Relay (LLKZMK11LM)](https://www.aqara.com/)   
+* Prepare app and drivers for 'Energy' (Homey 3.0.0)
+* Update Homey meshdriver to v1.3.6      
 
 ### v 0.5.5
 * Fix issue that prevented to include some devices ending in `status.invalid_setting_type`    
