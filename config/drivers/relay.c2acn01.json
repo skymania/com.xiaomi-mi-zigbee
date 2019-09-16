@@ -1,0 +1,79 @@
+{
+	"id": "relay.c2acn01",
+	"branch": "master",
+	"name": {
+		"en": "Aqara Double Relay",
+		"nl": "Aqara Double Relay",
+		"de": "Aqara Double Relay"
+	},
+	"class": "socket",
+	"capabilities": [
+		"onoff",
+		"onoff.1",
+		"measure_power"
+	],
+	"capabilitiesOptions": {
+		"onoff": {
+			"title": {
+				"en": "Switch 1"
+			},
+			"greyout": false
+		},
+		"onoff.1": {
+			"title": {
+				"en": "Switch 2"
+			},
+			"greyout": false
+		},
+		"measure_power": {
+			"approximated": true
+		}
+	},
+	"mobile": {
+		"components": [{
+				"id": "icon",
+				"capabilities": []
+			},
+			{
+				"id": "sensor",
+				"capabilities": [
+					"measure_power",
+					"meter_power",
+					"measure_voltage"
+				]
+			},
+			{
+				"id": "toggle",
+				"capabilities": ["onoff"],
+				"options": {
+					"showTitle": true
+				}
+			},
+			{
+				"id": "toggle",
+				"capabilities": ["onoff.1"],
+				"options": {
+					"showTitle": true
+				}
+			}
+		]
+	},
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": "lumi.relay.c2acn01",
+		"deviceId": 257,
+		"profileId": 260,
+		"learnmode": {
+			"image": "/drivers/relay.c2acn01/assets/learn.svg",
+			"instruction": {
+				"en": "Press and hold the reset button for more than 5 seconds until the blue light flashes three times after release",
+				"nl": "Press and hold the reset button for more than 5 seconds until the blue light flashes three times after release",
+				"de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+			}
+		}
+	},
+	"images": {
+		"large": "/drivers/relay.c2acn01/assets/images/large.png",
+		"small": "/drivers/relay.c2acn01/assets/images/small.png"
+	}
+}
