@@ -71,7 +71,16 @@
         "nl": "Gedetecteerde kantel beweging"
       },
       "getable": true,
-      "setable": false
+      "setable": false,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Tilt alarm turned on",
+        "nl": "Kantel alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Tilt alarm turned off",
+        "nl": "Kantel alarm ging uit"
+      }
     },
     "alarm_vibration": {
       "type": "boolean",
@@ -86,7 +95,16 @@
         "nl": "Gedetecteerde trilling"
       },
       "getable": true,
-      "setable": false
+      "setable": false,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Vibration alarm turned on",
+        "nl": "Trillings alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Vibration alarm turned off",
+        "nl": "Trillings alarm ging uit"
+      }
     },
     "alarm_drop": {
       "type": "boolean",
@@ -101,7 +119,16 @@
         "nl": "Gedetecteerde val beweging"
       },
       "getable": true,
-      "setable": false
+      "setable": false,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Drop alarm turned on",
+        "nl": "Val alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Drop alarm turned off",
+        "nl": "Val alarm ging uit"
+      }
     },
     "measure_tilt": {
       "type": "number",
@@ -113,6 +140,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": {
         "en": "°"
       },
@@ -128,6 +156,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "decimals": 2
     },
     "cube_measure_rotation": {
@@ -140,6 +169,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": {
         "en": "°"
       },

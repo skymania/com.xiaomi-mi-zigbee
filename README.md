@@ -67,6 +67,7 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ### v 0.6.0
 * Add support for [Aqara Double Relay (LLKZMK11LM)](https://www.aqara.com/)   
+* Add insights logging for Aqara Vibration sensor (all alarms and tilt angle) and Cube (rotation angle)   
 * Prepare app and drivers for 'Energy' (Homey 3.0.0)
 * Update Homey meshdriver to v1.3.6      
 
