@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.6.0",
+  "version": "0.6.1",
   "compatibility": ">=1.5.13",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -1327,7 +1327,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
           }
         ]
       }
@@ -1344,7 +1344,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
           }
         ]
       },
@@ -1359,7 +1359,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1"
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
           }
         ]
       }

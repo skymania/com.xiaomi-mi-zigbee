@@ -65,6 +65,10 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 
+### v 0.6.1
+* Fix issue showing flow card conditions and triggers for Aqara Relay device   
+* Update Homey meshdriver to v1.3.7      
+
 ### v 0.6.0
 * Add support for [Aqara Double Relay (LLKZMK11LM)](https://www.aqara.com/)   
 * Add insights logging for Aqara Vibration sensor (all alarms and tilt angle) and Cube (rotation angle)   
