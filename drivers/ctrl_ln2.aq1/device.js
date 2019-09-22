@@ -1,6 +1,8 @@
 'use strict';
 
 const Homey = require('homey');
+
+const util = require('./../../lib/util');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 class AqaraWallSwitchDoubleLN extends ZigBeeDevice {
@@ -11,6 +13,9 @@ class AqaraWallSwitchDoubleLN extends ZigBeeDevice {
 
 		// print the node's info to the console
 		// this.printNode();
+
+		//Link util parseData method to this devices instance
+		this.parseData = util.parseData.bind(this)
 
 		// Register capabilities and reportListeners for Left switch
 		this.registerCapability('onoff', 'genOnOff', {
@@ -104,7 +109,7 @@ class AqaraWallSwitchDoubleLN extends ZigBeeDevice {
 	onLifelineReport(value) {
 		this._debug('parsedData', new Buffer(value, 'ascii'));
 
-		const parsedData = parseData(new Buffer(value, 'ascii'));
+		const parsedData = this.parseData(new Buffer(value, 'ascii'));
 		this._debug('parsedData', parsedData);
 
 		// state (onoff) switch 1 (ID 100)
@@ -120,21 +125,6 @@ class AqaraWallSwitchDoubleLN extends ZigBeeDevice {
 			this.setCapabilityValue('onoff.1', parsedOnOff);
 		}
 
-		function parseData(rawData) {
-			const data = {};
-			let index = 0;
-			while (index < rawData.length - 2) {
-				const type = rawData.readUInt8(index + 1);
-				const byteLength = (type & 0x7) + 1;
-				const isSigned = Boolean((type >> 3) & 1);
-				// extract the relevant objects (100) switch 1 onoff state, (101) switch 2 onof state
-				if ([100, 101].includes(rawData.readUInt8(index))) {
-					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
-				}
-				index += byteLength + 2;
-			}
-			return data;
-		}
 	}
 
 	// Method to handle changes to attributes

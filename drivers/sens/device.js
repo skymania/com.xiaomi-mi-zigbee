@@ -1,5 +1,6 @@
 'use strict';
 
+const util = require('./../../lib/util');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 class XiaomiTempSensor extends ZigBeeDevice {
@@ -9,6 +10,9 @@ class XiaomiTempSensor extends ZigBeeDevice {
 
 		// print the node's info to the console
 		// this.printNode();
+
+		//Link util parseData method to this devices instance
+		this.parseData = util.parseData.bind(this)
 
 		// Register the AttributeReportListener for measure_temperature
 		this._attrReportListeners['0_msTemperatureMeasurement'] = this._attrReportListeners['0_msTemperatureMeasurement'] || {};
@@ -42,7 +46,7 @@ class XiaomiTempSensor extends ZigBeeDevice {
 	onLifelineReport(value) {
 		this._debug('lifeline report', new Buffer(value, 'ascii'));
 
-		const parsedData = parseData(new Buffer(value, 'ascii'));
+		const parsedData = this.parseData(new Buffer(value, 'ascii'));
 		this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
@@ -74,22 +78,6 @@ class XiaomiTempSensor extends ZigBeeDevice {
 			const parsedHum = parsedData['101'] / 100.0;
 			this.log('lifeline - humidity', parsedHum);
 			this.setCapabilityValue('measure_humidity', parsedHum);
-		}
-
-		function parseData(rawData) {
-			const data = {};
-			let index = 0;
-			while (index < rawData.length - 2) {
-				const type = rawData.readUInt8(index + 1);
-				const byteLength = (type & 0x7) + 1;
-				const isSigned = Boolean((type >> 3) & 1);
-				// extract the relevant objects (1) Battery, (100) Temperature, (101) Humidity
-				if ([1].includes(rawData.readUInt8(index))) {
-					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
-				}
-				index += byteLength + 2;
-			}
-			return data;
 		}
 	}
 

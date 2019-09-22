@@ -1,5 +1,6 @@
 'use strict';
 
+const util = require('./../../lib/util');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 class AqaraWaterSensor extends ZigBeeDevice {
@@ -10,6 +11,9 @@ class AqaraWaterSensor extends ZigBeeDevice {
 
 		// print the node's info to the console
 		// this.printNode();
+
+		//Link util parseData method to this devices instance
+		this.parseData = util.parseData.bind(this)
 
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,

@@ -17,6 +17,7 @@ const motionArray = {
 
 const Homey = require('homey');
 
+const util = require('./../../lib/util');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 class AqaraVibrationSensor extends ZigBeeDevice {
@@ -27,6 +28,9 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 
 		// print the node's info to the console
 		// this.printNode();
+
+		//Link util parseData method to this devices instance
+		this.parseData = util.parseData.bind(this)
 
 		// Register attribute listener for motion report
 		this.registerAttrReportListener('closuresDoorLock', '85', 1, 60, null,
@@ -236,7 +240,7 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 	onLifelineReport(value) {
 		this._debug('lifeline report', new Buffer(value, 'ascii'));
 
-		const parsedData = parseData(new Buffer(value, 'ascii'));
+		const parsedData = this.parseData(new Buffer(value, 'ascii'));
 		this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
@@ -253,23 +257,6 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 				// Set Battery alarm if battery percentatge is below 20%
 				this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
 			}
-		}
-
-		function parseData(rawData) {
-			const data = {};
-			let index = 0;
-			// let byteLength = 0
-			while (index < rawData.length - 2) {
-				const type = rawData.readUInt8(index + 1);
-				const byteLength = (type & 0x7) + 1;
-				const isSigned = Boolean((type >> 3) & 1);
-				// extract the relevant objects (1) Battery
-				if ([1].includes(rawData.readUInt8(index))) {
-					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
-				}
-				index += byteLength + 2;
-			}
-			return data;
 		}
 
 	}

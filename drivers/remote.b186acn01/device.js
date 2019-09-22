@@ -1,6 +1,8 @@
 'use strict';
 
 const Homey = require('homey');
+
+const util = require('./../../lib/util');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 let lastKey = null;
@@ -13,6 +15,9 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 
 		// print the node's info to the console
 		// this.printNode();
+
+		//Link util parseData method to this devices instance
+		this.parseData = util.parseData.bind(this)
 
 		// supported scenes and their reported attribute numbers (all based on reported data)
 		this.sceneMap = {
@@ -101,8 +106,8 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 
 	onLifelineReport(value) {
 		this._debug('lifeline report', new Buffer(value, 'ascii'));
-		/*
-		const parsedData = parseData(new Buffer(value, 'ascii'));
+		
+		const parsedData = this.parseData(new Buffer(value, 'ascii'));
 		// this._debug('parsedData', parsedData);
 
 		// battery reportParser (ID 1)
@@ -124,19 +129,6 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 		// this._debug('lifeline - contact alarm', parsedContact);
 		// this.setCapabilityValue('alarm_contact', parsedContact);
 
-		function parseData(rawData) {
-			const data = {};
-			let index = 0;
-			while (index < rawData.length) {
-				const type = rawData.readUInt8(index + 1);
-				const byteLength = (type & 0x7) + 1;
-				const isSigned = Boolean((type >> 3) & 1);
-				data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
-				index += byteLength + 2;
-			}
-			return data;
-		}
-		*/
 	}
 }
 module.exports = AqaraRemoteb186acn01;

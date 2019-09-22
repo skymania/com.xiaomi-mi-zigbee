@@ -1,16 +1,21 @@
 'use strict';
 
 const Homey = require('homey');
+
+const util = require('./../../lib/util');
 const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
 
 class AqaraDoubleRelay extends ZigBeeDevice {
 
 	async onMeshInit() {
 		// enable debugging
-		this.enableDebug();
+		// this.enableDebug();
 
 		// print the node's info to the console
-		this.printNode();
+		// this.printNode();
+
+		//Link util parseData method to this devices instance
+		this.parseData = util.parseData.bind(this)
 
 		// Register capabilities and reportListeners for Left switch
 		this.registerCapability('onoff', 'genOnOff', {
@@ -47,50 +52,6 @@ class AqaraDoubleRelay extends ZigBeeDevice {
 			}, 0);
 		}
 
-		// meter_power switch
-		/*
-		// applicationType : 720896 = 0x0B0000 Energy in kWH
-		// Register meter_power capability
-		if (this.hasCapability('meter_power')) {
-			this.registerCapability('meter_power', 'genAnalogInput', {
-				get: 'presentValue',
-				getOpts: {
-					pollInterval: 600000, // maps to device settings
-				},
-				report: 'presentValue',
-				reportParser: value => {
-					this.log('genAnalogInput - presentValue (meter)', value);
-					return value;
-				},
-				endpoint: 3
-			});
-
-			// Report is send if status is changed or after 5 min
-			this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
-				this.log('genAnalogInput - presentValue (meter)', data);
-				this.setCapabilityValue('meter_power', data);
-			}, 3);
-		}
-		*/
-
-		// measure_voltage
-		/*
-		if (this.hasCapability('measure_voltage')) {
-			this.registerCapability('measure_voltage', 'genPowerCfg', {
-				get: 'mainsVoltage',
-				getOpts: {
-					pollInterval: 600000, // maps to device settings
-				},
-				report: 'mainsVoltage',
-				reportParser: value => {
-					this.log('genAnalogInput - mainsVoltage', value / 10);
-					return value / 10;
-				},
-				endpoint: 0,
-			});
-		}
-		*/
-
 		// Register the AttributeReportListener - Lifeline
 		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
 				this.onLifelineReport.bind(this), 0)
@@ -108,7 +69,7 @@ class AqaraDoubleRelay extends ZigBeeDevice {
 	onLifelineReport(value) {
 		this._debug('parsedData', new Buffer(value, 'ascii'));
 
-		const parsedData = parseData(new Buffer(value, 'ascii'));
+		const parsedData = this.parseData(new Buffer(value, 'ascii'));
 		this._debug('parsedData', parsedData);
 
 		// state (onoff) switch 1 (ID 100)
@@ -122,22 +83,6 @@ class AqaraDoubleRelay extends ZigBeeDevice {
 			const parsedOnOff = parsedData['101'] === 1;
 			this.log('lifeline - onoff state (switch 2)', parsedOnOff);
 			this.setCapabilityValue('onoff.1', parsedOnOff);
-		}
-
-		function parseData(rawData) {
-			const data = {};
-			let index = 0;
-			while (index < rawData.length - 2) {
-				const type = rawData.readUInt8(index + 1);
-				const byteLength = (type & 0x7) + 1;
-				const isSigned = Boolean((type >> 3) & 1);
-				// extract the relevant objects (100) switch 1 onoff state, (101) switch 2 onof state
-				if ([100, 101].includes(rawData.readUInt8(index))) {
-					data[rawData.readUInt8(index)] = rawData[isSigned ? 'readIntLE' : 'readUIntLE'](index + 2, byteLength);
-				}
-				index += byteLength + 2;
-			}
-			return data;
 		}
 	}
 
