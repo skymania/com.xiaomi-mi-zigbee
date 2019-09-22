@@ -67,6 +67,7 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ### v 0.6.1
 * Fix issue showing flow card conditions and triggers for Aqara Relay device   
+* Fix issues where the lifeline reportParser is causing a crash of the app   
 * Update Homey meshdriver to v1.3.7      
 
 ### v 0.6.0
