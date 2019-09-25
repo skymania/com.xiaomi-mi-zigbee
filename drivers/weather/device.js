@@ -91,6 +91,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 			}
 		}
 
+		/* Disabled due to inaccurate reporting
 		// temperature reportParser (ID 100)
 		if (parsedData.hasOwnProperty('100')) {
 			const parsedTemp = parsedData['100'] / 100.0;
@@ -107,6 +108,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
 		}
 
 		// pressure reportParser (ID 102) - reported number not reliable
+		*/
 	}
 
 }
