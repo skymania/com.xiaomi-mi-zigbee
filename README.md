@@ -65,6 +65,10 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 
+### v 0.6.2
+* Fix issues where the lifeline temperature sensor reporting      
+* Update Homey meshdriver to v1.3.9   
+
 ### v 0.6.1
 * Fix issue showing flow card conditions and triggers for Aqara Relay device   
 * Fix issues where the lifeline reportParser is causing a crash of the app   
@@ -105,65 +109,3 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 * Cleaned up device driver logging (moved some logging to the debug-logging mode)
 * Updated readme device overview to show added capabilities and link towards the device info at the [official Aqara site](https://www.aqara.com/en/home.html)
 * Update Homey meshdriver to v1.2.30
-
-### v 0.4.3
-* Add support for the Aqara Wireless Mini Switch (2018) (WXKG11LM, productID `sensor_switch.aq2`), issue [#89](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/89)    
-* Add support for the Aqara Wireless Switch Single (2018) (WXKG03LM, productID `remote.b186acn01`), issue [#88](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/88)    
-* Add support for the Aqara Wireless Switch Double (2018) (WXKG02LM, productID `remote.b286acn01`), issue [#88](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/88)    
-**Note:** These devices are released by Xiaomi / Aqara with the same product code, but different firmware & capabilities. It is not possible based on the device label to determine which version you have, only based on the Zigbee productID once added to Homey   
-* Fix issue where alarm triggers for Aqara vibration sensor were triggered twice, issue [#97](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/97)   
-* Add settings option to determine amount of decimals reported for temperature & humidity, feature request [#98](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/98)   
-
-### v 0.4.2
-* Add support for the Aqara Vibration Sensor (DJT11LM), with capabilities tilt-, vibration-, drop-motion, tilt angles (to reference plane), tilt angles (to previous position), vibration strength, tilt-, vibration-, drop-alarm   
-* Removing the old, no longer working, (marked DEPRECATED) cards as announced in as of release v 0.3.0   
-* Optimizing the attribute report settings   
-* Update ZigBee meshdriver to 1.2.27      
-
-### v 0.4.1
-* Fix issue where the Aqara Smart Light Wall Switch (**LN**) Single (product type no: QBKG11LM) can not be controlled   
-
-### v 0.4.0
-* Add support for the 'Aqara Curtain controller' (product type no: ZNCLDJ11LM)   
-* Fix issue where Aqara Smart Light Wall Switch (**L**) right button is not activated by FlowCard, issue [#64](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/64).   
-Existing flows for this device will need to be rebuild   
-* Fix issue / add support for Aqara Smart Light Wall Switch (**LN**), issue [#60](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/60).   
-Re-inclusion of devices with Zigbee Product ID `lumi.ctrl_ln1.aq1` and `lumi.ctrl_ln2.aq1` is needed   
-
-**Note:** The old (marked DEPRECATED) flow cards of the wireless switches will be removed in a next release; please rebuild your flows based on the new cards   
-
-### v 0.3.0
-* Add support for Aqara Wireless switch with Gyro (product type no: WXKG12LM)   
-**Note:** Switches with this type no. that were included before will need to be re-included in order to work properly   
-* Replaced old scene trigger cards with autocomplete cards to fix reported issues   
-**Note:** The old (marked DEPRECATED) cards will be removed in a next release; please rebuild your flows based on the new cards  
-* Update ZigBee meshdriver to 1.2.12   
-
-### v 0.2.5
-* Add temperature offset correction setting for the Xiaomi temperature & humidity sensor and the Aqara temperature & humidity sensor   
-* Fix typo in Xiaomi Cube flow trigger card
-
-### v 0.2.4
-* Fix issue where Aqara Wireless Remote Switch Single init results in app crash, issue [#46](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/46)   
-
-### v 0.2.3
-* Updated app dependency to latest Stable Homey Software release (>= 1.5.7)
-* Update ZigBee meshdriver to 1.2.7   
-* Add support for the Xiaomi Cube rotation angle (and relative angle) capability, fix issue [#29](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/29)
-* Add additional ID's for Aqara Smart Light Wall Switch Single / Double, fix issue [#20](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/20))
-* Add additional ID's for Aqara Wireless Switch, fix issue [#38](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/38))   
-* Fix issue where unsupported options are presented in the trigger card of the Aqara Wireless Remote Switch Single, related to [#37](https://github.com/TedTolboom/com.xiaomi-mi-zigbee/issues/37)
-
-### v 0.2.2
-* Update relative link in readme.md to direct link (Homey apps compatible)   
-* Update app manifest for supported Devices   
-
-### v 0.2.1
-* Add support for Xiaomi Cube (Slide, Shake, Double Tap, Rotate (action, not angle yet), Flip 90°, Flip 180°).   
-**note:** Cubes included based on previous development builds need to be re-included   
-
-### v 0.2.0
-* Add support for Smart socket plug ZigBee edition (onoff, measure_power)   
-* Add support for Aqara Smart Light Wall Switch Single / Double (onoff)   
-* Add support for Aqara Smart Socket ZigBee Version (onoff, measure_power)   
-* Add explicitly in app title dependency on Homey SW release (>= 1.5.4)   
