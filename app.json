@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.6.2",
+  "version": "0.7.0",
   "compatibility": ">=1.5.13",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -1759,6 +1759,87 @@
           }
         }
       ]
+    },
+    {
+      "id": "curtain.hagl04",
+      "name": {
+        "en": "Aqara B1 Curtain Controller",
+        "nl": "Aqara B1 Curtain Controller",
+        "de": "Aqara B1 Curtain Controller"
+      },
+      "class": "curtain",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "windowcoverings_set",
+        "windowcoverings_state",
+        "measure_battery"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Curtain open"
+          }
+        },
+        "dim": {
+          "title": {
+            "en": "Open level"
+          }
+        }
+      },
+      "mobile": {
+        "components": [
+          {
+            "id": "icon",
+            "capabilities": [
+              "onoff"
+            ]
+          },
+          {
+            "id": "slider",
+            "capabilities": [
+              "dim"
+            ]
+          },
+          {
+            "id": "ternary",
+            "capabilities": [
+              "windowcoverings_state"
+            ],
+            "options": {
+              "icons": {
+                "top": "/drivers/curtain.hagl04/assets/curtain.hagl04_open.svg",
+                "middle": "/drivers/curtain.hagl04/assets/curtain.hagl04_hold.svg",
+                "bottom": "/drivers/curtain.hagl04/assets/curtain.hagl04_close.svg"
+              },
+              "values": {
+                "top": "up",
+                "middle": "idle",
+                "bottom": "down"
+              }
+            }
+          }
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain.hagl04",
+        "deviceId": 514,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/curtain.hagl04/assets/learn.svg",
+          "instruction": {
+            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "de": "Drücke den Reset Knopf mehr als 5 Sekunden und lasse ihn los sobald das blaue Licht an geht."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain.hagl04/assets/images/large.png",
+        "small": "/drivers/curtain.hagl04/assets/images/small.png"
+      },
+      "settings": []
     },
     {
       "id": "curtain",
