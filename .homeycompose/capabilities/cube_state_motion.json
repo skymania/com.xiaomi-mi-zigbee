@@ -1,0 +1,62 @@
+{
+  "type": "enum",
+  "uiComponent": "sensor",
+  "icon": "/drivers/cube/assets/icon.svg",
+  "title": {
+    "en": "Motion",
+    "nl": "Beweging"
+  },
+  "getable": true,
+  "setable": false,
+  "values": [
+    {
+      "id": "Shake",
+      "title": {
+        "en": "Shake",
+        "nl": "Schudden"
+      }
+    },
+    {
+      "id": "Flip90",
+      "title": {
+        "en": "Flip 90°",
+        "nl": "Flip 90°"
+      }
+    },
+    {
+      "id": "Flip180",
+      "title": {
+        "en": "Flip 180°",
+        "nl": "Flip 180°"
+      }
+    },
+    {
+      "id": "Slide",
+      "title": {
+        "en": "Slide",
+        "nl": "Schuiven"
+      }
+    },
+    {
+      "id": "DoubleTap",
+      "title": {
+        "en": "Double tap",
+        "nl": "Kloppen"
+      }
+    },
+    {
+      "id": "Rotate",
+      "title": {
+        "en": "Rotate",
+        "nl": "Roteren"
+      }
+    },
+    {
+      "id": "Catch",
+      "title": {
+        "en": "Catch",
+        "nl": "Vangen"
+      }
+    }
+  ]
+}

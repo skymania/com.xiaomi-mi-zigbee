@@ -1,0 +1,15 @@
+{
+  "id": "trigger_switch2_turned_off",
+  "title": {
+    "en": "Turned off (right switch)",
+    "nl": "Uitgeschakeld (rechter schakelaar)",
+    "de": "Ausgeschaltet (rechter Schalter)"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": {
+    "en": "Aqara Door and Window Sensor"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "alarm_contact",
+    "alarm_battery",
+    "measure_battery"
+  ],
+  "energy": {
+    "batteries": [
+      "CR1632"
+    ]
+  },
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.sensor_magnet.aq2",
+    "deviceId": 24321,
+    "profileId": 260,
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn_door.svg",
+      "instruction": {
+        "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+        "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+        "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
+      }
+    }
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "settings": [
+    {
+      "id": "battery_threshold",
+      "type": "number",
+      "label": {
+        "en": "Battery alarm threshold (%)",
+        "nl": "Batterij alarm waarde (%)"
+      },
+      "hint": {
+        "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+        "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+      },
+      "value": 20,
+      "attr": {
+        "min": 1,
+        "max": 90
+      }
+    }
+  ]
+}

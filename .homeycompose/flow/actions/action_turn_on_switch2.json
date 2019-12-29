@@ -1,0 +1,15 @@
+{
+  "id": "action_turn_on_switch2",
+  "title": {
+    "en": "Turn on (right switch)",
+    "nl": "Zet aan (rechter schakelaar)",
+    "de": "Anschalten (rechter Schalter)"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
+    }
+  ]
+}

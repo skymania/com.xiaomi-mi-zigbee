@@ -1,0 +1,24 @@
+{
+  "type": "boolean",
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/alarm_tilt.svg",
+  "title": {
+    "en": "Tilt Alarm",
+    "nl": "Kantelalarm"
+  },
+  "desc": {
+    "en": "Detected tilt motion",
+    "nl": "Gedetecteerde kantel beweging"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Tilt alarm turned on",
+    "nl": "Kantel alarm ging af"
+  },
+  "insightsTitleFalse": {
+    "en": "Tilt alarm turned off",
+    "nl": "Kantel alarm ging uit"
+  }
+}

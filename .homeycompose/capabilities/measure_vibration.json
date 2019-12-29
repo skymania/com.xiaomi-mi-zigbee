@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_vibration.svg",
+  "title": {
+    "en": "Vibration",
+    "nl": "Trilling"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "decimals": 2
+}

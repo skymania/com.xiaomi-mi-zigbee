@@ -1,0 +1,120 @@
+{
+  "triggers": [
+    {
+      "id": "cube_Motion",
+      "title": {
+        "en": "Cube motion",
+        "nl": "Cube beweging",
+        "de": "Cube Bewegung"
+      },
+      "args": [],
+      "tokens": [
+        {
+          "name": "motion",
+          "type": "string",
+          "title": {
+            "en": "Cube Motion",
+            "nl": "Cube beweging",
+            "de": "Cube Bewegung"
+          },
+          "example": {
+            "en": "Shake",
+            "nl": "Schudden",
+            "de": "Schütteln"
+          }
+        },
+        {
+          "name": "sourceFace",
+          "type": "number",
+          "title": {
+            "en": "source Face"
+          },
+          "example": 1
+        },
+        {
+          "name": "targetFace",
+          "type": "number",
+          "title": {
+            "en": "target Face"
+          },
+          "example": 5
+        }
+      ]
+    },
+    {
+      "id": "cube_Shake",
+      "title": {
+        "en": "Cube shaked",
+        "nl": "Cube geschud",
+        "de": "Cube geschüttelt"
+      },
+      "args": []
+    },
+    {
+      "id": "cube_Flip90",
+      "title": {
+        "en": "Cube flipped 90°",
+        "nl": "Cube 90° gekanteld",
+        "de": "Cube 90° gedreht"
+      },
+      "args": []
+    },
+    {
+      "id": "cube_Flip180",
+      "title": {
+        "en": "Cube flipped 180°",
+        "nl": "Cube 180° gekanteld"
+      },
+      "args": []
+    },
+    {
+      "id": "cube_Slide",
+      "title": {
+        "en": "Cube slided",
+        "nl": "Cube verschoven",
+        "de": "Cube verschieben"
+      },
+      "args": []
+    },
+    {
+      "id": "cube_DoubleTap",
+      "title": {
+        "en": "Cube double tapped",
+        "nl": "Cube twee keer kloppen",
+        "de": "Cube zweimal angetippt"
+      },
+      "args": []
+    },
+    {
+      "id": "cube_Rotate",
+      "title": {
+        "en": "Cube rotated",
+        "nl": "Cube gedraaid",
+        "de": "Cube gedreht"
+      },
+      "args": [],
+      "tokens": [
+        {
+          "name": "rotationAngle",
+          "type": "number",
+          "title": {
+            "en": "Rotation Angle °",
+            "nl": "Rotatiehoek °",
+            "de": "Drehwinkel °"
+          },
+          "example": 124.51
+        },
+        {
+          "name": "relativeRotationAngle",
+          "type": "number",
+          "title": {
+            "en": "Relative Angle %",
+            "nl": "Relatieve hoek %",
+            "de": "Relativer Winkel %"
+          },
+          "example": 0.92
+        }
+      ]
+    }
+  ]
+}
