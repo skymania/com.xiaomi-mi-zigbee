@@ -10,7 +10,7 @@
   "category": [
     "lights"
   ],
-  "version": "0.7.0",
+  "version": "0.7.1",
   "compatibility": ">=3.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -280,6 +280,68 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde",
+                  "de": "Zufällige Seite oben"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "zijde 5 boven",
+                  "de": "Seite 5 oben"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
+                }
+              }
+            ]
           }
         ]
       },
@@ -295,6 +357,130 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "sourceFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "from any side",
+                  "nl": "van iedere zijde",
+                  "de": "von beliebiger Seite"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "from side 1",
+                  "nl": "van zijde 1",
+                  "de": "von Seite 1"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "from side 2",
+                  "nl": "van zijde 2",
+                  "de": "von Seite 2"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "from side 3",
+                  "nl": "van zijde 3",
+                  "de": "von Seite 3"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "from side 4",
+                  "nl": "van zijde 4",
+                  "de": "von Seite 4"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "from side 5",
+                  "nl": "van side 5",
+                  "de": "von Seite 5"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "from side 6",
+                  "nl": "van zijde 6",
+                  "de": "von Seite 6"
+                }
+              }
+            ]
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "to any side",
+                  "nl": "naar iedere zijde",
+                  "de": "zu beliebiger Seite"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "to 1",
+                  "nl": "naar 1",
+                  "de": "zu Seite 1"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "to 2",
+                  "nl": "naar 2",
+                  "de": "zu Seite 2"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "to 3",
+                  "nl": "naar 3",
+                  "de": "zu Seite 3"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "to 4",
+                  "nl": "naar 4",
+                  "de": "zu Seite 4"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "to 5",
+                  "nl": "naar 5",
+                  "de": "zu Seite 5"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "to 6",
+                  "nl": "naar 6",
+                  "de": "zu Seite 6"
+                }
+              }
+            ]
           }
         ]
       },
@@ -309,6 +495,68 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde",
+                  "de": "beliebige Seite oben"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven",
+                  "de": "Seite 5 oben"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
+                }
+              }
+            ]
           }
         ]
       },
@@ -324,6 +572,68 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde",
+                  "de": "beliebige Seite oben"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven",
+                  "de": "Seite 5 oben"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
+                }
+              }
+            ]
           }
         ]
       },
@@ -339,6 +649,68 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde",
+                  "de": "beliebige Seite oben"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven",
+                  "de": "Seite 5 oben"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
+                }
+              }
+            ]
           }
         ]
       },
@@ -354,6 +726,68 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=cube"
+          },
+          {
+            "name": "targetFace",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "any side up",
+                  "nl": "willekeurige zijde",
+                  "de": "beliebige Seite oben"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "side 1 up",
+                  "nl": "zijde 1 boven",
+                  "de": "Seite 1 oben"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "side 2 up",
+                  "nl": "zijde 2 boven",
+                  "de": "Seite 2 oben"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "side 3 up",
+                  "nl": "zijde 3 boven",
+                  "de": "Seite 3 oben"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "side 4 up",
+                  "nl": "zijde 4  boven",
+                  "de": "Seite 4 oben"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "side 5 up",
+                  "nl": "side 5 boven",
+                  "de": "Seite 5 oben"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "side 6 up",
+                  "nl": "zijde 6 boven",
+                  "de": "Seite 6 oben"
+                }
+              }
+            ]
           }
         ],
         "tokens": [

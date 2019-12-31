@@ -66,6 +66,9 @@ Please report issues at the [issues section on Github](https://github.com/TedTol
 
 ## Change Log:
 
+### v 0.7.1
+* Fix issue with Aqara Cube trigger cards not showing argument fields   
+
 ### v 0.7.0
 * Add support for the [Aqara B1 Curtain Controller (Zigbee) (ZNCLDJ12LM)](https://www.aqara.com/en/curtain_controller-product.html) (open, close, idle, setpoint (100% = open, 0% = closed), measure_batery)   
 * Update app branding since more Aqara (then Xiaomi-Mi) devices are supported   
