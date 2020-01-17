@@ -1,0 +1,24 @@
+{
+  "type": "boolean",
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/alarm_drop.svg",
+  "title": {
+    "en": "Drop Alarm",
+    "nl": "Valalarm"
+  },
+  "desc": {
+    "en": "Detected drop motion",
+    "nl": "Gedetecteerde val beweging"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Drop alarm turned on",
+    "nl": "Val alarm ging af"
+  },
+  "insightsTitleFalse": {
+    "en": "Drop alarm turned off",
+    "nl": "Val alarm ging uit"
+  }
+}

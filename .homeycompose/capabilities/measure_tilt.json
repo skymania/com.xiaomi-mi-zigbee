@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/measure_tilt.svg",
+  "title": {
+    "en": "Tilt angle",
+    "nl": "Kantelhoek"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": {
+    "en": "°"
+  },
+  "decimals": 2
+}

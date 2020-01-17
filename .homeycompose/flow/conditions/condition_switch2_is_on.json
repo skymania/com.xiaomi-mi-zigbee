@@ -1,0 +1,15 @@
+{
+  "id": "condition_switch2_is_on",
+  "title": {
+    "en": "Is turned !{{on|off}} (right switch)",
+    "nl": "Is !{{ingeschakeld|uitgeschakeld}} (rechter schakelaar)",
+    "de": "Ist !{{eingeschaltet|ausgeschaltet}} (rechter Schalter)"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
+    }
+  ]
+}

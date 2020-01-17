@@ -1,0 +1,50 @@
+{
+  "name": {
+    "en": "Aqara Wall Switch Double (LN)",
+    "nl": "Aqara Wall Switch Double (LN)",
+    "de": "Aqara Wall Switch Double (LN)"
+  },
+  "class": "socket",
+  "capabilities": [
+    "onoff",
+    "onoff.1",
+    "measure_power",
+    "meter_power",
+    "measure_voltage"
+  ],
+  "capabilitiesOptions": {
+    "onoff": {
+      "title": {
+        "en": "Switch 1"
+      },
+      "greyout": false
+    },
+    "onoff.1": {
+      "title": {
+        "en": "Switch 2"
+      },
+      "greyout": false
+    },
+    "measure_power": {
+      "approximated": true
+    }
+  },
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.ctrl_ln2.aq1",
+    "deviceId": 81,
+    "profileId": 260,
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+        "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+        "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+      }
+    }
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}

@@ -1,21 +1,21 @@
 {
   "id": "com.xiaomi-mi",
   "name": {
-    "en": "Xiaomi / Aqara ZigBee"
+    "en": "Aqara & Xiaomi ZigBee"
   },
   "description": {
-    "en": "Control Xiaomi / Aqara ZigBee devices",
-    "nl": "Bestuur Xiaomi / Aqara ZigBee apparaten"
+    "en": "A different kind of Smart Home solution",
+    "nl": "Een ander soort oplossing voor slimme huizen"
   },
   "category": [
     "lights"
   ],
-  "version": "0.6.2",
-  "compatibility": ">=1.5.13",
+  "version": "0.7.1",
+  "compatibility": ">=3.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
   "sdk": 2,
-  "brandColor": "#f57921",
+  "brandColor": "#4e6690",
   "author": {
     "name": "Ted Tolboom",
     "email": "dTNL.Homey@gmail.com"
@@ -57,293 +57,8 @@
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   },
-  "capabilities": {
-    "alarm_tilt": {
-      "type": "boolean",
-      "uiComponent": "sensor",
-      "icon": "/drivers/vibration.aq1/assets/alarm_tilt.svg",
-      "title": {
-        "en": "Tilt Alarm",
-        "nl": "Kantelalarm"
-      },
-      "desc": {
-        "en": "Detected tilt motion",
-        "nl": "Gedetecteerde kantel beweging"
-      },
-      "getable": true,
-      "setable": false,
-      "insights": true,
-      "insightsTitleTrue": {
-        "en": "Tilt alarm turned on",
-        "nl": "Kantel alarm ging af"
-      },
-      "insightsTitleFalse": {
-        "en": "Tilt alarm turned off",
-        "nl": "Kantel alarm ging uit"
-      }
-    },
-    "alarm_vibration": {
-      "type": "boolean",
-      "uiComponent": "sensor",
-      "icon": "/drivers/vibration.aq1/assets/alarm_vibration.svg",
-      "title": {
-        "en": "Vibration Alarm",
-        "nl": "Trillingsalarm"
-      },
-      "desc": {
-        "en": "Detected vibration",
-        "nl": "Gedetecteerde trilling"
-      },
-      "getable": true,
-      "setable": false,
-      "insights": true,
-      "insightsTitleTrue": {
-        "en": "Vibration alarm turned on",
-        "nl": "Trillings alarm ging af"
-      },
-      "insightsTitleFalse": {
-        "en": "Vibration alarm turned off",
-        "nl": "Trillings alarm ging uit"
-      }
-    },
-    "alarm_drop": {
-      "type": "boolean",
-      "uiComponent": "sensor",
-      "icon": "/drivers/vibration.aq1/assets/alarm_drop.svg",
-      "title": {
-        "en": "Drop Alarm",
-        "nl": "Valalarm"
-      },
-      "desc": {
-        "en": "Detected drop motion",
-        "nl": "Gedetecteerde val beweging"
-      },
-      "getable": true,
-      "setable": false,
-      "insights": true,
-      "insightsTitleTrue": {
-        "en": "Drop alarm turned on",
-        "nl": "Val alarm ging af"
-      },
-      "insightsTitleFalse": {
-        "en": "Drop alarm turned off",
-        "nl": "Val alarm ging uit"
-      }
-    },
-    "measure_tilt": {
-      "type": "number",
-      "uiComponent": "sensor",
-      "icon": "/drivers/vibration.aq1/assets/measure_tilt.svg",
-      "title": {
-        "en": "Tilt angle",
-        "nl": "Kantelhoek"
-      },
-      "getable": true,
-      "setable": false,
-      "insights": true,
-      "units": {
-        "en": "°"
-      },
-      "decimals": 2
-    },
-    "measure_vibration": {
-      "type": "number",
-      "uiComponent": "sensor",
-      "icon": "/drivers/vibration.aq1/assets/measure_vibration.svg",
-      "title": {
-        "en": "Vibration",
-        "nl": "Trilling"
-      },
-      "getable": true,
-      "setable": false,
-      "insights": true,
-      "decimals": 2
-    },
-    "cube_measure_rotation": {
-      "type": "number",
-      "uiComponent": "sensor",
-      "icon": "/drivers/cube/assets/icon_rotate.svg",
-      "title": {
-        "en": "Rotation",
-        "nl": "Draaihoek"
-      },
-      "getable": true,
-      "setable": false,
-      "insights": true,
-      "units": {
-        "en": "°"
-      },
-      "decimals": 2
-    },
-    "cube_state_motion": {
-      "type": "enum",
-      "uiComponent": "sensor",
-      "icon": "/drivers/cube/assets/icon.svg",
-      "title": {
-        "en": "Motion",
-        "nl": "Beweging"
-      },
-      "getable": true,
-      "setable": false,
-      "values": [
-        {
-          "id": "Shake",
-          "title": {
-            "en": "Shake",
-            "nl": "Schudden"
-          }
-        },
-        {
-          "id": "Flip90",
-          "title": {
-            "en": "Flip 90°",
-            "nl": "Flip 90°"
-          }
-        },
-        {
-          "id": "Flip180",
-          "title": {
-            "en": "Flip 180°",
-            "nl": "Flip 180°"
-          }
-        },
-        {
-          "id": "Slide",
-          "title": {
-            "en": "Slide",
-            "nl": "Schuiven"
-          }
-        },
-        {
-          "id": "DoubleTap",
-          "title": {
-            "en": "Double tap",
-            "nl": "Kloppen"
-          }
-        },
-        {
-          "id": "Rotate",
-          "title": {
-            "en": "Rotate",
-            "nl": "Roteren"
-          }
-        },
-        {
-          "id": "Catch",
-          "title": {
-            "en": "Catch",
-            "nl": "Vangen"
-          }
-        }
-      ]
-    },
-    "cube_state_face": {
-      "type": "enum",
-      "uiComponent": "sensor",
-      "icon": "/drivers/cube/assets/icon_face.svg",
-      "title": {
-        "en": "Face up",
-        "nl": "Zijde boven"
-      },
-      "getable": true,
-      "setable": false,
-      "values": [
-        {
-          "id": "1",
-          "title": {
-            "en": "Face 1",
-            "nl": "Zijde 1"
-          }
-        },
-        {
-          "id": "2",
-          "title": {
-            "en": "Face 2",
-            "nl": "Zijde 2"
-          }
-        },
-        {
-          "id": "3",
-          "title": {
-            "en": "Face 3",
-            "nl": "Zijde 3"
-          }
-        },
-        {
-          "id": "4",
-          "title": {
-            "en": "Face 4",
-            "nl": "Zijde 4"
-          }
-        },
-        {
-          "id": "5",
-          "title": {
-            "en": "Face 5",
-            "nl": "Zijde 5"
-          }
-        },
-        {
-          "id": "6",
-          "title": {
-            "en": "Face 6",
-            "nl": "Zijde 6"
-          }
-        }
-      ]
-    },
-    "windowcoverings_set": {
-      "type": "number",
-      "title": {
-        "en": "Position",
-        "nl": "Positie"
-      },
-      "desc": {
-        "en": "Set the position of window coverings. 0 is closed, 1 is open"
-      },
-      "chartType": "stepLine",
-      "min": 0,
-      "max": 1,
-      "decimals": 2,
-      "units": {
-        "en": "%"
-      },
-      "getable": true,
-      "setable": true
-    }
-  },
   "flow": {
     "triggers": [
-      {
-        "id": "trigger_switch2_turned_on",
-        "title": {
-          "en": "Turned on (right switch)",
-          "nl": "Ingeschakeld (rechter schakelaar)",
-          "de": "Eingeschaltet (rechter Schalter)"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
-          }
-        ]
-      },
-      {
-        "id": "trigger_switch2_turned_off",
-        "title": {
-          "en": "Turned off (right switch)",
-          "nl": "Uitgeschakeld (rechter schakelaar)",
-          "de": "Ausgeschaltet (rechter Schalter)"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
-          }
-        ]
-      },
       {
         "id": "button1_button",
         "title": {
@@ -477,6 +192,36 @@
         ]
       },
       {
+        "id": "trigger_switch2_turned_off",
+        "title": {
+          "en": "Turned off (right switch)",
+          "nl": "Uitgeschakeld (rechter schakelaar)",
+          "de": "Ausgeschaltet (rechter Schalter)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
+          }
+        ]
+      },
+      {
+        "id": "trigger_switch2_turned_on",
+        "title": {
+          "en": "Turned on (right switch)",
+          "nl": "Ingeschakeld (rechter schakelaar)",
+          "de": "Eingeschaltet (rechter Schalter)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
+          }
+        ]
+      },
+      {
         "id": "cube_Motion",
         "title": {
           "en": "Cube motion",
@@ -485,8 +230,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=cube"
           }
         ],
@@ -532,8 +277,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=cube"
           },
           {
@@ -609,8 +354,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=cube"
           },
           {
@@ -747,8 +492,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=cube"
           },
           {
@@ -824,8 +569,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=cube"
           },
           {
@@ -901,8 +646,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=cube"
           },
           {
@@ -978,8 +723,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=cube"
           },
           {
@@ -1077,8 +822,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ],
@@ -1108,8 +853,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ],
@@ -1135,8 +880,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ],
@@ -1184,8 +929,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ],
@@ -1233,8 +978,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ]
@@ -1248,8 +993,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ]
@@ -1263,8 +1008,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ]
@@ -1278,8 +1023,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ]
@@ -1293,8 +1038,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ]
@@ -1308,8 +1053,8 @@
         },
         "args": [
           {
-            "name": "device",
             "type": "device",
+            "name": "device",
             "filter": "driver_id=vibration.aq1"
           }
         ]
@@ -1334,21 +1079,6 @@
     ],
     "actions": [
       {
-        "id": "action_turn_on_switch2",
-        "title": {
-          "en": "Turn on (right switch)",
-          "nl": "Zet aan (rechter schakelaar)",
-          "de": "Anschalten (rechter Schalter)"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
-          }
-        ]
-      },
-      {
         "id": "action_turn_off_switch2",
         "title": {
           "en": "Turn off (right switch)",
@@ -1362,12 +1092,26 @@
             "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
           }
         ]
+      },
+      {
+        "id": "action_turn_on_switch2",
+        "title": {
+          "en": "Turn on (right switch)",
+          "nl": "Zet aan (rechter schakelaar)",
+          "de": "Anschalten (rechter Schalter)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=ctrl_neutral2|ctrl_ln2.aq1|relay.c2acn01"
+          }
+        ]
       }
     ]
   },
   "drivers": [
     {
-      "id": "ctrl_86plug.aq1",
       "name": {
         "en": "Aqara Smart Socket",
         "nl": "Aqara Smart Socket",
@@ -1403,10 +1147,10 @@
         "large": "/drivers/ctrl_86plug.aq1/assets/images/large.png",
         "small": "/drivers/ctrl_86plug.aq1/assets/images/small.png"
       },
-      "settings": []
+      "settings": [],
+      "id": "ctrl_86plug.aq1"
     },
     {
-      "id": "ctrl_ln1.aq1",
       "name": {
         "en": "Aqara Wall Switch Single (LN)",
         "nl": "Aqara Wall Switch Single (LN)",
@@ -1423,31 +1167,6 @@
         "measure_power": {
           "approximated": true
         }
-      },
-      "mobile": {
-        "components": [
-          {
-            "id": "icon",
-            "capabilities": []
-          },
-          {
-            "id": "sensor",
-            "capabilities": [
-              "measure_power",
-              "meter_power",
-              "measure_voltage"
-            ]
-          },
-          {
-            "id": "toggle",
-            "capabilities": [
-              "onoff"
-            ],
-            "options": {
-              "showTitle": true
-            }
-          }
-        ]
       },
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -1466,10 +1185,10 @@
       "images": {
         "large": "/drivers/ctrl_ln1.aq1/assets/images/large.png",
         "small": "/drivers/ctrl_ln1.aq1/assets/images/small.png"
-      }
+      },
+      "id": "ctrl_ln1.aq1"
     },
     {
-      "id": "ctrl_ln2.aq1",
       "name": {
         "en": "Aqara Wall Switch Double (LN)",
         "nl": "Aqara Wall Switch Double (LN)",
@@ -1500,40 +1219,6 @@
           "approximated": true
         }
       },
-      "mobile": {
-        "components": [
-          {
-            "id": "icon",
-            "capabilities": []
-          },
-          {
-            "id": "sensor",
-            "capabilities": [
-              "measure_power",
-              "meter_power",
-              "measure_voltage"
-            ]
-          },
-          {
-            "id": "toggle",
-            "capabilities": [
-              "onoff"
-            ],
-            "options": {
-              "showTitle": true
-            }
-          },
-          {
-            "id": "toggle",
-            "capabilities": [
-              "onoff.1"
-            ],
-            "options": {
-              "showTitle": true
-            }
-          }
-        ]
-      },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.ctrl_ln2.aq1",
@@ -1551,10 +1236,10 @@
       "images": {
         "large": "/drivers/ctrl_ln2.aq1/assets/images/large.png",
         "small": "/drivers/ctrl_ln2.aq1/assets/images/small.png"
-      }
+      },
+      "id": "ctrl_ln2.aq1"
     },
     {
-      "id": "ctrl_neutral1",
       "name": {
         "en": "Aqara Wall Switch Single (L)",
         "nl": "Aqara Wall Switch Single (L)",
@@ -1570,7 +1255,7 @@
         "deviceId": 6,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/ctrl_neutral1/assets/learn.svg",
+          "image": "//drivers/ctrl_neutral1/assets/learn.svg",
           "instruction": {
             "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
             "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
@@ -1579,12 +1264,12 @@
         }
       },
       "images": {
-        "large": "/drivers/ctrl_neutral1/assets/images/large.png",
-        "small": "/drivers/ctrl_neutral1/assets/images/small.png"
-      }
+        "large": "//drivers/ctrl_neutral1/assets/images/large.png",
+        "small": "//drivers/ctrl_neutral1/assets/images/small.png"
+      },
+      "id": "ctrl_neutral1"
     },
     {
-      "id": "ctrl_neutral2",
       "name": {
         "en": "Aqara Wall Switch Double (L)",
         "nl": "Aqara Wall Switch Double (L)",
@@ -1609,32 +1294,6 @@
           "greyout": false
         }
       },
-      "mobile": {
-        "components": [
-          {
-            "id": "icon",
-            "capabilities": []
-          },
-          {
-            "id": "toggle",
-            "capabilities": [
-              "onoff"
-            ],
-            "options": {
-              "showTitle": true
-            }
-          },
-          {
-            "id": "toggle",
-            "capabilities": [
-              "onoff.1"
-            ],
-            "options": {
-              "showTitle": true
-            }
-          }
-        ]
-      },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.ctrl_neutral2",
@@ -1652,10 +1311,10 @@
       "images": {
         "large": "/drivers/ctrl_neutral2/assets/images/large.png",
         "small": "/drivers/ctrl_neutral2/assets/images/small.png"
-      }
+      },
+      "id": "ctrl_neutral2"
     },
     {
-      "id": "cube",
       "name": {
         "en": "Cube",
         "nl": "Cube",
@@ -1672,37 +1331,6 @@
       "energy": {
         "batteries": [
           "CR2450"
-        ]
-      },
-      "mobile": {
-        "components": [
-          {
-            "id": "icon",
-            "capabilities": []
-          },
-          {
-            "id": "battery",
-            "capabilities": [
-              "measure_battery"
-            ]
-          },
-          {
-            "id": "sensor",
-            "capabilities": [
-              "cube_state_motion",
-              "cube_state_face",
-              "cube_measure_rotation",
-              "alarm_battery"
-            ],
-            "options": {
-              "showTitle": true,
-              "icons": {
-                "cube_state_motion": "/drivers/cube/assets/icon.svg",
-                "cube_state_face": "/drivers/cube/assets/icon_face.svg",
-                "cube_measure_rotation": "/drivers/cube/assets/icon_rotate.svg"
-              }
-            }
-          }
         ]
       },
       "zigbee": {
@@ -1758,10 +1386,10 @@
             "max": 90
           }
         }
-      ]
+      ],
+      "id": "cube"
     },
     {
-      "id": "curtain",
       "name": {
         "en": "Aqara Curtain Controller",
         "nl": "Aqara Curtain Controller",
@@ -1786,40 +1414,6 @@
           }
         }
       },
-      "mobile": {
-        "components": [
-          {
-            "id": "icon",
-            "capabilities": [
-              "onoff"
-            ]
-          },
-          {
-            "id": "slider",
-            "capabilities": [
-              "dim"
-            ]
-          },
-          {
-            "id": "ternary",
-            "capabilities": [
-              "windowcoverings_state"
-            ],
-            "options": {
-              "icons": {
-                "top": "/drivers/curtain/assets/curtain_open.svg",
-                "middle": "/drivers/curtain/assets/curtain_hold.svg",
-                "bottom": "/drivers/curtain/assets/curtain_close.svg"
-              },
-              "values": {
-                "top": "up",
-                "middle": "idle",
-                "bottom": "down"
-              }
-            }
-          }
-        ]
-      },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.curtain",
@@ -1838,10 +1432,48 @@
         "large": "/drivers/curtain/assets/images/large.png",
         "small": "/drivers/curtain/assets/images/small.png"
       },
-      "settings": []
+      "settings": [],
+      "id": "curtain"
     },
     {
-      "id": "light.aqcn02",
+      "name": {
+        "en": "Aqara B1 Curtain Controller",
+        "nl": "Aqara B1 Curtain Controller",
+        "de": "Aqara B1 Curtain Controller"
+      },
+      "class": "curtain",
+      "capabilities": [
+        "windowcoverings_set",
+        "windowcoverings_state",
+        "measure_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "INTERNAL"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain.hagl04",
+        "deviceId": 514,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/curtain.hagl04/assets/learn.svg",
+          "instruction": {
+            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "de": "Drücke den Reset Knopf mehr als 5 Sekunden und lasse ihn los sobald das blaue Licht an geht."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain.hagl04/assets/images/large.png",
+        "small": "/drivers/curtain.hagl04/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "curtain.hagl04"
+    },
+    {
       "name": {
         "en": "Aqara LED Bulb",
         "nl": "Aqara LED Bulb",
@@ -1906,10 +1538,10 @@
             "max": 6553
           }
         }
-      ]
+      ],
+      "id": "light.aqcn02"
     },
     {
-      "id": "plug",
       "name": {
         "en": "Smart socket plug",
         "nl": "Smart socket plug",
@@ -1945,10 +1577,10 @@
         "large": "/drivers/plug/assets/images/large.png",
         "small": "/drivers/plug/assets/images/small.png"
       },
-      "settings": []
+      "settings": [],
+      "id": "plug"
     },
     {
-      "id": "relay.c2acn01",
       "name": {
         "en": "Aqara Double Relay",
         "nl": "Aqara Double Relay",
@@ -1977,40 +1609,6 @@
           "approximated": true
         }
       },
-      "mobile": {
-        "components": [
-          {
-            "id": "icon",
-            "capabilities": []
-          },
-          {
-            "id": "sensor",
-            "capabilities": [
-              "measure_power",
-              "meter_power",
-              "measure_voltage"
-            ]
-          },
-          {
-            "id": "toggle",
-            "capabilities": [
-              "onoff"
-            ],
-            "options": {
-              "showTitle": true
-            }
-          },
-          {
-            "id": "toggle",
-            "capabilities": [
-              "onoff.1"
-            ],
-            "options": {
-              "showTitle": true
-            }
-          }
-        ]
-      },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.relay.c2acn01",
@@ -2028,10 +1626,10 @@
       "images": {
         "large": "/drivers/relay.c2acn01/assets/images/large.png",
         "small": "/drivers/relay.c2acn01/assets/images/small.png"
-      }
+      },
+      "id": "relay.c2acn01"
     },
     {
-      "id": "remote.b186acn01",
       "name": {
         "en": "Aqara Wireless Switch Single (2018)",
         "nl": "Aqara Wireless Switch Single (2018)",
@@ -2062,44 +1660,10 @@
         "large": "/drivers/remote.b186acn01/assets/images/large.png",
         "small": "/drivers/remote.b186acn01/assets/images/small.png"
       },
-      "settings": []
+      "settings": [],
+      "id": "remote.b186acn01"
     },
     {
-      "id": "remote.b286acn01",
-      "name": {
-        "en": "Aqara Wireless Switch Double (2018)",
-        "nl": "Aqara Wireless Switch Double (2018)",
-        "de": "Aqara Wireless Switch Double (2018)"
-      },
-      "class": "sensor",
-      "capabilities": [],
-      "energy": {
-        "batteries": [
-          "CR2032"
-        ]
-      },
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.remote.b286acn01",
-        "deviceId": 24321,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/remote.b286acn01/assets/learn.svg",
-          "instruction": {
-            "en": "Long press any of the buttons for more than 10 seconds until the blue light flashes three times after release",
-            "nl": "Houd een van de knoppen ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert",
-            "de": "Drücke den Knopf länger als 10 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/remote.b286acn01/assets/images/large.png",
-        "small": "/drivers/remote.b286acn01/assets/images/small.png"
-      },
-      "settings": []
-    },
-    {
-      "id": "remote.b1acn01",
       "name": {
         "en": "Aqara Wireless Mini Switch (2018)",
         "nl": "Aqara Wireless Mini Switch (2018)",
@@ -2152,10 +1716,44 @@
             "max": 90
           }
         }
-      ]
+      ],
+      "id": "remote.b1acn01"
     },
     {
-      "id": "sens",
+      "name": {
+        "en": "Aqara Wireless Switch Double (2018)",
+        "nl": "Aqara Wireless Switch Double (2018)",
+        "de": "Aqara Wireless Switch Double (2018)"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.remote.b286acn01",
+        "deviceId": 24321,
+        "profileId": 260,
+        "learnmode": {
+          "image": "//drivers/remote.b286acn01/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any of the buttons for more than 10 seconds until the blue light flashes three times after release",
+            "nl": "Houd een van de knoppen ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert",
+            "de": "Drücke den Knopf länger als 10 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        }
+      },
+      "images": {
+        "large": "//drivers/remote.b286acn01/assets/images/large.png",
+        "small": "//drivers/remote.b286acn01/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "remote.b286acn01"
+    },
+    {
       "name": {
         "en": "Temperature/Humidity sensor",
         "nl": "Temperature/Humidity sensor"
@@ -2272,10 +1870,10 @@
             "max": 90
           }
         }
-      ]
+      ],
+      "id": "sens"
     },
     {
-      "id": "sensor_86sw1lu",
       "name": {
         "en": "Aqara Wireless Remote Switch Single",
         "nl": "Aqara Wireless Remote Switch Single",
@@ -2306,10 +1904,10 @@
         "large": "/drivers/sensor_86sw1lu/assets/images/large.png",
         "small": "/drivers/sensor_86sw1lu/assets/images/small.png"
       },
-      "settings": []
+      "settings": [],
+      "id": "sensor_86sw1lu"
     },
     {
-      "id": "sensor_86sw2Un",
       "name": {
         "en": "Aqara Wireless Remote Switch Double",
         "nl": "Aqara Wireless Remote Switch Double",
@@ -2340,10 +1938,48 @@
         "large": "/drivers/sensor_86sw2Un/assets/images/large.png",
         "small": "/drivers/sensor_86sw2Un/assets/images/small.png"
       },
-      "settings": []
+      "settings": [],
+      "id": "sensor_86sw2Un"
     },
     {
-      "id": "sensor_magnet.aq2",
+      "name": {
+        "en": "Door/Window sensor",
+        "nl": "Door/Window sensor",
+        "de": "Door/Window sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_contact",
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR1632"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_magnet",
+        "deviceId": 260,
+        "profileId": 260,
+        "learnmode": {
+          "image": "/drivers/sensor_magnet/assets/learn_door.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_magnet/assets/images/large.png",
+        "small": "/drivers/sensor_magnet/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "sensor_magnet"
+    },
+    {
       "name": {
         "en": "Aqara Door and Window Sensor"
       },
@@ -2394,33 +2030,33 @@
             "max": 90
           }
         }
-      ]
+      ],
+      "id": "sensor_magnet.aq2"
     },
     {
-      "id": "sensor_magnet",
       "name": {
-        "en": "Door/Window sensor",
-        "nl": "Door/Window sensor",
-        "de": "Door/Window sensor"
+        "en": "Occupancy sensor",
+        "nl": "Occupancy sensor",
+        "de": "Occupancy sensor"
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_contact",
-        "measure_battery",
-        "alarm_battery"
+        "alarm_motion",
+        "alarm_battery",
+        "measure_battery"
       ],
       "energy": {
         "batteries": [
-          "CR1632"
+          "CR2450"
         ]
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_magnet",
+        "productId": "lumi.sensor_motion",
         "deviceId": 260,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/sensor_magnet/assets/learn_door.svg",
+          "image": "/drivers/sensor_motion/assets/learn_motion.svg",
           "instruction": {
             "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
             "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
@@ -2429,13 +2065,53 @@
         }
       },
       "images": {
-        "large": "/drivers/sensor_magnet/assets/images/large.png",
-        "small": "/drivers/sensor_magnet/assets/images/small.png"
+        "large": "/drivers/sensor_motion/assets/images/large.png",
+        "small": "/drivers/sensor_motion/assets/images/small.png"
       },
-      "settings": []
+      "settings": [
+        {
+          "id": "alarm_motion_reset_window",
+          "type": "number",
+          "label": {
+            "en": "Disable motion alarm after",
+            "nl": "Schakel bewegingsalarm uit na"
+          },
+          "hint": {
+            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
+            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
+          },
+          "value": 300,
+          "attr": {
+            "min": 60,
+            "max": 86400
+          }
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Expert settings",
+            "nl": "Expert instellingen"
+          },
+          "collapsed": true,
+          "children": [
+            {
+              "id": "hacked_alarm_motion_reset_window",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Hacked sensor"
+              },
+              "hint": {
+                "en": "By soldering two contact points on the PCB it's possible to reduce the motion blind time to 5 seconds instead of the minimum 60 seconds. Enabling this setting will allow you to override the minimum of 60 seconds for cancelling the alarm and will set it to 5 seconds.",
+                "nl": "Door twee contactpunten op de printplaat te solderen is het mogelijk om de blindtijd van de sensor terug te brengen naar 5 seconden. Inschakelen van deze instelling maakt het mogelijk om de instelling voor het annuleren van de bewegingsmelder te overschrijven tot 5 seconden."
+              }
+            }
+          ]
+        }
+      ],
+      "id": "sensor_motion"
     },
     {
-      "id": "sensor_motion.aq2",
       "name": {
         "en": "Aqara Motion Sensor"
       },
@@ -2529,88 +2205,61 @@
             }
           ]
         }
-      ]
+      ],
+      "id": "sensor_motion.aq2"
     },
     {
-      "id": "sensor_motion",
       "name": {
-        "en": "Occupancy sensor",
-        "nl": "Occupancy sensor",
-        "de": "Occupancy sensor"
+        "en": "Wireless switch",
+        "nl": "Wireless switch"
       },
       "class": "sensor",
-      "capabilities": [
-        "alarm_motion",
-        "alarm_battery",
-        "measure_battery"
-      ],
+      "capabilities": [],
       "energy": {
         "batteries": [
-          "CR2450"
+          "CR2032"
         ]
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_motion",
+        "productId": "lumi.sensor_switch",
         "deviceId": 260,
         "profileId": 260,
         "learnmode": {
-          "image": "/drivers/sensor_motion/assets/learn_motion.svg",
+          "image": "/drivers/sensor_switch/assets/learn_button.svg",
           "instruction": {
-            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
+            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
             "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
           }
         }
       },
       "images": {
-        "large": "/drivers/sensor_motion/assets/images/large.png",
-        "small": "/drivers/sensor_motion/assets/images/small.png"
+        "large": "/drivers/sensor_switch/assets/images/large.png",
+        "small": "/drivers/sensor_switch/assets/images/small.png"
       },
       "settings": [
         {
-          "id": "alarm_motion_reset_window",
+          "id": "button_long_press_threshold",
           "type": "number",
           "label": {
-            "en": "Disable motion alarm after",
-            "nl": "Schakel bewegingsalarm uit na"
+            "en": "Button long-press threshold",
+            "nl": "Lang ingedrukt drempelwaarde"
           },
           "hint": {
-            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired after the last motion has been detected. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
-            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden), na de laatste beweging gedetecteerd is, is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
+            "en": "This setting will determine the threshold used to determine if a button is held or only single clicked.\nDepending on the distance between the switch and Homey, this threshold, \nneeds to be increased to compensate for latency or\n can be decreased to improve fast response.\nDefault: 1000 ms\nRange: 300 - 5000 ms",
+            "nl": "Deze instelling bepaald de drempelwaarde op basis waarvan bepaald wordt of een knop ingedrukt gehouden wordt of een enkele keer ingedrukt is.\nAfhankelijk van de afstand tussen switch en Homey, zal deze drempelwaarde, \nverhoogd moeten worden om communicatie tijd te compenseren or\n verlaagd worden om de reactietijd te verkorten.\nStandaard: 1000 ms\nBereik: 300 - 5000 ms"
           },
-          "value": 300,
+          "value": 1000,
           "attr": {
-            "min": 60,
-            "max": 86400
+            "min": 300,
+            "max": 5000
           }
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Expert settings",
-            "nl": "Expert instellingen"
-          },
-          "collapsed": true,
-          "children": [
-            {
-              "id": "hacked_alarm_motion_reset_window",
-              "type": "checkbox",
-              "value": false,
-              "label": {
-                "en": "Hacked sensor"
-              },
-              "hint": {
-                "en": "By soldering two contact points on the PCB it's possible to reduce the motion blind time to 5 seconds instead of the minimum 60 seconds. Enabling this setting will allow you to override the minimum of 60 seconds for cancelling the alarm and will set it to 5 seconds.",
-                "nl": "Door twee contactpunten op de printplaat te solderen is het mogelijk om de blindtijd van de sensor terug te brengen naar 5 seconden. Inschakelen van deze instelling maakt het mogelijk om de instelling voor het annuleren van de bewegingsmelder te overschrijven tot 5 seconden."
-              }
-            }
-          ]
         }
-      ]
+      ],
+      "id": "sensor_switch"
     },
     {
-      "id": "sensor_switch.aq2",
       "name": {
         "en": "Aqara Wireless switch",
         "nl": "Aqara Wireless switch"
@@ -2661,10 +2310,10 @@
             "max": 90
           }
         }
-      ]
+      ],
+      "id": "sensor_switch.aq2"
     },
     {
-      "id": "sensor_switch.aq3",
       "name": {
         "en": "Aqara Wireless switch (Gyro)",
         "nl": "Aqara Wireless switch (Gyro)"
@@ -2718,61 +2367,10 @@
             "max": 90
           }
         }
-      ]
+      ],
+      "id": "sensor_switch.aq3"
     },
     {
-      "id": "sensor_switch",
-      "name": {
-        "en": "Wireless switch",
-        "nl": "Wireless switch"
-      },
-      "class": "sensor",
-      "capabilities": [],
-      "energy": {
-        "batteries": [
-          "CR2032"
-        ]
-      },
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_switch",
-        "deviceId": 260,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/sensor_switch/assets/learn_button.svg",
-          "instruction": {
-            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
-            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/sensor_switch/assets/images/large.png",
-        "small": "/drivers/sensor_switch/assets/images/small.png"
-      },
-      "settings": [
-        {
-          "id": "button_long_press_threshold",
-          "type": "number",
-          "label": {
-            "en": "Button long-press threshold",
-            "nl": "Lang ingedrukt drempelwaarde"
-          },
-          "hint": {
-            "en": "This setting will determine the threshold used to determine if a button is held or only single clicked.\nDepending on the distance between the switch and Homey, this threshold, \nneeds to be increased to compensate for latency or\n can be decreased to improve fast response.\nDefault: 1000 ms\nRange: 300 - 5000 ms",
-            "nl": "Deze instelling bepaald de drempelwaarde op basis waarvan bepaald wordt of een knop ingedrukt gehouden wordt of een enkele keer ingedrukt is.\nAfhankelijk van de afstand tussen switch en Homey, zal deze drempelwaarde, \nverhoogd moeten worden om communicatie tijd te compenseren or\n verlaagd worden om de reactietijd te verkorten.\nStandaard: 1000 ms\nBereik: 300 - 5000 ms"
-          },
-          "value": 1000,
-          "attr": {
-            "min": 300,
-            "max": 5000
-          }
-        }
-      ]
-    },
-    {
-      "id": "vibration.aq1",
       "name": {
         "en": "Aqara Vibration Sensor",
         "nl": "Aqara Vibration Sensor"
@@ -2799,42 +2397,6 @@
             "en": "Relative tilt angle"
           }
         }
-      },
-      "mobile": {
-        "components": [
-          {
-            "id": "icon",
-            "capabilities": []
-          },
-          {
-            "id": "battery",
-            "capabilities": [
-              "measure_battery"
-            ]
-          },
-          {
-            "id": "sensor",
-            "capabilities": [
-              "measure_tilt",
-              "measure_tilt.relative",
-              "measure_vibration",
-              "alarm_tilt",
-              "alarm_vibration",
-              "alarm_drop",
-              "alarm_battery"
-            ],
-            "options": {
-              "icons": {
-                "measure_tilt": "/drivers/vibration.aq1/assets/measure_tilt.svg",
-                "measure_tilt.relative": "/drivers/vibration.aq1/assets/measure_tilt.svg",
-                "measure_vibration": "/drivers/vibration.aq1/assets/measure_vibration.svg",
-                "alarm_vibration": "/drivers/vibration.aq1/assets/alarm_vibration.svg",
-                "alarm_tilt": "/drivers/vibration.aq1/assets/alarm_tilt.svg",
-                "alarm_drop": "/drivers/vibration.aq1/assets/alarm_drop.svg"
-              }
-            }
-          }
-        ]
       },
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -2977,10 +2539,10 @@
             "max": 90
           }
         }
-      ]
+      ],
+      "id": "vibration.aq1"
     },
     {
-      "id": "weather",
       "name": {
         "en": "Aqara Temperature and Humidity Sensor"
       },
@@ -3098,7 +2660,244 @@
             "max": 90
           }
         }
-      ]
+      ],
+      "id": "weather"
     }
-  ]
+  ],
+  "capabilities": {
+    "alarm_drop": {
+      "type": "boolean",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/alarm_drop.svg",
+      "title": {
+        "en": "Drop Alarm",
+        "nl": "Valalarm"
+      },
+      "desc": {
+        "en": "Detected drop motion",
+        "nl": "Gedetecteerde val beweging"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Drop alarm turned on",
+        "nl": "Val alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Drop alarm turned off",
+        "nl": "Val alarm ging uit"
+      }
+    },
+    "alarm_tilt": {
+      "type": "boolean",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/alarm_tilt.svg",
+      "title": {
+        "en": "Tilt Alarm",
+        "nl": "Kantelalarm"
+      },
+      "desc": {
+        "en": "Detected tilt motion",
+        "nl": "Gedetecteerde kantel beweging"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Tilt alarm turned on",
+        "nl": "Kantel alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Tilt alarm turned off",
+        "nl": "Kantel alarm ging uit"
+      }
+    },
+    "alarm_vibration": {
+      "type": "boolean",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/alarm_vibration.svg",
+      "title": {
+        "en": "Vibration Alarm",
+        "nl": "Trillingsalarm"
+      },
+      "desc": {
+        "en": "Detected vibration",
+        "nl": "Gedetecteerde trilling"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Vibration alarm turned on",
+        "nl": "Trillings alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Vibration alarm turned off",
+        "nl": "Trillings alarm ging uit"
+      }
+    },
+    "cube_measure_rotation": {
+      "type": "number",
+      "uiComponent": "sensor",
+      "icon": "/drivers/cube/assets/icon_rotate.svg",
+      "title": {
+        "en": "Rotation",
+        "nl": "Draaihoek"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": {
+        "en": "°"
+      },
+      "decimals": 2
+    },
+    "cube_state_face": {
+      "type": "enum",
+      "uiComponent": "sensor",
+      "icon": "/drivers/cube/assets/icon_face.svg",
+      "title": {
+        "en": "Face up",
+        "nl": "Zijde boven"
+      },
+      "getable": true,
+      "setable": false,
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Face 1",
+            "nl": "Zijde 1"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Face 2",
+            "nl": "Zijde 2"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Face 3",
+            "nl": "Zijde 3"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Face 4",
+            "nl": "Zijde 4"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "Face 5",
+            "nl": "Zijde 5"
+          }
+        },
+        {
+          "id": "6",
+          "title": {
+            "en": "Face 6",
+            "nl": "Zijde 6"
+          }
+        }
+      ]
+    },
+    "cube_state_motion": {
+      "type": "enum",
+      "uiComponent": "sensor",
+      "icon": "/drivers/cube/assets/icon.svg",
+      "title": {
+        "en": "Motion",
+        "nl": "Beweging"
+      },
+      "getable": true,
+      "setable": false,
+      "values": [
+        {
+          "id": "Shake",
+          "title": {
+            "en": "Shake",
+            "nl": "Schudden"
+          }
+        },
+        {
+          "id": "Flip90",
+          "title": {
+            "en": "Flip 90°",
+            "nl": "Flip 90°"
+          }
+        },
+        {
+          "id": "Flip180",
+          "title": {
+            "en": "Flip 180°",
+            "nl": "Flip 180°"
+          }
+        },
+        {
+          "id": "Slide",
+          "title": {
+            "en": "Slide",
+            "nl": "Schuiven"
+          }
+        },
+        {
+          "id": "DoubleTap",
+          "title": {
+            "en": "Double tap",
+            "nl": "Kloppen"
+          }
+        },
+        {
+          "id": "Rotate",
+          "title": {
+            "en": "Rotate",
+            "nl": "Roteren"
+          }
+        },
+        {
+          "id": "Catch",
+          "title": {
+            "en": "Catch",
+            "nl": "Vangen"
+          }
+        }
+      ]
+    },
+    "measure_tilt": {
+      "type": "number",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_tilt.svg",
+      "title": {
+        "en": "Tilt angle",
+        "nl": "Kantelhoek"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": {
+        "en": "°"
+      },
+      "decimals": 2
+    },
+    "measure_vibration": {
+      "type": "number",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_vibration.svg",
+      "title": {
+        "en": "Vibration",
+        "nl": "Trilling"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "decimals": 2
+    }
+  }
 }

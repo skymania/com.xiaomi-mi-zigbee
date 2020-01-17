@@ -1,0 +1,55 @@
+{
+  "type": "enum",
+  "uiComponent": "sensor",
+  "icon": "/drivers/cube/assets/icon_face.svg",
+  "title": {
+    "en": "Face up",
+    "nl": "Zijde boven"
+  },
+  "getable": true,
+  "setable": false,
+  "values": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Face 1",
+        "nl": "Zijde 1"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Face 2",
+        "nl": "Zijde 2"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Face 3",
+        "nl": "Zijde 3"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Face 4",
+        "nl": "Zijde 4"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Face 5",
+        "nl": "Zijde 5"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "Face 6",
+        "nl": "Zijde 6"
+      }
+    }
+  ]
+}

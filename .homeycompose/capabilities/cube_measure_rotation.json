@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "uiComponent": "sensor",
+  "icon": "/drivers/cube/assets/icon_rotate.svg",
+  "title": {
+    "en": "Rotation",
+    "nl": "Draaihoek"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": {
+    "en": "°"
+  },
+  "decimals": 2
+}
