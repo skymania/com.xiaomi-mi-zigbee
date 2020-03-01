@@ -4,5 +4,8 @@
   },
   "0.7.1": {
     "en": "Fix issue Cube trigger flow card arguments not showing up"
+  },
+  "0.8.0": {
+    "en": "Add support for Aqara & Xiaomi EU plugs, Xiaomi light sensors and additional expert settings for several sensors"
   }
 }
