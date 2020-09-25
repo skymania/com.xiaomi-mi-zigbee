@@ -1,267 +1,249 @@
-//lifeline validated
+// SDK3 updated & validated: DONE
+
 'use strict';
 
-// clean up code onTiltReportRAW
-
 const motionArray = {
-	1: {
-		motion: 'vibration'
-	},
-	2: {
-		motion: 'tilt'
-	},
-	3: {
-		motion: 'drop'
-	},
+  1: 'vibration',
+  2: 'tilt',
+  3: 'drop',
 };
 
-const Homey = require('homey');
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
-const util = require('./../../lib/util');
-const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+const XiaomiSpecificDoorlockCluster = require('../../lib/XiaomiSpecificDoorlockCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
+Cluster.addCluster(XiaomiSpecificDoorlockCluster);
 
 class AqaraVibrationSensor extends ZigBeeDevice {
-	onMeshInit() {
 
-		// enable debugging
-		// this.enableDebug();
+  onNodeInit({ zclNode }) {
+    // enable debugging
+    // this.enableDebug();
 
-		// print the node's info to the console
-		// this.printNode();
+    // print the node's info to the console
+    // this.printNode();
 
-		//Link util parseData method to this devices instance
-		this.parseData = util.parseData.bind(this)
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
-		// Register attribute listener for motion report
-		this.registerAttrReportListener('closuresDoorLock', '85', 1, 60, null,
-				this.onMotionReport.bind(this), 0)
-			.catch(err => {
-				this.error('failed to register attr report listener - Motion report (85)', err);
-			});
+    zclNode.endpoints[1].clusters[CLUSTER.DOOR_LOCK.NAME]
+      .on('attr.aqaraVibrationEventType', this.onMotionReport.bind(this)); // 85  0x055
+    zclNode.endpoints[1].clusters[CLUSTER.DOOR_LOCK.NAME]
+      .on('attr.aqaraVibrationTiltAngle', this.onTiltReport.bind(this)); // 1283  0x0503
+    zclNode.endpoints[1].clusters[CLUSTER.DOOR_LOCK.NAME]
+      .on('attr.aqaraVibrationStrength', this.onVibrationReport.bind(this)); // 1285 0x0505
+    zclNode.endpoints[1].clusters[CLUSTER.DOOR_LOCK.NAME]
+      .on('attr.aqaraVibrationOrientation', this.onTiltReportRAW.bind(this)); // 1288 0x0508
 
-		// Register attribute listener for direct Tilt report
-		this.registerAttrReportListener('closuresDoorLock', '1283', 1, 60, null,
-				this.onTiltReport.bind(this), 0)
-			.catch(err => {
-				this.error('failed to register attr report listener - Tilt report (1283)', err);
-			});
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
-		// Register attribute listener for occupancy
-		this.registerAttrReportListener('closuresDoorLock', '1285', 1, 60, null,
-				this.onVibrationReport.bind(this), 0)
-			.catch(err => {
-				this.error('failed to register attr report listener - Vibration report (1285)', err);
-			});
+    // sensor motion trigger
+    this.sensorMotionTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('sensor_motion');
 
-		// Register attribute listener for occupancy
-		this.registerAttrReportListener('closuresDoorLock', '1288', 1, 60, null,
-				this.onTiltReportRAW.bind(this), 0)
-			.catch(err => {
-				this.error('failed to register attr report listener - RAW Tilt report (1288)', err);
-			});
+    // sensor vibration trigger
+    this.sensorVibrationTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('sensor_vibration');
 
-		// Register the AttributeReportListener - Lifeline
-		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
-				this.onLifelineReport.bind(this), 0)
-			.catch(err => {
-				this.error('failed to register attr report listener - Lifeline report (65281)', err);
-			});
+    // sensor vibration triggers
+    this.tiltDeltaTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('sensor_tilt_delta');
 
-		// sensor motion trigger
-		this.sensorMotionTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_motion');
-		this.sensorMotionTriggerDevice.register();
+    this.tiltReferenceTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('sensor_tilt_reference');
 
-		// sensor vibration trigger
-		this.sensorVibrationTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_vibration');
-		this.sensorVibrationTriggerDevice.register();
+    // Vibration alarm triggers
+    this.alarm_vibrationTrueTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('alarm_vibration_true');
 
-		// sensor vibration triggers
-		this.tiltDeltaTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_tilt_delta');
-		this.tiltDeltaTriggerDevice.register();
+    this.alarm_vibrationFalseTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('alarm_vibration_false');
 
-		this.tiltReferenceTriggerDevice = new Homey.FlowCardTriggerDevice('sensor_tilt_reference');
-		this.tiltReferenceTriggerDevice.register();
+    // Tilt alarm triggers
+    this.alarm_tiltTrueTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('alarm_tilt_true');
 
-		// Vibration alarm triggers
-		this.alarm_vibrationTrueTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_vibration_true');
-		this.alarm_vibrationTrueTriggerDevice.register();
+    this.alarm_tiltFalseTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('alarm_tilt_false');
 
-		this.alarm_vibrationFalseTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_vibration_false');
-		this.alarm_vibrationFalseTriggerDevice.register();
+    // Drop alarm triggers
+    this.alarm_dropTrueTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('alarm_drop_true');
 
-		// Tilt alarm triggers
-		this.alarm_tiltTrueTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_tilt_true');
-		this.alarm_tiltTrueTriggerDevice.register();
+    this.alarm_dropFalseTriggerDevice = this.homey.flow
+      .getDeviceTriggerCard('alarm_drop_false');
+  }
 
-		this.alarm_tiltFalseTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_tilt_false');
-		this.alarm_tiltFalseTriggerDevice.register();
+  onMotionReport(value) {
+    const motionType = motionArray[value];
+    this.log('closuresDoorLock - 85 (motion)', motionType, value);
 
-		// Drop alarm triggers
-		this.alarm_dropTrueTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_drop_true');
-		this.alarm_dropTrueTriggerDevice.register();
+    // Trigger generic motion token trigger card
+    this.triggerFlow({
+      id: 'sensor_motion',
+      tokens: {
+        motion: motionType,
+      },
+      state: null,
+    })
+      .catch(err => this.error('Error triggering sensorMotionTriggerDevice', err));
 
-		this.alarm_dropFalseTriggerDevice = new Homey.FlowCardTriggerDevice('alarm_drop_false');
-		this.alarm_dropFalseTriggerDevice.register();
+    //
+    if (this.getCapabilityValue(`alarm_${motionType}`) !== true) {
+      this.setCapabilityValue(`alarm_${motionType}`, true);
+    }
+    // restart alarm cancellation timer
+    clearTimeout(this[`alarm${motionType}Timeout`]);
 
-	}
+    // start alarm cancellation timer
+    this[`alarm${motionType}Timeout`] = setTimeout(() => {
+      this.setCapabilityValue(`alarm_${motionType}`, false);
+    }, (this.getSetting(`alarm_${motionType}_cancellation_delay`) || 30) * 1000);
+  }
 
-	onMotionReport(value) {
-		const motionType = motionArray[value].motion;
-		this.log('closuresDoorLock - 85 (motion)', motionType, value);
+  onTiltReport(value) {
+    this.log('closuresDoorLock - 1283 (tilt angle):', value);
+  }
 
-		// Trigger generic motion token trigger card
-		this.sensorMotionTriggerDevice.trigger(this, {
-				motion: motionType
-			})
-			// .then(() => this.log('Triggered sensorMotionTriggerDevice with token', motionType))
-			.catch(err => this.error('Error triggering sensorMotionTriggerDevice', err));
+  onVibrationReport(value) {
+    const toInt16 = v => Int16Array.from([v])[0];
+    const parsedValue = toInt16(value >> 16 & 0xffff);
+    this.log('closuresDoorLock - 1285 (vibration):', value, parsedValue);
+    this.setCapabilityValue('measure_vibration', parsedValue);
 
-		//
-		if (this.getCapabilityValue(`alarm_${motionType}`) !== true) {
-			this.setCapabilityValue(`alarm_${motionType}`, true);
-		}
-		// restart alarm cancellation timer
-		clearTimeout(this[`alarm${motionType}Timeout`]);
+    // Trigger generic motion token trigger card
+    this.triggerFlow({
+      id: 'sensor_vibration',
+      tokens: {
+        vibration: parsedValue,
+      },
+      state: null,
+    })
+    // .then(() => this.log('Triggered sensorVibrationTriggerDevice with token', parsedValue))
+      .catch(err => this.error('Error triggering sensorVibrationTriggerDevice', err));
+  }
 
-		// start alarm cancellation timer
-		this[`alarm${motionType}Timeout`] = setTimeout(() => {
-			this.setCapabilityValue(`alarm_${motionType}`, false);
-		}, (this.getSetting(`alarm_${motionType}_cancellation_delay`) || 30) * 1000);
-	}
+  onTiltReportRAW(value) {
+    const RAD = Math.PI / 180;
 
-	onTiltReport(value) {
-		this.log('closuresDoorLock - 1283 (tilt angle):', value);
-	}
+    // FIX data as parsed by the Zigbee Shepherd
+    const toInt16 = v => Int16Array.from([v])[0];
 
-	onVibrationReport(value) {
-		const toInt16 = v => Int16Array.from([v])[0];
-		const parsedValue = toInt16(value >> 16 & 0xffff);
-		this.log('closuresDoorLock - 1285 (vibration):', value, parsedValue);
-		this.setCapabilityValue('measure_vibration', parsedValue);
+    const Rx = toInt16((value[1]) & 0xffff); toInt16((value[1]) & 0xffff);
+    const Ry = toInt16((value[1] >> 16) & 0xffff);
+    const Rz = toInt16(value[0]);
 
-		this.sensorVibrationTriggerDevice.trigger(this, {
-				vibration: parsedValue
-			})
-			// .then(() => this.log('Triggered sensorVibrationTriggerDevice with token', parsedValue))
-			.catch(err => this.error('Error triggering sensorVibrationTriggerDevice', err));
-	}
+    // calculate force vector
+    const R = Math.sqrt(Rx * Rx + Ry * Ry + Rz * Rz);
 
-	onTiltReportRAW(value) {
-		const RAD = Math.PI / 180;
+    // Three different reference planes:
+    // 1. Calculate angles normalized force vector relative to axis
+    const Axr = Math.acos(Rx / R) / RAD;
+    const Ayr = Math.acos(Ry / R) / RAD;
+    const Azr = Math.acos(Rz / R) / RAD;
+    const Ameasured = [Axr, Ayr, Azr];
+    this.log('closuresDoorLock - 1288 (Tilt RAW):', value, 'Measured angles', Ameasured);
 
-		// FIX data as parsed by the Zigbee Shepherd
-		const toInt16 = v => Int16Array.from([v])[0];
+    // 2. Calculate angles normalized force vector relative to reference plane
+    const Areference = this.getStoreValue('Areference') || [90, 90, 0];
 
-		const Rx = toInt16((value[1]) & 0xffff);
-		const Ry = toInt16((value[1] >> 16) & 0xffff);
-		const Rz = toInt16(value[0]);
+    const Arelative = Areference.map((item, index) => {
+      // item correspond to currentValue of array Areference using index to get value from array Ameasured
+      return item - Ameasured[index];
+    });
 
-		// calculate force vector
-		const R = Math.sqrt(Rx * Rx + Ry * Ry + Rz * Rz);
+    const Arelative_max = Math.abs(Arelative[0]) > Math.abs(Arelative[1]) ? Arelative[0] : Arelative[1];
 
-		// Three different reference planes:
-		// 1. Calculate angles normalized force vector relative to axis
-		const Axr = Math.acos(Rx / R) / RAD;
-		const Ayr = Math.acos(Ry / R) / RAD;
-		const Azr = Math.acos(Rz / R) / RAD;
-		const Ameasured = [Axr, Ayr, Azr];
-		this.log('closuresDoorLock - 1288 (Tilt RAW):', value, 'Measured angles', Ameasured);
+    const tiltRelativeToken = {
+      Tilt_x: Math.round(Arelative[0] * 100) / 100,
+      Tilt_y: Math.round(Arelative[1] * 100) / 100,
+      Tilt_max: Math.round(Arelative_max * 100) / 100,
+      Tilt_abs: Math.round(Math.abs(Arelative_max) * 100) / 100,
+    };
 
-		// 2. Calculate angles normalized force vector relative to reference plane
-		const Areference = this.getStoreValue('Areference') || [90, 90, 0];
+    this.log('Tilt angles relative to reference plane:', tiltRelativeToken.Tilt_x, '(Tilt_x)', tiltRelativeToken.Tilt_y, '(Tilt_y)', tiltRelativeToken.Tilt_max, '(max(Tilt))', tiltRelativeToken.Tilt_abs, '(abs(Tilt))');
 
-		var Arelative = Areference.map(function (item, index) {
-			// item correspond to currentValue of array Areference using index to get value from array Ameasured
-			return item - Ameasured[index];
-		});
+    this.setCapabilityValue('measure_tilt', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltRelativeToken.Tilt_max : tiltRelativeToken.Tilt_abs);
 
-		var Arelative_max = Math.abs(Arelative[0]) > Math.abs(Arelative[1]) ? Arelative[0] : Arelative[1];
+    // Trigger generic motion token trigger card
+    this.triggerFlow({
+      id: 'sensor_tilt_reference',
+      tokens: tiltRelativeToken,
+      state: null,
+    })
+      .catch(err => this.error('Error triggering tiltRelativeTriggerDevice', err));
 
-		const tiltRelativeToken = {
-			Tilt_x: Math.round(Arelative[0] * 100) / 100,
-			Tilt_y: Math.round(Arelative[1] * 100) / 100,
-			Tilt_max: Math.round(Arelative_max * 100) / 100,
-			Tilt_abs: Math.round(Math.abs(Arelative_max) * 100) / 100,
-		};
+    // 3. Calculate angles normalized force vector relative to previous plane
+    const Ameasured_previous = this.getStoreValue('Ameasured_previous') || [90, 90, 0];
 
-		this.log('Tilt angles relative to reference plane:', tiltRelativeToken.Tilt_x, '(Tilt_x)', tiltRelativeToken.Tilt_y, '(Tilt_y)', tiltRelativeToken.Tilt_max, '(max(Tilt))', tiltRelativeToken.Tilt_abs, '(abs(Tilt))');
+    const Adelta = Ameasured_previous.map((item, index) => {
+      // item correspond to currentValue of array Ameasured_previous using index to get value from array Ameasured
+      return item - Ameasured[index];
+    });
 
-		this.setCapabilityValue('measure_tilt', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltRelativeToken.Tilt_max : tiltRelativeToken.Tilt_abs);
+    const Adelta_max = Math.abs(Adelta[0]) > Math.abs(Adelta[1]) ? Adelta[0] : Adelta[1];
+    const tiltDeltaToken = {
+      Tilt_x: Math.round(Adelta[0] * 100) / 100,
+      Tilt_y: Math.round(Adelta[1] * 100) / 100,
+      Tilt_max: Math.round(Adelta_max * 100) / 100,
+      Tilt_abs: Math.round(Math.abs(Adelta_max) * 100) / 100,
+    };
 
-		// Trigger generic motion token trigger card
-		this.tiltReferenceTriggerDevice.trigger(this, tiltRelativeToken)
-			// .then(() => this.log('Triggered tiltRelativeTriggerDevice with token'))
-			.catch(err => this.error('Error triggering tiltRelativeTriggerDevice', err));
+    this.log('Tilt angles relative to previous position:', tiltDeltaToken.Tilt_x, '(Tilt_x)', tiltDeltaToken.Tilt_y, '(Tilt_y)', tiltDeltaToken.Tilt_max, '(max(Tilt))', tiltDeltaToken.Tilt_abs, '(abs(Tilt))');
 
-		// 3. Calculate angles normalized force vector relative to previous plane
-		const Ameasured_previous = this.getStoreValue('Ameasured_previous') || [90, 90, 0];
+    this.setCapabilityValue('measure_tilt.relative', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltDeltaToken.Tilt_max : tiltDeltaToken.Tilt_abs);
 
-		var Adelta = Ameasured_previous.map(function (item, index) {
-			// item correspond to currentValue of array Ameasured_previous using index to get value from array Ameasured
-			return item - Ameasured[index];
-		});
+    // Trigger generic motion token trigger card
+    this.triggerFlow({
+      id: 'sensor_tilt_delta',
+      tokens: tiltDeltaToken,
+      state: null,
+    })
+    // .then(() => this.log('Triggered tiltDeltaTriggerDevice with token'))
+      .catch(err => this.error('Error triggering tiltDeltaTriggerDevice', err));
 
-		var Adelta_max = Math.abs(Adelta[0]) > Math.abs(Adelta[1]) ? Adelta[0] : Adelta[1];
-		const tiltDeltaToken = {
-			Tilt_x: Math.round(Adelta[0] * 100) / 100,
-			Tilt_y: Math.round(Adelta[1] * 100) / 100,
-			Tilt_max: Math.round(Adelta_max * 100) / 100,
-			Tilt_abs: Math.round(Math.abs(Adelta_max) * 100) / 100,
-		};
+    // update previous normalized force vector
+    this.setStoreValue('Ameasured_previous', Ameasured);
 
-		this.log('Tilt angles relative to previous position:', tiltDeltaToken.Tilt_x, '(Tilt_x)', tiltDeltaToken.Tilt_y, '(Tilt_y)', tiltDeltaToken.Tilt_max, '(max(Tilt))', tiltDeltaToken.Tilt_abs, '(abs(Tilt))');
+    // update reference normalized force vector if requested
+    if (this.getSetting('setReferenceVector') === true) {
+      this.setStoreValue('Areference', Ameasured);
 
-		this.setCapabilityValue('measure_tilt.relative', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltDeltaToken.Tilt_max : tiltDeltaToken.Tilt_abs);
+      const Ameasured_rounded = Ameasured.map(each_element => {
+        return Number(each_element.toFixed(0));
+      });
 
-		// Trigger generic motion token trigger card
-		this.tiltDeltaTriggerDevice.trigger(this, tiltDeltaToken)
-			// .then(() => this.log('Triggered tiltDeltaTriggerDevice with token'))
-			.catch(err => this.error('Error triggering tiltDeltaTriggerDevice', err));
+      this.setSettings({
+        tiltReferenceVector: Ameasured_rounded.toString(),
+        setReferenceVector: false,
+      });
+    }
+  }
 
-		// update previous normalized force vector
-		this.setStoreValue('Ameasured_previous', Ameasured);
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onXiaomiLifelineAttributeReport({
+    batteryVoltage,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      batteryVoltage,
+    });
 
-		// update reference normalized force vector if requested
-		if (this.getSetting('setReferenceVector') === true) {
-			this.setStoreValue('Areference', Ameasured);
+    if (typeof batteryVoltage === 'number') {
+      this.onBatteryVoltageAttributeReport(batteryVoltage);
+    }
+  }
 
-			var Ameasured_rounded = Ameasured.map(function (each_element) {
-				return Number(each_element.toFixed(0));
-			});
-
-			this.setSettings({
-				tiltReferenceVector: Ameasured_rounded.toString(),
-				setReferenceVector: false,
-			});
-
-		}
-	}
-
-	onLifelineReport(value) {
-		this._debug('lifeline report', new Buffer(value, 'ascii'));
-
-		const parsedData = this.parseData(new Buffer(value, 'ascii'));
-		this._debug('parsedData', parsedData);
-
-		// battery reportParser (ID 1)
-		if (parsedData.hasOwnProperty('1')) {
-			const parsedVolts = parsedData['1'] / 1000;
-			const minVolts = 2.5;
-			const maxVolts = 3.0;
-
-			const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-			this.log('lifeline - battery', parsedBatPct);
-			if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-				// Set Battery capability
-				this.setCapabilityValue('measure_battery', parsedBatPct);
-				// Set Battery alarm if battery percentatge is below 20%
-				this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
-			}
-		}
-
-	}
-
-	/* Unable to write the sensor sensitivity value, when not defined
+  /* Unable to write the sensor sensitivity value, when not defined
 	JSON section:
 	{
 		"id": "vibrationSensitivity",

@@ -16,8 +16,34 @@
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.plug.mmeu01",
-    "deviceId": 81,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          6,
+          9
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "21": {
+        "clusters": [
+        12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "22": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

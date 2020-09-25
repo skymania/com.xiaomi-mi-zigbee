@@ -8,8 +8,7 @@
   "capabilities": [
     "onoff",
     "measure_power",
-    "meter_power",
-    "measure_voltage"
+    "meter_power"
   ],
   "capabilitiesOptions": {
     "measure_power": {
@@ -19,8 +18,48 @@
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.ctrl_ln1.aq1",
-    "deviceId": 81,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          4,
+          5,
+          6,
+          16
+        ],
+        "bindings": [
+          6,
+          16
+        ]
+      },
+      "2": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "3": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "4": {
+        "clusters": [
+          16,
+          18
+        ],
+        "bindings": [
+          16,
+          18
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

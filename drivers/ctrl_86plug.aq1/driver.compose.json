@@ -8,7 +8,6 @@
   "capabilities": [
     "onoff",
     "measure_power",
-    "measure_voltage",
     "meter_power"
   ],
   "capabilitiesOptions": {
@@ -19,8 +18,35 @@
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.ctrl_86plug.aq1",
-    "deviceId": 81,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          4,
+          5,
+          6
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "2": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "3": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

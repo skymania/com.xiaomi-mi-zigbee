@@ -1,4 +1,5 @@
 {
+  "deprecated": true,
   "name": {
     "en": "Aqara Double Relay",
     "nl": "Aqara Double Relay",
@@ -30,8 +31,37 @@
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.relay.c2acn01",
-    "deviceId": 257,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          4,
+          5,
+          6,
+          12,
+          16,
+          2820
+        ],
+        "bindings": [
+          6,
+          12,
+          2820
+        ]
+      },
+      "2": {
+        "clusters": [
+          4,
+          5,
+          6,
+          16
+        ],
+        "bindings": [
+          6,
+          16
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

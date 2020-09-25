@@ -1,94 +1,113 @@
+// SDK3 updated & validated: DONE
+
 'use strict';
 
 const Homey = require('homey');
 
-const util = require('./../../lib/util');
-const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
-//const ZigBeeLightDevice = require('homey-meshdriver').ZigBeeLightDevice;
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
+
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
 
 class AqaraLightSwitchSingle extends ZigBeeDevice {
 
-	onMeshInit() {
+  onNodeInit({ zclNode }) {
+    // enable debugging
+    // this.enableDebug();
 
-		// enable debugging
-		// this.enableDebug();
+    // print the node's info to the console
+    // this.printNode();
 
-		// print the node's info to the console
-		// this.printNode();
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
-		//Link util parseData method to this devices instance
-		this.parseData = util.parseData.bind(this)
+    this.sceneMap = {
+      0: 'Key Pressed 1 time',
+    };
 
-		this.sceneMap = {
-			0: {
-				scene: 'Key Pressed 1 time'
-			},
-		};
+    zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
+      .on('attr.onOff', this.onOnOffAttributeReport.bind(this));
 
-		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
-		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this);
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
-		this._attrReportListeners['0_genBasic'] = this._attrReportListeners['0_genBasic'] || {};
-		this._attrReportListeners['0_genBasic']['65281'] = this.onLifelineReport.bind(this);
+    // Lifeline
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
-		// define and register FlowCardTriggers
-		this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
+    // define and register FlowCardTriggers
+    this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
+  }
 
-		this.triggerButton1_button = new Homey.FlowCardTriggerDevice('button1_button');
-		this.triggerButton1_button
-			.register();
+  onOnOffAttributeReport(repScene) {
+    repScene = Number(repScene);
+    this.log('genOnOff - onOff', repScene);
 
-	}
+    if (Object.keys(this.sceneMap).includes(repScene.toString())) {
+      const remoteValue = {
+        scene: this.sceneMap[repScene],
+      };
+      this.debug('Scene and Button triggers', remoteValue);
+      // Trigger the trigger card with 1 dropdown option
+      this.triggerFlow({
+        id: 'trigger_button1_scene',
+        tokens: null,
+        state: remoteValue,
+      })
+        .catch(err => this.error('Error triggering button1SceneTriggerDevice', err));
 
-	onOnOffListener(repScene) {
-		this.log('genOnOff - onOff', repScene);
+      // Trigger the trigger card with tokens
+      this.triggerFlow({
+        id: 'button1_button',
+        tokens: remoteValue,
+        state: null,
+      })
+        .catch(err => this.error('Error triggering button1ButtonTriggerDevice', err));
+    }
+  }
 
-		if (Object.keys(this.sceneMap).includes(repScene.toString())) {
-			const remoteValue = {
-				scene: this.sceneMap[repScene].scene,
-			};
-			// Trigger the trigger card with 1 dropdown option
-			Homey.app.triggerButton1_scene.trigger(this, null, remoteValue);
-			// Trigger the trigger card with tokens
-			this.triggerButton1_button.trigger(this, remoteValue, null);
-		}
-	}
+  onSceneAutocomplete(query, args, callback) {
+    let resultArray = [];
+    for (const sceneID in this.sceneMap) {
+      resultArray.push({
+        id: this.sceneMap[sceneID],
+        name: this.homey.__(this.sceneMap[sceneID]),
+      });
+    }
+    // filter for query
+    resultArray = resultArray.filter(result => {
+      return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    });
+    this.debug(resultArray);
+    return Promise.resolve(resultArray);
+  }
 
-	onSceneAutocomplete(query, args, callback) {
-		let resultArray = [];
-		for (let sceneID in this.sceneMap) {
-			resultArray.push({
-				id: this.sceneMap[sceneID].scene,
-				name: Homey.__(this.sceneMap[sceneID].scene),
-			})
-		}
-		// filter for query
-		resultArray = resultArray.filter(result => {
-			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
-		});
-		this._debug(resultArray);
-		return Promise.resolve(resultArray);
-	}
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onXiaomiLifelineAttributeReport({
+    batteryVoltage,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      batteryVoltage,
+    });
 
-	onLifelineReport(value) {
-		this._debug('lifeline report', new Buffer(value, 'ascii'));
-		const parsedData = this.parseData(new Buffer(value, 'ascii'));
-		// this._debug('parsedData', parsedData);
+    if (typeof batteryVoltage === 'number') {
+      const parsedVolts = batteryVoltage / 1000;
+      const minVolts = 2.5;
+      const maxVolts = 3.0;
+      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      this.setCapabilityValue('measure_battery', parsedBatPct);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    }
+  }
 
-		// battery reportParser (ID 1)
-		const parsedVolts = parsedData['1'] / 100.0;
-		const minVolts = 2.5;
-		const maxVolts = 3.0;
-
-		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-		this.log('lifeline - battery', parsedBatPct);
-		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-			// Set Battery capability
-			this.setCapabilityValue('measure_battery', parsedBatPct);
-			// Set Battery alarm if battery percentatge is below 20%
-			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
-		}
-	}
 }
 
 module.exports = AqaraLightSwitchSingle;

@@ -1,92 +1,67 @@
+// SDK3 updated: DONE
+
 'use strict';
 
 const Homey = require('homey');
-const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
+
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const {
+  zclNode, debug, Cluster, CLUSTER,
+} = require('zigbee-clusters');
 
 class AqaraWallSwitchDoubleL extends ZigBeeDevice {
 
-	async onMeshInit() {
-		// enable debugging
-		// this.enableDebug();
+  async onNodeInit({ zclNode }) {
+    // enable debugging
+    // this.enableDebug();
 
-		// print the node's info to the console
-		// this.printNode();
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
-		// Register capabilities and reportListeners for Left switch
-		this.registerCapability('onoff', 'genOnOff', {
-			endpoint: 1
-		});
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
-			this.switchOneAttrListener.bind(this), 1, true);
+    // print the node's info to the console
+    // this.printNode();
 
-		// Register capabilities and reportListeners for Right switch
-		this.registerCapability('onoff.1', 'genOnOff', {
-			endpoint: 2
-		});
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 3600, 1,
-			this.switchTwoAttrListener.bind(this), 2, true);
+    // Register capabilities and reportListeners for Left switch
+    if (this.hasCapability('onoff')) {
+      this.registerCapability('onoff', CLUSTER.ON_OFF, {
+        endpoint: 2,
+      });
+    }
 
-	}
+    // Register capabilities and reportListeners for Right switch
+    if (this.hasCapability('onoff.1')) {
+      this.registerCapability('onoff.1', CLUSTER.ON_OFF, {
+        get: 'onOff',
+        getOpts: {
+          getOnStart: true,
+        },
+        set: value => (value ? 'setOn' : 'setOff'),
+        /**
+         * Return empty object, the command specifies the action for this cluster ('setOn'/setOff').
+         * @returns {{}}
+         */
+        setParser: () => ({}),
+        report: 'onOff',
+        /**
+         * @param {boolean} value
+         * @returns {boolean}
+         */
+        reportParser(value) {
+          const currentValue = this.getCapabilityValue('onoff.1');
+          if (currentValue !== value) {
+            this.triggerFlow({
+              id: `trigger_switch2_turned_${value ? 'on' : 'off'}`,
+              tokens: null,
+              state: null,
+            });
+          }
+          return value;
+        },
+        endpoint: 3,
+      });
+    }
+  }
 
-	// Method to handle changes to attributes
-	switchOneAttrListener(data) {
-		this.log('genOnOff - onOff (switch 1):', data === 1);
-		this.setCapabilityValue('onoff', data === 1);
-	}
-
-	switchTwoAttrListener(data) {
-		this.log('genOnOff - onOff (switch 2):', data === 1);
-		let currentValue = this.getCapabilityValue('onoff.1');
-		this.setCapabilityValue('onoff.1', data === 1);
-		if (currentValue !== (data === 1)) {
-			Homey.app[`_triggerSwitchTwoTurned${data === 1 ? 'On' : 'Off'}`].trigger(this, {}, {}).catch(this.error);
-		}
-	}
-
-	// <<<< Temporary till until Zigbee Meshdriver bug is fixed.
-	// See https://github.com/athombv/homey/issues/2137
-	// Rewrite parent method to overcome Zigbee Meshdriver bug.
-	_mergeSystemAndUserOpts(capabilityId, clusterId, userOpts) {
-
-		// Merge systemOpts & userOpts
-		let systemOpts = {};
-
-		let tempCapabilityId = capabilityId;
-		let index = tempCapabilityId.lastIndexOf('.');
-		if (index !== -1) {
-			tempCapabilityId = tempCapabilityId.slice(0, index)
-		}
-
-		try {
-			systemOpts = Homey.util.recursiveDeepCopy(require(`../../node_modules/homey-meshdriver/lib/zigbee/system/capabilities/${tempCapabilityId}/${clusterId}.js`));
-
-			// Bind correct scope
-			for (let i in systemOpts) {
-				if (systemOpts.hasOwnProperty(i) && typeof systemOpts[i] === 'function') {
-					systemOpts[i] = systemOpts[i].bind(this);
-				}
-			}
-		}
-		catch (err) {
-			if (err.code !== 'MODULE_NOT_FOUND' || err.message.indexOf(`../../node_modules/homey-meshdriver/lib/zigbee/system/capabilities/${tempCapabilityId}/${clusterId}.js`) < 0) {
-				process.nextTick(() => {
-					throw err;
-				});
-			}
-		}
-
-		// Insert default endpoint zero
-		if (userOpts && !userOpts.hasOwnProperty('endpoint')) userOpts.endpoint = this.getClusterEndpoint(clusterId);
-		else if (typeof userOpts === 'undefined') userOpts = {
-			endpoint: this.getClusterEndpoint(clusterId)
-		};
-
-		this._capabilities[capabilityId][clusterId] = Object.assign(
-			systemOpts || {},
-			userOpts || {}
-		);
-	}
-	// >>>>
 }
 
 module.exports = AqaraWallSwitchDoubleL;

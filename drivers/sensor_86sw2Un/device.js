@@ -1,128 +1,150 @@
+// SDK3 updated & validated: DONE
+
 'use strict';
 
 const Homey = require('homey');
 
-const util = require('./../../lib/util');
-const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
-class AqaraLightSwitchDouble extends ZigBeeDevice {
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
-	onMeshInit() {
+Cluster.addCluster(XiaomiBasicCluster);
 
-		// enable debugging
-		// this.enableDebug();
+module.exports = class AqaraLightSwitchDouble extends ZigBeeDevice {
 
-		// print the node's info to the console
-		// this.printNode();
+  async onNodeInit({ zclNode }) {
+    // enable debugging
+    this.enableDebug();
 
-		//Link util parseData method to this devices instance
-		this.parseData = util.parseData.bind(this)
+    // print the node's info to the console
+    // this.printNode();
 
-		this.buttonMap = {
-			Left: {
-				button: 'Left button',
-			},
-			Right: {
-				button: 'Right button',
-			},
-			Both: {
-				button: 'Both buttons',
-			},
-		};
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
-		this.sceneMap = {
-			0: {
-				scene: 'Key Pressed 1 time',
-			},
-		};
-		// >>>> possible to use this.onOnOffListener.bind(this, 'Left') ???
-		this._attrReportListeners['0_genOnOff'] = this._attrReportListeners['0_genOnOff'] || {};
-		this._attrReportListeners['0_genOnOff']['onOff'] = this.onOnOffListener.bind(this, 'Left');
+    this.buttonMap = {
+      Left: 'Left button',
+      Right: 'Right button',
+      Both: 'Both buttons',
+    };
 
-		this._attrReportListeners['1_genOnOff'] = this._attrReportListeners['1_genOnOff'] || {};
-		this._attrReportListeners['1_genOnOff']['onOff'] = this.onOnOffListener.bind(this, 'Right');
+    this.sceneMap = {
+      0: 'Key Pressed 1 time',
+    };
 
-		this._attrReportListeners['2_genOnOff'] = this._attrReportListeners['2_genOnOff'] || {};
-		this._attrReportListeners['2_genOnOff']['onOff'] = this.onOnOffListener.bind(this, 'Both');
+    zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
+      .on('attr.onOff', this.onOnOffAttributeReport.bind(this, 'Left'));
 
-		this._attrReportListeners['0_genBasic'] = this._attrReportListeners['0_genBasic'] || {};
-		this._attrReportListeners['0_genBasic']['65281'] = this.onLifelineReport.bind(this);
+    zclNode.endpoints[2].clusters[CLUSTER.ON_OFF.NAME]
+      .on('attr.onOff', this.onOnOffAttributeReport.bind(this, 'Right'));
 
-		this.triggerButton2_button = new Homey.FlowCardTriggerDevice('button2_button');
-		this.triggerButton2_button
-			.register();
+    zclNode.endpoints[3].clusters[CLUSTER.ON_OFF.NAME]
+      .on('attr.onOff', this.onOnOffAttributeReport.bind(this, 'Both'));
 
-	}
-	onOnOffListener(repButton, repScene) {
-		this.log('genOnOff - onOff', repScene, repButton, 'button');
-		if (Object.keys(this.sceneMap).includes(repScene.toString())) {
-			const remoteValue = {
-				button: this.buttonMap[repButton].button,
-				scene: this.sceneMap[repScene].scene,
-			};
-			this._debug('genOnOff - onOff', remoteValue);
-			// Trigger the trigger card with 2 autocomplete options
-			Homey.app.triggerButton2_scene.trigger(this, null, remoteValue);
-			// Trigger the trigger card with tokens
-			this.triggerButton2_button.trigger(this, remoteValue, null);
-		}
-	}
+    // Lifeline
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
-	onSceneAutocomplete(query, args, callback) {
-		let resultArray = [];
-		for (let sceneID in this.sceneMap) {
-			resultArray.push({
-				id: this.sceneMap[sceneID].scene,
-				name: Homey.__(this.sceneMap[sceneID].scene),
-			});
-		}
-		// filter for query
-		resultArray = resultArray.filter(result => {
-			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
-		});
-		this._debug(resultArray);
-		return Promise.resolve(resultArray);
-	}
+    // define and register FlowCardTriggers
+    this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
 
-	onButtonAutocomplete(query, args, callback) {
-		let resultArray = [];
-		for (let sceneID in this.buttonMap) {
-			resultArray.push({
-				id: this.buttonMap[sceneID].button,
-				name: Homey.__(this.buttonMap[sceneID].button),
-			});
-		}
+    // define and register FlowCardTriggers
+    this.onButtonAutocomplete = this.onButtonAutocomplete.bind(this);
+  }
 
-		// filter for query
-		resultArray = resultArray.filter(result => {
-			return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
-		});
-		this._debug(resultArray);
-		return Promise.resolve(resultArray);
-	}
+  /**
+     * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+     * interesting the battery level. The battery level divided by 1000 represents the battery
+     * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+     * on the battery voltage curve of a CR1632.
+     * @param {{batteryLevel: number}} lifeline
+     */
+  onXiaomiLifelineAttributeReport({
+    state, humidity, pressure, batteryVoltage,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      batteryVoltage, state, humidity, pressure,
+    });
 
-	onLifelineReport(value) {
-		this._debug('lifeline report', new Buffer(value, 'ascii'));
-		const parsedData = this.parseData(new Buffer(value, 'ascii'));
-		// this._debug('parsedData', parsedData);
+    if (typeof state === 'number') this.onTemperatureMeasuredAttributeReport(state);
+    if (typeof humidity === 'number') this.onRelativeHumidityMeasuredAttributeReport(humidity);
+    if (typeof pressure === 'number') this.onPressureMeasuredAttributeReport(pressure / 100);
+    if (typeof batteryVoltage === 'number') {
+      const parsedVolts = batteryVoltage / 1000;
+      const minVolts = 2.5;
+      const maxVolts = 3.0;
+      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      this.setCapabilityValue('measure_battery', parsedBatPct);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    }
+  }
 
-		// battery reportParser (ID 1)
-		const parsedVolts = parsedData['1'] / 100.0;
-		const minVolts = 2.5;
-		const maxVolts = 3.0;
+  /**
+     * This attribute is reported when the contact alarm of the door and window sensor changes.
+     * @param {boolean} onOff
+     */
+  onOnOffAttributeReport(repButton, repScene) {
+    repScene = Number(repScene);
+    this.log('genOnOff - onOff', repScene, repButton, 'button', Object.keys(this.sceneMap).includes(repScene.toString()));
+    if (Object.keys(this.sceneMap).includes(repScene.toString())) {
+      const remoteValue = {
+        button: this.buttonMap[repButton],
+        scene: this.sceneMap[repScene],
+      };
+      this.debug('Scene and Button triggers', remoteValue);
+      // Trigger the trigger card with 1 dropdown option
+      this.triggerFlow({
+        id: 'trigger_button2_scene',
+        tokens: null,
+        state: remoteValue,
+      })
+        .catch(err => this.error('Error triggering button1SceneTriggerDevice', err));
 
-		const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-		this.log('lifeline - battery', parsedBatPct);
-		if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-			// Set Battery capability
-			this.setCapabilityValue('measure_battery', parsedBatPct);
-			// Set Battery alarm if battery percentatge is below 20%
-			this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
-		}
-	}
-}
+      // Trigger the trigger card with tokens
+      this.triggerFlow({
+        id: 'button2_button',
+        tokens: remoteValue,
+        state: null,
+      })
+        .catch(err => this.error('Error triggering button1ButtonTriggerDevice', err));
+    }
+  }
 
-module.exports = AqaraLightSwitchDouble;
+  onSceneAutocomplete(query, args, callback) {
+    let resultArray = [];
+    for (const sceneID in this.sceneMap) {
+      resultArray.push({
+        id: this.sceneMap[sceneID],
+        name: this.homey.__(this.sceneMap[sceneID]),
+      });
+    }
+    // filter for query
+    resultArray = resultArray.filter(result => {
+      return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    });
+    this.debug(resultArray);
+    return Promise.resolve(resultArray);
+  }
+
+  onButtonAutocomplete(query, args, callback) {
+    let resultArray = [];
+    for (const sceneID in this.buttonMap) {
+      resultArray.push({
+        id: this.buttonMap[sceneID],
+        name: this.homey.__(this.buttonMap[sceneID]),
+      });
+    }
+
+    // filter for query
+    resultArray = resultArray.filter(result => {
+      return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    });
+    this.debug(resultArray);
+    return Promise.resolve(resultArray);
+  }
+
+};
 
 // WXKG02LM
 /*

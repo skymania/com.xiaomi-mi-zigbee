@@ -14,12 +14,22 @@
     ]
   },
   "zigbee": {
-    "manufacturerName": "LUMI",
+    "manufacturerName": ["XIAOMI", "LUMI"],
     "productId": "lumi.sen_ill.mgl01",
-    "deviceId": [
-      262
-    ],
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          1024
+        ],
+        "bindings": [
+          0,
+          1,
+          1024
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn_human_body.svg",
       "instruction": {

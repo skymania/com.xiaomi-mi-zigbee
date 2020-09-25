@@ -13,9 +13,25 @@
   },
   "zigbee": {
     "manufacturerName": "LUMI",
-    "productId": "lumi.sensor_86sw2Un",
-    "deviceId": 24321,
-    "profileId": 260,
+    "productId": ["lumi.sensor_86sw2Un", "lumi.sensor_86sw2"],
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          6
+        ]
+      },
+      "2": {
+        "clusters": [
+          6
+        ]
+      },
+      "3": {
+        "clusters": [
+          6
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

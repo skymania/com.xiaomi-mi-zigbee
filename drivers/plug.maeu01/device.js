@@ -1,87 +1,123 @@
+// SDK3 updated & validated: DONE
+
 'use strict';
 
 const Homey = require('homey');
 
-const { ZigBeeDevice } = require('homey-meshdriver');
-const util = require('./../../lib/util');
-// const ZigBeeLightDevice = require('homey-meshdriver').ZigBeeLightDevice;
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const {
+  zclNode, debug, Cluster, CLUSTER,
+} = require('zigbee-clusters');
 
 class AqaraSmartPlugEU extends ZigBeeDevice {
 
-  onMeshInit() {
+  async onNodeInit({ zclNode }) {
     // enable debugging
     // this.enableDebug();
+
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
     // print the node's info to the console
     // this.printNode();
 
     if (this.hasCapability('onoff')) {
-      /**
-       * Register a Homey Capability with a Cluster.
-       * @param {string} capabilityId - The Homey capability id (e.g. `onoff`)
-       * @param {string} clusterId - The Cluster id (e.g. `genBasic`)
-       * @param {Object} [userOpts] - The object with options for this capability/cluster combination. These will extend system options, if available (`/lib/zigbee/system/`)
-       * @param {number} [userOpts.endpoint=0] - An index to identify the endpoint to use for this capability
-      */
-      this.registerCapability('onoff', 'genOnOff', { endpoint: 0 });
-
-      /**
-      * Register an attribute report listener, which is called when a report has been received for the provided endpoint
-      * cluster and attribute combination.
-      * @param {string} clusterId - The ID of the cluster (e.g. `genOnOff`)
-      * @param {string} attrId - The ID of the attribute (e.g. `onOff`)
-      * @param {number} minInt - The minimal reporting interval in seconds (e.g. 1 (seconds))
-      * @param {number} maxInt - The maximal reporting interval in seconds (e.g. 60 (seconds))
-      * @param {number} repChange - Reportable change; the attribute should report its value when the value is changed more than this setting, for attributes of analog data type this argument is mandatory.
-      * @param {Function} triggerFn - Function that will be called when attribute report data is received
-      * @param {number} [endpointId=0] - The endpoint index (e.g. 0)
-      * @returns {Promise} Resolves if configuration succeeded
-      */
-
-      this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, null, data => {
-        if (this.getCapabilityValue('onoff') !== (data === 1)) {
-          this.log('onoff | genOnOff - onOff', data);
-          return this.setCapabilityValue('onoff', data === 1);
-        }
-      }, 0);
+      this.registerCapability('onoff', CLUSTER.ON_OFF, {
+        reportOpts: {
+          configureAttributeReporting: {
+            minInterval: 0, // No minimum reporting interval
+            maxInterval: 43200, // Maximally every ~12 hours
+            minChange: 1, // Report when value changed by 5
+          },
+        },
+        endpoint: this.getClusterEndpoint(CLUSTER.ON_OFF),
+      });
     }
 
+    // measure_power
     if (this.hasCapability('measure_power')) {
-      // Define acPower parsing factor based on device settings
-      if (typeof this.acPowerFactor !== 'number') {
-        const haElectricalMeasurementAttrs = this.node.endpoints[0].clusters['haElectricalMeasurement'].attrs;
-        this.acPowerFactor = haElectricalMeasurementAttrs.acPowerMultiplier / haElectricalMeasurementAttrs.acPowerDivisor;
-        this._debug('acPowerFactor:', this.acPowerFactor);
-      }
-
-      /**
-      * Register an attribute report listener, which is called when a report has been received for the provided endpoint
-      * cluster and attribute combination.
-      */
-      this.registerAttrReportListener('haElectricalMeasurement', 'activePower', 1, 3600, 1 / this.acPowerFactor, data => {
-        const parsedPayload = data * this.acPowerFactor;
-        this.log('measure_power | haElectricalMeasurement - activePower', parsedPayload);
-        return this.setCapabilityValue('measure_power', parsedPayload);
-      }, 0);
+      this.registerCapability('measure_power', CLUSTER.ELECTRICAL_MEASUREMENT, {
+        endpoint: this.getClusterEndpoint(CLUSTER.ELECTRICAL_MEASUREMENT),
+      });
     }
 
     if (this.hasCapability('meter_power')) {
-      // Define acCurrent parsing factor based on device settings
-      if (typeof this.meteringFactor !== 'number') {
-        const haElectricalMeasurementAttrs = this.node.endpoints[0].clusters['seMetering'].attrs;
-        this.meteringFactor = haElectricalMeasurementAttrs.multiplier / haElectricalMeasurementAttrs.divisor;
-        this._debug('meteringFactor:', this.meteringFactor);
-      }
+      this.registerCapability('meter_power', CLUSTER.METERING, {
+        endpoint: this.getClusterEndpoint(CLUSTER.METERING),
+      });
+    }
 
-      /**
-      * Register an attribute report listener, which is called when a report has been received for the provided endpoint
-      * cluster and attribute combination.
-      */
-      this.registerAttrReportListener('seMetering', 'currentSummDelivered', 300, 3600, [null, 0.01 / this.meteringFactor], data => {
-        const parsedPayload = data[1] * this.meteringFactor;
-        this.log('meter_power | seMetering - currentSummDelivered', parsedPayload);
-        return this.setCapabilityValue('meter_power', parsedPayload);
-      }, 0);
+    // Try to initialize AttributeReporting for electricaMeasurement and metering clusters
+    try {
+      await this._configureMeterAttributeReporting({ zclNode });
+    } catch (err) {
+      this.error('failed to configure AttributeReporting', err);
+    }
+  }
+
+  async _configureMeterAttributeReporting({ zclNode }) {
+    this.debug('--  initializing attribute reporting for the electricaMeasurement cluster');
+
+    const electricalMeasurementAttributeArray = [];
+
+    // Define the relevant attributes to read depending on the defined capabilities and availability of the factors in the Store
+    const attributesToRead = [];
+    if (this.hasCapability('measure_power') && typeof this.getStoreValue('activePowerFactor') !== 'number') {
+      attributesToRead.push('acPowerMultiplier', 'acPowerDivisor');
+    }
+
+    // Actually read the required attributes
+    if (attributesToRead.length !== 0) {
+      var attrs = await this.zclNode.endpoints[this.getClusterEndpoint(CLUSTER.ELECTRICAL_MEASUREMENT)].clusters[CLUSTER.ELECTRICAL_MEASUREMENT.NAME].readAttributes(...attributesToRead);
+      this.debug('--- Read reporting divisors and multipliers:', attrs);
+    }
+
+    // Re-iterate over the different capabilities and define the required report factors, add them to the Array and store them.
+    if (this.hasCapability('measure_power')) {
+      if (typeof this.getStoreValue('activePowerFactor') !== 'number') {
+        this.activePowerFactor = attrs.acPowerMultiplier / attrs.acPowerDivisor;
+        this.setStoreValue('activePowerFactor', this.activePowerFactor);
+        electricalMeasurementAttributeArray.push({
+          cluster: CLUSTER.ELECTRICAL_MEASUREMENT,
+          attributeName: 'activePower',
+          minInterval: 30,
+          maxInterval: 300,
+          minChange: 1 / this.activePowerFactor,
+          endpointId: this.getClusterEndpoint(CLUSTER.ELECTRICAL_MEASUREMENT),
+        });
+      } else {
+        this.activePowerFactor = this.getStoreValue('activePowerFactor');
+      }
+    }
+
+    // When there are Attributes to be configured, configure them
+    if (electricalMeasurementAttributeArray.length !== 0) {
+      await this.configureAttributeReporting(electricalMeasurementAttributeArray);
+    }
+
+    this.debug('--  initializing attribute reporting for the metering cluster');
+    const meteringAttributeArray = [];
+
+    if (this.hasCapability('meter_power')) {
+      if (typeof this.getStoreValue('meteringFactor') !== 'number') {
+        const { multiplier, divisor } = await this.zclNode.endpoints[this.getClusterEndpoint(CLUSTER.METERING)].clusters[CLUSTER.METERING.NAME].readAttributes('multiplier', 'divisor');
+        this.meteringFactor = multiplier / divisor;
+        this.setStoreValue('meteringFactor', this.meteringFactor);
+        meteringAttributeArray.push({
+          cluster: CLUSTER.METERING,
+          attributeName: 'currentSummationDelivered',
+          minInterval: 120,
+          maxInterval: 300,
+          minChange: 0.01 / this.meteringFactor,
+          endpointId: this.getClusterEndpoint(CLUSTER.METERING),
+        });
+      } else {
+        this.meteringFactor = this.getStoreValue('meteringFactor');
+      }
+    }
+
+    if (meteringAttributeArray.length !== 0) {
+      await this.configureAttributeReporting(meteringAttributeArray);
     }
   }
 

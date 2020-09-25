@@ -1,34 +1,61 @@
+// SDK3 updated & validated: DONE
+
 'use strict';
 
-const { ZigBeeDevice } = require('homey-meshdriver');
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
+
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
 
 class XiaomiDoorWindowSensor extends ZigBeeDevice {
 
-  onMeshInit() {
+  async onNodeInit({ zclNode }) {
     // enable debugging
     // this.enableDebug();
+
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
     // print the node's info to the console
     // this.printNode();
 
-    // Listen for attribute changes on the genOnOff cluster
-    this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, null,
-      this.onContactReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - genOnOff - Contact', err);
-      });
+    zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
+      .on('attr.onOff', this.onOnOffAttributeReport.bind(this));
 
-    this.registerAttrReportListener('genBasic', '65281', 1, 60, null, data => {
-      this.log('65281', data);
-    }, 0);
+    // zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+    //  .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
   }
+
+  /**
+   * This attribute is reported when the contact alarm of the door and window sensor changes.
+   * @param {boolean} onOff
+   */
 
   onContactReport(data) {
     const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
-    const parsedData = !reverseAlarmLogic ? data === 1 : data === 0;
+    const parsedData = !reverseAlarmLogic ? data === true : data === false;
     this.log(`alarm_contact -> ${parsedData}`);
     this.setCapabilityValue('alarm_contact', parsedData);
+  }
+
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onXiaomiLifelineAttributeReport({ batteryVoltage } = {}) {
+    this.log('lifeline attribute report', { batteryVoltage });
+    const parsedVolts = batteryVoltage / 1000;
+    const minVolts = 2.5;
+    const maxVolts = 3.0;
+
+    const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+    this.setCapabilityValue('measure_battery', parsedBatPct);
+    this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
   }
 
 }
@@ -68,7 +95,4 @@ Node overview
 2017-10-21 00:55:34 [log] [ManagerDrivers] [sensor_magnet] [0] ---- cid : manuSpecificCluster
 2017-10-21 00:55:34 [log] [ManagerDrivers] [sensor_magnet] [0] ---- sid : attrs
 2017-10-21 00:55:34 [log] [ManagerDrivers] [sensor_magnet] [0] ------------------------------------------
-
-65281 - 0xFF01 report:
-Not reported
 */

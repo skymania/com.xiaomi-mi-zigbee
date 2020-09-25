@@ -1,23 +1,32 @@
+// SDK3 updated & validated
+// TODO: set color temperature
+
 'use strict';
 
-const ZigBeeLightDevice = require('homey-meshdriver').ZigBeeLightDevice;
+const { ZigBeeLightDevice } = require('homey-zigbeedriver');
+const {
+  zclNode, debug, Cluster, CLUSTER,
+} = require('zigbee-clusters');
 
 class AqaraTunableBulb extends ZigBeeLightDevice {
 
-	async onMeshInit() {
+  async onNodeInit({ zclNode }) {
+    this.setStoreValue('colorTempMin', 153); // 6500K = 153 Mired
+    this.setStoreValue('colorTempMax', 370); // 2700K = 370 Mired
 
-			this.setStoreValue('colorTempMin', 153); // 6500K = 153 Mired
-			this.setStoreValue('colorTempMax', 370); // 2700K = 370 Mired
+    await super.onNodeInit({ zclNode, supportsHueAndSaturation: false, supportsColorTemperature: true });
 
-      await super.onMeshInit();
-      // enable debugging
-      // this.enableDebug();
+    this.log('TEST', this.getSetting('transition_time'), this.getSetting('transition_time') ? Math.round(this.getSetting('transition_time') * 10) : 0);
 
-      // print the node's info to the console
-      // this.printNode();
+    // enable debugging
+    // this.enableDebug();
 
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
-	}
+    // print the node's info to the console
+    // this.printNode();
+  }
 
 }
 

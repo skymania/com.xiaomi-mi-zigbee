@@ -29,8 +29,19 @@
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.vibration.aq1",
-    "deviceId": 10,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          257
+        ]
+      },
+      "2": {
+        "clusters": [
+          18
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn_vibration.svg",
       "instruction": {

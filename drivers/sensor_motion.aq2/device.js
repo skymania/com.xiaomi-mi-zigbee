@@ -1,95 +1,92 @@
+// SDK3 updated & validated
+
 'use strict';
 
-const util = require('./../../lib/util');
-const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
+
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
 
 class AqaraHumanBodySensor extends ZigBeeDevice {
-	onMeshInit() {
-		// enable debugging
-		// this.enableDebug();
 
-		// print the node's info to the console
-		// this.printNode();
+  async onNodeInit({ zclNode }) {
+    // enable debugging
+    // this.enableDebug();
 
-		//Link util parseData method to this devices instance
-		this.parseData = util.parseData.bind(this)
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
-		// Register attribute listener for occupancy
-		this.registerAttrReportListener('msOccupancySensing', 'occupancy', 1, 60, null,
-				this.onOccupancyReport.bind(this), 0)
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - msOccupancySensing', err);
-			});
+    // print the node's info to the console
+    // this.printNode();
 
-		// Register attribute listener for illuminance measurements
-		this.registerAttrReportListener('msIlluminanceMeasurement', 'measuredValue', 1, 60, null,
-				this.onIlluminanceReport.bind(this), 0)
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - msIlluminanceMeasurement', err);
-			});
+    zclNode.endpoints[1].clusters[CLUSTER.OCCUPANCY_SENSING.NAME]
+      .on('attr.occupancy', this.onOccupancyAttributeReport.bind(this));
 
-		// Register the AttributeReportListener - Lifeline
-		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
-				this.onLifelineReport.bind(this), 0)
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genBasic - Lifeline', err);
-			});
-	}
+    // zclNode.endpoints[1].clusters[CLUSTER.BASIC.NAME]
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
-	onOccupancyReport(value) {
-		this.log('alarm_motion', value === 1);
+    zclNode.endpoints[1].clusters[CLUSTER.ILLUMINANCE_MEASUREMENT.NAME]
+      .on('attr.measuredValue', this.onLuminanceMeasuredValueAttributeReport.bind(this));
+  }
 
-		// Set and clear motion timeout
-		let alarm_motion_reset_window = this.getSetting('hacked_alarm_motion_reset_window') ? 5 : (this.getSetting('alarm_motion_reset_window') || 300);
-		clearTimeout(this.motionTimeout);
-		this.motionTimeout = setTimeout(() => {
-			this.log('manual alarm_motion reset');
-			this.setCapabilityValue('alarm_motion', false);
-		}, alarm_motion_reset_window * 1000);
+  /**
+   * When an occupancy attribute report is received `alarm_motion` is set true. After the
+   * timeout has expired (and no motion has been detected since) the `alarm_motion` is set false.
+   * @param {boolean} occupied - True if motion is detected
+   */
+  onOccupancyAttributeReport({ occupied }) {
+    this.log('occupancy attribute report', occupied);
 
-		// Update capability value
-		this.setCapabilityValue('alarm_motion', value === 1);
-	}
+    this.setCapabilityValue('alarm_motion', occupied).catch(this.error);
 
-	onIlluminanceReport(value) {
-		this.log('measure_luminance', value);
-		this.setCapabilityValue('measure_luminance', value);
-	}
+    // Set and clear motion timeout
+    const alarmMotionResetWindow = this.getSetting('hacked_alarm_motion_reset_window') ? 5 : (this.getSetting('alarm_motion_reset_window') || 300);
+    // Set a timeout after which the alarm_motion capability is reset
+    if (this.motionAlarmTimeout) clearTimeout(this.motionAlarmTimeout);
 
-	onLifelineReport(value) {
-		this._debug('lifeline report', new Buffer(value, 'ascii'));
+    this.motionAlarmTimeout = setTimeout(() => {
+      this.log('manual alarm_motion reset');
+      this.setCapabilityValue('alarm_motion', false).catch(this.error);
+    }, alarmMotionResetWindow * 1000);
+  }
 
-		const parsedData = this.parseData(new Buffer(value, 'ascii'));
-		this._debug('parsedData', parsedData);
+  /**
+   * Set `measure_luminance` when a `measureValue` attribute report is received on the measure
+   * luminance cluster.
+   * @param {number} measuredValue
+   */
+  onLuminanceMeasuredValueAttributeReport(measuredValue) {
+    this.log('illuminance measuredValue report', measuredValue);
+    this.setCapabilityValue('measure_luminance', measuredValue).catch(this.error);
+  }
 
-		// battery reportParser (ID 1)
-		if (parsedData.hasOwnProperty('1')) {
-			const parsedVolts = parsedData['1'] / 1000;
-			const minVolts = 2.5;
-			const maxVolts = 3.0;
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onXiaomiLifelineAttributeReport({
+    batteryVoltage,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      batteryVoltage,
+    });
 
-			const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-			this.log('lifeline - battery', parsedBatPct);
-			if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-				// Set Battery capability
-				this.setCapabilityValue('measure_battery', parsedBatPct);
-				// Set Battery alarm if battery percentatge is below 20%
-				this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
-			}
-		}
+    if (typeof batteryVoltage === 'number') {
+      const parsedVolts = batteryVoltage / 1000;
+      const minVolts = 2.5;
+      const maxVolts = 3.0;
+      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      this.setCapabilityValue('measure_battery', parsedBatPct);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    }
+  }
 
-		/*
-		// motion alarm reportParser (ID 100)
-		if (parsedData.hasOwnProperty('100')) {
-			const parsedContact = (parsedData['100'] === 1);
-			this.log('lifeline - motion alarm', parsedContact);
-			this.setCapabilityValue('alarm_motion', parsedContact);
-		}
-		*/
-	}
 }
 
 module.exports = AqaraHumanBodySensor;
@@ -123,17 +120,5 @@ Node overview:
 2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- cid : manuSpecificCluster
 2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ---- sid : attrs
 2017-09-14 20:29:21 [log] [ManagerDrivers] [aqara_human_body_sensor] [0] ------------------------------------------
-
-65281 - 0xFF01 report:
-
-{ '1': 3069,	= Battery
-  '3': 23,
-  '4': 12797,
-  '5': 41,
-  '6': 5,
-  '10': 0,
-  '11': 253,
-  '100': 0
-}
 
 */

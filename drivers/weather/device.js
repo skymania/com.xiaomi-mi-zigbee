@@ -1,119 +1,98 @@
-// lifeline validated
+// SDK3 updated & validated: done
 
 'use strict';
 
-const { ZigBeeDevice } = require('homey-meshdriver');
-const util = require('./../../lib/util');
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const { Cluster, CLUSTER } = require('zigbee-clusters');
+
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
 
 class AqaraWeatherSensor extends ZigBeeDevice {
 
-  onMeshInit() {
+  async onNodeInit({ zclNode }) {
     // enable debugging
     // this.enableDebug();
 
     // print the node's info to the console
     // this.printNode();
 
-    // Link util parseData method to this devices instance
-    this.parseData = util.parseData.bind(this);
+    // zclNode.endpoints[1].clusters[CLUSTER.BASIC.NAME]
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
-    // Register the AttributeReportListener
-    this.registerAttrReportListener('msTemperatureMeasurement', 'measuredValue', 1, 60, null,
-      this.onTemperatureReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - msTemperatureMeasurement', err);
-      });
+    zclNode.endpoints[1].clusters[CLUSTER.TEMPERATURE_MEASUREMENT.NAME]
+      .on('attr.measuredValue', this.onTemperatureMeasuredAttributeReport.bind(this));
 
-    // Register the AttributeReportListener
-    this.registerAttrReportListener('msRelativeHumidity', 'measuredValue', 1, 60, null,
-      this.onHumidityReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - msRelativeHumidity', err);
-      });
+    zclNode.endpoints[1].clusters[CLUSTER.RELATIVE_HUMIDITY_MEASUREMENT.NAME]
+      .on('attr.measuredValue', this.onRelativeHumidityMeasuredAttributeReport.bind(this));
 
-    // Register the AttributeReportListener
-    this.registerAttrReportListener('msPressureMeasurement', '16', 1, 60, null,
-      this.onPressureReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - msPressureMeasurement', err);
-      });
-
-    // Register the AttributeReportListener - Lifeline
-    this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
-      this.onLifelineReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - genBasic - Lifeline', err);
-      });
+    zclNode.endpoints[1].clusters[CLUSTER.PRESSURE_MEASUREMENT.NAME]
+      .on('attr.measuredValue', this.onPressureMeasuredAttributeReport.bind(this));
   }
 
-  onTemperatureReport(value) {
-    const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((value / 100) * 100) / 100 : Math.round((value / 100) * 10) / 10;
-    if (parsedValue !== -100) {
-      // const parsedValue = Math.round((value / 100) * 10) / 10;
-      const temperatureOffset = this.getSetting('temperature_offset') || 0;
-      this.log('measure_temperature | msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
-      this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
-    }
+  /**
+   * Set `measure_temperature` when a `measureValue` attribute report is received on the
+   * temperature measurement cluster.
+   * @param {number} measuredValue
+   */
+  onTemperatureMeasuredAttributeReport(measuredValue) {
+    const temperatureOffset = this.getSetting('temperature_offset') || 0;
+    const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
+    this.log('measure_temperature | msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
+    this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
   }
 
-  onHumidityReport(value) {
+  /**
+   * Set `measure_humidity` when a `measureValue` attribute report is received on the relative
+   * humidity measurement cluster.
+   * @param {number} measuredValue
+   */
+  onRelativeHumidityMeasuredAttributeReport(measuredValue) {
     const humidityOffset = this.getSetting('humidity_offset') || 0;
-    const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((value / 100) * 100) / 100 : Math.round((value / 100) * 10) / 10;
+    const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
     this.log('measure_humidity | msRelativeHumidity - measuredValue (humidity):', parsedValue, '+ humidity offset', humidityOffset);
     this.setCapabilityValue('measure_humidity', parsedValue + humidityOffset);
   }
 
-  onPressureReport(value) {
+  /**
+   * Set `measure_pressure` when a `measureValue` attribute report is received on the pressure
+   * measurement cluster.
+   * @param {number} measuredValue
+   */
+  onPressureMeasuredAttributeReport(measuredValue) {
     const pressureOffset = this.getSetting('pressure_offset') || 0;
-    const parsedValue = Math.round((value / 100) * 10);
-    this.log('measure_pressure | msPressureMeasurement - 16 (pressure):', parsedValue, '+ pressure offset', pressureOffset);
+    const parsedValue = Math.round((measuredValue / 100) * 100);
+    this.log('measure_pressure | msPressureMeasurement - measuredValue (pressure):', parsedValue, '+ pressure offset', pressureOffset);
     this.setCapabilityValue('measure_pressure', parsedValue + pressureOffset);
   }
 
-  onLifelineReport(value) {
-    this._debug('lifeline report', new Buffer(value, 'ascii'));
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onXiaomiLifelineAttributeReport({
+    state, state1, pressure, batteryVoltage,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      batteryVoltage, state, state1, pressure,
+    });
 
-    const parsedData = this.parseData(new Buffer(value, 'ascii'));
-    this._debug('parsedData', parsedData);
-
-    // battery reportParser (ID 1)
-    if (parsedData.hasOwnProperty('1')) {
-      const parsedVolts = parsedData['1'] / 1000;
+    if (typeof state === 'number') this.onTemperatureMeasuredAttributeReport(state);
+    if (typeof state1 === 'number') this.onRelativeHumidityMeasuredAttributeReport(state1);
+    if (typeof pressure === 'number') this.onPressureMeasuredAttributeReport(pressure / 100);
+    if (typeof batteryVoltage === 'number') {
+      const parsedVolts = batteryVoltage / 1000;
       const minVolts = 2.5;
       const maxVolts = 3.0;
-
       const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.log('lifeline - battery', parsedBatPct);
-      if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-        // Set Battery capability
-        this.setCapabilityValue('measure_battery', parsedBatPct);
-        // Set Battery alarm if battery percentatge is below 20%
-        this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
-      }
+      this.setCapabilityValue('measure_battery', parsedBatPct);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
     }
-
-    /* Disabled due to inaccurate reporting
-		// temperature reportParser (ID 100)
-		if (parsedData.hasOwnProperty('100')) {
-			const parsedTemp = parsedData['100'] / 100.0;
-			const temperatureOffset = this.getSetting('temperature_offset') || 0;
-			this.log('lifeline - temperature', parsedTemp, '+ temperature offset', temperatureOffset);
-			this.setCapabilityValue('measure_temperature', parsedTemp + temperatureOffset);
-		}
-
-		// humidity reportParser (ID 101)
-		if (parsedData.hasOwnProperty('101')) {
-			const parsedHum = parsedData['101'] / 100.0;
-			this.log('lifeline - humidity', parsedHum);
-			this.setCapabilityValue('measure_humidity', parsedHum);
-		}
-
-		// pressure reportParser (ID 102) - reported number not reliable
-		*/
   }
 
 }
@@ -162,14 +141,4 @@ f+��                                                                    !�
 2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ---- sid : attrs
 2018-03-03 15:04:40 [log] [ManagerDrivers] [weather] [0] ------------------------------------------
 
-65281 - 0xFF01 report:
-{ '1': 3069,		= Battery voltage
-  '4': 5117,
-  '5': 61,
-  '6': 1,
-  '10': 0,
-  '100': 2094,	= temperature
-  '101': 3676,	= humidity
-  '102': 130557 = pressure - reported number not reliable
-}
 */

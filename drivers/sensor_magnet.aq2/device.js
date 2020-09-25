@@ -1,75 +1,61 @@
-// lifeline validated
+// SDK3 updated & validated: DONE
 
 'use strict';
 
-const { ZigBeeDevice } = require('homey-meshdriver');
-const util = require('./../../lib/util');
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
+
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
 
 class AqaraDoorWindowSensor extends ZigBeeDevice {
 
-  onMeshInit() {
+  async onNodeInit({ zclNode }) {
     // enable debugging
     // this.enableDebug();
+
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
     // print the node's info to the console
     // this.printNode();
 
-    // Link util parseData method to this devices instance
-    this.parseData = util.parseData.bind(this);
+    zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
+      .on('attr.onOff', this.onContactReport.bind(this));
 
-    // Listen for attribute changes on the genOnOff cluster
-    this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, null,
-      this.onContactReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - genOnOff - Contact', err);
-      });
-
-    // Register the AttributeReportListener - Lifeline
-    this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
-      this.onLifelineReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - genBasic - Lifeline', err);
-      });
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
   }
+
+  /**
+   * This attribute is reported when the contact alarm of the door and window sensor changes.
+   * @param {boolean} onOff
+   */
 
   onContactReport(data) {
     const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
-    const parsedData = !reverseAlarmLogic ? data === 1 : data === 0;
+    const parsedData = !reverseAlarmLogic ? data === true : data === false;
     this.log(`alarm_contact -> ${parsedData}`);
     this.setCapabilityValue('alarm_contact', parsedData);
   }
 
-  onLifelineReport(value) {
-    this._debug('lifeline report', new Buffer(value, 'ascii'));
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onXiaomiLifelineAttributeReport({ batteryVoltage } = {}) {
+    this.log('lifeline attribute report', { batteryVoltage });
+    const parsedVolts = batteryVoltage / 1000;
+    const minVolts = 2.5;
+    const maxVolts = 3.0;
 
-    const parsedData = this.parseData(new Buffer(value, 'ascii'));
-    this._debug('parsedData', parsedData);
-
-    // battery reportParser (ID 1)
-    if (parsedData.hasOwnProperty('1')) {
-      const parsedVolts = parsedData['1'] / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.log('lifeline - battery', parsedBatPct);
-      if (this.hasCapability('measure_battery') && this.hasCapability('alarm_battery')) {
-        // Set Battery capability
-        this.setCapabilityValue('measure_battery', parsedBatPct);
-        // Set Battery alarm if battery percentatge is below 20%
-        this.setCapabilityValue('alarm_battery', parsedBatPct < (this.getSetting('battery_threshold') || 20));
-      }
-    }
-
-    // contact alarm reportParser (ID 100)
-    if (parsedData.hasOwnProperty('100')) {
-      const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
-      const parsedContact = !reverseAlarmLogic ? (parsedData['100'] === 1) : (parsedData['100'] === 0);
-      this.log('lifeline - contact alarm', parsedContact);
-      this.setCapabilityValue('alarm_contact', parsedContact);
-    }
+    const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+    this.setCapabilityValue('measure_battery', parsedBatPct);
+    this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
   }
 
 }
@@ -106,15 +92,5 @@ Node overview:
 2018-03-03 15:04:39 [log] [ManagerDrivers] [sensor_magnet.aq2] [0] ---- cid : manuSpecificCluster
 2018-03-03 15:04:39 [log] [ManagerDrivers] [sensor_magnet.aq2] [0] ---- sid : attrs
 2018-03-03 15:04:39 [log] [ManagerDrivers] [sensor_magnet.aq2] [0] ------------------------------------------
-
-65281 - 0xFF01 report:
-{ '1': 3069,	=	Battery
-  '3': 29,		= soc_temperature
-  '4': 5117,
-  '5': 38,
-  '6': 65550,
-  '10': 0,
-  '100': 1 		= contact alarm (on / off)
-}
 
 */

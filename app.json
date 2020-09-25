@@ -10,11 +10,11 @@
   "category": [
     "lights"
   ],
-  "version": "0.8.0",
-  "compatibility": ">=4.0.0",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
-  "sdk": 2,
+  "sdk": 3,
   "brandColor": "#4e6690",
   "author": {
     "name": "Ted Tolboom",
@@ -1121,7 +1121,6 @@
       "capabilities": [
         "onoff",
         "measure_power",
-        "measure_voltage",
         "meter_power"
       ],
       "capabilitiesOptions": {
@@ -1132,8 +1131,35 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.ctrl_86plug.aq1",
-        "deviceId": 81,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "2": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "3": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/ctrl_86plug.aq1/assets/learn.svg",
           "instruction": {
@@ -1160,8 +1186,7 @@
       "capabilities": [
         "onoff",
         "measure_power",
-        "meter_power",
-        "measure_voltage"
+        "meter_power"
       ],
       "capabilitiesOptions": {
         "measure_power": {
@@ -1171,8 +1196,48 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.ctrl_ln1.aq1",
-        "deviceId": 81,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              4,
+              5,
+              6,
+              16
+            ],
+            "bindings": [
+              6,
+              16
+            ]
+          },
+          "2": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "3": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "4": {
+            "clusters": [
+              16,
+              18
+            ],
+            "bindings": [
+              16,
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/ctrl_ln1.aq1/assets/learn.svg",
           "instruction": {
@@ -1189,6 +1254,7 @@
       "id": "ctrl_ln1.aq1"
     },
     {
+      "deprecated": true,
       "name": {
         "en": "Aqara Wall Switch Double (LN)",
         "nl": "Aqara Wall Switch Double (LN)",
@@ -1199,8 +1265,7 @@
         "onoff",
         "onoff.1",
         "measure_power",
-        "meter_power",
-        "measure_voltage"
+        "meter_power"
       ],
       "capabilitiesOptions": {
         "onoff": {
@@ -1222,8 +1287,78 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.ctrl_ln2.aq1",
-        "deviceId": 81,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              4,
+              5,
+              6,
+              16
+            ],
+            "bindings": [
+              6,
+              16
+            ]
+          },
+          "2": {
+            "clusters": [
+              6,
+              16
+            ],
+            "bindings": [
+              6,
+              16
+            ]
+          },
+          "3": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "4": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "5": {
+            "clusters": [
+              16,
+              18
+            ],
+            "bindings": [
+              16,
+              18
+            ]
+          },
+          "6": {
+            "clusters": [
+              16,
+              18
+            ],
+            "bindings": [
+              16,
+              18
+            ]
+          },
+          "7": {
+            "clusters": [
+              16,
+              18
+            ],
+            "bindings": [
+              16,
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/ctrl_ln2.aq1/assets/learn.svg",
           "instruction": {
@@ -1241,6 +1376,126 @@
     },
     {
       "name": {
+        "en": "Aqara Wall Switch Double (LN) - Left",
+        "nl": "Aqara Wall Switch Double (LN) - Links",
+        "de": "Aqara Wall Switch Double (LN) - Links"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.ctrl_ln2.aq1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              4,
+              5,
+              6,
+              16
+            ],
+            "bindings": [
+              6,
+              16
+            ]
+          },
+          "2": {
+            "clusters": [
+              6,
+              16
+            ],
+            "bindings": [
+              6,
+              16
+            ]
+          },
+          "3": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "4": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "5": {
+            "clusters": [
+              16,
+              18
+            ],
+            "bindings": [
+              16,
+              18
+            ]
+          },
+          "6": {
+            "clusters": [
+              16,
+              18
+            ],
+            "bindings": [
+              16,
+              18
+            ]
+          },
+          "7": {
+            "clusters": [
+              16,
+              18
+            ],
+            "bindings": [
+              16,
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/ctrl_ln2.aq1.2/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "rightSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara Wall Switch Double (LN) - Right",
+              "nl": "Aqara Wall Switch Double (LN) - Rechts",
+              "de": "Aqara Wall Switch Double (LN) - Rechts"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_ln2.aq1.2/assets/images/large.png",
+        "small": "/drivers/ctrl_ln2.aq1.2/assets/images/small.png"
+      },
+      "id": "ctrl_ln2.aq1.2"
+    },
+    {
+      "name": {
         "en": "Aqara Wall Switch Single (L)",
         "nl": "Aqara Wall Switch Single (L)",
         "de": "Aqara Wall Switch Single (L)"
@@ -1252,8 +1507,36 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.ctrl_neutral1",
-        "deviceId": 6,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "2": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "//drivers/ctrl_neutral1/assets/learn.svg",
           "instruction": {
@@ -1270,6 +1553,7 @@
       "id": "ctrl_neutral1"
     },
     {
+      "deprecated": true,
       "name": {
         "en": "Aqara Wall Switch Double (L)",
         "nl": "Aqara Wall Switch Double (L)",
@@ -1297,8 +1581,67 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.ctrl_neutral2",
-        "deviceId": 6,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0
+            ]
+          },
+          "2": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "3": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "4": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "5": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "6": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "7": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/ctrl_neutral2/assets/learn.svg",
           "instruction": {
@@ -1313,6 +1656,108 @@
         "small": "/drivers/ctrl_neutral2/assets/images/small.png"
       },
       "id": "ctrl_neutral2"
+    },
+    {
+      "name": {
+        "en": "Aqara Wall Switch Double (L) - Left",
+        "nl": "Aqara Wall Switch Double (L) - Links",
+        "de": "Aqara Wall Switch Double (L) - Links"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.ctrl_neutral2",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0
+            ]
+          },
+          "2": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "3": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "4": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "5": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "6": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "7": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/ctrl_neutral2.2/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "rightSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara Wall Switch Double (L) - Right",
+              "nl": "Aqara Wall Switch Double (L) - Rechts",
+              "de": "Aqara Wall Switch Double (L) - Rechts"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ctrl_neutral2.2/assets/images/large.png",
+        "small": "/drivers/ctrl_neutral2.2/assets/images/small.png"
+      },
+      "id": "ctrl_neutral2.2"
     },
     {
       "name": {
@@ -1336,8 +1781,24 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_cube",
-        "deviceId": 24321,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              12
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/cube/assets/learn.svg",
           "instruction": {
@@ -1391,90 +1852,6 @@
     },
     {
       "name": {
-        "en": "Aqara Curtain Controller",
-        "nl": "Aqara Curtain Controller",
-        "de": "Aqara Curtain Controller"
-      },
-      "class": "windowcoverings",
-      "capabilities": [
-        "onoff",
-        "dim",
-        "windowcoverings_set",
-        "windowcoverings_state"
-      ],
-      "capabilitiesOptions": {
-        "onoff": {
-          "title": {
-            "en": "Curtain open"
-          }
-        },
-        "dim": {
-          "title": {
-            "en": "Open level"
-          }
-        }
-      },
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.curtain",
-        "deviceId": 514,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/curtain/assets/learn.svg",
-          "instruction": {
-            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
-            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
-            "de": "Drücke den Reset Knopf mehr als 5 Sekunden und lasse ihn los sobald das blaue Licht an geht."
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/curtain/assets/images/large.png",
-        "small": "/drivers/curtain/assets/images/small.png"
-      },
-      "settings": [],
-      "id": "curtain"
-    },
-    {
-      "name": {
-        "en": "Aqara B1 Curtain Controller",
-        "nl": "Aqara B1 Curtain Controller",
-        "de": "Aqara B1 Curtain Controller"
-      },
-      "class": "curtain",
-      "capabilities": [
-        "windowcoverings_set",
-        "windowcoverings_state",
-        "measure_battery"
-      ],
-      "energy": {
-        "batteries": [
-          "INTERNAL"
-        ]
-      },
-      "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.curtain.hagl04",
-        "deviceId": 514,
-        "profileId": 260,
-        "learnmode": {
-          "image": "/drivers/curtain.hagl04/assets/learn.svg",
-          "instruction": {
-            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
-            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
-            "de": "Drücke den Reset Knopf mehr als 5 Sekunden und lasse ihn los sobald das blaue Licht an geht."
-          }
-        }
-      },
-      "images": {
-        "large": "/drivers/curtain.hagl04/assets/images/large.png",
-        "small": "/drivers/curtain.hagl04/assets/images/small.png"
-      },
-      "settings": [],
-      "id": "curtain.hagl04"
-    },
-    {
-      "name": {
         "en": "Aqara LED Bulb",
         "nl": "Aqara LED Bulb",
         "de": "Aqara LED Bulb"
@@ -1499,13 +1876,34 @@
         },
         "onoff": {
           "setOnDim": false
+        },
+        "light_temperature": {
+          "opts": {
+            "duration": true
+          }
         }
       },
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.light.aqcn02",
-        "deviceId": 258,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              4,
+              5,
+              6,
+              8,
+              768
+            ],
+            "bindings": [
+              6,
+              8,
+              768
+            ]
+          }
+        },
         "learnmode": {
           "instruction": {
             "en": "Toggle the bulb on/off 5 times until the bulb blinks twice quickly to start pairing.",
@@ -1562,8 +1960,35 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.plug",
-        "deviceId": 81,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "2": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "3": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/plug/assets/learn.svg",
           "instruction": {
@@ -1598,8 +2023,22 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.plug.maeu01",
-        "deviceId": 81,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              6,
+              9,
+              1794,
+              2820
+            ],
+            "bindings": [
+              6,
+              1794,
+              2820
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/plug.maeu01/assets/learn.svg",
           "instruction": {
@@ -1634,8 +2073,34 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.plug.mmeu01",
-        "deviceId": 81,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              6,
+              9
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "21": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "22": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/plug.mmeu01/assets/learn.svg",
           "instruction": {
@@ -1653,6 +2118,7 @@
       "id": "plug.mmeu01"
     },
     {
+      "deprecated": true,
       "name": {
         "en": "Aqara Double Relay",
         "nl": "Aqara Double Relay",
@@ -1684,8 +2150,37 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.relay.c2acn01",
-        "deviceId": 257,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              4,
+              5,
+              6,
+              12,
+              16,
+              2820
+            ],
+            "bindings": [
+              6,
+              12,
+              2820
+            ]
+          },
+          "2": {
+            "clusters": [
+              4,
+              5,
+              6,
+              16
+            ],
+            "bindings": [
+              6,
+              16
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/relay.c2acn01/assets/learn.svg",
           "instruction": {
@@ -1703,6 +2198,84 @@
     },
     {
       "name": {
+        "en": "Aqara Double Relay - L1",
+        "nl": "Aqara Double Relay - L1",
+        "de": "Aqara Double Relay - L1"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.relay.c2acn01",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              4,
+              5,
+              6,
+              12,
+              16,
+              2820
+            ],
+            "bindings": [
+              6,
+              12,
+              2820
+            ]
+          },
+          "2": {
+            "clusters": [
+              4,
+              5,
+              6,
+              16
+            ],
+            "bindings": [
+              6,
+              16
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/relay.c2acn01.2/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold the reset button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold the reset button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "secondOutlet": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara Double Relay - L2",
+              "nl": "Aqara Double Relay - L2",
+              "de": "Aqara Double Relay - L2"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/relay.c2acn01.2/assets/images/large.png",
+        "small": "/drivers/relay.c2acn01.2/assets/images/small.png"
+      },
+      "id": "relay.c2acn01.2"
+    },
+    {
+      "name": {
         "en": "Aqara Wireless Switch Single (2018)",
         "nl": "Aqara Wireless Switch Single (2018)",
         "de": "Aqara Wireless Switch Single (2018)"
@@ -1717,8 +2290,25 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b186acn01",
-        "deviceId": 24321,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              6,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/remote.b186acn01/assets/learn.svg",
           "instruction": {
@@ -1754,8 +2344,14 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b1acn01",
-        "deviceId": 259,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/remote.b1acn01/assets/learn_switch.svg",
           "instruction": {
@@ -1769,26 +2365,6 @@
         "large": "/drivers/remote.b1acn01/assets/images/large.png",
         "small": "/drivers/remote.b1acn01/assets/images/small.png"
       },
-      "settings": [
-        {
-          "id": "battery_threshold",
-          "type": "number",
-          "label": {
-            "en": "Battery alarm threshold (%)",
-            "nl": "Batterij alarm waarde (%)"
-          },
-          "hint": {
-            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]",
-            "de": "Batterie level (%) Zwischen welchen Werten der Batterie Alarm aktiviert wird.\nSpanne: 1 - 90, \ndefault: 20 [%]"
-          },
-          "value": 20,
-          "attr": {
-            "min": 1,
-            "max": 90
-          }
-        }
-      ],
       "id": "remote.b1acn01"
     },
     {
@@ -1807,8 +2383,24 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b286acn01",
-        "deviceId": 24321,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "//drivers/remote.b286acn01/assets/learn.svg",
           "instruction": {
@@ -1841,12 +2433,25 @@
         ]
       },
       "zigbee": {
-        "manufacturerName": "LUMI",
-        "productId": "lumi.sen_ill.mgl01",
-        "deviceId": [
-          262
+        "manufacturerName": [
+          "XIAOMI",
+          "LUMI"
         ],
-        "profileId": 260,
+        "productId": "lumi.sen_ill.mgl01",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              1024
+            ],
+            "bindings": [
+              0,
+              1,
+              1024
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sen_ill.mgl01/assets/learn_human_body.svg",
           "instruction": {
@@ -1939,11 +2544,19 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.sens",
-        "deviceId": [
-          24321
+        "productId": [
+          "lumi.sens",
+          "lumi.sensor_ht"
         ],
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1026,
+              1029
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sens/assets/learn_temp.svg",
           "instruction": {
@@ -1957,6 +2570,7 @@
         "large": "/drivers/sens/assets/images/large.png",
         "small": "/drivers/sens/assets/images/small.png"
       },
+      "id": "sens",
       "settings": [
         {
           "id": "temperature_offset",
@@ -2041,26 +2655,8 @@
               }
             }
           ]
-        },
-        {
-          "id": "battery_threshold",
-          "type": "number",
-          "label": {
-            "en": "Battery alarm threshold (%)",
-            "nl": "Batterij alarm waarde (%)"
-          },
-          "hint": {
-            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-          },
-          "value": 20,
-          "attr": {
-            "min": 1,
-            "max": 90
-          }
         }
-      ],
-      "id": "sens"
+      ]
     },
     {
       "name": {
@@ -2077,9 +2673,18 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_86sw1lu",
-        "deviceId": 24321,
-        "profileId": 260,
+        "productId": [
+          "lumi.sensor_86sw1lu",
+          "lumi.sensor_86sw1"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              6
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_86sw1lu/assets/learn.svg",
           "instruction": {
@@ -2111,9 +2716,28 @@
       },
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.sensor_86sw2Un",
-        "deviceId": 24321,
-        "profileId": 260,
+        "productId": [
+          "lumi.sensor_86sw2Un",
+          "lumi.sensor_86sw2"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              6
+            ]
+          },
+          "2": {
+            "clusters": [
+              6
+            ]
+          },
+          "3": {
+            "clusters": [
+              6
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_86sw2Un/assets/learn.svg",
           "instruction": {
@@ -2150,8 +2774,14 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_magnet",
-        "deviceId": 260,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              6
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_magnet/assets/learn_door.svg",
           "instruction": {
@@ -2165,6 +2795,7 @@
         "large": "/drivers/sensor_magnet/assets/images/large.png",
         "small": "/drivers/sensor_magnet/assets/images/small.png"
       },
+      "id": "sensor_magnet",
       "settings": [
         {
           "type": "group",
@@ -2188,8 +2819,7 @@
             }
           ]
         }
-      ],
-      "id": "sensor_magnet"
+      ]
     },
     {
       "name": {
@@ -2209,8 +2839,14 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_magnet.aq2",
-        "deviceId": 24321,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              6
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_magnet.aq2/assets/learn_door.svg",
           "instruction": {
@@ -2224,24 +2860,8 @@
         "large": "/drivers/sensor_magnet.aq2/assets/images/large.png",
         "small": "/drivers/sensor_magnet.aq2/assets/images/small.png"
       },
+      "id": "sensor_magnet.aq2",
       "settings": [
-        {
-          "id": "battery_threshold",
-          "type": "number",
-          "label": {
-            "en": "Battery alarm threshold (%)",
-            "nl": "Batterij alarm waarde (%)"
-          },
-          "hint": {
-            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-          },
-          "value": 20,
-          "attr": {
-            "min": 1,
-            "max": 90
-          }
-        },
         {
           "type": "group",
           "label": {
@@ -2264,8 +2884,7 @@
             }
           ]
         }
-      ],
-      "id": "sensor_magnet.aq2"
+      ]
     },
     {
       "name": {
@@ -2287,8 +2906,15 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_motion",
-        "deviceId": 260,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1024,
+              1030
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_motion/assets/learn_motion.svg",
           "instruction": {
@@ -2302,6 +2928,7 @@
         "large": "/drivers/sensor_motion/assets/images/large.png",
         "small": "/drivers/sensor_motion/assets/images/small.png"
       },
+      "id": "sensor_motion",
       "settings": [
         {
           "id": "alarm_motion_reset_window",
@@ -2342,8 +2969,7 @@
             }
           ]
         }
-      ],
-      "id": "sensor_motion"
+      ]
     },
     {
       "name": {
@@ -2364,11 +2990,15 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_motion.aq2",
-        "deviceId": [
-          260,
-          263
-        ],
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1024,
+              1030
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_motion.aq2/assets/learn_human_body.svg",
           "instruction": {
@@ -2382,6 +3012,7 @@
         "large": "/drivers/sensor_motion.aq2/assets/images/large.png",
         "small": "/drivers/sensor_motion.aq2/assets/images/small.png"
       },
+      "id": "sensor_motion.aq2",
       "settings": [
         {
           "id": "alarm_motion_reset_window",
@@ -2439,8 +3070,7 @@
             }
           ]
         }
-      ],
-      "id": "sensor_motion.aq2"
+      ]
     },
     {
       "name": {
@@ -2457,8 +3087,15 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_switch",
-        "deviceId": 260,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              6
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_switch/assets/learn_button.svg",
           "instruction": {
@@ -2511,8 +3148,15 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_switch.aq2",
-        "deviceId": 24321,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              6
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_switch.aq2/assets/learn_switch.svg",
           "instruction": {
@@ -2526,25 +3170,6 @@
         "large": "/drivers/sensor_switch.aq2/assets/images/large.png",
         "small": "/drivers/sensor_switch.aq2/assets/images/small.png"
       },
-      "settings": [
-        {
-          "id": "battery_threshold",
-          "type": "number",
-          "label": {
-            "en": "Battery alarm threshold (%)",
-            "nl": "Batterij alarm waarde (%)"
-          },
-          "hint": {
-            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-          },
-          "value": 20,
-          "attr": {
-            "min": 1,
-            "max": 90
-          }
-        }
-      ],
       "id": "sensor_switch.aq2"
     },
     {
@@ -2568,8 +3193,16 @@
           "lumi.sensor_switch.aq3",
           "lumi.sensor_swit"
         ],
-        "deviceId": 24321,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              6,
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/sensor_switch.aq3/assets/learn_switch.svg",
           "instruction": {
@@ -2583,26 +3216,8 @@
         "large": "/drivers/sensor_switch.aq3/assets/images/large.png",
         "small": "/drivers/sensor_switch.aq3/assets/images/small.png"
       },
-      "settings": [
-        {
-          "id": "battery_threshold",
-          "type": "number",
-          "label": {
-            "en": "Battery alarm threshold (%)",
-            "nl": "Batterij alarm waarde (%)"
-          },
-          "hint": {
-            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-          },
-          "value": 20,
-          "attr": {
-            "min": 1,
-            "max": 90
-          }
-        }
-      ],
-      "id": "sensor_switch.aq3"
+      "id": "sensor_switch.aq3",
+      "settings": []
     },
     {
       "name": {
@@ -2635,8 +3250,19 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.vibration.aq1",
-        "deviceId": 10,
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              257
+            ]
+          },
+          "2": {
+            "clusters": [
+              18
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/vibration.aq1/assets/learn_vibration.svg",
           "instruction": {
@@ -2796,11 +3422,16 @@
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.weather",
-        "deviceId": [
-          770,
-          24321
-        ],
-        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1026,
+              1027,
+              1029
+            ]
+          }
+        },
         "learnmode": {
           "image": "/drivers/weather/assets/learn_weather.svg",
           "instruction": {
@@ -2814,6 +3445,7 @@
         "large": "/drivers/weather/assets/images/large.png",
         "small": "/drivers/weather/assets/images/small.png"
       },
+      "id": "weather",
       "settings": [
         {
           "id": "temperature_offset",
@@ -2924,26 +3556,8 @@
             "en": "mbar",
             "nl": "mbar"
           }
-        },
-        {
-          "id": "battery_threshold",
-          "type": "number",
-          "label": {
-            "en": "Battery alarm threshold (%)",
-            "nl": "Batterij alarm waarde (%)"
-          },
-          "hint": {
-            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-          },
-          "value": 20,
-          "attr": {
-            "min": 1,
-            "max": 90
-          }
         }
-      ],
-      "id": "weather"
+      ]
     }
   ],
   "capabilities": {

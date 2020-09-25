@@ -1,131 +1,102 @@
+// SDK3 updated & validated: DONE
+
 'use strict';
 
 const Homey = require('homey');
 
-const util = require('./../../lib/util');
-const ZigBeeDevice = require('homey-meshdriver').ZigBeeDevice;
-//const ZigBeeLightDevice = require('homey-meshdriver').ZigBeeLightDevice;
+const { ZigBeeDevice } = require('homey-zigbeedriver');
+const {
+  zclNode, debug, Cluster, CLUSTER,
+} = require('zigbee-clusters');
+
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
 
 class AqaraPlug extends ZigBeeDevice {
 
-	onMeshInit() {
-		// enable debugging
-		// this.enableDebug();
+  async onNodeInit({ zclNode }) {
+    // enable debugging
+    // this.enableDebug();
 
-		// print the node's info to the console
-		// this.printNode();
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
-		//Link util parseData method to this devices instance
-		this.parseData = util.parseData.bind(this)
+    // print the node's info to the console
+    // this.printNode();
 
-		// OnOff capability
-		this.registerCapability('onoff', 'genOnOff');
+    // OnOff capability
+    if (this.hasCapability('onoff')) {
+      this.registerCapability('onoff', CLUSTER.ON_OFF, {
+        endpoint: 1,
+      });
+    }
 
-		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genOnOff', 'onOff', 1, 60, null, data => {
-			if (this.getCapabilityValue('onoff') !== (data === 1)) {
-				this.log('genOnOff - onOff', data);
-				this.setCapabilityValue('onoff', data === 1);
-			}
-		}, 0);
+    // measure_power
+    // applicationType : 589824 = 0x090000 Power in Watts
+    // Register measure_power capability
+    if (this.hasCapability('measure_power')) {
+      this.registerCapability('measure_power', CLUSTER.ANALOG_INPUT, {
+        get: 'presentValue',
+        getOpts: {
+          getOnStart: true,
+        },
+        report: 'presentValue',
+        reportParser(value) {
+          return value;
+        },
+        endpoint: 2,
+      });
+    }
 
-		// measure_power
-		// applicationType : 589824 = 0x090000 Power in Watts
-		// Register measure_power capability
-		if (this.hasCapability('measure_power')) {
-			this.registerCapability('measure_power', 'genAnalogInput', {
-				get: 'presentValue',
-				getOpts: {
-					// getOnStart: true, // get the initial value on app start (only use for non-battery devices)
-					// pollInterval: 30000 // maps to device settings
-					// getOnOnline: true, // use only for battery devices
-				},
-				report: 'presentValue',
-				reportParser: value => {
-					this._debug('genAnalogInput - presentValue (power)', value); // due to amount of data reported, only logged in debug mode
-					return value;
-				},
-				endpoint: 1
-			});
-		}
+    // meter_power
+    // applicationType : 720896 = 0x0B0000 Energy in kWH
+    // Register meter_power capability
 
-		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
-			this._debug('genAnalogInput - presentValue (power)', data);
-			this.setCapabilityValue('measure_power', data);
-		}, 1);
+    if (this.hasCapability('meter_power')) {
+      this.registerCapability('meter_power', CLUSTER.ANALOG_INPUT, {
+        get: 'presentValue',
+        getOpts: {
+          getOnStart: true,
+        },
+        report: 'presentValue',
+        reportParser(value) {
+          return value;
+        },
+        endpoint: 3,
+      });
+    }
 
-		// meter_power
-		// applicationType : 720896 = 0x0B0000 Energy in kWH
-		// Register meter_power capability
-		if (this.hasCapability('meter_power')) {
-			this.registerCapability('meter_power', 'genAnalogInput', {
-				get: 'presentValue',
-				getOpts: {
-					// getOnStart: true, // get the initial value on app start (only use for non-battery devices)
-					pollInterval: 600000, // maps to device settings
-					// getOnOnline: true, // use only for battery devices
-				},
-				report: 'presentValue',
-				reportParser: value => {
-					this.log('genAnalogInput - presentValue (meter)', value);
-					return value;
-				},
-				endpoint: 2
-			});
-		}
+    // measure_voltage
+    if (this.hasCapability('measure_voltage')) {
+      await this.removeCapability('measure_voltage');
+    }
 
-		// Report is send if status is changed or after 5 min
-		this.registerAttrReportListener('genAnalogInput', 'presentValue', 1, 60, null, data => {
-			this.log('genAnalogInput - presentValue (meter)', data);
-			this.setCapabilityValue('meter_power', data);
-		}, 2);
+    // Register the AttributeReportListener - Lifeline
 
-		// measure_voltage
-		if (this.hasCapability('measure_voltage')) {
-			this.registerCapability('measure_voltage', 'genPowerCfg', {
-				get: 'mainsVoltage',
-				getOpts: {
-					// getOnStart: true, // get the initial value on app start (only use for non-battery devices)
-					pollInterval: 600000, // maps to device settings
-					// getOnOnline: true, // use only for battery devices
-				},
-				report: 'mainsVoltage',
-				reportParser: value => {
-					this.log('genAnalogInput - mainsVoltage', value / 10);
-					return value / 10;
-				},
-				endpoint: 0,
-			});
-		}
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
+  }
 
-		// Register the AttributeReportListener - Lifeline
-		this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
-				this.onLifelineReport.bind(this), 0)
-			.then(() => {
-				// Registering attr reporting succeeded
-				this._debug('registered attr report listener - genBasic - Lifeline');
-			})
-			.catch(err => {
-				// Registering attr reporting failed
-				this.error('failed to register attr report listener - genBasic - Lifeline', err);
-			});
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onXiaomiLifelineAttributeReport({
+    status,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      status,
+    });
 
-	}
+    if (typeof status === 'number') {
+      this.setCapabilityValue('onoff', status === 1);
+    }
+  }
 
-	onLifelineReport(value) {
-		this._debug('parsedData', new Buffer(value, 'ascii'));
-
-		const parsedData = this.parseData(new Buffer(value, 'ascii'));
-		this._debug('parsedData', parsedData);
-
-		// switch onoff reportParser (ID 100)
-		if (parsedData.hasOwnProperty('100')) {
-			const parsedOnOff = parsedData['100'] === 1;
-			this.log('lifeline - onoff state', parsedOnOff);
-			this.setCapabilityValue('onoff', parsedOnOff);
-		}
-	}
 }
 
 module.exports = AqaraPlug;

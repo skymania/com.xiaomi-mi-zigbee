@@ -14,8 +14,26 @@
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.remote.b186acn01",
-    "deviceId": 24321,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          6,
+          18
+        ]
+      },
+      "2": {
+        "clusters": [
+          18
+        ]
+      }
+      ,
+      "3": {
+        "clusters": [
+          18
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {
