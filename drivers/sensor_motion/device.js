@@ -22,12 +22,17 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
+    // Remove unused capabilities
+    if (this.hasCapability('alarm_battery')) {
+      await this.removeCapability('alarm_battery');
+    }
+
+    if (this.hasCapability('measure_battery')) {
+      await this.removeCapability('measure_battery');
+    }
+
     zclNode.endpoints[1].clusters[CLUSTER.OCCUPANCY_SENSING.NAME]
       .on('attr.occupancy', this.onOccupancyAttributeReport.bind(this));
-
-    // zclNode.endpoints[1].clusters[CLUSTER.BASIC.NAME]
-    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
-      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
   }
 
   /**
@@ -49,30 +54,6 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
       this.log('manual alarm_motion reset');
       this.setCapabilityValue('alarm_motion', false).catch(this.error);
     }, alarmMotionResetWindow * 1000);
-  }
-
-  /**
-   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
-   * interesting the battery level. The battery level divided by 1000 represents the battery
-   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
-   * on the battery voltage curve of a CR1632.
-   * @param {{batteryLevel: number}} lifeline
-   */
-  onXiaomiLifelineAttributeReport({
-    batteryVoltage,
-  } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
-    if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
-    }
   }
 
 }

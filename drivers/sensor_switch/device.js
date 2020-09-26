@@ -1,5 +1,4 @@
 // SDK3 updated & validated: DONE
-// ADD: Lifeline: attributes: <Buffer 05 00 42 12 6c 75 6d 69 2e 73 65 6e 73 6f 72 5f 73 77 69 74 63 68>
 
 'use strict';
 
@@ -8,10 +7,8 @@ const Homey = require('homey');
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { Cluster, CLUSTER, debug } = require('zigbee-clusters');
 
-const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 const XiaomiSpecificOnOffCluster = require('../../lib/XiaomiSpecificOnOffCluster');
 
-Cluster.addCluster(XiaomiBasicCluster);
 Cluster.addCluster(XiaomiSpecificOnOffCluster);
 
 let keyHeld = false;
@@ -29,6 +26,15 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
+    // Remove unused capabilities
+    if (this.hasCapability('alarm_battery')) {
+      await this.removeCapability('alarm_battery');
+    }
+
+    if (this.hasCapability('measure_battery')) {
+      await this.removeCapability('measure_battery');
+    }
+
     // supported scenes and their reported attribute numbers (1 - 4 based on reported data, 90,91 custom code)
     this.sceneMap = {
       1: 'Key Pressed 1 time',
@@ -44,9 +50,6 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 
     zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
       .on('attr.xiaomiOnOffScene', this.onOnOffAttributeReport.bind(this));
-
-    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
-      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
     // define and register FlowCardTriggers
     this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
@@ -112,30 +115,6 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
           lastKey = null;
         }, 3000);
       }
-    }
-  }
-
-  /**
-   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
-   * interesting the battery level. The battery level divided by 1000 represents the battery
-   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
-   * on the battery voltage curve of a CR1632.
-   * @param {{batteryLevel: number}} lifeline
-   */
-  onXiaomiLifelineAttributeReport({
-    batteryVoltage,
-  } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
-    if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
     }
   }
 

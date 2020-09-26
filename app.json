@@ -2532,9 +2532,7 @@
       "class": "sensor",
       "capabilities": [
         "measure_temperature",
-        "measure_humidity",
-        "measure_battery",
-        "alarm_battery"
+        "measure_humidity"
       ],
       "energy": {
         "batteries": [
@@ -2761,9 +2759,7 @@
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_contact",
-        "measure_battery",
-        "alarm_battery"
+        "alarm_contact"
       ],
       "energy": {
         "batteries": [
@@ -2893,9 +2889,7 @@
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_motion",
-        "alarm_battery",
-        "measure_battery"
+        "alarm_motion"
       ],
       "energy": {
         "batteries": [
