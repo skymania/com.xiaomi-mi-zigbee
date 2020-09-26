@@ -81,14 +81,14 @@ class AqaraWallSwitchSingleLN extends ZigBeeDevice {
    * @param {{batteryLevel: number}} lifeline
    */
   onXiaomiLifelineAttributeReport({
-    status,
+    state,
   } = {}) {
     this.log('lifeline attribute report', {
-      status,
+      state,
     });
 
-    if (typeof status === 'number') {
-      this.setCapabilityValue('onoff', status === 1);
+    if (typeof state === 'number') {
+      this.setCapabilityValue('onoff', state === 1);
     }
   }
 
