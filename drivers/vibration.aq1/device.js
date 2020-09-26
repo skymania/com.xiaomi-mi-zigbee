@@ -239,7 +239,12 @@ class AqaraVibrationSensor extends ZigBeeDevice {
     });
 
     if (typeof batteryVoltage === 'number') {
-      this.onBatteryVoltageAttributeReport(batteryVoltage);
+      const parsedVolts = batteryVoltage / 1000;
+      const minVolts = 2.5;
+      const maxVolts = 3.0;
+      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      this.setCapabilityValue('measure_battery', parsedBatPct);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
     }
   }
 
