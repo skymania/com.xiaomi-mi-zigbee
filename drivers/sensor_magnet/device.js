@@ -22,7 +22,7 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
     // this.printNode();
 
     zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
-      .on('attr.onOff', this.onOnOffAttributeReport.bind(this));
+      .on('attr.onOff', this.onContactReport.bind(this));
 
     // zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
     //  .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
