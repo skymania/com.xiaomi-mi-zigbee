@@ -1,4 +1,5 @@
 // SDK3 updated & validated: DONE
+// TODO: Check Cube Rotate flow card trigger
 
 'use strict';
 
@@ -173,7 +174,6 @@ class AqaraCubeSensor extends ZigBeeDevice {
         tokens: null,
         state: cubeAction,
       })
-      // this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, null, cubeAction)
         .then(() => this.debug(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
         .catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
     }
@@ -211,7 +211,6 @@ class AqaraCubeSensor extends ZigBeeDevice {
         tokens: null,
         state: cubeAction,
       })
-      // this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, null, cubeAction)
         .then(() => this.debug(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
         .catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
     }
@@ -245,10 +244,9 @@ class AqaraCubeSensor extends ZigBeeDevice {
     if (cubeAction.motion) {
       this.triggerFlow({
         id: `cube_${cubeAction.motion}`,
-        tokens: null,
+        tokens: cubeAction,
         state: cubeAction,
       })
-      // this[`cube${cubeAction.motion}TriggerDevice`].trigger(this, cubeAction, cubeAction)
         .then(() => this.debug(`Triggered cube${cubeAction.motion}TriggerDevice, cubeAction:`, cubeAction))
         .catch(err => this.error(`Error triggering cube${cubeAction.motion}TriggerDevice`, err));
     }
