@@ -1,5 +1,4 @@
 // SDK3 updated & validated
-// TODO: set color temperature
 
 'use strict';
 
@@ -15,8 +14,6 @@ class AqaraTunableBulb extends ZigBeeLightDevice {
     this.setStoreValue('colorTempMax', 370); // 2700K = 370 Mired
 
     await super.onNodeInit({ zclNode, supportsHueAndSaturation: false, supportsColorTemperature: true });
-
-    this.log('TEST', this.getSetting('transition_time'), this.getSetting('transition_time') ? Math.round(this.getSetting('transition_time') * 10) : 0);
 
     // enable debugging
     // this.enableDebug();
