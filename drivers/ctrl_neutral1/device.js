@@ -22,7 +22,7 @@ class AqaraWallSwitchSingleL extends ZigBeeDevice {
     // Register capabilities and reportListeners for  switch
     if (this.hasCapability('onoff')) {
       this.registerCapability('onoff', CLUSTER.ON_OFF, {
-        endpoint: 1,
+        endpoint: 2,
       });
     }
   }
