@@ -61,15 +61,12 @@ module.exports = class AqaraLightSwitchDouble extends ZigBeeDevice {
      * @param {{batteryLevel: number}} lifeline
      */
   onXiaomiLifelineAttributeReport({
-    state, humidity, pressure, batteryVoltage,
+    batteryVoltage,
   } = {}) {
     this.log('lifeline attribute report', {
-      batteryVoltage, state, humidity, pressure,
+      batteryVoltage,
     });
 
-    if (typeof state === 'number') this.onTemperatureMeasuredAttributeReport(state);
-    if (typeof humidity === 'number') this.onRelativeHumidityMeasuredAttributeReport(humidity);
-    if (typeof pressure === 'number') this.onPressureMeasuredAttributeReport(pressure / 100);
     if (typeof batteryVoltage === 'number') {
       const parsedVolts = batteryVoltage / 1000;
       const minVolts = 2.5;
