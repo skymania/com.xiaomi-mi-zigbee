@@ -35,7 +35,7 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
     this.sceneMap = {
       1: 'Key Pressed 1 time',
       2: 'Key Pressed 2 times',
-      0: 'Key long pressed',
+      0: 'Key Held Down',
     };
 
     zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_INPUT.NAME]
@@ -103,7 +103,7 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
     resultArray = resultArray.filter(result => {
       return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
     });
-    this._debug(resultArray);
+    this.debug(resultArray);
     return Promise.resolve(resultArray);
   }
 
@@ -120,7 +120,7 @@ class AqaraRemoteb286acn01 extends ZigBeeDevice {
     resultArray = resultArray.filter(result => {
       return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
     });
-    this._debug(resultArray);
+    this.debug(resultArray);
     return Promise.resolve(resultArray);
   }
 
