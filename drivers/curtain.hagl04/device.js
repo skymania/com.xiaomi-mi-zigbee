@@ -14,7 +14,6 @@ const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
-const util = require('../../lib/util');
 
 const REPORT_DEBOUNCER = 2000;
 
@@ -31,8 +30,23 @@ class AqaraCurtainB1 extends ZigBeeDevice {
     // this.printNode();
 
     // Add onoff capability if not available
+    if (!this.hasCapability('onoff')) {
+      await this.addCapability('onoff');
+    }
+
     if (this.hasCapability('onoff')) {
-      await this.removeCapability('onoff');
+      this.registerCapabilityListener('onoff', async value => {
+        this.log('onoff - go to state', commandMap[value ? 'up' : 'down']);
+        await zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_OUTPUT.NAME].writeAttributes({ presentValue: commandMap[value ? 'up' : 'down'] });
+
+        //  goToLiftPercentage({
+        //  percentageLiftValue: (1 - value) * 100,
+        // }, {
+        // This is a workaround for the fact that this device does not repsonds with a default
+        // response even though the ZCL command `goToLiftPercentage` demands that.
+        //  waitForResponse: false,
+        // });
+      });
     }
 
     // this.log('CLASS:', this.getClass(), this.getClass() === 'windowcoverings');
@@ -312,6 +326,11 @@ class AqaraCurtainB1 extends ZigBeeDevice {
       //  this.error('Read presentValue: ', err);
       // });
       // return;
+
+      // update onOff capability
+      if (this.getCapabilityValue('onoff') !== presentValue > 0) {
+        this.setCapabilityValue('onoff', presentValue > 0).catch(this.error);
+      }
       this.log('onCurtainPositionAttrReport - windowcoverings_set', presentValue, 1 - (presentValue / 100));
       this.setCapabilityValue('windowcoverings_set', 1 - (presentValue / 100));
     }
