@@ -51,9 +51,12 @@ class AqaraCurtainB1 extends ZigBeeDevice {
 
     // this.log('CLASS:', this.getClass(), this.getClass() === 'windowcoverings');
 
-    this.log('READ xiaomiCurtainClearPosition:', await zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtainClearPosition'));
-    this.log('READ xiaomiCurtainReverse:', await zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtainReverse'));
-    this.log('READ xiaomiCurtainOpenCloseManual:', await zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtainOpenCloseManual'));
+    try {
+      const { xiaomiCurtainClearPosition, xiaomiCurtainReverse, xiaomiCurtainOpenCloseManual } = await zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtainClearPosition', 'xiaomiCurtainReverse', 'xiaomiCurtainOpenCloseManual');
+      this.log('READ xiaomiCurtainClearPosition:', xiaomiCurtainClearPosition, 'xiaomiCurtainReverse', xiaomiCurtainReverse, 'xiaomiCurtainOpenCloseManual', xiaomiCurtainOpenCloseManual);
+  		} catch (err) {
+      this.error('failed to read curtain attributes', err);
+    }
 
     if (this.hasCapability('windowcoverings_state')) {
       this.registerCapability('windowcoverings_state', CLUSTER.MULTI_STATE_OUTPUT, {
