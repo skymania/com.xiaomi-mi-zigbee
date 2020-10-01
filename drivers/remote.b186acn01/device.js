@@ -80,8 +80,8 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
     let resultArray = [];
     for (const sceneID in this.sceneMap) {
       resultArray.push({
-        id: this.sceneMap[sceneID].scene,
-        name: this.homey.__(this.sceneMap[sceneID].scene),
+        id: this.sceneMap[sceneID],
+        name: this.homey.__(this.sceneMap[sceneID]),
       });
     }
     // filter for query
