@@ -11,15 +11,23 @@ Cluster.addCluster(XiaomiBasicCluster);
 
 class XiaomiLightSensor extends ZigBeeDevice {
 
-  onNodeInit({ zclNode }) {
+  async onNodeInit({ zclNode }) {
     // enable debugging
-    // this.enableDebug();
+    this.enableDebug();
 
     // Enables debug logging in zigbee-clusters
-    // debug(true);
+    debug(true);
 
     // print the node's info to the console
     // this.printNode();
+
+    await this.configureAttributeReporting([{
+      cluster: CLUSTER.POWER_CONFIGURATION,
+      attributeName: 'batteryVoltage',
+      minInterval: 30,
+      maxInterval: 43200,
+      minChange: 1,
+    }]);
 
     zclNode.endpoints[1].clusters[CLUSTER.BASIC.NAME]
       .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
@@ -43,16 +51,17 @@ class XiaomiLightSensor extends ZigBeeDevice {
   onIlluminanceMeasuredAttributeReport(measuredValue) {
     const parsedPayload = 10 ** ((measuredValue - 1) / 10000); // Lux = 10^((data-1)/10000)
     this.log('measure_luminance | msIlluminanceMeasurement - measuredValue', parsedPayload);
-    return this.setCapabilityValue('measure_luminance', parsedPayload);
+    return this.setCapabilityValue('measure_luminance', parsedPayload).catch(this.error);
   }
 
   onBatteryVoltageAttributeReport(batteryVoltage) {
-    const parsedVolts = batteryVoltage / 1000;
+    this.log('onBatteryVoltageAttributeReport', batteryVoltage);
+    const parsedVolts = batteryVoltage / 10;
     const minVolts = 2.5;
     const maxVolts = 3.0;
     const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-    this.setCapabilityValue('measure_battery', parsedBatPct);
-    this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+    this.setCapabilityValue('alarm_battery', parsedVolts < 2.6).catch(this.error);
   }
 
   /**
