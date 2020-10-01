@@ -38,10 +38,12 @@ class AqaraWeatherSensor extends ZigBeeDevice {
    * @param {number} measuredValue
    */
   onTemperatureMeasuredAttributeReport(measuredValue) {
+    // if (measuredValue !== -100) {
     const temperatureOffset = this.getSetting('temperature_offset') || 0;
     const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
     this.log('measure_temperature | msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
     this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
+    // }
   }
 
   /**
@@ -50,10 +52,12 @@ class AqaraWeatherSensor extends ZigBeeDevice {
    * @param {number} measuredValue
    */
   onRelativeHumidityMeasuredAttributeReport(measuredValue) {
+    // if (measuredValue !== 100) {
     const humidityOffset = this.getSetting('humidity_offset') || 0;
     const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
     this.log('measure_humidity | msRelativeHumidity - measuredValue (humidity):', parsedValue, '+ humidity offset', humidityOffset);
     this.setCapabilityValue('measure_humidity', parsedValue + humidityOffset);
+    // }
   }
 
   /**
