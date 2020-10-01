@@ -7,5 +7,11 @@
   },
   "0.8.0": {
     "en": "Add support for Aqara & Xiaomi EU plugs, Xiaomi light sensors and additional expert settings for several sensors"
+  },
+  "1.0.0": {
+    "en": "Initial SDK3 Homey app store release"
+  },
+  "1.0.1": {
+    "en": "Fix Aqara wireless single switch (2018) trigger and light sensor battery reporting"
   }
 }
