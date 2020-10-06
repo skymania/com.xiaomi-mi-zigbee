@@ -1,0 +1,49 @@
+{
+  "name": {
+    "en": "Aqara D1 Wireless Switch Single"
+  },
+  "class": "sensor",
+  "capabilities": [],
+  "energy": {
+    "batteries": [
+      "CR2032"
+    ]
+  },
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.remote.b186acn02",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          6,
+          18
+        ]
+      },
+      "2": {
+        "clusters": [
+          18
+        ]
+      }
+      ,
+      "3": {
+        "clusters": [
+          18
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Long press the button for more than 10 seconds until the blue light flashes three times after release",
+        "nl": "Houd de knop ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert",
+        "de": "Drücke den Knopf länger als 10 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+      }
+    }
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "settings": []
+}

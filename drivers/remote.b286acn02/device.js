@@ -13,49 +13,63 @@ Cluster.addCluster(XiaomiBasicCluster);
 
 let lastKey = null;
 
-class AqaraRemoteb1acn01 extends ZigBeeDevice {
+class AqaraD1Remoteb286acn02 extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
     // enable debugging
     // this.enableDebug();
 
-    // Enables debug logging in zigbee-clusters
-    // debug(true);
-
     // print the node's info to the console
     // this.printNode();
 
+    // Enables debug logging in zigbee-clusters
+    debug(true);
+
     // supported scenes and their reported attribute numbers (all based on reported data)
+    this.buttonMap = {
+      Left: 'Left button',
+      Right: 'Right button',
+      Both: 'Both buttons',
+    };
+
     this.sceneMap = {
       1: 'Key Pressed 1 time',
       2: 'Key Pressed 2 times',
       0: 'Key Held Down',
-      255: 'Key Released',
     };
 
     zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_INPUT.NAME]
-      .on('attr.presentValue', this.onPresentValueAttributeReport.bind(this));
+      .on('attr.presentValue', this.onPresentValueAttributeReport.bind(this, 'Left'));
+
+    zclNode.endpoints[2].clusters[CLUSTER.MULTI_STATE_INPUT.NAME]
+      .on('attr.presentValue', this.onPresentValueAttributeReport.bind(this, 'Right'));
+
+    zclNode.endpoints[3].clusters[CLUSTER.MULTI_STATE_INPUT.NAME]
+      .on('attr.presentValue', this.onPresentValueAttributeReport.bind(this, 'Both'));
 
     zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
       .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
     // define and register FlowCardTriggers
     this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
+
+    // define and register FlowCardTriggers
+    this.onButtonAutocomplete = this.onButtonAutocomplete.bind(this);
   }
 
-  onPresentValueAttributeReport(repScene) {
-    this.log('MultistateInputCluster - presentValue', repScene, this.sceneMap[repScene], 'lastKey', lastKey);
-
-    if (lastKey !== repScene) {
-      lastKey = repScene;
+  onPresentValueAttributeReport(repButton, repScene) {
+    this.log('MultistateInputCluster - presentValue', this.buttonMap[repButton], this.sceneMap[repScene], 'lastKey', lastKey);
+    if (lastKey !== `${repButton} ${repScene}`) {
+      lastKey = `${repButton} ${repScene}`;
       if (Object.keys(this.sceneMap).includes(repScene.toString())) {
         const remoteValue = {
+          button: this.buttonMap[repButton],
           scene: this.sceneMap[repScene],
         };
         this.debug('Scene and Button triggers', remoteValue);
         // Trigger the trigger card with 1 dropdown option
         this.triggerFlow({
-          id: 'trigger_button1_scene',
+          id: 'trigger_button2_scene',
           tokens: null,
           state: remoteValue,
         })
@@ -63,7 +77,7 @@ class AqaraRemoteb1acn01 extends ZigBeeDevice {
 
         // Trigger the trigger card with tokens
         this.triggerFlow({
-          id: 'button1_button',
+          id: 'button2_button',
           tokens: remoteValue,
           state: null,
         })
@@ -93,6 +107,23 @@ class AqaraRemoteb1acn01 extends ZigBeeDevice {
     return Promise.resolve(resultArray);
   }
 
+  onButtonAutocomplete(query, args, callback) {
+    let resultArray = [];
+    for (const sceneID in this.buttonMap) {
+      resultArray.push({
+        id: this.buttonMap[sceneID],
+        name: this.homey.__(this.buttonMap[sceneID]),
+      });
+    }
+
+    // filter for query
+    resultArray = resultArray.filter(result => {
+      return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    });
+    this.debug(resultArray);
+    return Promise.resolve(resultArray);
+  }
+
   /**
    * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
    * interesting the battery level. The battery level divided by 1000 represents the battery
@@ -112,36 +143,12 @@ class AqaraRemoteb1acn01 extends ZigBeeDevice {
       const minVolts = 2.5;
       const maxVolts = 3.0;
       const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('measure_battery', parsedBatPct);
       this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
     }
   }
 
 }
-module.exports = AqaraRemoteb1acn01;
+module.exports = AqaraD1Remoteb286acn02;
 
-// WXKG11LM_ remote.b1acn01
-/*
-Node overview:
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ------------------------------------------
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] Node: f5b42996-97aa-45d8-a8c4-b45772286c06
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] - Battery: false
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] - Endpoints: 0
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] -- Clusters:
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- zapp
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genBasic
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- 65281 : !�
-                                                                               (!�!�$
-!
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genBasic
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- modelId : lumi.remote.b1acn01
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genIdentify
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genIdentify
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genMultistateInput
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genMultistateInput
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- presentValue : 255
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ------------------------------------------
-*/
+// WXKG07LM_ remote.b286acn02;

@@ -13,24 +13,23 @@ Cluster.addCluster(XiaomiBasicCluster);
 
 let lastKey = null;
 
-class AqaraRemoteb1acn01 extends ZigBeeDevice {
+class AqaraD1Remoteb186acn02 extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
     // enable debugging
     // this.enableDebug();
 
-    // Enables debug logging in zigbee-clusters
-    // debug(true);
-
     // print the node's info to the console
     // this.printNode();
+
+    // Enables debug logging in zigbee-clusters
+    // debug(true);
 
     // supported scenes and their reported attribute numbers (all based on reported data)
     this.sceneMap = {
       1: 'Key Pressed 1 time',
       2: 'Key Pressed 2 times',
       0: 'Key Held Down',
-      255: 'Key Released',
     };
 
     zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_INPUT.NAME]
@@ -112,36 +111,12 @@ class AqaraRemoteb1acn01 extends ZigBeeDevice {
       const minVolts = 2.5;
       const maxVolts = 3.0;
       const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('measure_battery', parsedBatPct);
       this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
     }
   }
 
 }
-module.exports = AqaraRemoteb1acn01;
+module.exports = AqaraD1Remoteb186acn02;
 
-// WXKG11LM_ remote.b1acn01
-/*
-Node overview:
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ------------------------------------------
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] Node: f5b42996-97aa-45d8-a8c4-b45772286c06
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] - Battery: false
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] - Endpoints: 0
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] -- Clusters:
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- zapp
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genBasic
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- 65281 : !�
-                                                                               (!�!�$
-!
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genBasic
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- modelId : lumi.remote.b1acn01
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genIdentify
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genIdentify
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] --- genMultistateInput
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- cid : genMultistateInput
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- sid : attrs
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ---- presentValue : 255
-2018-10-13 17:15:04 [log] [ManagerDrivers] [remote.b1acn01] [0] ------------------------------------------
-*/
+// WXKG06LM_ remote.b186acn02;

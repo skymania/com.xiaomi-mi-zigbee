@@ -1,0 +1,98 @@
+{
+  "name": {
+    "en": "Aqara D1 Wall Switch Tripple (LN) - Left",
+    "nl": "Aqara D1 Wall Switch Tripple (LN) - Links",
+    "de": "Aqara D1 Wall Switch Tripple (LN) - Links"
+  },
+  "class": "socket",
+  "capabilities": [
+    "onoff",
+    "measure_power",
+    "meter_power"
+  ],
+  "capabilitiesOptions": {
+    "measure_power": {
+      "approximated": true
+    }
+  },
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.switch.n3acn3",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          1794,
+          2820
+        ],
+        "bindings": [
+          6,
+          1794,
+          2820
+        ]
+      },
+      "2": {
+        "clusters": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "3": {
+        "clusters": [
+          0,
+          3,
+          4,
+          5,
+          6
+        ],
+        "bindings": [
+          6
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+        "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+        "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+      }
+    },
+    "devices": {
+      "middleSwitch": {
+        "capabilities": [ "onoff" ],
+        "name": {
+          "en": "Aqara D1 Wall Switch Tripple (LN) - Middle",
+          "nl": "Aqara D1 Wall Switch Tripple (LN) - Middel",
+          "de": "Aqara D1 Wall Switch Tripple (LN) - Mitte"
+        },
+        "settings": []
+      },
+      "rightSwitch": {
+        "capabilities": [ "onoff" ],
+        "name": {
+          "en": "Aqara D1 Wall Switch Tripple (LN) - Right",
+          "nl": "Aqara D1 Wall Switch Tripple (LN) - Rechts",
+          "de": "Aqara D1 Wall Switch Tripple (LN) - Rechts"
+        },
+        "settings": []
+      }
+    }
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}
