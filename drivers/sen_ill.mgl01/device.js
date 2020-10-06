@@ -13,21 +13,27 @@ class XiaomiLightSensor extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
     // enable debugging
-    this.enableDebug();
+    // this.enableDebug();
 
     // Enables debug logging in zigbee-clusters
-    debug(true);
+    // debug(true);
 
     // print the node's info to the console
     // this.printNode();
 
-    await this.configureAttributeReporting([{
-      cluster: CLUSTER.POWER_CONFIGURATION,
-      attributeName: 'batteryVoltage',
-      minInterval: 30,
-      maxInterval: 43200,
-      minChange: 1,
-    }]);
+    if (this.isFirstInit()) {
+      try {
+        await this.configureAttributeReporting([{
+          cluster: CLUSTER.POWER_CONFIGURATION,
+          attributeName: 'batteryVoltage',
+          minInterval: 30,
+          maxInterval: 43200,
+          minChange: 1,
+        }]);
+      } catch (err) {
+        this.error('failed to read  attributes', err);
+      }
+    }
 
     zclNode.endpoints[1].clusters[CLUSTER.BASIC.NAME]
       .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
