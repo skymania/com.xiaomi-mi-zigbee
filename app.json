@@ -11,7 +11,7 @@
   "category": [
     "lights"
   ],
-  "version": "1.0.1",
+  "version": "1.1.0",
   "compatibility": ">=5.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -72,7 +72,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_switch.aq3|remote.b1acn01|sensor_86sw1lu|remote.b186acn01"
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_switch.aq3|remote.b1acn01|sensor_86sw1lu|remote.b186acn01|remote.b186acn02"
           }
         ],
         "tokens": [
@@ -106,7 +106,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_86sw2Un|remote.b286acn01"
+            "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01"
           }
         ],
         "tokens": [
@@ -152,7 +152,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_switch.aq3|remote.b1acn01|sensor_86sw1lu|remote.b186acn01"
+            "filter": "driver_id=sensor_switch|sensor_switch.aq2|sensor_switch.aq3|remote.b1acn01|sensor_86sw1lu|remote.b186acn01|remote.b186acn02"
           },
           {
             "name": "scene",
@@ -176,7 +176,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_86sw2Un|remote.b286acn01"
+            "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01"
           },
           {
             "name": "button",
@@ -2462,6 +2462,55 @@
     },
     {
       "name": {
+        "en": "Aqara D1 Wireless Switch Single"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.remote.b186acn02",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              6,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/remote.b186acn02/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the button for more than 10 seconds until the blue light flashes three times after release",
+            "nl": "Houd de knop ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert",
+            "de": "Drücke den Knopf länger als 10 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/remote.b186acn02/assets/images/large.png",
+        "small": "/drivers/remote.b186acn02/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "remote.b186acn02"
+    },
+    {
+      "name": {
         "en": "Aqara Wireless Mini Switch (2018)",
         "nl": "Aqara Wireless Mini Switch (2018)",
         "de": "Aqara Wireless Mini Switch (2018)"
@@ -2551,6 +2600,303 @@
       },
       "settings": [],
       "id": "remote.b286acn01"
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wireless Switch Double"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.remote.b286acn02",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "//drivers/remote.b286acn02/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any of the buttons for more than 10 seconds until the blue light flashes three times after release",
+            "nl": "Houd een van de knoppen ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert",
+            "de": "Drücke den Knopf länger als 10 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        }
+      },
+      "images": {
+        "large": "//drivers/remote.b286acn02/assets/images/large.png",
+        "small": "//drivers/remote.b286acn02/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "remote.b286acn02"
+    },
+    {
+      "name": {
+        "en": "Aqara | Opple Switch - 2 button",
+        "nl": "Aqara | Opple Schakelaar - 2 knoppen",
+        "de": "Aqara | Opple Switch - 2 button"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.remote.b286opcn01",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              18,
+              64704
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "//drivers/remote.b286opcn01/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the reset button for more 15 seconds until the blue light flashes the second time (!) three times",
+            "nl": "Houd de reset knop ingedrukt voor meer dan 15 seconden totdat de blauwe led voor de tweede keer (!) drie keer knippert",
+            "de": "Drücken Sie die Reset-Taste noch 15 Sekunden lang, bis das blaue Licht das zweite Mal (!) dreimal blinkt"
+          }
+        }
+      },
+      "images": {
+        "large": "//drivers/remote.b286opcn01/assets/images/large.png",
+        "small": "//drivers/remote.b286opcn01/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "remote.b286opcn01"
+    },
+    {
+      "name": {
+        "en": "Aqara | Opple Switch - 4 button",
+        "nl": "Aqara | Opple Schakelaar - 4 knoppen",
+        "de": "Aqara | Opple Switch - 4 button"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.remote.b486opcn01",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              18,
+              64704
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "4": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "//drivers/remote.b486opcn01/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the reset button for more 15 seconds until the blue light flashes the second time (!) three times",
+            "nl": "Houd de reset knop ingedrukt voor meer dan 15 seconden totdat de blauwe led voor de tweede keer (!) drie keer knippert",
+            "de": "Drücken Sie die Reset-Taste noch 15 Sekunden lang, bis das blaue Licht das zweite Mal (!) dreimal blinkt"
+          }
+        }
+      },
+      "images": {
+        "large": "//drivers/remote.b486opcn01/assets/images/large.png",
+        "small": "//drivers/remote.b486opcn01/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "remote.b486opcn01"
+    },
+    {
+      "name": {
+        "en": "Aqara | Opple Switch - 6 button",
+        "nl": "Aqara | Opple Schakelaar - 6 knoppen",
+        "de": "Aqara | Opple Switch - 6 button"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.remote.b686opcn01",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              18,
+              64704
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "4": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "5": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "6": {
+            "clusters": [
+              3,
+              4,
+              5,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "//drivers/remote.b686opcn01/assets/learn.svg",
+          "instruction": {
+            "en": "Long press the reset button for more 15 seconds until the blue light flashes the second time (!) three times",
+            "nl": "Houd de reset knop ingedrukt voor meer dan 15 seconden totdat de blauwe led voor de tweede keer (!) drie keer knippert",
+            "de": "Drücken Sie die Reset-Taste noch 15 Sekunden lang, bis das blaue Licht das zweite Mal (!) dreimal blinkt"
+          }
+        }
+      },
+      "images": {
+        "large": "//drivers/remote.b686opcn01/assets/images/large.png",
+        "small": "//drivers/remote.b686opcn01/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "remote.b686opcn01"
     },
     {
       "name": {
@@ -3202,6 +3548,96 @@
       ]
     },
     {
+      "id": "sensor_natgas",
+      "name": {
+        "en": "Xiaomi Honeywell natural gas detector",
+        "nl": "Xiaomi Honeywell gas melder"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_gas"
+      ],
+      "energy": {
+        "batteries": [
+          "CR123A"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_natgas",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              1280
+            ],
+            "bindings": [
+              1280
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/sensor_natgas/assets/learn.svg",
+          "instruction": {
+            "en": "Press the button on your natural gas detector three times",
+            "nl": "Druk driemaal op de knop op de gasmelder"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_natgas/assets/images/large.png",
+        "small": "/drivers/sensor_natgas/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "id": "sensor_smoke",
+      "name": {
+        "en": "Xiaomi Honeywell smoke detector",
+        "nl": "Xiaomi Honeywell rookmelder"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_smoke",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR123A"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_smoke",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              1280
+            ],
+            "bindings": [
+              1280
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/sensor_smoke/assets/learn.svg",
+          "instruction": {
+            "en": "Press the button on your smoke detector three times",
+            "nl": "Druk driemaal op de knop op de rookmelder"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_smoke/assets/images/large.png",
+        "small": "/drivers/sensor_smoke/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
       "name": {
         "en": "Wireless switch",
         "nl": "Wireless switch"
@@ -3347,6 +3783,510 @@
       },
       "id": "sensor_switch.aq3",
       "settings": []
+    },
+    {
+      "id": "sensor_wleak.aq1",
+      "name": {
+        "en": "Aqara Water sensor",
+        "nl": "Aqara Water sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_water",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.sensor_wleak.aq1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              1280
+            ],
+            "bindings": [
+              1280
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/sensor_wleak.aq1/assets/learn.svg",
+          "instruction": {
+            "en": "Pinch the sensor for 5 seconds until the blue light flashes continuously",
+            "nl": "Pinch the sensor for 5 seconds until the blue light flashes continuously"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/sensor_wleak.aq1/assets/images/large.png",
+        "small": "/drivers/sensor_wleak.aq1/assets/images/small.png"
+      },
+      "settings": []
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wall Switch Single (L)",
+        "nl": "Aqara D1 Wall Switch Single (L)",
+        "de": "Aqara D1 Wall Switch Single (L)"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.b1lacn02",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "//drivers/switch.b1lacn02/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        }
+      },
+      "images": {
+        "large": "//drivers/switch.b1lacn02/assets/images/large.png",
+        "small": "//drivers/switch.b1lacn02/assets/images/small.png"
+      },
+      "id": "switch.b1lacn02"
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wall Switch Single (LN)",
+        "nl": "Aqara D1 Wall Switch Single (LN)",
+        "de": "Aqara D1 Wall Switch Single (LN)"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.b1nacn02",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9,
+              1794,
+              2820
+            ],
+            "bindings": [
+              6,
+              1794,
+              2820
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.b1nacn02/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/switch.b1nacn02/assets/images/large.png",
+        "small": "/drivers/switch.b1nacn02/assets/images/small.png"
+      },
+      "id": "switch.b1nacn02"
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wall Switch Double (L) - Left",
+        "nl": "Aqara D1 Wall Switch Double (L) - Links",
+        "de": "Aqara D1 Wall Switch Double (L) - Links"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.b2lacn02",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.b2lacn02/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "rightSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara D1 Wall Switch Double (L) - Right",
+              "nl": "Aqara D1 Wall Switch Double (L) - Rechts",
+              "de": "Aqara D1 Wall Switch Double (L) - Rechts"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/switch.b2lacn02/assets/images/large.png",
+        "small": "/drivers/switch.b2lacn02/assets/images/small.png"
+      },
+      "id": "switch.b2lacn02"
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wall Switch Double (LN) - Left",
+        "nl": "Aqara D1 Wall Switch Double (LN) - Links",
+        "de": "Aqara D1 Wall Switch Double (LN) - Links"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.b2nacn02",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9,
+              1794,
+              2820
+            ],
+            "bindings": [
+              6,
+              1794,
+              2820
+            ]
+          },
+          "2": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.b2nacn02/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "rightSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara D1 Wall Switch Double (LN) - Right",
+              "nl": "Aqara D1 Wall Switch Double (LN) - Rechts",
+              "de": "Aqara D1 Wall Switch Double (LN) - Rechts"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/switch.b2nacn02/assets/images/large.png",
+        "small": "/drivers/switch.b2nacn02/assets/images/small.png"
+      },
+      "id": "switch.b2nacn02"
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wall Switch Tripple (L) - Left",
+        "nl": "Aqara D1 Wall Switch Tripple (L) - Links",
+        "de": "Aqara D1 Wall Switch Tripple (L) - Links"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.l3acn3",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.l3acn3/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "middleSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara D1 Wall Switch Tripple (L) - Middle",
+              "nl": "Aqara D1 Wall Switch Tripple (L) - Midden",
+              "de": "Aqara D1 Wall Switch Tripple (L) - Mitte"
+            },
+            "settings": []
+          },
+          "rightSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara D1 Wall Switch Tripple (L) - Right",
+              "nl": "Aqara D1 Wall Switch Tripple (L) - Rechts",
+              "de": "Aqara D1 Wall Switch Tripple (L) - Rechts"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/switch.l3acn3/assets/images/large.png",
+        "small": "/drivers/switch.l3acn3/assets/images/small.png"
+      },
+      "id": "switch.l3acn3"
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wall Switch Tripple (LN) - Left",
+        "nl": "Aqara D1 Wall Switch Tripple (LN) - Links",
+        "de": "Aqara D1 Wall Switch Tripple (LN) - Links"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.n3acn3",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9,
+              1794,
+              2820
+            ],
+            "bindings": [
+              6,
+              1794,
+              2820
+            ]
+          },
+          "2": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "3": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6
+            ],
+            "bindings": [
+              6
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.n3acn3/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "middleSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara D1 Wall Switch Tripple (LN) - Middle",
+              "nl": "Aqara D1 Wall Switch Tripple (LN) - Middel",
+              "de": "Aqara D1 Wall Switch Tripple (LN) - Mitte"
+            },
+            "settings": []
+          },
+          "rightSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara D1 Wall Switch Tripple (LN) - Right",
+              "nl": "Aqara D1 Wall Switch Tripple (LN) - Rechts",
+              "de": "Aqara D1 Wall Switch Tripple (LN) - Rechts"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/switch.n3acn3/assets/images/large.png",
+        "small": "/drivers/switch.n3acn3/assets/images/small.png"
+      },
+      "id": "switch.n3acn3"
     },
     {
       "name": {
@@ -3712,6 +4652,30 @@
       "insightsTitleFalse": {
         "en": "Drop alarm turned off",
         "nl": "Val alarm ging uit"
+      }
+    },
+    "alarm_gas": {
+      "type": "boolean",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/alarm_gas.svg",
+      "title": {
+        "en": "Gas Alarm",
+        "nl": "Gas salarm"
+      },
+      "desc": {
+        "en": "True when gas has been detected",
+        "nl": "Gaat af als er gas gedetecteerd wordt"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Gas alarm turned on",
+        "nl": "Gas alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Gas alarm turned off",
+        "nl": "Gas alarm ging uit"
       }
     },
     "alarm_tilt": {

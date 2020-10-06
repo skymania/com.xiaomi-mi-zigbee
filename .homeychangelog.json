@@ -13,5 +13,8 @@
   },
   "1.0.1": {
     "en": "Fix Aqara wireless single switch (2018) trigger and light sensor battery reporting"
+  },
+  "1.1.0": {
+    "en": "Add support water-, smoke- and gas-sensors, Aqara Opple switches, Aqara D1 switch series and fix light sensor"
   }
 }
