@@ -16,5 +16,11 @@
   },
   "1.1.0": {
     "en": "Add support water-, smoke- and gas-sensors, Aqara Opple switches, Aqara D1 switch series and fix light sensor"
+  },
+  "1.1.1": {
+    "en": "Add support water-, smoke- and gas-sensors, Aqara Opple switches, Aqara D1 switch series and fix light sensor"
+  },
+  "1.1.2": {
+    "en": "Add support water-, smoke- and gas-sensors, Aqara Opple switches, Aqara D1 switch series and fix light sensor"
   }
 }

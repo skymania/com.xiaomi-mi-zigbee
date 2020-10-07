@@ -11,7 +11,7 @@
   "category": [
     "lights"
   ],
-  "version": "1.1.0",
+  "version": "1.1.2",
   "compatibility": ">=5.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -807,6 +807,36 @@
               "de": "Relativer Winkel %"
             },
             "example": 0.92
+          }
+        ]
+      },
+      {
+        "id": "alarm_gas_true",
+        "title": {
+          "en": "The gas alarm turned on",
+          "nl": "Het gasalarm gaat aan",
+          "de": "Der Gasalarm wurde ausgelöst"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor_natgas"
+          }
+        ]
+      },
+      {
+        "id": "alarm_gas_false",
+        "title": {
+          "en": "The gas alarm turned off",
+          "nl": "Het gassalarm gaat uit",
+          "de": "Der Gasalarm wurde ausgeschaltet"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor_natgas"
           }
         ]
       },
