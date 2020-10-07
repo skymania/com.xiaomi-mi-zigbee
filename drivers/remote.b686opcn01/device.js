@@ -125,7 +125,7 @@ class AqaraRemoteb686opcn01 extends ZigBeeDevice {
     resultArray = resultArray.filter(result => {
       return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
     });
-    this._debug(resultArray);
+    this.debug(resultArray);
     return Promise.resolve(resultArray);
   }
 
@@ -142,7 +142,7 @@ class AqaraRemoteb686opcn01 extends ZigBeeDevice {
     resultArray = resultArray.filter(result => {
       return result.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
     });
-    this._debug(resultArray);
+    this.debug(resultArray);
     return Promise.resolve(resultArray);
   }
 
