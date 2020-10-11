@@ -6,7 +6,9 @@
   },
   "class": "sensor",
   "capabilities": [
-    "alarm_contact"
+    "alarm_contact",
+    "alarm_battery",
+    "measure_battery"
   ],
   "energy": {
     "batteries": [

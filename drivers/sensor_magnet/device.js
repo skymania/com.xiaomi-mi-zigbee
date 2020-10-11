@@ -5,6 +5,10 @@
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
+
 class XiaomiDoorWindowSensor extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
@@ -17,17 +21,20 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
-    // Remove unused capabilities
-    if (this.hasCapability('alarm_battery')) {
-      await this.removeCapability('alarm_battery');
+    // Add battery capabilities
+    if (!this.hasCapability('measure_battery')) {
+      this.addCapability('measure_battery');
     }
-
-    if (this.hasCapability('measure_battery')) {
-      await this.removeCapability('measure_battery');
+    if (!this.hasCapability('alarm_battery')) {
+      this.addCapability('alarm_battery');
     }
 
     zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
       .on('attr.onOff', this.onContactReport.bind(this));
+
+    // Lifeline
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline2', this.onXiaomiLifelineAttributeReport.bind(this));
   }
 
   /**
@@ -42,11 +49,69 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
     this.setCapabilityValue('alarm_contact', parsedData);
   }
 
+  /**
+     * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+     * interesting the battery level. The battery level divided by 1000 represents the battery
+     * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+     * on the battery voltage curve of a CR1632.
+     * @param {{batteryLevel: number}} lifeline
+     */
+  onXiaomiLifelineAttributeReport(attributeBuffer) {
+    const state = attributeBuffer.readUInt8(3);
+    const batteryVoltage = attributeBuffer.readUInt16LE(5);
+    this.log('lifeline attribute report, state:', state, ', batteryVoltage (mV):', batteryVoltage);
+
+    if (typeof state === 'number') {
+      this.setCapabilityValue('alarm_contact', state === 1).catch(this.error);
+    }
+
+    if (typeof batteryVoltage === 'number') {
+      const parsedVolts = batteryVoltage / 1000;
+      const minVolts = 2.5;
+      const maxVolts = 3.0;
+      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    }
+  }
+
 }
 
 module.exports = XiaomiDoorWindowSensor;
 
 // MCCGQ01LM_sensor_magnet
+
+/*
+Motion sensor:  <Buffer 02 ff 4c 06 00 10 01 21 bd 0b 21 a8 13 24 02 00 00 00 00 21 17 00 20 5c>
+                <Buffer 02 ff 4c 06 00
+                10 (bool)   01              // state
+                21 (uint16) bd 0b           // battery
+                21 (uint16) a8 13           // rssi?
+                24 (uint40) 02 00 00 00 00  // txCount
+                21 (uint16) 17 00           // rssi?
+                20 (uint8)  5c              // CPU temperature
+                >
+Door sensor:    <Buffer 02 ff 4c 06 00 10 01 21 c4 0b 21 a8 43 24 06 00 00 00 00 21 7a 00 20 5c>
+                <Buffer 02 ff 4c 06 00
+                10 (bool)   01
+                21 (uint16) c4 0b
+                21 (uint16) a8 43
+                24 (uint40) 06 00 00 00 00
+                21 (uint16) 7a 00
+                20 (uint16) 5c>
+
+                <Buffer 06 00 10 00 21 bd 0b 21 a8 33 24 21 00 00 07 02 21 17 00 20 5c>
+                <Buffer 06 00
+                10 (bool)   00               // state (closed)
+                21 (unit16) bd 0b            // battery
+                21 (uint16) a8 33            // rssi?
+                24 (uint40) 21 00 00 07 02   // txCount
+                21 (uint16) 17 00            // rssi?
+                20 (uint8)  5c               // CPU temperature
+                >
+                <Buffer 06 00 10 01 21 bd 0b 21 a8 33 24 22 00 00 07 02 21 17 00 20 5c>
+*/
+
 /*
 Node overview
 2017-10-21 00:55:34 [log] [ManagerDrivers] [sensor_magnet] [0] Node: 2a3902d3-988a-4ae5-adea-6e0d7c85ec5e

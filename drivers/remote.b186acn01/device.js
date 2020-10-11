@@ -25,6 +25,14 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
     // Enables debug logging in zigbee-clusters
     // debug(true);
 
+    // add battery capabilities if needed
+    if (!this.hasCapability('measure_battery')) {
+      this.addCapability('measure_battery');
+    }
+    if (!this.hasCapability('alarm_battery')) {
+      this.addCapability('alarm_battery');
+    }
+
     // supported scenes and their reported attribute numbers (all based on reported data)
     this.sceneMap = {
       1: 'Key Pressed 1 time',

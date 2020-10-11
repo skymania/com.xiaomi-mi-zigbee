@@ -5,6 +5,10 @@
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+
+Cluster.addCluster(XiaomiBasicCluster);
+
 class XiaomiTempSensor extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
@@ -17,6 +21,15 @@ class XiaomiTempSensor extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
+    // add battery capabilities if needed
+    if (!this.hasCapability('measure_battery')) {
+      this.addCapability('measure_battery');
+    }
+    if (!this.hasCapability('alarm_battery')) {
+      this.addCapability('alarm_battery');
+    }
+
+    /*
     // Remove unused capabilities
     if (this.hasCapability('alarm_battery')) {
       await this.removeCapability('alarm_battery');
@@ -25,12 +38,17 @@ class XiaomiTempSensor extends ZigBeeDevice {
     if (this.hasCapability('measure_battery')) {
       await this.removeCapability('measure_battery');
     }
+    */
 
     zclNode.endpoints[1].clusters[CLUSTER.TEMPERATURE_MEASUREMENT.NAME]
       .on('attr.measuredValue', this.onTemperatureMeasuredAttributeReport.bind(this));
 
     zclNode.endpoints[1].clusters[CLUSTER.RELATIVE_HUMIDITY_MEASUREMENT.NAME]
       .on('attr.measuredValue', this.onRelativeHumidityMeasuredAttributeReport.bind(this));
+
+    // Lifeline
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
   }
 
   /**
@@ -55,6 +73,30 @@ class XiaomiTempSensor extends ZigBeeDevice {
     const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
     this.log('measure_humidity | msRelativeHumidity - measuredValue (humidity):', parsedValue, '+ humidity offset', humidityOffset);
     this.setCapabilityValue('measure_humidity', parsedValue + humidityOffset);
+  }
+
+  /**
+     * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+     * interesting the battery level. The battery level divided by 1000 represents the battery
+     * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+     * on the battery voltage curve of a CR1632.
+     * @param {{batteryLevel: number}} lifeline
+     */
+  onXiaomiLifelineAttributeReport({
+    batteryVoltage,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      batteryVoltage,
+    });
+
+    if (typeof batteryVoltage === 'number') {
+      const parsedVolts = batteryVoltage / 1000;
+      const minVolts = 2.5;
+      const maxVolts = 3.0;
+      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      this.setCapabilityValue('measure_battery', parsedBatPct);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    }
   }
 
 }

@@ -22,17 +22,21 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
-    // Remove unused capabilities
-    if (this.hasCapability('alarm_battery')) {
-      await this.removeCapability('alarm_battery');
+    // Add battery capabilities
+    if (!this.hasCapability('alarm_battery')) {
+      await this.addCapability('alarm_battery');
     }
 
-    if (this.hasCapability('measure_battery')) {
-      await this.removeCapability('measure_battery');
+    if (!this.hasCapability('measure_battery')) {
+      await this.addCapability('measure_battery');
     }
 
     zclNode.endpoints[1].clusters[CLUSTER.OCCUPANCY_SENSING.NAME]
       .on('attr.occupancy', this.onOccupancyAttributeReport.bind(this));
+
+    // Lifeline
+    zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
+      .on('attr.xiaomiLifeline2', this.onXiaomiLifelineAttributeReport.bind(this));
   }
 
   /**
@@ -54,6 +58,32 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
       this.log('manual alarm_motion reset');
       this.setCapabilityValue('alarm_motion', false).catch(this.error);
     }, alarmMotionResetWindow * 1000);
+  }
+
+  /**
+     * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+     * interesting the battery level. The battery level divided by 1000 represents the battery
+     * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+     * on the battery voltage curve of a CR1632.
+     * @param {{batteryLevel: number}} lifeline
+     */
+  onXiaomiLifelineAttributeReport(attributeBuffer) {
+    const state = attributeBuffer.readUInt8(3);
+    const batteryVoltage = attributeBuffer.readUInt16LE(5);
+    this.log('lifeline attribute report, state:', state, ', batteryVoltage (mV):', batteryVoltage);
+
+    if (typeof state === 'number') {
+      this.setCapabilityValue('alarm_motion', state === 1).catch(this.error);
+    }
+
+    if (typeof batteryVoltage === 'number') {
+      const parsedVolts = batteryVoltage / 1000;
+      const minVolts = 2.5;
+      const maxVolts = 3.0;
+      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    }
   }
 
 }

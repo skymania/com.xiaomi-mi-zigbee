@@ -15,13 +15,21 @@ module.exports = class AqaraLightSwitchDouble extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
     // enable debugging
-    this.enableDebug();
+    // this.enableDebug();
 
     // print the node's info to the console
     // this.printNode();
 
     // Enables debug logging in zigbee-clusters
     // debug(true);
+
+    // add battery capabilities if needed
+    if (!this.hasCapability('measure_battery')) {
+      this.addCapability('measure_battery');
+    }
+    if (!this.hasCapability('alarm_battery')) {
+      this.addCapability('alarm_battery');
+    }
 
     this.buttonMap = {
       Left: 'Left button',

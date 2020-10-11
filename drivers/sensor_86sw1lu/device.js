@@ -23,6 +23,14 @@ class AqaraLightSwitchSingle extends ZigBeeDevice {
     // Enables debug logging in zigbee-clusters
     // debug(true);
 
+    // add battery capabilities if needed
+    if (!this.hasCapability('measure_battery')) {
+      this.addCapability('measure_battery');
+    }
+    if (!this.hasCapability('alarm_battery')) {
+      this.addCapability('alarm_battery');
+    }
+
     this.sceneMap = {
       0: 'Key Pressed 1 time',
     };

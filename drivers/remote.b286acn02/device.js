@@ -23,7 +23,15 @@ class AqaraD1Remoteb286acn02 extends ZigBeeDevice {
     // this.printNode();
 
     // Enables debug logging in zigbee-clusters
-    debug(true);
+    // debug(true);
+
+    // add battery capabilities if needed
+    if (!this.hasCapability('measure_battery')) {
+      this.addCapability('measure_battery');
+    }
+    if (!this.hasCapability('alarm_battery')) {
+      this.addCapability('alarm_battery');
+    }
 
     // supported scenes and their reported attribute numbers (all based on reported data)
     this.buttonMap = {

@@ -6,7 +6,9 @@
   "class": "sensor",
   "capabilities": [
     "measure_temperature",
-    "measure_humidity"
+    "measure_humidity",
+    "measure_battery",
+    "alarm_battery"
   ],
   "energy": {
     "batteries": [
