@@ -22,5 +22,8 @@
   },
   "1.1.2": {
     "en": "Add support water-, smoke- and gas-sensors, Aqara Opple switches, Aqara D1 switch series and fix light sensor"
+  },
+  "1.1.3": {
+    "en": "Add battery capabilities for remaining devices and add gas- and smoke-density capabilities for the detectors"
   }
 }

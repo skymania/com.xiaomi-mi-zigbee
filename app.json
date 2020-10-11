@@ -11,7 +11,7 @@
   "category": [
     "lights"
   ],
-  "version": "1.1.2",
+  "version": "1.1.3",
   "compatibility": ">=5.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -2446,7 +2446,10 @@
         "de": "Aqara Wireless Switch Single (2018)"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
       "energy": {
         "batteries": [
           "CR2032"
@@ -2495,7 +2498,10 @@
         "en": "Aqara D1 Wireless Switch Single"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
       "energy": {
         "batteries": [
           "CR2032"
@@ -2588,7 +2594,10 @@
         "de": "Aqara Wireless Switch Double (2018)"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
       "energy": {
         "batteries": [
           "CR2032"
@@ -2636,7 +2645,10 @@
         "en": "Aqara D1 Wireless Switch Double"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
       "energy": {
         "batteries": [
           "CR2032"
@@ -3044,7 +3056,9 @@
       "class": "sensor",
       "capabilities": [
         "measure_temperature",
-        "measure_humidity"
+        "measure_humidity",
+        "measure_battery",
+        "alarm_battery"
       ],
       "energy": {
         "batteries": [
@@ -3174,7 +3188,10 @@
         "de": "Aqara Wireless Remote Switch Single"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
       "energy": {
         "batteries": [
           "CR2032"
@@ -3217,7 +3234,10 @@
         "de": "Aqara Wireless Remote Switch Double"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
       "energy": {
         "batteries": [
           "CR2032"
@@ -3271,7 +3291,9 @@
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_contact"
+        "alarm_contact",
+        "alarm_battery",
+        "measure_battery"
       ],
       "energy": {
         "batteries": [
@@ -3401,7 +3423,9 @@
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_motion"
+        "alarm_motion",
+        "measure_battery",
+        "alarm_battery"
       ],
       "energy": {
         "batteries": [
@@ -3585,7 +3609,8 @@
       },
       "class": "sensor",
       "capabilities": [
-        "alarm_gas"
+        "alarm_gas",
+        "measure_gas_density"
       ],
       "energy": {
         "batteries": [
@@ -3603,6 +3628,7 @@
               1280
             ],
             "bindings": [
+              0,
               1280
             ]
           }
@@ -3649,6 +3675,7 @@
               1280
             ],
             "bindings": [
+              0,
               1280
             ]
           }
@@ -3673,7 +3700,10 @@
         "nl": "Wireless switch"
       },
       "class": "sensor",
-      "capabilities": [],
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
       "energy": {
         "batteries": [
           "CR2032"
@@ -4759,7 +4789,7 @@
     "cube_measure_rotation": {
       "type": "number",
       "uiComponent": "sensor",
-      "icon": "/drivers/cube/assets/icon_rotate.svg",
+      "icon": "/assets/capabilities/cube_rotate.svg",
       "title": {
         "en": "Rotation",
         "nl": "Draaihoek"
@@ -4775,7 +4805,7 @@
     "cube_state_face": {
       "type": "enum",
       "uiComponent": "sensor",
-      "icon": "/drivers/cube/assets/icon_face.svg",
+      "icon": "/assets/capabilities/cube_face.svg",
       "title": {
         "en": "Face up",
         "nl": "Zijde boven"
@@ -4830,7 +4860,7 @@
     "cube_state_motion": {
       "type": "enum",
       "uiComponent": "sensor",
-      "icon": "/drivers/cube/assets/icon.svg",
+      "icon": "/assets/capabilities/cube_icon.svg",
       "title": {
         "en": "Motion",
         "nl": "Beweging"
@@ -4888,6 +4918,34 @@
           }
         }
       ]
+    },
+    "measure_gas_density": {
+      "title": {
+        "en": "Gas Density"
+      },
+      "type": "number",
+      "uiComponent": "sensor",
+      "units": {
+        "en": "kg/m3"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/measure_gas_density.svg"
+    },
+    "measure_smoke_density": {
+      "title": {
+        "en": "Smoke Density"
+      },
+      "type": "number",
+      "uiComponent": "sensor",
+      "units": {
+        "en": "kg/m3"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capabilities/measure_smoke_density.svg"
     },
     "measure_tilt": {
       "type": "number",
