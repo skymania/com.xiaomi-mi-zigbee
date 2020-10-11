@@ -6,7 +6,8 @@
 	},
 	"class": "sensor",
 	"capabilities": [
-		"alarm_gas"
+		"alarm_gas",
+		"measure_gas_density"
 	],
 	"energy": {
     "batteries": [
@@ -24,6 +25,7 @@
 				 1280
 			 ],
 			 "bindings": [
+				 0,
 				 1280
 			 ]
 		 }

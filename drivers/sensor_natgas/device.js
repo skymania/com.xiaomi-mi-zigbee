@@ -6,8 +6,10 @@ const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
+const XiaomiSpecificIASZoneCluster = require('../../lib/XiaomiSpecificIASZoneCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
+Cluster.addCluster(XiaomiSpecificIASZoneCluster);
 
 class AqaraSensorNatgas extends ZigBeeDevice {
 
@@ -21,19 +23,34 @@ class AqaraSensorNatgas extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
-    this.removeCapability('measure_battery');
-
-    this.removeCapability('alarm_battery');
+    // add measure_gas_density capabilities if needed
+    if (!this.hasCapability('measure_gas_density')) {
+      this.addCapability('measure_gas_density');
+    }
 
     // Capture the zoneStatusChangeNotification
-    zclNode.endpoints[1].clusters[CLUSTER.IAS_ZONE.NAME]
+    zclNode.endpoints[1].clusters[XiaomiSpecificIASZoneCluster.NAME]
       .onZoneStatusChangeNotification = payload => {
         this.onIASZoneStatusChangeNoficiation(payload);
       };
 
     // Register the AttributeReportListener - Lifeline
+    zclNode.endpoints[1].clusters[XiaomiSpecificIASZoneCluster.NAME]
+      .on('attr.xiaomiSensorDensity', this.onXiaomiSensorDensityAttributeReport.bind(this));
+
+    // Register the AttributeReportListener - Lifeline
     zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
       .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
+  }
+
+  /**
+   * Update alarm capabilities based on the IASZoneStatusChangeNotification.
+   */
+  onXiaomiSensorDensityAttributeReport({
+    sensorDensity,
+  }) {
+    this.log('IASZoneSensorDensity report received:', sensorDensity);
+    this.setCapabilityValue('measure_gas_density', sensorDensity);
   }
 
   /**
@@ -44,7 +61,6 @@ class AqaraSensorNatgas extends ZigBeeDevice {
   }) {
     this.log('IASZoneStatusChangeNotification received:', zoneStatus, extendedStatus, zoneId, delay);
     this.setCapabilityValue('alarm_gas', zoneStatus.alarm1);
-    this.setCapabilityValue('alarm_battery', zoneStatus.battery);
   }
 
   /**
@@ -60,6 +76,10 @@ class AqaraSensorNatgas extends ZigBeeDevice {
     this.log('lifeline attribute report', {
       state,
     });
+
+    if (typeof state === 'number') {
+      this.setCapabilityValue('measure_gas_density', state);
+    }
   }
 
 }
