@@ -72,9 +72,9 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
     const batteryVoltage = attributeBuffer.readUInt16LE(5);
     this.log('lifeline attribute report, state:', state, ', batteryVoltage (mV):', batteryVoltage);
 
-    if (typeof state === 'number') {
-      this.setCapabilityValue('alarm_motion', state === 1).catch(this.error);
-    }
+    // if (typeof state === 'number') {
+    //  this.setCapabilityValue('alarm_motion', state === 1).catch(this.error);
+    // }
 
     if (typeof batteryVoltage === 'number') {
       const parsedVolts = batteryVoltage / 1000;
