@@ -25,5 +25,8 @@
   },
   "1.1.3": {
     "en": "Add battery capabilities for remaining devices and add gas- and smoke-density capabilities for the detectors"
+  },
+  "1.1.4": {
+    "en": "Add battery capabilities for remaining devices and add gas- and smoke-density capabilities for the detectors"
   }
 }
