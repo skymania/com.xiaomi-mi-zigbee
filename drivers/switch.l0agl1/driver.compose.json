@@ -1,0 +1,45 @@
+{
+  "name": {
+    "en": "Single Switch Module T1 (No Neutral)",
+    "nl": "Single Switch Module T1 (No Neutral)",
+    "de": "Single Switch Module T1 (No Neutral)"
+  },
+  "class": "socket",
+  "capabilities": [
+    "onoff"
+  ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.switch.l0agl1",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          10,
+          64704
+        ],
+        "bindings": [
+          6
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Press and hold the button for more than 5 seconds",
+        "nl": "Press and hold the button for more than 5 seconds",
+        "de": "Halten Sie die Taste länger als 5 Sekunden gedrückt"
+      }
+    }
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}

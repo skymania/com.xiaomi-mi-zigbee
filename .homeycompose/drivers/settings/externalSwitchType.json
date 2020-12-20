@@ -1,0 +1,39 @@
+{
+  "type": "dropdown",
+  "zigbee": {
+    "cluster": "AqaraManufacturerSpecific",
+    "attribute": "switchType"
+  },
+  "label": {
+    "en": "Switch type",
+    "nl": "Schakelaar type"
+  },
+  "hint": {
+    "en": "This parameter determines what device is operating the switch.",
+    "nl": "Deze parameter epaalt welk apparaat de schakelaar bestuurt."
+  },
+  "value": "1",
+  "values": [
+    {
+      "id": "1",
+      "label": {
+        "en": "Toggle switch",
+        "nl": "Tuimelschakelaar"
+      }
+    },
+    {
+      "id": "2",
+      "label": {
+        "en": "Momentary switch",
+        "nl": "Pulsdrukschakelaar"
+      }
+    },
+    {
+      "id": "3",
+      "label": {
+        "en": "No switch",
+        "nl": "Geen sckakelaar"
+      }
+    }
+  ]
+}
