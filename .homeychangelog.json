@@ -28,5 +28,8 @@
   },
   "1.1.4": {
     "en": "Add battery capabilities for remaining devices and add gas- and smoke-density capabilities for the detectors"
+  },
+  "1.2.0": {
+    "en": "Add support for Aqara T1 switches"
   }
 }

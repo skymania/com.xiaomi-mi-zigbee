@@ -11,7 +11,7 @@
   "category": [
     "lights"
   ],
-  "version": "1.1.4",
+  "version": "1.2.0",
   "compatibility": ">=5.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -2243,7 +2243,8 @@
             "clusters": [
               0,
               6,
-              9
+              9,
+              64704
             ],
             "bindings": [
               6
@@ -4147,6 +4148,111 @@
     },
     {
       "name": {
+        "en": "Single Switch Module T1 (No Neutral)",
+        "nl": "Single Switch Module T1 (No Neutral)",
+        "de": "Single Switch Module T1 (No Neutral)"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.l0agl1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9,
+              10,
+              64704
+            ],
+            "bindings": [
+              6
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.l0agl1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold the button for more than 5 seconds",
+            "nl": "Press and hold the button for more than 5 seconds",
+            "de": "Halten Sie die Taste länger als 5 Sekunden gedrückt"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/switch.l0agl1/assets/images/large.png",
+        "small": "/drivers/switch.l0agl1/assets/images/small.png"
+      },
+      "id": "switch.l0agl1",
+      "settings": [
+        {
+          "id": "external_switch_type",
+          "type": "dropdown",
+          "zigbee": {
+            "cluster": "AqaraManufacturerSpecific",
+            "attribute": "switchType"
+          },
+          "label": {
+            "en": "Switch type",
+            "nl": "Schakelaar type"
+          },
+          "hint": {
+            "en": "This parameter determines what device is operating the switch.",
+            "nl": "Deze parameter epaalt welk apparaat de schakelaar bestuurt."
+          },
+          "value": "1",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Toggle switch",
+                "nl": "Tuimelschakelaar"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Momentary switch",
+                "nl": "Pulsdrukschakelaar"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "No switch",
+                "nl": "Geen sckakelaar"
+              }
+            }
+          ]
+        },
+        {
+          "id": "save_state",
+          "value": false,
+          "label": {
+            "en": "Restore state after power failure",
+            "nl": "Herstel status na stroomonderbreking"
+          },
+          "hint": {
+            "en": "This parameter determines whether after a power failure the device should be restored to the state it had before the power failure.",
+            "nl": "Deze parameter bepaalt of het apparaat na een stroomonderbreking moet worden ingesteld zoals deze voor de stroomonderbreking stond ingesteld."
+          },
+          "zigbee": {
+            "cluster": "AqaraManufacturerSpecific",
+            "attribute": "switchType"
+          },
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "name": {
         "en": "Aqara D1 Wall Switch Tripple (L) - Left",
         "nl": "Aqara D1 Wall Switch Tripple (L) - Links",
         "de": "Aqara D1 Wall Switch Tripple (L) - Links"
@@ -4244,6 +4350,122 @@
         "small": "/drivers/switch.l3acn3/assets/images/small.png"
       },
       "id": "switch.l3acn3"
+    },
+    {
+      "name": {
+        "en": "Single Switch Module T1 (With Neutral)",
+        "nl": "Single Switch Module T1 (With Neutral)",
+        "de": "Single Switch Module T1 (With Neutral) "
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.n0agl1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9,
+              10,
+              1794,
+              2820,
+              64704
+            ],
+            "bindings": [
+              6,
+              1794,
+              2820
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.n0agl1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold the button for more than 5 seconds",
+            "nl": "Press and hold the button for more than 5 seconds",
+            "de": "Halten Sie die Taste länger als 5 Sekunden gedrückt"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/switch.n0agl1/assets/images/large.png",
+        "small": "/drivers/switch.n0agl1/assets/images/small.png"
+      },
+      "id": "switch.n0agl1",
+      "settings": [
+        {
+          "id": "external_switch_type",
+          "type": "dropdown",
+          "zigbee": {
+            "cluster": "AqaraManufacturerSpecific",
+            "attribute": "switchType"
+          },
+          "label": {
+            "en": "Switch type",
+            "nl": "Schakelaar type"
+          },
+          "hint": {
+            "en": "This parameter determines what device is operating the switch.",
+            "nl": "Deze parameter epaalt welk apparaat de schakelaar bestuurt."
+          },
+          "value": "1",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Toggle switch",
+                "nl": "Tuimelschakelaar"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Momentary switch",
+                "nl": "Pulsdrukschakelaar"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "No switch",
+                "nl": "Geen sckakelaar"
+              }
+            }
+          ]
+        },
+        {
+          "id": "save_state",
+          "value": false,
+          "label": {
+            "en": "Restore state after power failure",
+            "nl": "Herstel status na stroomonderbreking"
+          },
+          "hint": {
+            "en": "This parameter determines whether after a power failure the device should be restored to the state it had before the power failure.",
+            "nl": "Deze parameter bepaalt of het apparaat na een stroomonderbreking moet worden ingesteld zoals deze voor de stroomonderbreking stond ingesteld."
+          },
+          "zigbee": {
+            "cluster": "AqaraManufacturerSpecific",
+            "attribute": "switchType"
+          },
+          "type": "checkbox"
+        }
+      ]
     },
     {
       "name": {
