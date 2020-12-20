@@ -5,9 +5,9 @@ const Homey = require('homey');
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
-const AqaraOppleCluster = require('../../lib/AqaraOppleCluster');
+const AqaraManufacturerSpecificCluster = require('../../lib/AqaraManufacturerSpecificCluster');
 
-Cluster.addCluster(AqaraOppleCluster);
+Cluster.addCluster(AqaraManufacturerSpecificCluster);
 
 let lastKey = null;
 
@@ -18,7 +18,7 @@ class AqaraRemoteb686opcn01 extends ZigBeeDevice {
     this.enableDebug();
 
     // Enables debug logging in zigbee-clusters
-    debug(true);
+    // debug(true);
 
     // print the node's info to the console
     // this.printNode();
@@ -26,7 +26,7 @@ class AqaraRemoteb686opcn01 extends ZigBeeDevice {
     // Set Aqara Opple mode to 1 to force sending MULTI_STATE_INPUT messages
     if (this.isFirstInit()) {
       try {
-        await zclNode.endpoints[1].clusters[AqaraOppleCluster.NAME].writeAttributes({ mode: 1 });
+        await zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME].writeAttributes({ mode: 1 });
       } catch (err) {
         this.error('failed to read  attributes', err);
       }
@@ -69,8 +69,8 @@ class AqaraRemoteb686opcn01 extends ZigBeeDevice {
     zclNode.endpoints[6].clusters[CLUSTER.MULTI_STATE_INPUT.NAME]
       .on('attr.presentValue', this.onPresentValueAttributeReport.bind(this, 6));
 
-    zclNode.endpoints[1].clusters[AqaraOppleCluster.NAME]
-      .on('attr.aqaraOppleLifeline', this.onAqaraOppleLifelineAttributeReport.bind(this));
+    zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME]
+      .on('attr.aqaraLifeline', this.onAqaraLifelineAttributeReport.bind(this));
 
     // define and register FlowCardTriggers
     this.onSceneAutocomplete = this.onSceneAutocomplete.bind(this);
@@ -153,7 +153,7 @@ class AqaraRemoteb686opcn01 extends ZigBeeDevice {
    * on the battery voltage curve of a CR1632.
    * @param {{batteryLevel: number}} lifeline
    */
-  onAqaraOppleLifelineAttributeReport({
+  onAqaraLifelineAttributeReport({
     batteryVoltage,
   } = {}) {
     this.log('lifeline attribute report', {

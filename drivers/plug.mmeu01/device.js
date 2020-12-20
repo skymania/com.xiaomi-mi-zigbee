@@ -6,8 +6,12 @@ const Homey = require('homey');
 
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const {
-  zclNode, debug, Cluster, CLUSTER,
+  debug, Cluster, CLUSTER,
 } = require('zigbee-clusters');
+
+const AqaraManufacturerSpecificCluster = require('../../lib/AqaraManufacturerSpecificCluster');
+
+Cluster.addCluster(AqaraManufacturerSpecificCluster);
 
 class XiaomiSmartPlugEU extends ZigBeeDevice {
 
@@ -61,6 +65,28 @@ class XiaomiSmartPlugEU extends ZigBeeDevice {
         },
         endpoint: 22,
       });
+    }
+
+    zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME]
+      .on('attr.aqaraLifeline', this.onAqaraLifelineAttributeReport.bind(this));
+  }
+
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onAqaraLifelineAttributeReport({
+    state,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      state,
+    });
+
+    if (typeof state === 'number') {
+      this.setCapabilityValue('onoff', state === 1);
     }
   }
 
