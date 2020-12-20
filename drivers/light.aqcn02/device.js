@@ -4,7 +4,7 @@
 
 const { ZigBeeLightDevice } = require('homey-zigbeedriver');
 const {
-  zclNode, debug, Cluster, CLUSTER,
+  debug, Cluster, CLUSTER,
 } = require('zigbee-clusters');
 
 class AqaraTunableBulb extends ZigBeeLightDevice {

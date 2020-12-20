@@ -4,7 +4,7 @@ const Homey = require('homey');
 
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const {
-  zclNode, debug, Cluster, CLUSTER,
+  debug, Cluster, CLUSTER,
 } = require('zigbee-clusters');
 
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
