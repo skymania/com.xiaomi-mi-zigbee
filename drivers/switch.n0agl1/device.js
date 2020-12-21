@@ -90,7 +90,7 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
    * on the battery voltage curve of a CR1632.
    * @param {{batteryLevel: number}} lifeline
    */
-  onAqaraiLifelineAttributeReport({
+  onAqaraLifelineAttributeReport({
     state,
   } = {}) {
     this.log('lifeline attribute report', {
