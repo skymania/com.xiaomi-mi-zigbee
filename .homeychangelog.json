@@ -31,5 +31,8 @@
   },
   "1.2.0": {
     "en": "Add support for Aqara T1 switches"
+  },
+  "1.2.1": {
+    "en": "Add support for Aqara T1 switches"
   }
 }
