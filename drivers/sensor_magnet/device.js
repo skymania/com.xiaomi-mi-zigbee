@@ -57,21 +57,15 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
      * @param {{batteryLevel: number}} lifeline
      */
   onXiaomiLifelineAttributeReport(attributeBuffer) {
-    const state = attributeBuffer.readUInt8(3);
+    const state = attributeBuffer.readUInt8(3) === 1;
     const batteryVoltage = attributeBuffer.readUInt16LE(5);
-    // onXiaomiLifelineAttributeReport({
-    //  state, batteryVoltage,
-    // } = {}) {
     this.log('lifeline attribute report', {
       batteryVoltage, state,
     });
     this.log('lifeline attribute report, state:', state, ', batteryVoltage (mV):', batteryVoltage);
 
-    if (typeof state === 'number') {
-      const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
-      const parsedData = !reverseAlarmLogic ? state === 1 : state === 0;
-      this.log(`alarm_contact -> ${parsedData}`);
-      this.setCapabilityValue('alarm_contact', parsedData).catch(this.error);
+    if (typeof state === 'boolean') {
+      this.onContactReport(state);
     }
 
     if (typeof batteryVoltage === 'number') {

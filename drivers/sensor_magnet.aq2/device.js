@@ -47,8 +47,16 @@ class AqaraDoorWindowSensor extends ZigBeeDevice {
    * on the battery voltage curve of a CR1632.
    * @param {{batteryLevel: number}} lifeline
    */
-  onXiaomiLifelineAttributeReport({ batteryVoltage } = {}) {
-    this.log('lifeline attribute report', { batteryVoltage });
+  onXiaomiLifelineAttributeReport({
+    state, batteryVoltage,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      batteryVoltage, state,
+    });
+
+    if (typeof state === 'boolean') {
+      this.onContactReport(state);
+    }
 
     if (typeof batteryVoltage === 'number') {
       const parsedVolts = batteryVoltage / 1000;
