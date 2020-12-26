@@ -46,7 +46,7 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
     const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
     const parsedData = !reverseAlarmLogic ? data === true : data === false;
     this.log(`alarm_contact -> ${parsedData}`);
-    this.setCapabilityValue('alarm_contact', parsedData);
+    this.setCapabilityValue('alarm_contact', parsedData).catch(this.error);
   }
 
   /**
@@ -56,13 +56,23 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
      * on the battery voltage curve of a CR1632.
      * @param {{batteryLevel: number}} lifeline
      */
-  onXiaomiLifelineAttributeReport(attributeBuffer) {
-    const state = attributeBuffer.readUInt8(3);
-    const batteryVoltage = attributeBuffer.readUInt16LE(5);
+  // onXiaomiLifelineAttributeReport(attributeBuffer) {
+  //  const state = attributeBuffer.readUInt8(3);
+  //  const batteryVoltage = attributeBuffer.readUInt16LE(5);
+
+  onXiaomiLifelineAttributeReport({
+    state, batteryVoltage,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      batteryVoltage, state,
+    });
     this.log('lifeline attribute report, state:', state, ', batteryVoltage (mV):', batteryVoltage);
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('alarm_contact', state === 1).catch(this.error);
+      const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
+      const parsedData = !reverseAlarmLogic ? state === 1 : state === 0;
+      this.log(`alarm_contact -> ${parsedData}`);
+      this.setCapabilityValue('alarm_contact', parsedData).catch(this.error);
     }
 
     if (typeof batteryVoltage === 'number') {

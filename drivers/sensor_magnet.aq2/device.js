@@ -37,7 +37,7 @@ class AqaraDoorWindowSensor extends ZigBeeDevice {
     const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
     const parsedData = !reverseAlarmLogic ? data === true : data === false;
     this.log(`alarm_contact -> ${parsedData}`);
-    this.setCapabilityValue('alarm_contact', parsedData);
+    this.setCapabilityValue('alarm_contact', parsedData).catch(this.error);
   }
 
   /**
@@ -49,13 +49,16 @@ class AqaraDoorWindowSensor extends ZigBeeDevice {
    */
   onXiaomiLifelineAttributeReport({ batteryVoltage } = {}) {
     this.log('lifeline attribute report', { batteryVoltage });
-    const parsedVolts = batteryVoltage / 1000;
-    const minVolts = 2.5;
-    const maxVolts = 3.0;
 
-    const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-    this.setCapabilityValue('measure_battery', parsedBatPct);
-    this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    if (typeof batteryVoltage === 'number') {
+      const parsedVolts = batteryVoltage / 1000;
+      const minVolts = 2.5;
+      const maxVolts = 3.0;
+
+      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      this.setCapabilityValue('measure_battery', parsedBatPct);
+      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+    }
   }
 
 }
