@@ -56,13 +56,12 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
      * on the battery voltage curve of a CR1632.
      * @param {{batteryLevel: number}} lifeline
      */
-  // onXiaomiLifelineAttributeReport(attributeBuffer) {
-  //  const state = attributeBuffer.readUInt8(3);
-  //  const batteryVoltage = attributeBuffer.readUInt16LE(5);
-
-  onXiaomiLifelineAttributeReport({
-    state, batteryVoltage,
-  } = {}) {
+  onXiaomiLifelineAttributeReport(attributeBuffer) {
+    const state = attributeBuffer.readUInt8(3);
+    const batteryVoltage = attributeBuffer.readUInt16LE(5);
+    // onXiaomiLifelineAttributeReport({
+    //  state, batteryVoltage,
+    // } = {}) {
     this.log('lifeline attribute report', {
       batteryVoltage, state,
     });
