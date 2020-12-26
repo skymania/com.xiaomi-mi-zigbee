@@ -26,9 +26,9 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
     try {
       const { switchType, powerOffMemory } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('switchType', 'powerOffMemory');
       this.log('READattributes', switchType, powerOffMemory);
+      this.setSettings({ external_switch_type: switchType, save_state: powerOffMemory });
     } catch (err) {
-      this.log('could not read Attribute AqaraManufacturerSpecificCluster');
-      this.log(err);
+      this.log('could not read Attribute AqaraManufacturerSpecificCluster:', err);
     }
 
     if (this.hasCapability('onoff')) {
