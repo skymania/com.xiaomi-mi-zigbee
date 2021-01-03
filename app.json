@@ -11,7 +11,7 @@
   "category": [
     "lights"
   ],
-  "version": "1.2.2",
+  "version": "1.2.3",
   "compatibility": ">=5.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -1971,11 +1971,23 @@
       },
       "class": "curtain",
       "capabilities": [
-        "onoff",
+        "windowcoverings_closed",
         "windowcoverings_set",
         "windowcoverings_state",
-        "measure_battery"
+        "measure_battery",
+        "button.calibrate"
       ],
+      "capabilitiesOptions": {
+        "button.calibrate": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Start calibration"
+          },
+          "desc": {
+            "en": "Start the curtain track calibration process."
+          }
+        }
+      },
       "energy": {
         "batteries": [
           "INTERNAL"
@@ -1995,6 +2007,7 @@
             ],
             "bindings": [
               0,
+              1,
               258
             ]
           }
@@ -2012,7 +2025,42 @@
         "large": "/drivers/curtain.hagl04/assets/images/large.png",
         "small": "/drivers/curtain.hagl04/assets/images/small.png"
       },
-      "settings": [],
+      "settings": [
+        {
+          "id": "open_close_manual",
+          "value": true,
+          "label": {
+            "en": "Manually open curtains",
+            "nl": "Handmatig openen gordijen"
+          },
+          "hint": {
+            "en": "This parameter enables to manually open the curtains.",
+            "nl": "Deze parameter maakt het mogelijk om de gordijnen handmatig te openen."
+          },
+          "zigbee": {
+            "cluster": "XiaomiBasicCluster",
+            "attribute": "xiaomiCurtainOpenCloseManual"
+          },
+          "type": "checkbox"
+        },
+        {
+          "id": "reverse_direction",
+          "value": false,
+          "label": {
+            "en": "Reverse curtain direction",
+            "nl": "Draai gordijn richting om"
+          },
+          "hint": {
+            "en": "This parameter enables to reverse the curtain direction.",
+            "nl": "Deze parameter maakt het mogelijk om de gordijn openingsrichting om te draaien."
+          },
+          "zigbee": {
+            "cluster": "XiaomiBasicCluster",
+            "attribute": "xiaomiCurtainReverse"
+          },
+          "type": "checkbox"
+        }
+      ],
       "id": "curtain.hagl04"
     },
     {

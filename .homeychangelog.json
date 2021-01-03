@@ -37,5 +37,8 @@
   },
   "1.2.2": {
     "en": "Add support for Aqara T1 switches"
+  },
+  "1.2.3": {
+    "en": "Update Aqara B1 curtain controller operation and settings, power measuring capabilities, settings on the T1 devices and fix door sensor inversed operation"
   }
 }
