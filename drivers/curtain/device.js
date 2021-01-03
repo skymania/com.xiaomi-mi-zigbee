@@ -43,6 +43,14 @@ class AqaraCurtain extends ZigBeeDevice {
       this.removeCapability('dim');
     }
 
+    // try {
+    //  const { xiaomiCurtain } = await zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtain');
+    //  this.log('READattributes XiaomiCurtain', xiaomiCurtain, xiaomiCurtain[1], xiaomiCurtain[3], xiaomiCurtain[5]);
+    // this.setSettings({ external_switch_type: switchType, save_state: powerOffMemory });
+    // } catch (err) {
+    //  this.log('could not read Attribute XiaomiBasicCluster:', err);
+    // }
+
     // this.log('CLASS:', this.getClass(), this.getClass() === 'windowcoverings');
 
     // this.log('READ:', await zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME].readAttributes('XiaomiCurtain'));
@@ -252,5 +260,13 @@ E	Enabled						Positive	Normal				0008 0000 0000 00
 F	Disabled					Positive	Normal				0008 0000 0001 00
 G	Enabled						Reverse		Normal				0008 0001 0000 00
 H	Disabled					Reverse		Normal				0008 0001 0001 00
+
+07 00 01 00 00 00 00 00
+07 00 08 00 00 00 01 00
+07 00 08 00 00 00 01 00
+07 00 01 00 00 00 01 00
+07 00 01 00 00 00 01 00
+07 00 08 00 00 00 00 00
+07 00 02 00 01 00 00 00
 
 */
