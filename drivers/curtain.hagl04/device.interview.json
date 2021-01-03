@@ -1,5 +1,4 @@
 [
-
   "ids": {
     "modelId": "lumi.curtain.hagl04",
     "manufacturerName": "LUMI"
@@ -31,7 +30,7 @@
         "clusters": {
           "basic": {
             "attributes": "UNSUP_GENERAL_COMMAND",
-            "commandsGenerated": "TIMEOUT",
+            "commandsGenerated": "UNSUP_GENERAL_COMMAND",
             "commandsReceived": "UNSUP_GENERAL_COMMAND"
           },
           "identify": {
@@ -70,5 +69,4 @@
         }
       }
     }
-  }
-]
+  }]

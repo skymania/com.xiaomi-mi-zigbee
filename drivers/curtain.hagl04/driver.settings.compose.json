@@ -1,0 +1,9 @@
+[{
+  "$extends": "curtainOpenCloseManual",
+  "$id": "open_close_manual"
+},
+{
+  "$extends": "curtainReverseDirection",
+  "$id": "reverse_direction"
+}
+]

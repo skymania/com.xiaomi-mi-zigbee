@@ -6,11 +6,23 @@
   },
   "class": "curtain",
   "capabilities": [
-    "onoff",
+    "windowcoverings_closed",
     "windowcoverings_set",
     "windowcoverings_state",
-    "measure_battery"
+    "measure_battery",
+    "button.calibrate"
   ],
+  "capabilitiesOptions": {
+    "button.calibrate": {
+       "maintenanceAction": true,
+       "title": {
+          "en": "Start calibration"
+       },
+       "desc": {
+          "en": "Start the curtain track calibration process."
+       }
+    }
+  },
   "energy": {
     "batteries": [ "INTERNAL" ]
   },
@@ -28,6 +40,7 @@
         ],
         "bindings": [
           0,
+          1,
           258
         ]
       }

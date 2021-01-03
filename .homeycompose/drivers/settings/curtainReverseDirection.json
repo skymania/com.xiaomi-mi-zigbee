@@ -1,0 +1,16 @@
+{
+  "value": false,
+  "label": {
+    "en": "Reverse curtain direction",
+    "nl": "Draai gordijn richting om"
+  },
+  "hint": {
+    "en": "This parameter enables to reverse the curtain direction.",
+    "nl": "Deze parameter maakt het mogelijk om de gordijn openingsrichting om te draaien."
+  },
+  "zigbee": {
+    "cluster": "XiaomiBasicCluster",
+    "attribute": "xiaomiCurtainReverse"
+  },
+  "type": "checkbox"
+}

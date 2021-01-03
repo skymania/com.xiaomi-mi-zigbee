@@ -1,3 +1,5 @@
+// Definitions: Open = on = 100% (end state of up), Closed = off = 0% (end state of down)
+
 'use strict';
 
 const commandMap = {
@@ -21,7 +23,7 @@ class AqaraCurtainB1 extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
     // enable debugging
-    // this.enableDebug();
+    this.enableDebug();
 
     // Enables debug logging in zigbee-clusters
     // debug(true);
@@ -29,42 +31,36 @@ class AqaraCurtainB1 extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
-    // Add onoff capability if not available
-    if (!this.hasCapability('onoff')) {
-      await this.addCapability('onoff');
+    try {
+      const { xiaomiCurtainClearPosition, xiaomiCurtainReverse, xiaomiCurtainOpenCloseManual } = await zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtainClearPosition', 'xiaomiCurtainReverse', 'xiaomiCurtainOpenCloseManual');
+      this.log('READattributes clear_position', xiaomiCurtainClearPosition, 'reverse_direction', xiaomiCurtainReverse, 'open_close_manual', xiaomiCurtainOpenCloseManual, '(', !xiaomiCurtainOpenCloseManual, ')');
+      this.setSettings({ reverse_direction: xiaomiCurtainReverse, open_close_manual: !xiaomiCurtainOpenCloseManual });
+    } catch (err) {
+      this.log('could not read Attribute XiaomiBasicCluster:', err);
     }
 
+    // Add onoff capability if not available
     if (this.hasCapability('onoff')) {
-      this.registerCapabilityListener('onoff', async value => {
-        this.log('onoff - go to state', commandMap[value ? 'up' : 'down']);
-        await zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_OUTPUT.NAME].writeAttributes({ presentValue: commandMap[value ? 'up' : 'down'] });
+      await this.removeCapability('onoff');
+    }
 
-        //  goToLiftPercentage({
-        //  percentageLiftValue: (1 - value) * 100,
-        // }, {
-        // This is a workaround for the fact that this device does not repsonds with a default
-        // response even though the ZCL command `goToLiftPercentage` demands that.
-        //  waitForResponse: false,
-        // });
+    // Add windowcoverings_closed capability if not available
+    if (!this.hasCapability('windowcoverings_closed')) {
+      await this.addCapability('windowcoverings_closed');
+    }
+
+    // Define windowcoverings_closed capability (true = closed, false = open)
+    if (this.hasCapability('windowcoverings_closed')) {
+      this.registerCapabilityListener('windowcoverings_closed', async value => {
+        this.log('windowcoverings_closed |', value, '- go to state', commandMap[value ? 'down' : 'up']);
+        await zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_OUTPUT.NAME].writeAttributes({ presentValue: commandMap[value ? 'down' : 'up'] });
+        this._reportDebounceEnabled = true;
       });
     }
 
-    // this.log('CLASS:', this.getClass(), this.getClass() === 'windowcoverings');
-
-    try {
-      const { xiaomiCurtainClearPosition, xiaomiCurtainReverse, xiaomiCurtainOpenCloseManual } = await zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtainClearPosition', 'xiaomiCurtainReverse', 'xiaomiCurtainOpenCloseManual');
-      this.log('READ xiaomiCurtainClearPosition:', xiaomiCurtainClearPosition, 'xiaomiCurtainReverse', xiaomiCurtainReverse, 'xiaomiCurtainOpenCloseManual', xiaomiCurtainOpenCloseManual);
-  		} catch (err) {
-      this.error('failed to read curtain attributes', err);
-    }
-
+    // Define windowcoverings_state capability (up (to open end state) = 1, down (to closed end state) = 0, idle = 2)
     if (this.hasCapability('windowcoverings_state')) {
       this.registerCapability('windowcoverings_state', CLUSTER.MULTI_STATE_OUTPUT, {
-        // set: 'presentValue',
-        // setParser(value) {
-        //  this.log('windowcoverings_state', value, commandMap[value]);
-        //  return { data: commandMap[value] };
-        // },
         get: 'presentValue',
         getOpts: {
           getOnStart: true,
@@ -75,67 +71,22 @@ class AqaraCurtainB1 extends ZigBeeDevice {
       this.registerCapabilityListener('windowcoverings_state', async value => {
         this.log('windowcoverings_state - go to state', commandMap[value]);
         await zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_OUTPUT.NAME].writeAttributes({ presentValue: commandMap[value] });
-
-        //  goToLiftPercentage({
-        //  percentageLiftValue: (1 - value) * 100,
-        // }, {
-        // This is a workaround for the fact that this device does not repsonds with a default
-        // response even though the ZCL command `goToLiftPercentage` demands that.
-        //  waitForResponse: false,
-        // });
       });
-
-      /*
-      this.registerCapability('windowcoverings_state', CLUSTER.WINDOW_COVERING, {
-        endpoint: 1,
-      });
-      */
     }
 
+    // Define windowcoverings_set capability (1.0 = open, 0.0 = closed)
     if (this.hasCapability('windowcoverings_set')) {
-      // Set Position
-      /*
-      this.registerCapabilityListener('windowcoverings_set', async value => {
-        this.log('go to lift percentage', (1 - value) * 100);
-        await zclNode.endpoints[1].clusters[CLUSTER.WINDOW_COVERING.NAME].goToLiftPercentage({
-          percentageLiftValue: (1 - value) * 100,
-        }, {
-          // This is a workaround for the fact that this device does not repsonds with a default
-          // response even though the ZCL command `goToLiftPercentage` demands that.
-          waitForResponse: false,
-        });
-      });
-      */
-
       this.registerCapability('windowcoverings_set', CLUSTER.ANALOG_OUTPUT, {
-        // set: 'presentValue',
-        // setParser(value) {
-        //  return value * 100;
-        // },
         get: 'presentValue',
         getOpts: {
           getOnStart: true,
         },
-        // report: 'presentValue',
-        // reportParser(value) {
-        //  this.log('reported presentValue:', value);
-        //  return value / 100;
-        // },
-
         endpoint: 1,
       });
 
       this.registerCapabilityListener('windowcoverings_set', async value => {
         this.log('windowcoverings_set - go to lift percentage', (1 - value) * 100);
         await zclNode.endpoints[1].clusters[CLUSTER.ANALOG_OUTPUT.NAME].writeAttributes({ presentValue: (1 - value) * 100 });
-
-        //  goToLiftPercentage({
-        //  percentageLiftValue: (1 - value) * 100,
-        // }, {
-        // This is a workaround for the fact that this device does not repsonds with a default
-        // response even though the ZCL command `goToLiftPercentage` demands that.
-        //  waitForResponse: false,
-        // });
       });
 
       // Get Position
@@ -147,165 +98,49 @@ class AqaraCurtainB1 extends ZigBeeDevice {
         .on('attr.currentPositionLiftPercentage', this.onCurtainPositionAttrReport.bind(this));
     }
 
-    this.registerCapability('measure_battery', CLUSTER.POWER_CONFIGURATION, {
-      getOpts: {
-        getOnStart: true,
-      },
-      endpoint: 1,
-    });
+    // Define measure_battery capability
+    if (this.hasCapability('measure_battery')) {
+      // TEMP: configureAttributeReporting for batteryPercentageRemaining on each init
+      await this.configureAttributeReporting([{
+        cluster: CLUSTER.POWER_CONFIGURATION,
+        attributeName: 'batteryPercentageRemaining',
+        minInterval: 3600,
+        maxInterval: 60000,
+        minChange: 2,
+      }]);
+
+      this.registerCapability('measure_battery', CLUSTER.POWER_CONFIGURATION, {
+        getOpts: {
+          getOnStart: true,
+        },
+        endpoint: 1,
+      });
+    }
 
     // Register the AttributeReportListener - Lifeline
     zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
       .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
 
-    /*
-    // This value is set by the system set parser in order to know whether command was sent from Homey
-    this._reportDebounceEnabled = false;
-
-    // Link util parseData method to this devices instance
-    this.parseData = util.parseData.bind(this);
-
-    // powerSource = 1 = adapter only, 3 = battery, 4 = battery + adapter
-    this.node.endpoints[0].clusters.genBasic.read('powerSource')
-      .then(res => {
-        this.debug('Read powerSource: ', res);
-      })
-      .catch(err => {
-        this.error('Read powerSource: ', err);
-      });
-
-    // DEFINE windowcoverings_state (open / close / idle)
-    // Close command: genMultistateOutput, presentValue 0
-    // Pause command: genMultistateOutput, presentValue 2
-    // Open command: genMultistateOutput, presentValue 1
-    this.node.endpoints[0].clusters.genMultistateOutput.read('presentValue') // 0x0055
-      .then(res => {
-        this.debug('Read presentValue (state): ', res);
-        this.setCapabilityValue('windowcoverings_state', res / 100);
-      })
-      .catch(err => {
-        this.error('Read presentValue (state): ', err);
-      });
-
-    if (this.hasCapability('windowcoverings_state')) {
-      this.registerCapability('windowcoverings_state', 'genMultistateOutput', {
-        set: 'presentValue',
-        setParser(value) {
-          this.log('windowcoverings_state', value, commandMap[value]);
-          return { data: commandMap[value] };
-        },
-        get: 'presentValue',
-        endpoint: 0,
-      });
+    // Add button.calibrate capability if not available
+    if (!this.hasCapability('button.calibrate')) {
+      await this.addCapability('button.calibrate');
     }
 
-    await this.registerCapabilityListener('windowcoverings_state', value => {
-      this.log('Setting windowcoverings_state to:', value, commandMap[value]);
-      this.node.endpoints[0].clusters.genMultistateOutput.write(0x0055, commandMap[value])
-        .then(res => {
-          this.debug('Write genMultistateOutput presentValue: ', res);
-        })
-        .catch(err => {
-          this.error('Write genMultistateOutput presentValue: ', err);
-        });
-      return Promise.resolve();
+    this.registerCapabilityListener('button.calibrate', async () => {
+      try {
+        // Step 1: set clear position attribute to true
+        this.debug('MaintenanceAction | Calibrate Tracks - Step 1: Start calibration and write Attribute to True');
+        const result = await this.zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME]
+          .writeAttributes({ xiaomiCurtainClearPosition: true });
+        // Step 2-4: Cycle curtains close - open to define new end points and set attribute back to false
+        this.calibrateCurtainTracks();
+      } catch (err) {
+        this.debug('MaintenanceAction | Calibrate Tracks - ERROR: Could not complete maintenanceAction:', err);
+        throw new Error('Something went wrong');
+      }
+      // Maintenance action button was pressed, return a promise
+      return true;
     });
-
-    // Register listener for when position changes
-    await this.registerAttrReportListener('genMultistateOutput', 'presentValue', 1, 300, null, presentValue => {
-      this.debug('genMultistateOutput persentValue', presentValue);
-
-      // If reports are not generated by set command from Homey update directly
-      // if (!this._reportDebounceEnabled) {
-      this.node.endpoints[0].clusters.genMultistateOutput.read(0x0055)
-						 .then(res => {
-								 this.debug('Read presentValue (state): ', res);
-								 // this.setCapabilityValue('windowcoverings_state', res / 100);
-						 })
-						 .catch(err => {
-								 this.error('Read presentValue (state): ', err);
-						 });
-    });
-
-    // DEFINE windowcoverings_set (percentage)
-    this.node.endpoints[0].clusters.genAnalogOutput.read('presentValue') // presentValue
-      .then(res => {
-        this.debug('Read presentValue (set): ', res);
-        this.setCapabilityValue('windowcoverings_set', res / 100);
-      })
-      .catch(err => {
-        this.error('Read presentValue (set): ', err);
-      });
-
-    if (this.hasCapability('windowcoverings_set')) {
-		    this.registerCapability('windowcoverings_set', 'genAnalogOutput', {
-        set: 'presentValue',
-		    setParser(value) {
-		        return {
-		            percentageliftvalue: value * 100,
-		        };
-		    },
-        get: 'presentValue',
-		    report: 'presentValue',
-		    reportParser(value) {
-          this.log('reported presentValue:', value);
-		        return value / 100;
-		    },
-		    endpoint: 0,
-		    getOpts: {
-		        getOnStart: true,
-		    },
-      });
-    }
-
-    await this.registerCapabilityListener('windowcoverings_set', value => {
-      this.log('Setting windowcoverings_set to:', value, value * 100);
-		    const percentage = value * 100;
-		    const number = Math.min(Math.max(percentage, 0), 100);
-		    this.node.endpoints[0].clusters.genAnalogOutput.write(0x0055, number)
-        .then(res => {
-          this.debug('Write presentValue (set): ', res);
-        })
-        .catch(err => {
-          this.error('Write presentValue (set): ', err);
-        });
-
-		    return Promise.resolve();
-    });
-
-    // Register listener for when position changes
-    await this.registerAttrReportListener('genAnalogOutput', 'presentValue', 1, 300, null,
-      this.onCurtainPositionAttrReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - genBasic - Lifeline', err);
-      });
-
-    // Listen for battery percentage updates
-    this.node.endpoints[0].clusters.genPowerCfg.read('batteryPercentageRemaining') // 0x0021
-      .then(res => {
-        this.debug('Read battery: ', res);
-        const percentage = Math.min(Math.max(res / 2, 0), 100);
-        this.setCapabilityValue('measure_battery', percentage);
-      })
-      .catch(err => {
-        this.error('Read battery: ', err);
-      });
-
-    await this.registerAttrReportListener('genPowerCfg', 'batteryPercentageRemaining', 1, 300, 0, batteryPercentage => {
-	    this.debug('batteryPercentageRemaining', batteryPercentage);
-	    const percentage = Math.min(Math.max(batteryPercentage / 2, 0), 100);
-	    return this.setCapabilityValue('measure_battery', percentage);
-    });
-
-    // Register the AttributeReportListener - Lifeline
-    this.registerAttrReportListener('genBasic', '65281', 1, 60, null,
-      this.onLifelineReport.bind(this), 0)
-      .catch(err => {
-        // Registering attr reporting failed
-        this.error('failed to register attr report listener - genBasic - Lifeline', err);
-      });
-      */
   }
 
   async onCurtainPositionAttrReport(data) {
@@ -320,22 +155,12 @@ class AqaraCurtainB1 extends ZigBeeDevice {
     // If reports are not generated by set command from Homey update directly
     if (data !== 2 && !this._reportDebounceEnabled) {
       const { presentValue } = await this.zclNode.endpoints[1].clusters[CLUSTER.ANALOG_OUTPUT.NAME].readAttributes('presentValue');
-      // this.node.endpoints[0].clusters.genAnalogOutput.read(0x0055)
-      // .then(res => {
-      //  this.debug('Read presentValue: ', res);
-      //  this.setCapabilityValue('windowcoverings_set', 1 - (res / 100));
-      // })
-      // .catch(err => {
-      //  this.error('Read presentValue: ', err);
-      // });
-      // return;
 
-      // update onOff capability
-      if (this.getCapabilityValue('onoff') !== presentValue > 0) {
-        this.setCapabilityValue('onoff', presentValue > 0).catch(this.error);
-      }
+      this.log('onCurtainPositionAttrReport - windowcoverings_closed', presentValue !== 0);
+      this.setCapabilityValue('windowcoverings_closed', presentValue !== 0).catch(this.error);
+
       this.log('onCurtainPositionAttrReport - windowcoverings_set', presentValue, 1 - (presentValue / 100));
-      this.setCapabilityValue('windowcoverings_set', 1 - (presentValue / 100));
+      this.setCapabilityValue('windowcoverings_set', 1 - (presentValue / 100)).catch(this.error);
     }
 
     // Else set debounce timeout to prevent capability value updates while moving
@@ -366,8 +191,59 @@ class AqaraCurtainB1 extends ZigBeeDevice {
       const parsedDim = 1 - (state / 100);
       this.log('onXiaomiLifelineAttributeReport - windowcoverings_set', parsedDim);
       this.setCapabilityValue('windowcoverings_set', parsedDim);
-      this.setCapabilityValue('onoff', parsedDim === 1);
+      // this.setCapabilityValue('onoff', parsedDim === 1);
+      this.setCapabilityValue('windowcoverings_closed', parsedDim === 0);
     }
+  }
+
+  async onSettings({ oldSettings, newSettings, changedKeys }) {
+    // reverse_direction attribute
+    if (changedKeys.includes('reverse_direction')) {
+      const result = await this.zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME]
+        .writeAttributes({ xiaomiCurtainReverse: newSettings.reverse_direction });
+      this.log('SETTINGS | Write Attribute - Xiaomi Basic Cluster - xiaomiCurtainReverse', newSettings.reverse_direction, 'result:', result);
+    }
+
+    // clear_position attribute
+    if (changedKeys.includes('clear_position')) {
+      const result = await this.zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME]
+        .writeAttributes({ xiaomiCurtainClearPosition: newSettings.clear_position });
+      this.log('SETTINGS | Write Attribute - Xiaomi Basic Cluster - xiaomiCurtainClearPosition', newSettings.clear_position, 'result:', result);
+    }
+
+    // reverse_direction attribute
+    if (changedKeys.includes('open_close_manual')) {
+      const result = await this.zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME]
+        .writeAttributes({ xiaomiCurtainOpenCloseManual: !newSettings.open_close_manual });
+      this.log('SETTINGS | Write Attribute - Xiaomi Basic Cluster - xiaomiCurtainOpenCloseManual', newSettings.open_close_manual, 'result:', result);
+    }
+
+    try {
+      const { xiaomiCurtainClearPosition, xiaomiCurtainReverse, xiaomiCurtainOpenCloseManual } = await this.zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtainClearPosition', 'xiaomiCurtainReverse', 'xiaomiCurtainOpenCloseManual');
+      this.log('READattributes', xiaomiCurtainClearPosition, xiaomiCurtainReverse, xiaomiCurtainOpenCloseManual, '(', !xiaomiCurtainOpenCloseManual, ')');
+      // this.setSettings({ clear_position: xiaomiCurtainClearPosition, reverse_direction: xiaomiCurtainReverse, open_close_manual: xiaomiCurtainOpenCloseManual });
+    } catch (err) {
+      this.log('could not read Attribute XiaomiBasicCluster:', err);
+    }
+  }
+
+  async calibrateCurtainTracks() {
+    // Step 2-5: Cycle curtains open - close - open to define new end points and set attribute back to false
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    // Step 2: fully open curtains and wait for 20 seconds
+    this.debug('MaintenanceAction | Calibrate Tracks - Step 2: Fully close and wait 20 seconds');
+    await this.zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_OUTPUT.NAME].writeAttributes({ presentValue: commandMap['down'] });
+    await delay(20000);
+
+    // Step 3: fully close curtains and wait for 20 seconds
+    this.debug('MaintenanceAction | Calibrate Tracks - Step 3: Fully open and wait 20 seconds');
+    await this.zclNode.endpoints[1].clusters[CLUSTER.MULTI_STATE_OUTPUT.NAME].writeAttributes({ presentValue: commandMap['up'] });
+    await delay(20000);
+
+    // Step 4: Set clear position attribute to false
+    this.debug('MaintenanceAction | Calibrate Tracks - Step 4: Finalize and write Attribute to False');
+    await this.zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME]
+      .writeAttributes({ xiaomiCurtainClearPosition: false });
   }
 
 }
@@ -413,18 +289,13 @@ Product type no: ZNCLDJ12LM
 // Open / close curtain manually: genBasic, 0xff29, bool = false (not manually), true (manually)
 // genBasic, 0xff2A, 0
 
-Changing settings of Curtain controller
-Cluster: 	genBasic (0x0000)
-Attribute: Unknown (0x0401)
-Values
-	Manual open/close	Direction	Operation			HEX stream
-A	Enabled						Positive	Clear Stroke	0001 0000 0000 00
-B	Disabled					Positive	Clear Stroke	0001 0000 0001 00
-C	Enabled						Reverse		Clear Stroke	0001 0001 0000 00
-D	Disabled					Reverse		Clear Stroke	0001 0001 0001 00
-E	Enabled						Positive	Normal				0008 0000 0000 00
-F	Disabled					Positive	Normal				0008 0000 0001 00
-G	Enabled						Reverse		Normal				0008 0001 0000 00
-H	Disabled					Reverse		Normal				0008 0001 0001 00
+// powerSource = 1 = adapter only, 3 = battery, 4 = battery + adapter
+this.node.endpoints[0].clusters.genBasic.read('powerSource')
+  .then(res => {
+    this.debug('Read powerSource: ', res);
+  })
+  .catch(err => {
+    this.error('Read powerSource: ', err);
+  });
 
 */
