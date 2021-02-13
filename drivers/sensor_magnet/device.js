@@ -62,7 +62,6 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
     this.log('lifeline attribute report', {
       batteryVoltage, state,
     });
-    this.log('lifeline attribute report, state:', state, ', batteryVoltage (mV):', batteryVoltage);
 
     if (typeof state === 'boolean') {
       this.onContactReport(state);

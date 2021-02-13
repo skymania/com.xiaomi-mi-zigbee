@@ -1,4 +1,4 @@
-// SDK3 updated: DONE
+// TODO add settings + Add genMultistateOutput options (single / double tripple press)
 
 'use strict';
 
@@ -8,6 +8,10 @@ const { ZigBeeDevice } = require('homey-zigbeedriver');
 const {
   debug, Cluster, CLUSTER,
 } = require('zigbee-clusters');
+
+const AqaraManufacturerSpecificCluster = require('../../lib/AqaraManufacturerSpecificCluster');
+
+Cluster.addCluster(AqaraManufacturerSpecificCluster);
 
 class AqaraD1WallSwitchTrippleL extends ZigBeeDevice {
 
@@ -34,6 +38,29 @@ class AqaraD1WallSwitchTrippleL extends ZigBeeDevice {
         endpoint: onOffEndpoint,
       });
     }
+
+    // Register the AttributeReportListener - Lifeline
+    zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
+      .on('attr.aqaraLifeline', this.onAqaraLifelineAttributeReport.bind(this));
+  }
+
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onAqaraLifelineAttributeReport({
+    state, state1, state2,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      state, state1, state2,
+    });
+
+    if (typeof state === 'number') {
+      this.setCapabilityValue('onoff', state === 1);
+    }
   }
 
 }
@@ -42,26 +69,11 @@ module.exports = AqaraD1WallSwitchTrippleL;
 
 /*
 Product ID: QBKG03LM
+actual captured:
+Left to wireless switch: endPoint 1, 0xfcc0, attrs  0x0200, type 0x20 uint8, 0 (wireless)
+Middle: endpoint 2
+right: endpoint 3
 
-Left button to a wireless switch:
-Cluster: genBasic (0x0000)
-Atribute: Unknown (0xff22) 65314
-Data Type: 8-bit unsigned (0x20)
-	disabled (regular switch): 18
-	enabled: 254
+Zigbee2MQTT options: aqaraSwitchOperationMode, aqaraPowerOutageMemory, aqaraLedDisabled
 
-Right button to a wireless switch:
-Cluster: genBasic (0x0000)
-Atribute: Unknown (0xff23) 65315
-Data Type: 8-bit unsigned (0x20)
-	disabled (regular switch): 18
-	enabled: 254
-
-When converted to a wireless switch:
-Cluster: genOnOff (0x0006)
-Atribute: onOff (0x0000)
-1x click: Double attribute (off (0x00) + on (0x01))
-2x click: data value 2 (0x02)
-Hold: Off (0x00)
-Release: ON (0x01)
 */

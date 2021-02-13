@@ -9,10 +9,6 @@ const {
   debug, Cluster, CLUSTER,
 } = require('zigbee-clusters');
 
-const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
-
-Cluster.addCluster(XiaomiBasicCluster);
-
 class AqaraD1WallSwitchTripleLN extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
@@ -103,34 +99,6 @@ class AqaraD1WallSwitchTripleLN extends ZigBeeDevice {
         endpoint: this.getClusterEndpoint(CLUSTER.METERING),
       });
     }
-
-    // Register the AttributeReportListener - Lifeline
-
-    // zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
-    //  .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
-  }
-
-  /**
-   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
-   * interesting the battery level. The battery level divided by 1000 represents the battery
-   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
-   * on the battery voltage curve of a CR1632.
-   * @param {{batteryLevel: number}} lifeline
-   */
-  onXiaomiLifelineAttributeReport({
-    state, state1,
-  } = {}) {
-    this.log('lifeline attribute report', {
-      state, state1,
-    });
-
-    if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
-    }
-
-    if (typeof state1 === 'number') {
-      this.setCapabilityValue('onoff.1', state1 === 1);
-    }
   }
 
 }
@@ -138,5 +106,16 @@ class AqaraD1WallSwitchTripleLN extends ZigBeeDevice {
 module.exports = AqaraD1WallSwitchTripleLN;
 
 /*
-Product ID: QBKG12LM
+Product ID:
+Deconz: OnOff Cluster: OnTime (u16), OffWaitTime (u16), PowerOn OnOff (enum8)
+
+Actual captured:
+Left to wireless switch: endPoint 1, 0xfcc0, attrs  0x0200, type 0x20 uint8, 0 (wireless)
+Middle: endpoint 2
+right: endpoint 3
+
+If wireless: MultiState input: presentvalue
+
+Holding left switch: 0xfcc0, attrs  0x00f7, bool true
+
 */
