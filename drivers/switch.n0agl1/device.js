@@ -1,4 +1,6 @@
-// SDK3 updated: DONE
+/*
+Product ID: SSM-U01
+*/
 
 'use strict';
 
@@ -24,9 +26,9 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
     // this.printNode();
 
     try {
-      const { switchType, powerOffMemory } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('switchType', 'powerOffMemory');
-      this.log('READattributes', switchType, powerOffMemory);
-      this.setSettings({ external_switch_type: switchType, save_state: powerOffMemory });
+      const { aqaraSwitchType, aqaraPowerOutageMemory } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('aqaraSwitchType', 'aqaraPowerOutageMemory');
+      this.log('READattributes', aqaraSwitchType, aqaraPowerOutageMemory);
+      this.setSettings({ external_switch_type: aqaraSwitchType, save_state: aqaraPowerOutageMemory });
     } catch (err) {
       this.log('could not read Attribute AqaraManufacturerSpecificCluster:', err);
     }
@@ -127,18 +129,18 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
   }
 
   async onSettings({ oldSettings, newSettings, changedKeys }) {
-    // switchType attribute
+    // aqaraSwitchType attribute
     if (changedKeys.includes('external_switch_type')) {
       const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
-        .writeAttributes({ switchType: newSettings.external_switch_type });
-      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - switchType', newSettings.external_switch_type, 'result:', result);
+        .writeAttributes({ aqaraSwitchType: newSettings.external_switch_type });
+      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraSwitchType', newSettings.external_switch_type, 'result:', result);
     }
 
-    // powerOffMemory attribute
+    // aqaraPowerOutageMemory attribute
     if (changedKeys.includes('save_state')) {
       const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
-        .writeAttributes({ powerOffMemory: newSettings.save_state });
-      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - powerOffMemory', newSettings.save_state, 'result:', result);
+        .writeAttributes({ aqaraPowerOutageMemory: newSettings.save_state });
+      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraPowerOutageMemory', newSettings.save_state, 'result:', result);
     }
   }
 
@@ -147,5 +149,9 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
 module.exports = AqaraT1SwitchModuleNeutral;
 
 /*
-Product ID: SSM-U01
+Deconz options to still add
+aqaraPowerOutageMemory (done)
+aqaraSwitchType (done)
+aqaraPowerReportThreshold
+aqaraMaximumPower
 */

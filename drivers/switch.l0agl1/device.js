@@ -1,4 +1,6 @@
-// SDK3 updated: DONE
+/*
+Product ID: SSM-U02
+*/
 
 'use strict';
 
@@ -24,8 +26,8 @@ class AqaraT1SwitchModule extends ZigBeeDevice {
     // this.printNode();
 
     try {
-      const { switchType, powerOffMemory } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('switchType', 'powerOffMemory');
-      this.log('READattributes', switchType, powerOffMemory);
+      const { aqaraSwitchType, aqaraPowerOutageMemory } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('aqaraSwitchType', 'aqaraPowerOutageMemory');
+      this.log('READattributes', aqaraSwitchType, aqaraPowerOutageMemory);
     } catch (err) {
       this.log('could not read Attribute AqaraManufacturerSpecificCluster');
       this.log(err);
@@ -103,38 +105,21 @@ class AqaraT1SwitchModule extends ZigBeeDevice {
   }
 
   async onSettings({ oldSettings, newSettings, changedKeys }) {
-    // switchType attribute
+    // aqaraSwitchType attribute
     if (changedKeys.includes('external_switch_type')) {
       const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
-        .writeAttributes({ switchType: newSettings.external_switch_type });
-      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - switchType', newSettings.external_switch_type, 'result:', result);
+        .writeAttributes({ aqaraSwitchType: newSettings.external_switch_type });
+      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraSwitchType', newSettings.external_switch_type, 'result:', result);
     }
 
-    // powerOffMemory attribute
+    // aqaraPowerOutageMemory attribute
     if (changedKeys.includes('save_state')) {
       const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
-        .writeAttributes({ powerOffMemory: newSettings.save_state });
-      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - powerOffMemory', newSettings.save_state, 'result:', result);
+        .writeAttributes({ aqaraPowerOutageMemory: newSettings.save_state });
+      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraPowerOutageMemory', newSettings.save_state, 'result:', result);
     }
   }
 
 }
 
 module.exports = AqaraT1SwitchModule;
-
-/*
-Product ID: SSM-U02
-
-Settings:
->> type of switch
-Manufacturer specific cluster: 0xfcc0, endpoint 1, mnfg code: 0x115f
-Attribute 0x000a  uint 8
-Rocker switch = 1 (default)
-Rebound switch  =  2
-No switch connected = 3
-
->> power memory
-Attribute 0x0201, bool
-true / false (default)
-
-*/
