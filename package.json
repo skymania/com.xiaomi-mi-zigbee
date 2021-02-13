@@ -14,8 +14,13 @@
 		"eslint-config-athom": "^2.1.0"
 	},
 	"scripts": {
-		"run": "homeyConfig compose && athom project --run",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"lint": "eslint .",
+		"start": "nodemon --watch . --exec \"homey app run\""
+	},
+	"nodemonConfig": {
+		"ignore": [
+			"app.json"
+		]
 	},
 	"repository": {
 		"type": "git",
