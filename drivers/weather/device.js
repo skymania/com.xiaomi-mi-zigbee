@@ -1,4 +1,4 @@
-// SDK3 updated & validated: done
+// TODO: add configureAttributeReporting
 
 'use strict';
 
@@ -41,9 +41,10 @@ class AqaraWeatherSensor extends ZigBeeDevice {
     // if (measuredValue !== -100) {
     const temperatureOffset = this.getSetting('temperature_offset') || 0;
     const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
-    this.log('measure_temperature | msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
-    this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
-    // }
+    if (parsedValue >= -20 && parsedValue <= 60) {
+      this.log('measure_temperature | msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
+      this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
+    }
   }
 
   /**
@@ -55,9 +56,10 @@ class AqaraWeatherSensor extends ZigBeeDevice {
     // if (measuredValue !== 100) {
     const humidityOffset = this.getSetting('humidity_offset') || 0;
     const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
-    this.log('measure_humidity | msRelativeHumidity - measuredValue (humidity):', parsedValue, '+ humidity offset', humidityOffset);
-    this.setCapabilityValue('measure_humidity', parsedValue + humidityOffset);
-    // }
+    if (parsedValue >= 0 && parsedValue <= 100) {
+      this.log('measure_humidity | msRelativeHumidity - measuredValue (humidity):', parsedValue, '+ humidity offset', humidityOffset);
+      this.setCapabilityValue('measure_humidity', parsedValue + humidityOffset);
+    }
   }
 
   /**
@@ -80,15 +82,15 @@ class AqaraWeatherSensor extends ZigBeeDevice {
    * @param {{batteryLevel: number}} lifeline
    */
   onXiaomiLifelineAttributeReport({
-    state, state1, pressure, batteryVoltage,
+    state, state1, state2, batteryVoltage,
   } = {}) {
     this.log('lifeline attribute report', {
-      batteryVoltage, state, state1, pressure,
+      batteryVoltage, state, state1, state2,
     });
 
     if (typeof state === 'number') this.onTemperatureMeasuredAttributeReport(state);
     if (typeof state1 === 'number') this.onRelativeHumidityMeasuredAttributeReport(state1);
-    if (typeof pressure === 'number') this.onPressureMeasuredAttributeReport(pressure / 100);
+    if (typeof state2 === 'number') this.onPressureMeasuredAttributeReport(pressure / 100);
     if (typeof batteryVoltage === 'number') {
       const parsedVolts = batteryVoltage / 1000;
       const minVolts = 2.5;

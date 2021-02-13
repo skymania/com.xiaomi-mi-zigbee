@@ -59,8 +59,10 @@ class XiaomiTempSensor extends ZigBeeDevice {
   onTemperatureMeasuredAttributeReport(measuredValue) {
     const temperatureOffset = this.getSetting('temperature_offset') || 0;
     const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
-    this.log('measure_temperature | msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
-    this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
+    if (parsedValue >= -20 && parsedValue <= 60) {
+      this.log('measure_temperature | msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
+      this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset);
+    }
   }
 
   /**
@@ -71,8 +73,10 @@ class XiaomiTempSensor extends ZigBeeDevice {
   onRelativeHumidityMeasuredAttributeReport(measuredValue) {
     const humidityOffset = this.getSetting('humidity_offset') || 0;
     const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
-    this.log('measure_humidity | msRelativeHumidity - measuredValue (humidity):', parsedValue, '+ humidity offset', humidityOffset);
-    this.setCapabilityValue('measure_humidity', parsedValue + humidityOffset);
+    if (parsedValue >= 0 && parsedValue <= 100) {
+      this.log('measure_humidity | msRelativeHumidity - measuredValue (humidity):', parsedValue, '+ humidity offset', humidityOffset);
+      this.setCapabilityValue('measure_humidity', parsedValue + humidityOffset);
+    }
   }
 
   /**
