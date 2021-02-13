@@ -15,7 +15,7 @@ Cluster.addCluster(AqaraManufacturerSpecificCluster);
 
 class XiaomiSmartPlugEU extends ZigBeeDevice {
 
-  onNodeInit({ zclNode }) {
+  async onNodeInit({ zclNode }) {
     // enable debugging
     // this.enableDebug();
 
@@ -24,6 +24,16 @@ class XiaomiSmartPlugEU extends ZigBeeDevice {
 
     // print the node's info to the console
     // this.printNode();
+
+    try {
+      const {
+        aqaraLedDisabled, aqaraPowerOutageMemory, aqaraPowerOffMemory, aqaraMaximumPower,
+      } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('aqaraLedDisabled', 'aqaraPowerOutageMemory', 'aqaraPowerOffMemory', 'aqaraMaximumPower');
+      this.log('READattributes options', aqaraLedDisabled, aqaraPowerOutageMemory, aqaraPowerOffMemory, aqaraMaximumPower);
+      // this.setSettings({ reverse_direction: xiaomiCurtainReverse, open_close_manual: !xiaomiCurtainOpenCloseManual });
+    } catch (err) {
+      this.log('could not read Attribute xiaomiSwitchOptions:', err);
+    }
 
     if (this.hasCapability('onoff')) {
       this.registerCapability('onoff', CLUSTER.ON_OFF, {

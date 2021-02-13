@@ -1,4 +1,4 @@
-// SDK3 updated & validated: DONE
+// model: 'SP-EUC01'
 
 'use strict';
 
@@ -8,6 +8,10 @@ const { ZigBeeDevice } = require('homey-zigbeedriver');
 const {
   debug, Cluster, CLUSTER,
 } = require('zigbee-clusters');
+
+const AqaraManufacturerSpecificCluster = require('../../lib/AqaraManufacturerSpecificCluster');
+
+Cluster.addCluster(AqaraManufacturerSpecificCluster);
 
 class AqaraSmartPlugEU extends ZigBeeDevice {
 
@@ -20,6 +24,19 @@ class AqaraSmartPlugEU extends ZigBeeDevice {
 
     // print the node's info to the console
     // this.printNode();
+
+    try {
+      const {
+        aqaraLedDisabled, aqaraPowerOutageMemory, aqaraPowerOffMemory, aqaraMaximumPower,
+      } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('aqaraLedDisabled', 'aqaraPowerOutageMemory', 'aqaraPowerOffMemory', 'aqaraMaximumPower');
+      this.log('READattributes options', aqaraLedDisabled, aqaraPowerOutageMemory, aqaraPowerOffMemory, aqaraMaximumPower);
+      // this.setSettings({ reverse_direction: xiaomiCurtainReverse, open_close_manual: !xiaomiCurtainOpenCloseManual });
+
+      const attrs = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].discoverAttributesExtended();
+      this.log('READattributes attrs', attrs);
+    } catch (err) {
+      this.log('could not read Attribute xiaomiSwitchOptions:', err);
+    }
 
     if (this.hasCapability('onoff')) {
       this.registerCapability('onoff', CLUSTER.ON_OFF, {
@@ -97,6 +114,28 @@ class AqaraSmartPlugEU extends ZigBeeDevice {
         },
         endpoint: this.getClusterEndpoint(CLUSTER.METERING),
       });
+    }
+
+    zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME]
+      .on('attr.aqaraLifeline', this.onAqaraLifelineAttributeReport.bind(this));
+  }
+
+  /**
+   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+   * interesting the battery level. The battery level divided by 1000 represents the battery
+   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+   * on the battery voltage curve of a CR1632.
+   * @param {{batteryLevel: number}} lifeline
+   */
+  onAqaraLifelineAttributeReport({
+    state,
+  } = {}) {
+    this.log('lifeline attribute report', {
+      state,
+    });
+
+    if (typeof state === 'number') {
+      this.setCapabilityValue('onoff', state === 1);
     }
   }
 
@@ -220,5 +259,9 @@ disabled: 						aa8005d14729011000	aa8005d1472b011000
 Charging protection
 enabled:							aa8005d1472c021001
 disabled:							aa8005d1472d021000
+
+ACTUAL from G2H:
+Cluster 0xFCC0, Attribute 0x0207, type bool, powerOfMemory
+Cluster 0xFCC0, Attribute 0x020b, type 0x39 (float), Maximum power 100 - 2300 W
 
 */
