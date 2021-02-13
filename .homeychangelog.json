@@ -40,5 +40,8 @@
   },
   "1.2.3": {
     "en": "Update Aqara B1 curtain controller operation and settings, power measuring capabilities, settings on the T1 devices and fix door sensor inversed operation"
+  },
+  "1.2.4": {
+    "en": "Add filtering for temperature & humidity sensor, minor fixes"
   }
 }

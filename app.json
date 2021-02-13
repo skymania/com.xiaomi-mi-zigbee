@@ -11,7 +11,7 @@
   "category": [
     "lights"
   ],
-  "version": "1.2.3",
+  "version": "1.2.4",
   "compatibility": ">=5.0.0",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
@@ -1234,8 +1234,7 @@
               16
             ],
             "bindings": [
-              6,
-              16
+              6
             ]
           },
           "2": {
@@ -1325,8 +1324,7 @@
               16
             ],
             "bindings": [
-              6,
-              16
+              6
             ]
           },
           "2": {
@@ -1335,8 +1333,7 @@
               16
             ],
             "bindings": [
-              6,
-              16
+              6
             ]
           },
           "3": {
@@ -1360,30 +1357,21 @@
               16,
               18
             ],
-            "bindings": [
-              16,
-              18
-            ]
+            "bindings": []
           },
           "6": {
             "clusters": [
               16,
               18
             ],
-            "bindings": [
-              16,
-              18
-            ]
+            "bindings": []
           },
           "7": {
             "clusters": [
               16,
               18
             ],
-            "bindings": [
-              16,
-              18
-            ]
+            "bindings": []
           }
         },
         "learnmode": {
@@ -1432,8 +1420,7 @@
               16
             ],
             "bindings": [
-              6,
-              16
+              6
             ]
           },
           "2": {
@@ -1442,8 +1429,7 @@
               16
             ],
             "bindings": [
-              6,
-              16
+              6
             ]
           },
           "3": {
@@ -1467,30 +1453,21 @@
               16,
               18
             ],
-            "bindings": [
-              16,
-              18
-            ]
+            "bindings": []
           },
           "6": {
             "clusters": [
               16,
               18
             ],
-            "bindings": [
-              16,
-              18
-            ]
+            "bindings": []
           },
           "7": {
             "clusters": [
               16,
               18
             ],
-            "bindings": [
-              16,
-              18
-            ]
+            "bindings": []
           }
         },
         "learnmode": {
@@ -1544,19 +1521,18 @@
               25,
               10
             ],
-            "bindings": [
-              10
-            ]
+            "bindings": []
           },
           "2": {
             "clusters": [
               16,
               6,
               4,
-              5
+              5,
+              16
             ],
             "bindings": [
-              16
+              6
             ]
           },
           "3": {
@@ -1566,33 +1542,25 @@
               4,
               5
             ],
-            "bindings": [
-              16
-            ]
+            "bindings": []
           },
           "4": {
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           },
           "5": {
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           },
           "6": {
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           }
         },
         "learnmode": {
@@ -1671,33 +1639,31 @@
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           },
           "5": {
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           },
           "6": {
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           },
           "7": {
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
+          },
+          "8": {
+            "clusters": [
+              12
+            ],
+            "bindings": []
           }
         },
         "learnmode": {
@@ -1760,33 +1726,31 @@
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           },
           "5": {
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           },
           "6": {
             "clusters": [
               18
             ],
-            "bindings": [
-              18
-            ]
+            "bindings": []
           },
           "7": {
             "clusters": [
               18
             ],
-            "bindings": [
+            "bindings": []
+          },
+          "8": {
+            "clusters": [
               18
-            ]
+            ],
+            "bindings": []
           }
         },
         "learnmode": {
@@ -2243,7 +2207,8 @@
               6,
               9,
               1794,
-              2820
+              2820,
+              64704
             ],
             "bindings": [
               6,
@@ -2390,8 +2355,7 @@
               16
             ],
             "bindings": [
-              6,
-              16
+              6
             ]
           }
         },
@@ -2455,8 +2419,7 @@
               16
             ],
             "bindings": [
-              6,
-              16
+              6
             ]
           }
         },
@@ -3037,64 +3000,7 @@
         "large": "/drivers/sen_ill.mgl01/assets/images/large.png",
         "small": "/drivers/sen_ill.mgl01/assets/images/small.png"
       },
-      "settings": [
-        {
-          "id": "alarm_motion_reset_window",
-          "type": "number",
-          "label": {
-            "en": "Disable motion alarm after",
-            "nl": "Schakel bewegingsalarm uit na"
-          },
-          "hint": {
-            "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 60 - 86400, default: 300 [s]",
-            "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 60 - 86400, Standaard: 300 [s]"
-          },
-          "value": 300,
-          "attr": {
-            "min": 60,
-            "max": 86400
-          }
-        },
-        {
-          "id": "battery_threshold",
-          "type": "number",
-          "label": {
-            "en": "Battery alarm threshold (%)",
-            "nl": "Batterij alarm waarde (%)"
-          },
-          "hint": {
-            "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-            "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-          },
-          "value": 20,
-          "attr": {
-            "min": 1,
-            "max": 90
-          }
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Expert settings",
-            "nl": "Expert instellingen"
-          },
-          "collapsed": true,
-          "children": [
-            {
-              "id": "hacked_alarm_motion_reset_window",
-              "type": "checkbox",
-              "value": false,
-              "label": {
-                "en": "Hacked sensor"
-              },
-              "hint": {
-                "en": "By soldering two contact points on the PCB it's possible to reduce the motion blind time to 5 seconds instead of the minimum 60 seconds. Enabling this setting will allow you to override the minimum of 60 seconds for cancelling the alarm and will set it to 5 seconds.",
-                "nl": "Door twee contactpunten op de printplaat te solderen is het mogelijk om de blindtijd van de sensor terug te brengen naar 5 seconden. Inschakelen van deze instelling maakt het mogelijk om de instelling voor het annuleren van de bewegingsmelder te overschrijven tot 5 seconden."
-              }
-            }
-          ]
-        }
-      ],
+      "settings": [],
       "id": "sen_ill.mgl01"
     },
     {
