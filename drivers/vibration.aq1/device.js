@@ -1,4 +1,4 @@
-// SDK3 updated & validated: DONE
+// TODO: add vibration sensitivity & configureAttributeReporting
 
 'use strict';
 

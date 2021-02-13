@@ -1,3 +1,7 @@
+// TODO: add smoke sensor sensitivity & self test (IAS cluster)
+// IASZone, 0xFFF1, type 0x23, 'low': 0x04010000, 'medium': 0x04020000, 'high': 0x04030000
+// IASZone, 0xFFF1, type 0x23, 'selftest' 0x03010000
+
 'use strict';
 
 const Homey = require('homey');

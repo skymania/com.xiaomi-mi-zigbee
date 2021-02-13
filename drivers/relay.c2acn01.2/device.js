@@ -1,3 +1,6 @@
+// TODO:
+// This option allows to inter connect the relays which will make sure that only one relay is on at a time. 'genBinaryOutput', {0xff06: {value: value ? 0x01 : 0x00, type: 0x10}}, manufacturerOptions.xiaomi)
+
 'use strict';
 
 const Homey = require('homey');
@@ -206,4 +209,7 @@ Product ID: LLKZMK11LM
 2019-09-15 22:03:30 [log] [ManagerDrivers] [relay.c2acn01] [0] ---- statusFlags : 0
 2019-09-15 22:03:30 [log] [ManagerDrivers] [relay.c2acn01] [0] ---- applicationType : 67109377
 2019-09-15 22:03:30 [log] [ManagerDrivers] [relay.c2acn01] [0] ------------------------------------------
+
+Captures:
+Interlock mode: Endpoint 1, genBinaryOutput, 0xff06, bool,
 */

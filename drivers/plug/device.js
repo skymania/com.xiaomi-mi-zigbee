@@ -1,4 +1,4 @@
-// SDK3 updated & validated: DONE
+// TODO add Power outage memory
 
 'use strict';
 
