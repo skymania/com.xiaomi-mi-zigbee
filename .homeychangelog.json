@@ -43,5 +43,8 @@
   },
   "1.2.4": {
     "en": "Add filtering for temperature & humidity sensor, minor fixes"
+  },
+  "1.2.5": {
+    "en": "Fix binding issues during inclusion"
   }
 }
