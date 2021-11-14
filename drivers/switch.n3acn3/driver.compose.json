@@ -4,6 +4,11 @@
     "nl": "Aqara D1 Wall Switch Tripple (LN) - Links",
     "de": "Aqara D1 Wall Switch Tripple (LN) - Links"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG26LM",
+    "EAN": "6970504211858"
+  },
   "class": "socket",
   "capabilities": [
     "onoff",
@@ -15,6 +20,8 @@
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.switch.n3acn3",

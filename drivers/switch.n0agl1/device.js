@@ -28,7 +28,7 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
     try {
       const { aqaraSwitchType, aqaraPowerOutageMemory } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('aqaraSwitchType', 'aqaraPowerOutageMemory');
       this.log('READattributes', aqaraSwitchType, aqaraPowerOutageMemory);
-      this.setSettings({ external_switch_type: aqaraSwitchType, save_state: aqaraPowerOutageMemory });
+      await this.setSettings({ external_switch_type: aqaraSwitchType, save_state: aqaraPowerOutageMemory });
     } catch (err) {
       this.log('could not read Attribute AqaraManufacturerSpecificCluster:', err);
     }
@@ -50,7 +50,7 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
         try {
           const { acPowerMultiplier, acPowerDivisor } = await zclNode.endpoints[this.getClusterEndpoint(CLUSTER.ELECTRICAL_MEASUREMENT)].clusters[CLUSTER.ELECTRICAL_MEASUREMENT.NAME].readAttributes('acPowerMultiplier', 'acPowerDivisor');
           this.activePowerFactor = acPowerMultiplier / acPowerDivisor;
-          this.setStoreValue('activePowerFactor', this.activePowerFactor);
+          this.setStoreValue('activePowerFactor', this.activePowerFactor).catch(this.error);
           this.debug('SET activePowerFactor:', acPowerMultiplier, acPowerDivisor, this.activePowerFactor);
         } catch (err) {
           this.debug('Could not read electricaMeasurementCluster attributes `acPowerMultiplier`, `acPowerDivisor`:', err);
@@ -80,7 +80,7 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
         try {
           const { multiplier, divisor } = await zclNode.endpoints[this.getClusterEndpoint(CLUSTER.METERING)].clusters[CLUSTER.METERING.NAME].readAttributes('multiplier', 'divisor');
           this.meteringFactor = multiplier / divisor;
-          this.setStoreValue('meteringFactor', this.meteringFactor);
+          this.setStoreValue('meteringFactor', this.meteringFactor).catch(this.error);
           this.debug('SET meteringFactor:', multiplier, divisor, this.meteringFactor);
         } catch (err) {
           this.debug('could not read meteringCluster attributes `multiplier` and `divisor`:', err);
@@ -124,7 +124,7 @@ class AqaraT1SwitchModuleNeutral extends ZigBeeDevice {
     });
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
+      this.setCapabilityValue('onoff', state === 1).catch(this.error);
     }
   }
 

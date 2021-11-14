@@ -5,6 +5,11 @@
     "nl": "Aqara Double Relay",
     "de": "Aqara Double Relay"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "LLKZMK11LM",
+    "EAN": "6970504210714"
+  },
   "class": "socket",
   "capabilities": [
     "onoff",
@@ -28,6 +33,8 @@
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.relay.c2acn01",

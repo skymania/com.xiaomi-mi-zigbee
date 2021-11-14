@@ -5,6 +5,11 @@
     "de": "Aqara LED Bulb"
   },
   "class": "light",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "ZNLDP12LM",
+    "EAN": "6970504211032"
+  },
   "capabilities": [
     "onoff",
     "dim",
@@ -31,6 +36,8 @@
       }
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.light.aqcn02",

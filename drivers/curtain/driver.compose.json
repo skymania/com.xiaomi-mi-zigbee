@@ -5,6 +5,11 @@
     "de": "Aqara Curtain Controller"
   },
   "class": "curtain",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "ZNCLDJ11LM",
+    "EAN": "6970504210165"
+  },
   "capabilities": [
     "onoff",
     "windowcoverings_set",
@@ -17,6 +22,8 @@
       }
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.curtain",

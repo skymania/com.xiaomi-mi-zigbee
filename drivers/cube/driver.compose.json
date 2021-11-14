@@ -5,6 +5,11 @@
     "de": "Würfel"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "MFKZQ01LM",
+    "EAN": ["6970504210615, 6974176874412", "192784000045"]
+  },
   "capabilities": [
     "measure_battery",
     "cube_state_motion",
@@ -17,6 +22,8 @@
       "CR2450"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": ["lumi.sensor_cube", "lumi.sensor_cube.aqgl01" ],

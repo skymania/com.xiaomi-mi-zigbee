@@ -2,6 +2,11 @@
   "name": {
     "en": "Aqara Temperature and Humidity Sensor"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "WSDCGQ11LM",
+    "EAN": ["6970504210097", "192784000106"]
+  },
   "class": "sensor",
   "capabilities": [
     "measure_battery",
@@ -15,6 +20,8 @@
       "CR2032"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.weather",

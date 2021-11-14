@@ -29,6 +29,7 @@ const Homey = require('homey');
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
@@ -134,17 +135,13 @@ class AqaraCubeSensor extends ZigBeeDevice {
   onXiaomiLifelineAttributeReport({
     batteryVoltage,
   } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('lifeline attribute report', {
+        batteryVoltage,
+      }, 'parsedBatteryPct', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 
@@ -164,8 +161,8 @@ class AqaraCubeSensor extends ZigBeeDevice {
     };
 
     // set corresponding capability values
-    this.setCapabilityValue('cube_state_motion', cubeAction.motion);
-    this.setCapabilityValue('cube_state_face', cubeAction.targetFace);
+    this.setCapabilityValue('cube_state_motion', cubeAction.motion).catch(this.error);
+    this.setCapabilityValue('cube_state_face', cubeAction.targetFace).catch(this.error);
 
     // Trigger the corresponding triggerdevice matching to the motion
     if (cubeAction.motion) {
@@ -202,7 +199,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
     };
 
     // set corresponding capability values
-    this.setCapabilityValue('cube_state_motion', cubeAction.motion);
+    this.setCapabilityValue('cube_state_motion', cubeAction.motion).catch(this.error);
 
     // Trigger the corresponding triggerdevice matching to the motion
     if (cubeAction.motion) {
@@ -237,8 +234,8 @@ class AqaraCubeSensor extends ZigBeeDevice {
     };
 
     // set corresponding capability values
-    this.setCapabilityValue('cube_state_motion', cubeAction.motion);
-    this.setCapabilityValue('cube_measure_rotation', cubeAction.rotationAngle);
+    this.setCapabilityValue('cube_state_motion', cubeAction.motion).catch(this.error);
+    this.setCapabilityValue('cube_measure_rotation', cubeAction.rotationAngle).catch(this.error);
 
     // Trigger the corresponding triggerdevice matching to the motion
     if (cubeAction.motion) {

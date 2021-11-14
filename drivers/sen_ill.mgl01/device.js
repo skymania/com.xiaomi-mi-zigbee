@@ -5,6 +5,7 @@
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
@@ -61,13 +62,12 @@ class XiaomiLightSensor extends ZigBeeDevice {
   }
 
   onBatteryVoltageAttributeReport(batteryVoltage) {
-    this.log('onBatteryVoltageAttributeReport', batteryVoltage);
-    const parsedVolts = batteryVoltage / 10;
-    const minVolts = 2.5;
-    const maxVolts = 3.0;
-    const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-    this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-    this.setCapabilityValue('alarm_battery', parsedVolts < 2.6).catch(this.error);
+    if (typeof batteryVoltage === 'number') {
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2500');
+      this.log('onBatteryVoltageAttributeReport', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+    }
   }
 
   /**
@@ -80,12 +80,13 @@ class XiaomiLightSensor extends ZigBeeDevice {
   onXiaomiLifelineAttributeReport({
     batteryVoltage,
   } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
     if (typeof batteryVoltage === 'number') {
-      this.onBatteryVoltageAttributeReport(batteryVoltage);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('lifeline attribute report', {
+        batteryVoltage,
+      }, 'parsedBatteryPct', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

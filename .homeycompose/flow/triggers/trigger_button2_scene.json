@@ -1,9 +1,15 @@
 {
   "id": "trigger_button2_scene",
+  "platforms": [ "local", "cloud" ],
   "title": {
     "en": "A scene has been activated",
     "nl": "Een scene is geactiveerd",
     "de": "Eine Szene wurde aktiviert"
+  },
+  "titleFormatted": {
+    "en": "A scene ([[scene]]) has been activated with [[button]]",
+    "nl": "Een scene ([[scene]]) is geactiveerd met [[button]]",
+    "de": "Eine Szene ([[scene]]) wurde aktiviert mit [[button]]"
   },
   "hint": {
     "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
@@ -14,15 +20,31 @@
     {
       "name": "device",
       "type": "device",
-      "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01"
+      "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01|remote.b28ac1"
     },
     {
       "name": "button",
-      "type": "autocomplete"
+      "type": "autocomplete",
+      "title": {
+        "en": "Select the group",
+        "nl": "Selecteer de groep"
+      },
+      "placeholder": {
+        "en": "Group X",
+        "nl": "Groep X"
+      }
     },
     {
       "name": "scene",
-      "type": "autocomplete"
+      "type": "autocomplete",
+      "title": {
+        "en": "Select the action",
+        "nl": "Selecteer de actie"
+      },
+      "placeholder": {
+        "en": "Pressed",
+        "nl": "Ingedrukt"
+      }
     }
   ]
 }

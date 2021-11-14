@@ -4,10 +4,17 @@
     "nl": "Aqara D1 Wall Switch Double (L) - Links",
     "de": "Aqara D1 Wall Switch Double (L) - Links"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG22LM",
+    "EAN": "6970504211650"
+  },
   "class": "socket",
   "capabilities": [
     "onoff"
   ],
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.switch.b2lacn02",
@@ -29,13 +36,21 @@
       },
       "2": {
         "clusters": [
-          0,
-          3,
           4,
           5,
           6,
-          18,
-          64704
+          16
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "3": {
+        "clusters": [
+          4,
+          5,
+          6,
+          16
         ],
         "bindings": [
           6

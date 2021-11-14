@@ -5,6 +5,11 @@
     "de": "Aqara | Opple Switch - 2 button"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara Opple",
+    "modelID": "WXCJKG11LM",
+    "EAN": "6970504211964"
+  },
   "capabilities": [
     "measure_battery",
     "alarm_battery"
@@ -14,6 +19,8 @@
       "CR2032"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.remote.b286opcn01",

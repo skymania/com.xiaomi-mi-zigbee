@@ -4,10 +4,17 @@
     "nl": "Aqara Wall Switch Double (L) - Links",
     "de": "Aqara Wall Switch Double (L) - Links"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG03LM",
+    "EAN": "6970504210028"
+  },
   "class": "socket",
   "capabilities": [
     "onoff"
   ],
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.ctrl_neutral2",

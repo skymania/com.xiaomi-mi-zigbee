@@ -67,7 +67,7 @@ class AqaraSocket extends ZigBeeDevice {
 
     // measure_voltage
     if (this.hasCapability('measure_voltage')) {
-      await this.removeCapability('measure_voltage');
+      await this.removeCapability('measure_voltage').catch(this.error);
     }
 
     // Register the AttributeReportListener - Lifeline
@@ -91,7 +91,7 @@ class AqaraSocket extends ZigBeeDevice {
     });
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
+      this.setCapabilityValue('onoff', state === 1).catch(this.error);
     }
   }
 

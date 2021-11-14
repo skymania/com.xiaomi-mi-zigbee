@@ -1,0 +1,16 @@
+{
+  "value": false,
+  "label": {
+    "en": "Disable LED indicators",
+    "nl": "Schakel LED indicators uit"
+  },
+  "hint": {
+    "en": "This parameter determines whether the indicator LED's are disabled.",
+    "nl": "Deze parameter bepaalt of LED's uitgeschakeld worden."
+  },
+  "zigbee": {
+    "cluster": "AqaraManufacturerSpecific",
+    "attribute": "aqaraLedDisabled"
+  },
+  "type": "checkbox"
+}

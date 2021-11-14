@@ -3,6 +3,11 @@
     "en": "Xiaomi Smart plug (EU)"
   },
   "class": "socket",
+  "_appSpecific":{
+    "brand": "Xiaomi",
+    "modelID": "ZNCZ04LM",
+    "EAN": "6934177706493"
+  },
   "capabilities": [
     "onoff",
     "measure_power",
@@ -13,6 +18,8 @@
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.plug.mmeu01",

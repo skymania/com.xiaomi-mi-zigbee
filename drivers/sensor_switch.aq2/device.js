@@ -9,6 +9,7 @@ const {
   debug, Cluster, CLUSTER,
 } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 const XiaomiSpecificOnOffCluster = require('../../lib/XiaomiSpecificOnOffCluster');
 
@@ -94,7 +95,7 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
         this.triggerFlow({
           id: 'button1_button',
           tokens: remoteValue,
-          state: null,
+          state: remoteValue,
         })
           .catch(err => this.error('Error triggering button1ButtonTriggerDevice', err));
 
@@ -132,17 +133,11 @@ class AqaraWirelessSwitchAq2 extends ZigBeeDevice {
   onXiaomiLifelineAttributeReport({
     batteryVoltage,
   } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('lifeline attribute report', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

@@ -7,6 +7,7 @@ const Homey = require('homey');
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
@@ -25,10 +26,10 @@ module.exports = class AqaraLightSwitchDouble extends ZigBeeDevice {
 
     // add battery capabilities if needed
     if (!this.hasCapability('measure_battery')) {
-      this.addCapability('measure_battery');
+      this.addCapability('measure_battery').catch(this.error);
     }
     if (!this.hasCapability('alarm_battery')) {
-      this.addCapability('alarm_battery');
+      this.addCapability('alarm_battery').catch(this.error);
     }
 
     this.buttonMap = {
@@ -71,17 +72,11 @@ module.exports = class AqaraLightSwitchDouble extends ZigBeeDevice {
   onXiaomiLifelineAttributeReport({
     batteryVoltage,
   } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('lifeline attribute report', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 
@@ -110,7 +105,7 @@ module.exports = class AqaraLightSwitchDouble extends ZigBeeDevice {
       this.triggerFlow({
         id: 'button2_button',
         tokens: remoteValue,
-        state: null,
+        state: remoteValue,
       })
         .catch(err => this.error('Error triggering button1ButtonTriggerDevice', err));
     }

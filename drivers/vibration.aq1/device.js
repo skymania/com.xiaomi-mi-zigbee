@@ -10,6 +10,7 @@ const motionArray = {
 
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
+const util = require('../../lib/util');
 
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 const XiaomiSpecificDoorlockCluster = require('../../lib/XiaomiSpecificDoorlockCluster');
@@ -94,14 +95,14 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 
     //
     if (this.getCapabilityValue(`alarm_${motionType}`) !== true) {
-      this.setCapabilityValue(`alarm_${motionType}`, true);
+      this.setCapabilityValue(`alarm_${motionType}`, true).catch(this.error);
     }
     // restart alarm cancellation timer
     clearTimeout(this[`alarm${motionType}Timeout`]);
 
     // start alarm cancellation timer
     this[`alarm${motionType}Timeout`] = setTimeout(() => {
-      this.setCapabilityValue(`alarm_${motionType}`, false);
+      this.setCapabilityValue(`alarm_${motionType}`, false).catch(this.error);
     }, (this.getSetting(`alarm_${motionType}_cancellation_delay`) || 30) * 1000);
   }
 
@@ -113,7 +114,7 @@ class AqaraVibrationSensor extends ZigBeeDevice {
     const toInt16 = v => Int16Array.from([v])[0];
     const parsedValue = toInt16(value >> 16 & 0xffff);
     this.log('closuresDoorLock - 1285 (vibration):', value, parsedValue);
-    this.setCapabilityValue('measure_vibration', parsedValue);
+    this.setCapabilityValue('measure_vibration', parsedValue).catch(this.error);
 
     // Trigger generic motion token trigger card
     this.triggerFlow({
@@ -127,7 +128,7 @@ class AqaraVibrationSensor extends ZigBeeDevice {
       .catch(err => this.error('Error triggering sensorVibrationTriggerDevice', err));
   }
 
-  onTiltReportRAW(value) {
+  async onTiltReportRAW(value) {
     const RAD = Math.PI / 180;
 
     // FIX data as parsed by the Zigbee Shepherd
@@ -167,7 +168,7 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 
     this.log('Tilt angles relative to reference plane:', tiltRelativeToken.Tilt_x, '(Tilt_x)', tiltRelativeToken.Tilt_y, '(Tilt_y)', tiltRelativeToken.Tilt_max, '(max(Tilt))', tiltRelativeToken.Tilt_abs, '(abs(Tilt))');
 
-    this.setCapabilityValue('measure_tilt', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltRelativeToken.Tilt_max : tiltRelativeToken.Tilt_abs);
+    this.setCapabilityValue('measure_tilt', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltRelativeToken.Tilt_max : tiltRelativeToken.Tilt_abs).catch(this.error);
 
     // Trigger generic motion token trigger card
     this.triggerFlow({
@@ -195,7 +196,7 @@ class AqaraVibrationSensor extends ZigBeeDevice {
 
     this.log('Tilt angles relative to previous position:', tiltDeltaToken.Tilt_x, '(Tilt_x)', tiltDeltaToken.Tilt_y, '(Tilt_y)', tiltDeltaToken.Tilt_max, '(max(Tilt))', tiltDeltaToken.Tilt_abs, '(abs(Tilt))');
 
-    this.setCapabilityValue('measure_tilt.relative', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltDeltaToken.Tilt_max : tiltDeltaToken.Tilt_abs);
+    this.setCapabilityValue('measure_tilt.relative', this.getSetting('capabilityTiltAngles') === 'signed' ? tiltDeltaToken.Tilt_max : tiltDeltaToken.Tilt_abs).catch(this.error);
 
     // Trigger generic motion token trigger card
     this.triggerFlow({
@@ -207,17 +208,17 @@ class AqaraVibrationSensor extends ZigBeeDevice {
       .catch(err => this.error('Error triggering tiltDeltaTriggerDevice', err));
 
     // update previous normalized force vector
-    this.setStoreValue('Ameasured_previous', Ameasured);
+    this.setStoreValue('Ameasured_previous', Ameasured).catch(this.error);
 
     // update reference normalized force vector if requested
     if (this.getSetting('setReferenceVector') === true) {
-      this.setStoreValue('Areference', Ameasured);
+      this.setStoreValue('Areference', Ameasured).catch(this.error);
 
       const Ameasured_rounded = Ameasured.map(each_element => {
         return Number(each_element.toFixed(0));
       });
 
-      this.setSettings({
+      await this.setSettings({
         tiltReferenceVector: Ameasured_rounded.toString(),
         setReferenceVector: false,
       });
@@ -225,26 +226,20 @@ class AqaraVibrationSensor extends ZigBeeDevice {
   }
 
   /**
-   * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
-   * interesting the battery level. The battery level divided by 1000 represents the battery
-   * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
-   * on the battery voltage curve of a CR1632.
-   * @param {{batteryLevel: number}} lifeline
-   */
+	 * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
+	 * interesting the battery level. The battery level divided by 1000 represents the battery
+	 * voltage. If the battery voltage drops below 2600 (2.6V) we assume it is almost empty, based
+	 * on the battery voltage curve of a CR1632.
+	 * @param {{batteryLevel: number}} lifeline
+	 */
   onXiaomiLifelineAttributeReport({
     batteryVoltage,
   } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('lifeline attribute report', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

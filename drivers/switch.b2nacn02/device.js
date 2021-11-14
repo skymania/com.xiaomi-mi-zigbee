@@ -25,16 +25,19 @@ class AqaraD1WallSwitchDoubleLN extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
-    const { subDeviceId } = this.getData();
+    this.endpointIds = {
+      leftSwitch: 1,
+      rightSwitch: 2,
+    };
 
-    let onOffEndpoint = 1;
-    if (subDeviceId === 'rightSwitch') onOffEndpoint = 2;
+    const subDeviceId = this.isSubDevice() ? this.getData().subDeviceId : 'leftSwitch';
+    this.log('Initializing', subDeviceId, 'at endpoint', this.endpointIds[subDeviceId]);
 
     // Register capabilities and reportListeners for Left or Right switch
     if (this.hasCapability('onoff')) {
-      this.debug('Register OnOff capability:', subDeviceId, onOffEndpoint);
+      this.log('Initializing', subDeviceId, 'at endpoint', this.endpointIds[subDeviceId]);
       this.registerCapability('onoff', CLUSTER.ON_OFF, {
-        endpoint: onOffEndpoint,
+        endpoint: this.endpointIds[subDeviceId],
       });
     }
 
@@ -49,7 +52,7 @@ class AqaraD1WallSwitchDoubleLN extends ZigBeeDevice {
         try {
           const { acPowerMultiplier, acPowerDivisor } = await zclNode.endpoints[this.getClusterEndpoint(CLUSTER.ELECTRICAL_MEASUREMENT)].clusters[CLUSTER.ELECTRICAL_MEASUREMENT.NAME].readAttributes('acPowerMultiplier', 'acPowerDivisor');
           this.activePowerFactor = acPowerMultiplier / acPowerDivisor;
-          this.setStoreValue('activePowerFactor', this.activePowerFactor);
+          this.setStoreValue('activePowerFactor', this.activePowerFactor).catch(this.error);
           this.debug('SET activePowerFactor:', acPowerMultiplier, acPowerDivisor, this.activePowerFactor);
         } catch (err) {
           this.debug('Could not read electricaMeasurementCluster attributes `acPowerMultiplier`, `acPowerDivisor`:', err);
@@ -79,7 +82,7 @@ class AqaraD1WallSwitchDoubleLN extends ZigBeeDevice {
         try {
           const { multiplier, divisor } = await zclNode.endpoints[this.getClusterEndpoint(CLUSTER.METERING)].clusters[CLUSTER.METERING.NAME].readAttributes('multiplier', 'divisor');
           this.meteringFactor = multiplier / divisor;
-          this.setStoreValue('meteringFactor', this.meteringFactor);
+          this.setStoreValue('meteringFactor', this.meteringFactor).catch(this.error);
           this.debug('SET meteringFactor:', multiplier, divisor, this.meteringFactor);
         } catch (err) {
           this.debug('could not read meteringCluster attributes `multiplier` and `divisor`:', err);
@@ -124,11 +127,11 @@ class AqaraD1WallSwitchDoubleLN extends ZigBeeDevice {
     });
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
+      this.setCapabilityValue('onoff', state === 1).catch(this.error);
     }
 
     if (typeof state1 === 'number') {
-      this.setCapabilityValue('onoff.1', state1 === 1);
+      this.setCapabilityValue('onoff.1', state1 === 1).catch(this.error);
     }
   }
 

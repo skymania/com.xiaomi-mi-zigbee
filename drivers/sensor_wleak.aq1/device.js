@@ -3,6 +3,7 @@
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
@@ -36,9 +37,10 @@ class AqaraWaterSensor extends ZigBeeDevice {
   onIASZoneStatusChangeNoficiation({
     zoneStatus, extendedStatus, zoneId, delay,
   }) {
-    this.log('IASZoneStatusChangeNotification received:', zoneStatus, extendedStatus, zoneId, delay);
-    this.setCapabilityValue('alarm_water', zoneStatus.alarm1);
-    this.setCapabilityValue('alarm_battery', zoneStatus.battery);
+    this.log('handle report (cluster: iasZone, attribute: zoneStatus.alarm1, capability: alarm_water), parsed payload:', zoneStatus.alarm1);
+    this.setCapabilityValue('alarm_water', zoneStatus.alarm1).catch(this.error);
+    this.log('handle report (cluster: iasZone, attribute: zoneStatus.battery, capability: alarm_battery), parsed payload:', zoneStatus.battery);
+    this.setCapabilityValue('alarm_battery', zoneStatus.battery).catch(this.error);
   }
 
   /**
@@ -51,17 +53,12 @@ class AqaraWaterSensor extends ZigBeeDevice {
   onXiaomiLifelineAttributeReport({
     batteryVoltage,
   } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('handle report (cluster: AqaraLifeline, attribute: batteryVoltage, capability: measure_battery), parsed payload:', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.log('handle report (cluster: AqaraLifeline, attribute: batteryVoltage, capability: alarm_battery), parsed payload:', parsedBatPct < 20);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

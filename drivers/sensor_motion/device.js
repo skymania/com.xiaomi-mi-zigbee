@@ -6,6 +6,7 @@
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
@@ -24,11 +25,11 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
 
     // Add battery capabilities
     if (!this.hasCapability('alarm_battery')) {
-      await this.addCapability('alarm_battery');
+      await this.addCapability('alarm_battery').catch(this.error);
     }
 
     if (!this.hasCapability('measure_battery')) {
-      await this.addCapability('measure_battery');
+      await this.addCapability('measure_battery').catch(this.error);
     }
 
     zclNode.endpoints[1].clusters[CLUSTER.OCCUPANCY_SENSING.NAME]
@@ -72,17 +73,11 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
     const batteryVoltage = attributeBuffer.readUInt16LE(5);
     this.log('lifeline attribute report, state:', state, ', batteryVoltage (mV):', batteryVoltage);
 
-    // if (typeof state === 'number') {
-    //  this.setCapabilityValue('alarm_motion', state === 1).catch(this.error);
-    // }
-
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('lifeline attribute report', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
       this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

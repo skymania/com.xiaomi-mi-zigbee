@@ -40,13 +40,13 @@ class AqaraCurtain extends ZigBeeDevice {
 
     if (this.hasCapability('dim')) {
       this.log('Removing capability dim');
-      this.removeCapability('dim');
+      this.removeCapability('dim').catch(this.error);
     }
 
     // try {
     //  const { xiaomiCurtain } = await zclNode.endpoints[this.getClusterEndpoint(XiaomiBasicCluster)].clusters[XiaomiBasicCluster.NAME].readAttributes('xiaomiCurtain');
     //  this.log('READattributes XiaomiCurtain', xiaomiCurtain, xiaomiCurtain[1], xiaomiCurtain[3], xiaomiCurtain[5]);
-    // this.setSettings({ external_switch_type: switchType, save_state: powerOffMemory });
+    // await this.setSettings({ external_switch_type: switchType, save_state: powerOffMemory });
     // } catch (err) {
     //  this.log('could not read Attribute XiaomiBasicCluster:', err);
     // }
@@ -149,8 +149,8 @@ class AqaraCurtain extends ZigBeeDevice {
     if (typeof state === 'number') {
       const parsedDim = 1 - (state / 100);
       this.log('lifeline - curtain position', parsedDim);
-      this.setCapabilityValue('dim', parsedDim);
-      this.setCapabilityValue('onoff', parsedDim === 1);
+      this.setCapabilityValue('dim', parsedDim).catch(this.error);
+      this.setCapabilityValue('onoff', parsedDim === 1).catch(this.error);
     }
   }
 

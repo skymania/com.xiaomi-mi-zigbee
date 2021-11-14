@@ -5,6 +5,11 @@
     "de": "Aqara B1 Curtain Controller"
   },
   "class": "curtain",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "ZNCLDJ12LM",
+    "EAN": "6970504211452, 6970504211292"
+  },
   "capabilities": [
     "windowcoverings_closed",
     "windowcoverings_set",
@@ -26,6 +31,8 @@
   "energy": {
     "batteries": [ "INTERNAL" ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.curtain.hagl04",

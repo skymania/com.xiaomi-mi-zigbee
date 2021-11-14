@@ -101,11 +101,11 @@ class AqaraDoubleRelay extends ZigBeeDevice {
     });
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
+      this.setCapabilityValue('onoff', state === 1).catch(this.error);
     }
 
     if (typeof state1 === 'number') {
-      this.setCapabilityValue('onoff.1', state1 === 1);
+      this.setCapabilityValue('onoff.1', state1 === 1).catch(this.error);
     }
   }
 

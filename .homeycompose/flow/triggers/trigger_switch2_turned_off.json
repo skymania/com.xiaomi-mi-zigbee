@@ -1,5 +1,6 @@
 {
   "id": "trigger_switch2_turned_off",
+  "platforms": [ "local", "cloud" ],
   "title": {
     "en": "Turned off (right switch)",
     "nl": "Uitgeschakeld (rechter schakelaar)",

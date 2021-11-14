@@ -26,12 +26,19 @@ class AqaraDoubleRelay extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
-    const { subDeviceId } = this.getData();
+    this.endpointIds = {
+      firstOutlet: 1,
+      secondOutlet: 2,
+    };
+
+    const subDeviceId = this.isSubDevice() ? this.getData().subDeviceId : 'firstOutlet';
+    this.log('Initializing', subDeviceId, 'at endpoint', this.endpointIds[subDeviceId]);
 
     // Register capabilities and reportListeners for Left switch
     if (this.hasCapability('onoff')) {
+      this.log('Register OnOff capability:', subDeviceId, 'at endpoint', this.endpointIds[subDeviceId]);
       this.registerCapability('onoff', CLUSTER.ON_OFF, {
-        endpoint: subDeviceId === 'secondOutlet' ? 2 : 1,
+        endpoint: this.endpointIds[subDeviceId],
       });
     }
 
@@ -72,11 +79,11 @@ class AqaraDoubleRelay extends ZigBeeDevice {
     });
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
+      this.setCapabilityValue('onoff', state === 1).catch(this.error);
     }
 
     if (typeof state1 === 'number') {
-      this.setCapabilityValue('onoff.1', state1 === 1);
+      this.setCapabilityValue('onoff.1', state1 === 1).catch(this.error);
     }
   }
 

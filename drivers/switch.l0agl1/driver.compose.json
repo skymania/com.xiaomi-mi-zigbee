@@ -4,10 +4,17 @@
     "nl": "Single Switch Module T1 (No Neutral)",
     "de": "Single Switch Module T1 (No Neutral)"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "SSM-U02",
+    "EAN": "6970504213302"
+  },
   "class": "socket",
   "capabilities": [
     "onoff"
   ],
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.switch.l0agl1",

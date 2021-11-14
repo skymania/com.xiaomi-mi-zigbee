@@ -10,8 +10,8 @@ const {
 class AqaraTunableBulb extends ZigBeeLightDevice {
 
   async onNodeInit({ zclNode }) {
-    this.setStoreValue('colorTempMin', 153); // 6500K = 153 Mired
-    this.setStoreValue('colorTempMax', 370); // 2700K = 370 Mired
+    this.setStoreValue('colorTempMin', 153).catch(this.error); // 6500K = 153 Mired
+    this.setStoreValue('colorTempMax', 370).catch(this.error); // 2700K = 370 Mired
 
     await super.onNodeInit({ zclNode, supportsHueAndSaturation: false, supportsColorTemperature: true });
 

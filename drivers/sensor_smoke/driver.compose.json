@@ -4,6 +4,11 @@
 		"en": "Xiaomi Honeywell smoke detector",
 		"nl": "Xiaomi Honeywell rookmelder"
 	},
+	"_appSpecific":{
+  	"brand": "Xiaomi Honeywell",
+    "modelID": "JTYJ-GD-01LM/BW",
+    "EAN":"6953046000074"
+  },
 	"class": "sensor",
 	"capabilities": [
 		"alarm_smoke",
@@ -15,6 +20,8 @@
       "CR123A"
     ]
   },
+	"platforms": [ "local", "cloud" ],
+	"connectivity": [ "zigbee" ],
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.sensor_smoke",

@@ -1,0 +1,16 @@
+{
+  "value": true,
+  "label": {
+    "en": "Switch controls relay",
+    "nl": "Schakelaar stuurt relay aan"
+  },
+  "hint": {
+    "en": "This parameter determines whether the button controls the relay or acts as wireless switch.",
+    "nl": "Deze parameter bepaalt of het apparaat de bijbehorende relay aanstuurt of zich gedraagt als een draadloze schakelaaar."
+  },
+  "zigbee": {
+    "cluster": "AqaraManufacturerSpecific",
+    "attribute": "aqaraSwitchOperationMode"
+  },
+  "type": "checkbox"
+}

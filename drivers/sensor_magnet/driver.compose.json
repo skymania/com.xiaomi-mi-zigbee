@@ -1,10 +1,15 @@
 {
   "name": {
-    "en": "Door/Window sensor",
-    "nl": "Door/Window sensor",
-    "de": "Door/Window sensor"
+    "en": "Xiaomi Door and window sensor",
+    "nl": "Xiaomi Door and window sensor",
+    "de": "Xiaomi Door and window sensor"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Xiaomi",
+    "modelID": "MCCGQ01LM",
+    "EAN": "6970244522771"
+  },
   "capabilities": [
     "alarm_contact",
     "alarm_battery",
@@ -15,6 +20,8 @@
       "CR1632"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.sensor_magnet",
@@ -29,9 +36,9 @@
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn_door.svg",
       "instruction": {
-        "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-        "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
-        "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
+        "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+        "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+        "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
       }
     }
   },

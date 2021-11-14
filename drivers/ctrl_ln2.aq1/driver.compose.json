@@ -5,6 +5,11 @@
     "nl": "Aqara Wall Switch Double (LN)",
     "de": "Aqara Wall Switch Double (LN)"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG12LM",
+    "EAN": "6970504210134"
+  },
   "class": "socket",
   "capabilities": [
     "onoff",
@@ -29,9 +34,11 @@
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
-    "productId": "lumi.ctrl_ln2.aq1",
+    "productId": ["lumi.ctrl_ln2", "lumi.ctrl_ln2.aq1"],
     "endpoints": {
       "1": {
         "clusters": [

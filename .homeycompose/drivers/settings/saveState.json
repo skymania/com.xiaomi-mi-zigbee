@@ -10,7 +10,7 @@
   },
   "zigbee": {
     "cluster": "AqaraManufacturerSpecific",
-    "attribute": "switchType"
+    "attribute": "aqaraPowerOutageMemory"
   },
   "type": "checkbox"
 }

@@ -4,10 +4,17 @@
     "nl": "Aqara Wall Switch Single (L)",
     "de": "Aqara Wall Switch Single (L)"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG04LM",
+    "EAN": "6970504210011"
+  },
   "class": "socket",
   "capabilities": [
     "onoff"
   ],
+  "platforms": [ "local", "cloud"],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.ctrl_neutral1",

@@ -25,17 +25,29 @@ class AqaraD1WallSwitchTrippleL extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
-    const { subDeviceId } = this.getData();
+    // Set Aqara Opple mode to 1
+    if (this.isFirstInit()) {
+      try {
+        await zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME].writeAttributes({ mode: 1 }); // , aqaraRemoteMode: 2
+      } catch (err) {
+        this.error('failed to write mode attributes', err);
+      }
+    }
 
-    let onOffEndpoint = 1;
-    if (subDeviceId === 'middleSwitch') onOffEndpoint = 2;
-    if (subDeviceId === 'rightSwitch') onOffEndpoint = 3;
+    this.endpointIds = {
+      leftSwitch: 1,
+      middleSwitch: 2,
+      rightSwitch: 3,
+    };
+
+    const subDeviceId = this.isSubDevice() ? this.getData().subDeviceId : 'leftSwitch';
+    this.log('Initializing', subDeviceId, 'at endpoint', this.endpointIds[subDeviceId]);
 
     // Register capabilities and reportListeners for Left or Right switch
     if (this.hasCapability('onoff')) {
-      this.debug('Register OnOff capability:', subDeviceId, onOffEndpoint);
+      this.log('Register OnOff capability:', subDeviceId, 'at endpoint', this.endpointIds[subDeviceId]);
       this.registerCapability('onoff', CLUSTER.ON_OFF, {
-        endpoint: onOffEndpoint,
+        endpoint: this.endpointIds[subDeviceId],
       });
     }
 
@@ -59,7 +71,7 @@ class AqaraD1WallSwitchTrippleL extends ZigBeeDevice {
     });
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
+      this.setCapabilityValue('onoff', state === 1).catch(this.error);
     }
   }
 

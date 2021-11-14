@@ -7,6 +7,7 @@ const Homey = require('homey');
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
@@ -27,10 +28,10 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
 
     // add battery capabilities if needed
     if (!this.hasCapability('measure_battery')) {
-      this.addCapability('measure_battery');
+      this.addCapability('measure_battery').catch(this.error);
     }
     if (!this.hasCapability('alarm_battery')) {
-      this.addCapability('alarm_battery');
+      this.addCapability('alarm_battery').catch(this.error);
     }
 
     // supported scenes and their reported attribute numbers (all based on reported data)
@@ -72,7 +73,7 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
         this.triggerFlow({
           id: 'button1_button',
           tokens: remoteValue,
-          state: null,
+          state: remoteValue,
         })
           .catch(err => this.error('Error triggering button1ButtonTriggerDevice', err));
 
@@ -110,17 +111,13 @@ class AqaraRemoteb186acn01 extends ZigBeeDevice {
   onXiaomiLifelineAttributeReport({
     batteryVoltage,
   } = {}) {
-    this.log('lifeline attribute report', {
-      batteryVoltage,
-    });
-
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('lifeline attribute report', {
+        batteryVoltage,
+      }, 'parsedBatteryPct', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

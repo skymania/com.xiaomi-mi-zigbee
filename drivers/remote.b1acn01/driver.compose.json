@@ -5,6 +5,11 @@
     "de": "Aqara Wireless Mini Switch (2018)"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "WXKG11LM",
+    "EAN": ["6970504210080", "192784000052"]
+  },
   "capabilities": [
     "alarm_battery",
     "measure_battery"
@@ -14,6 +19,8 @@
       "CR2032"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.remote.b1acn01",

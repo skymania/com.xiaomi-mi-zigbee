@@ -3,6 +3,11 @@
     "en": "Aqara Vibration Sensor",
     "nl": "Aqara Vibration Sensor"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "DJT11LM",
+    "EAN": "6970504210592"
+  },
   "class": "sensor",
   "capabilities": [
     "measure_tilt",
@@ -26,6 +31,8 @@
       }
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.vibration.aq1",

@@ -4,6 +4,11 @@
     "nl": "Aqara Wireless switch"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "WXKG11LM",
+    "EAN":"6970504210080"
+  },
   "capabilities": [
     "alarm_battery",
     "measure_battery"
@@ -13,6 +18,8 @@
       "CR2032"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.sensor_switch.aq2",

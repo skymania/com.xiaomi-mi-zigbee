@@ -1,9 +1,15 @@
 {
   "id": "trigger_button1_scene",
+  "platforms": [ "local", "cloud" ],
   "title": {
     "en": "A scene has been activated",
     "nl": "Een scene is geactiveerd",
     "de": "Eine Szene wurde aktiviert"
+  },
+  "titleFormatted": {
+    "en": "A scene ([[scene]]) has been activated",
+    "nl": "Een scene ([[scene]]) is geactiveerd",
+    "de": "Eine Szene ([[scene]]) wurde aktiviert"
   },
   "hint": {
     "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
@@ -18,7 +24,15 @@
     },
     {
       "name": "scene",
-      "type": "autocomplete"
+      "type": "autocomplete",
+      "title": {
+        "en": "Select the action",
+        "nl": "Selecteer de actie"
+      },
+      "placeholder": {
+        "en": "Pressed",
+        "nl": "Ingedrukt"
+      }
     }
   ]
 }

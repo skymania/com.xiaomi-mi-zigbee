@@ -5,6 +5,7 @@
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { debug, Cluster, CLUSTER } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
 Cluster.addCluster(XiaomiBasicCluster);
@@ -22,7 +23,7 @@ class AqaraDoorWindowSensor extends ZigBeeDevice {
     // this.printNode();
 
     zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
-      .on('attr.onOff', this.onContactReport.bind(this));
+      .on('attr.onOff', this.onContactReport.bind(this, CLUSTER.ON_OFF.NAME, 'onOff'));
 
     zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
       .on('attr.xiaomiLifeline', this.onXiaomiLifelineAttributeReport.bind(this));
@@ -33,10 +34,10 @@ class AqaraDoorWindowSensor extends ZigBeeDevice {
    * @param {boolean} onOff
    */
 
-  onContactReport(data) {
+  onContactReport(reportingClusterName, reportingAttribute, data) {
     const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
     const parsedData = !reverseAlarmLogic ? data === true : data === false;
-    this.log(`alarm_contact -> ${parsedData}`);
+    this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_contact), parsed payload: ${parsedData}`);
     this.setCapabilityValue('alarm_contact', parsedData).catch(this.error);
   }
 
@@ -50,22 +51,21 @@ class AqaraDoorWindowSensor extends ZigBeeDevice {
   onXiaomiLifelineAttributeReport({
     state, batteryVoltage,
   } = {}) {
-    this.log('lifeline attribute report', {
+    this.debug('lifeline attribute report', {
       batteryVoltage, state,
     });
 
     if (typeof state === 'boolean') {
-      this.onContactReport(state);
+      // this.log('lifeline attribute report', state, 'parsedState', state === 1);
+      this.onContactReport('AqaraLifeline', 'state', state);
     }
 
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
-      this.setCapabilityValue('measure_battery', parsedBatPct);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('handle report (cluster: AqaraLifeline, attribute: batteryVoltage, capability: measure_battery), parsed payload:', parsedBatPct);
+      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      this.log('handle report (cluster: aqaraLifeline, attribute: batteryVoltage, capability: alarm_battery), parsed payload:', parsedBatPct < 20);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

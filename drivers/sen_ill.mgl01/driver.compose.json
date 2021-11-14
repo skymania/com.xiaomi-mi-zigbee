@@ -3,6 +3,11 @@
     "en": "Xiaomi Light Sensor"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Xiaomi",
+    "modelID": "GZCGQ01LM",
+    "EAN": "6934177710865"
+  },
   "capabilities": [
     "measure_luminance",
     "alarm_battery",
@@ -13,6 +18,8 @@
       "CR2032"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": ["XIAOMI", "LUMI"],
     "productId": "lumi.sen_ill.mgl01",

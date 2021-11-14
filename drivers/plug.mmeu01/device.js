@@ -30,7 +30,7 @@ class XiaomiSmartPlugEU extends ZigBeeDevice {
         aqaraLedDisabled, aqaraPowerOutageMemory, aqaraPowerOffMemory, aqaraMaximumPower,
       } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('aqaraLedDisabled', 'aqaraPowerOutageMemory', 'aqaraPowerOffMemory', 'aqaraMaximumPower');
       this.log('READattributes options', aqaraLedDisabled, aqaraPowerOutageMemory, aqaraPowerOffMemory, aqaraMaximumPower);
-      // this.setSettings({ reverse_direction: xiaomiCurtainReverse, open_close_manual: !xiaomiCurtainOpenCloseManual });
+      // await this.setSettings({ reverse_direction: xiaomiCurtainReverse, open_close_manual: !xiaomiCurtainOpenCloseManual });
     } catch (err) {
       this.log('could not read Attribute xiaomiSwitchOptions:', err);
     }
@@ -96,7 +96,7 @@ class XiaomiSmartPlugEU extends ZigBeeDevice {
     });
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
+      this.setCapabilityValue('onoff', state === 1).catch(this.error);
     }
   }
 

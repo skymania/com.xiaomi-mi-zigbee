@@ -4,6 +4,11 @@
 		"en": "Xiaomi Honeywell natural gas detector",
 		"nl": "Xiaomi Honeywell gas melder"
 	},
+	"_appSpecific":{
+  	"brand": "Xiaomi Honeywell",
+    "modelID": "JTQJ-BF-01LM/BW",
+    "EAN":"6953046000074"
+  },
 	"class": "sensor",
 	"capabilities": [
 		"alarm_gas",
@@ -14,6 +19,8 @@
       "CR123A"
     ]
   },
+	"platforms": [ "local", "cloud" ],
+	"connectivity": [ "zigbee" ],
 	"zigbee": {
 		"manufacturerName": "LUMI",
 		"productId": "lumi.sensor_natgas",

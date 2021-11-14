@@ -1,5 +1,6 @@
 {
   "id": "button1_button",
+  "platforms": [ "local" ],
   "title": {
     "en": "A button has been pressed",
     "nl": "Een knop is ingedrukt",

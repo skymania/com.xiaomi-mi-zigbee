@@ -3,6 +3,11 @@
     "en": "Aqara Motion Sensor"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "RTCGQ11LM",
+    "EAN": ["6970504210066", "192784000090"]
+  },
   "capabilities": [
     "alarm_motion",
     "measure_luminance",
@@ -14,6 +19,8 @@
       "CR2450"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.sensor_motion.aq2",

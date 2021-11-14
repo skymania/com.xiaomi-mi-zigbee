@@ -3,6 +3,11 @@
     "en": "Aqara Door and Window Sensor"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "MCCGQ11LM",
+    "EAN": ["6970504210073", "192784000083"]
+  },
   "capabilities": [
     "alarm_contact",
     "alarm_battery",
@@ -13,6 +18,8 @@
       "CR1632"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.sensor_magnet.aq2",

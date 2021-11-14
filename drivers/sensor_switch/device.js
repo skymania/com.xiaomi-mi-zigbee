@@ -7,6 +7,7 @@ const Homey = require('homey');
 const { ZigBeeDevice } = require('homey-zigbeedriver');
 const { Cluster, CLUSTER, debug } = require('zigbee-clusters');
 
+const util = require('../../lib/util');
 const XiaomiSpecificOnOffCluster = require('../../lib/XiaomiSpecificOnOffCluster');
 const XiaomiBasicCluster = require('../../lib/XiaomiBasicCluster');
 
@@ -30,11 +31,11 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
 
     // Add battery capabilities
     if (!this.hasCapability('alarm_battery')) {
-      await this.addCapability('alarm_battery');
+      await this.addCapability('alarm_battery').catch(this.error);
     }
 
     if (!this.hasCapability('measure_battery')) {
-      await this.addCapability('measure_battery');
+      await this.addCapability('measure_battery').catch(this.error);
     }
 
     // supported scenes and their reported attribute numbers (1 - 4 based on reported data, 90,91 custom code)
@@ -88,7 +89,7 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
           this.triggerFlow({
             id: 'button1_button',
             tokens: remoteValue,
-            state: null,
+            state: remoteValue,
           })
             .catch(err => this.error('Error triggering button1ButtonTriggerDevice', err));
         }, (this.getSetting('button_long_press_threshold') || 1000));
@@ -112,7 +113,7 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
         this.triggerFlow({
           id: 'button1_button',
           tokens: remoteValue,
-          state: null,
+          state: remoteValue,
         })
           .catch(err => this.error('Error triggering button1ButtonTriggerDevice', err));
 
@@ -149,15 +150,11 @@ class XiaomiWirelessSwitch extends ZigBeeDevice {
      */
   onXiaomiLifelineAttributeReport(attributeBuffer) {
     const batteryVoltage = attributeBuffer.readUInt16LE(5);
-    this.log('lifeline attribute report, batteryVoltage (mV):', batteryVoltage);
-
     if (typeof batteryVoltage === 'number') {
-      const parsedVolts = batteryVoltage / 1000;
-      const minVolts = 2.5;
-      const maxVolts = 3.0;
-      const parsedBatPct = Math.min(100, Math.round((parsedVolts - minVolts) / (maxVolts - minVolts) * 100));
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      this.log('lifeline attribute report', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
       this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-      this.setCapabilityValue('alarm_battery', batteryVoltage < 2600).catch(this.error);
+      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

@@ -23,10 +23,17 @@ class AqaraD1WallSwitchSingleL extends ZigBeeDevice {
     // print the node's info to the console
     // this.printNode();
 
+    this.endpointIds = {
+      leftSwitch: 2,
+    };
+
+    const subDeviceId = this.isSubDevice() ? this.getData().subDeviceId : 'leftSwitch';
+    this.log('Initializing', subDeviceId, 'at endpoint', this.endpointIds[subDeviceId]);
+
     // Register capabilities and reportListeners for  switch
     if (this.hasCapability('onoff')) {
       this.registerCapability('onoff', CLUSTER.ON_OFF, {
-        endpoint: 1,
+        endpoint: this.endpointIds[subDeviceId],
       });
     }
 
@@ -50,7 +57,7 @@ class AqaraD1WallSwitchSingleL extends ZigBeeDevice {
     });
 
     if (typeof state === 'number') {
-      this.setCapabilityValue('onoff', state === 1);
+      this.setCapabilityValue('onoff', state === 1).catch(this.error);
     }
   }
 

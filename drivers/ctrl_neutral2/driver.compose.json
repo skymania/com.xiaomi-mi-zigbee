@@ -5,6 +5,11 @@
     "nl": "Aqara Wall Switch Double (L)",
     "de": "Aqara Wall Switch Double (L)"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG03LM",
+    "EAN": "6970504210028"
+  },
   "class": "socket",
   "capabilities": [
     "onoff",
@@ -24,6 +29,8 @@
       "greyout": false
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.ctrl_neutral2",

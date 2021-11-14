@@ -4,6 +4,11 @@
     "nl": "Aqara Smart Socket",
     "de": "Aqara Smarte Steckdose"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBCZ11LM",
+    "EAN": "6970504210110"
+  },
   "class": "socket",
   "capabilities": [
     "onoff",
@@ -15,9 +20,11 @@
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
-    "productId": "lumi.ctrl_86plug.aq1",
+    "productId": ["lumi.ctrl_86plug","lumi.ctrl_86plug.aq1"],
     "endpoints": {
       "1": {
         "clusters": [
