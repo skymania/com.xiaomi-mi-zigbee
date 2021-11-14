@@ -1,0 +1,101 @@
+{
+  "name": {
+    "en": "Aqara H1 Wall Switch Double (No Neutral)"
+  },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "WS-EUK02",
+    "EAN": "6970504214781"
+  },
+  "class": "socket",
+  "capabilities": [
+    "onoff"
+  ],
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.switch.l2aeu1",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          18,
+          64704
+        ],
+        "bindings": [
+          6,
+          18
+        ]
+      },
+      "2": {
+        "clusters": [
+          0,
+          3,
+          4,
+          5,
+          6,
+          18,
+          64704
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "41":{
+        "clusters": [
+          18
+        ],
+        "bindings": [
+          18
+        ]
+      },
+      "42":{
+        "clusters": [
+          18
+        ],
+        "bindings": [
+          18
+        ]
+      }
+      ,
+      "51":{
+        "clusters": [
+          18
+        ],
+        "bindings": [
+          18
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+      }
+    },
+    "devices": {
+      "rightSwitch": {
+        "capabilities": [ "onoff" ],
+        "name": {
+          "en": "Aqara H1 Wall Switch Double (L) - Right",
+          "nl": "Aqara H1 Wall Switch Double (L) - Rechts",
+          "de": "Aqara H1 Wall Switch Double (L) - Rechts"
+        },
+        "settings": []
+      }
+    }
+  },
+  "images": {
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}
