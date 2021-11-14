@@ -1,0 +1,42 @@
+{
+  "triggers": [
+    {
+      "id": "alarm_VOC_false",
+      "platforms": [ "local", "cloud" ],
+      "title": {
+        "en": "The VOC alarm turned off",
+        "nl": "Het VOC alarm gaat uit"
+      },
+      "args": []
+    },
+    {
+      "id": "alarm_VOC_true",
+      "platforms": [ "local", "cloud" ],
+      "title": {
+        "en": "The VOC alarm turned on",
+        "nl": "Het VOC alarm gaat aan"
+      },
+      "args": []
+    },
+    {
+      "id": "measure_AirQualityLevel_changed",
+      "platforms": [ "local", "cloud" ],
+      "title": {
+        "en": "Air Quality Level has changed",
+        "nl": "Luchtkwaliteitsniveau is verandert"
+      },
+      "args": [],
+      "tokens": [
+          {
+            "name": "measure_AirQualityLevel",
+            "title": {
+              "en": "Air Quality Level",
+              "nl": "Luchtkwaliteitsniveau"
+            },
+            "type": "number",
+            "example": 3
+          }
+        ]
+    }
+  ]
+}
