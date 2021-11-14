@@ -5,9 +5,9 @@
 	"main": "app.js",
 	"dependencies": {
 		"git-branch": "^1.0.0",
-		"homey-zigbeedriver": "^1.6.2",
-		"homey-zwavedriver": "^1.0.3",
-		"zigbee-clusters": "^1.4.0"
+		"homey-zigbeedriver": "^1.6.10",
+		"homey-zwavedriver": "^1.0.4",
+		"zigbee-clusters": "^1.4.1"
 	},
 	"devDependencies": {
 		"eslint": "^6.8.0",
@@ -15,11 +15,13 @@
 	},
 	"scripts": {
 		"lint": "eslint .",
-		"start": "nodemon --watch . --exec \"homey app run\""
+		"start": "nodemon --watch . --exec \"homey app run\"",
+		"buildTable": "node -e \"require('./docs/supportedDevices').parseManifest()\" > docs/supportedDevices.md"
 	},
 	"nodemonConfig": {
 		"ignore": [
-			"app.json"
+			"app.json",
+			"build/"
 		]
 	},
 	"repository": {
