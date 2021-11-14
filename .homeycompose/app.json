@@ -10,8 +10,9 @@
   "category": [
     "lights"
   ],
-  "version": "1.2.5",
+  "version": "1.4.0",
   "compatibility": ">=5.0.0",
+  "support": "https://community.athom.com/t/156",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
   "sdk": 3,
@@ -52,5 +53,6 @@
   "images": {
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
-  }
+  },
+  "platforms": [ "local", "cloud" ]
 }

@@ -11,8 +11,9 @@
   "category": [
     "lights"
   ],
-  "version": "1.2.5",
+  "version": "1.4.0",
   "compatibility": ">=5.0.0",
+  "support": "https://community.athom.com/t/156",
   "athomForumDiscussionId": 4120,
   "homeyCommunityTopicId": 156,
   "sdk": 3,
@@ -54,10 +55,17 @@
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   },
+  "platforms": [
+    "local",
+    "cloud"
+  ],
   "flow": {
     "triggers": [
       {
         "id": "button1_button",
+        "platforms": [
+          "local"
+        ],
         "title": {
           "en": "A button has been pressed",
           "nl": "Een knop is ingedrukt",
@@ -92,6 +100,9 @@
       },
       {
         "id": "button2_button",
+        "platforms": [
+          "local"
+        ],
         "title": {
           "en": "A button has been pressed",
           "nl": "Een knop is ingedrukt",
@@ -106,7 +117,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01"
+            "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01|remote.b28ac1"
           }
         ],
         "tokens": [
@@ -138,10 +149,19 @@
       },
       {
         "id": "trigger_button1_scene",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "A scene has been activated",
           "nl": "Een scene is geactiveerd",
           "de": "Eine Szene wurde aktiviert"
+        },
+        "titleFormatted": {
+          "en": "A scene ([[scene]]) has been activated",
+          "nl": "Een scene ([[scene]]) is geactiveerd",
+          "de": "Eine Szene ([[scene]]) wurde aktiviert"
         },
         "hint": {
           "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
@@ -156,16 +176,33 @@
           },
           {
             "name": "scene",
-            "type": "autocomplete"
+            "type": "autocomplete",
+            "title": {
+              "en": "Select the action",
+              "nl": "Selecteer de actie"
+            },
+            "placeholder": {
+              "en": "Pressed",
+              "nl": "Ingedrukt"
+            }
           }
         ]
       },
       {
         "id": "trigger_button2_scene",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "A scene has been activated",
           "nl": "Een scene is geactiveerd",
           "de": "Eine Szene wurde aktiviert"
+        },
+        "titleFormatted": {
+          "en": "A scene ([[scene]]) has been activated with [[button]]",
+          "nl": "Een scene ([[scene]]) is geactiveerd met [[button]]",
+          "de": "Eine Szene ([[scene]]) wurde aktiviert mit [[button]]"
         },
         "hint": {
           "en": "This card will only get triggered if the scene matches the state of the dropdown fields.",
@@ -176,20 +213,40 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01"
+            "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01|remote.b28ac1"
           },
           {
             "name": "button",
-            "type": "autocomplete"
+            "type": "autocomplete",
+            "title": {
+              "en": "Select the group",
+              "nl": "Selecteer de groep"
+            },
+            "placeholder": {
+              "en": "Group X",
+              "nl": "Groep X"
+            }
           },
           {
             "name": "scene",
-            "type": "autocomplete"
+            "type": "autocomplete",
+            "title": {
+              "en": "Select the action",
+              "nl": "Selecteer de actie"
+            },
+            "placeholder": {
+              "en": "Pressed",
+              "nl": "Ingedrukt"
+            }
           }
         ]
       },
       {
         "id": "trigger_switch2_turned_off",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Turned off (right switch)",
           "nl": "Uitgeschakeld (rechter schakelaar)",
@@ -205,6 +262,10 @@
       },
       {
         "id": "trigger_switch2_turned_on",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Turned on (right switch)",
           "nl": "Ingeschakeld (rechter schakelaar)",
@@ -219,7 +280,76 @@
         ]
       },
       {
+        "id": "alarm_VOC_false",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "title": {
+          "en": "The VOC alarm turned off",
+          "nl": "Het VOC alarm gaat uit"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=airmonitor.acn01"
+          }
+        ]
+      },
+      {
+        "id": "alarm_VOC_true",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "title": {
+          "en": "The VOC alarm turned on",
+          "nl": "Het VOC alarm gaat aan"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=airmonitor.acn01"
+          }
+        ]
+      },
+      {
+        "id": "measure_AirQualityLevel_changed",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "title": {
+          "en": "Air Quality Level has changed",
+          "nl": "Luchtkwaliteitsniveau is verandert"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=airmonitor.acn01"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "measure_AirQualityLevel",
+            "title": {
+              "en": "Air Quality Level",
+              "nl": "Luchtkwaliteitsniveau"
+            },
+            "type": "number",
+            "example": 3
+          }
+        ]
+      },
+      {
         "id": "cube_Motion",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Cube motion",
           "nl": "Cube beweging",
@@ -267,10 +397,19 @@
       },
       {
         "id": "cube_Shake",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Cube shaked",
           "nl": "Cube geschud",
           "de": "Cube geschüttelt"
+        },
+        "titleFormatted": {
+          "en": "Cube shaked with [[targetFace]]",
+          "nl": "Cube geschud met [[targetFace]]",
+          "de": "Cube geschüttelt mit [[targetFace]]"
         },
         "args": [
           {
@@ -281,13 +420,23 @@
           {
             "name": "targetFace",
             "type": "dropdown",
+            "title": {
+              "en": "Select the top side",
+              "nl": "Selecteer de boven zijde",
+              "de": "Wählen Sie die Seite oben"
+            },
+            "placeholder": {
+              "en": "side X",
+              "nl": "zijde X",
+              "de": "Seite X"
+            },
             "values": [
               {
                 "id": "0",
                 "label": {
                   "en": "any side up",
                   "nl": "willekeurige zijde",
-                  "de": "Zufällige Seite oben"
+                  "de": "zufällige Seite oben"
                 }
               },
               {
@@ -344,10 +493,19 @@
       },
       {
         "id": "cube_Flip90",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Cube flipped 90°",
           "nl": "Cube 90° gekanteld",
           "de": "Cube 90° gedreht"
+        },
+        "titleFormatted": {
+          "en": "Cube flipped 90° [[sourceFace]] [[targetFace]]",
+          "nl": "Cube 90° gekanteld [[sourceFace]] [[targetFace]]",
+          "de": "Cube 90° gedreht [[sourceFace]] [[targetFace]]"
         },
         "args": [
           {
@@ -358,6 +516,16 @@
           {
             "name": "sourceFace",
             "type": "dropdown",
+            "title": {
+              "en": "Select the starting side",
+              "nl": "Selecteer de start zijde",
+              "de": "Wählen Sie die Startseite"
+            },
+            "placeholder": {
+              "en": "side X",
+              "nl": "zijde X",
+              "de": "Seite X"
+            },
             "values": [
               {
                 "id": "0",
@@ -420,6 +588,16 @@
           {
             "name": "targetFace",
             "type": "dropdown",
+            "title": {
+              "en": "Select the top side",
+              "nl": "Selecteer de boven zijde",
+              "de": "Wählen Sie die Seite oben"
+            },
+            "placeholder": {
+              "en": "side X",
+              "nl": "zijde X",
+              "de": "Seite X"
+            },
             "values": [
               {
                 "id": "0",
@@ -483,9 +661,19 @@
       },
       {
         "id": "cube_Flip180",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Cube flipped 180°",
-          "nl": "Cube 180° gekanteld"
+          "nl": "Cube 180° gekanteld",
+          "de": "Cube um 180° gedreht"
+        },
+        "titleFormatted": {
+          "en": "Cube flipped 180° with [[targetFace]]",
+          "nl": "Cube 180° gekanteld met [[targetFace]]",
+          "de": "Cube um 180° gedreht mit [[targetFace]]"
         },
         "args": [
           {
@@ -496,12 +684,22 @@
           {
             "name": "targetFace",
             "type": "dropdown",
+            "title": {
+              "en": "Select the top side",
+              "nl": "Selecteer de boven zijde",
+              "de": "Wählen Sie die Seite oben"
+            },
+            "placeholder": {
+              "en": "side X",
+              "nl": "zijde X",
+              "de": "Seite X"
+            },
             "values": [
               {
                 "id": "0",
                 "label": {
                   "en": "any side up",
-                  "nl": "willekeurige zijde",
+                  "nl": "willekeurige zijde boven",
                   "de": "beliebige Seite oben"
                 }
               },
@@ -559,10 +757,19 @@
       },
       {
         "id": "cube_Slide",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Cube slided",
           "nl": "Cube verschoven",
           "de": "Cube verschieben"
+        },
+        "titleFormatted": {
+          "en": "Cube slided with [[targetFace]]",
+          "nl": "Cube verschoven met [[targetFace]]",
+          "de": "Cube verschieben mit [[targetFace]]"
         },
         "args": [
           {
@@ -573,6 +780,16 @@
           {
             "name": "targetFace",
             "type": "dropdown",
+            "title": {
+              "en": "Select the top side",
+              "nl": "Selecteer de boven zijde",
+              "de": "Wählen Sie die Seite oben"
+            },
+            "placeholder": {
+              "en": "side X",
+              "nl": "zijde X",
+              "de": "Seite X"
+            },
             "values": [
               {
                 "id": "0",
@@ -636,10 +853,19 @@
       },
       {
         "id": "cube_DoubleTap",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Cube double tapped",
           "nl": "Cube twee keer kloppen",
           "de": "Cube zweimal angetippt"
+        },
+        "titleFormatted": {
+          "en": "Cube double tapped with [[targetFace]]",
+          "nl": "Cube twee keer kloppen met [[targetFace]]",
+          "de": "Cube zweimal angetippt mit [[targetFace]]"
         },
         "args": [
           {
@@ -650,6 +876,16 @@
           {
             "name": "targetFace",
             "type": "dropdown",
+            "title": {
+              "en": "Select the top side",
+              "nl": "Selecteer de boven zijde",
+              "de": "Wählen Sie die Seite oben"
+            },
+            "placeholder": {
+              "en": "side X",
+              "nl": "zijde X",
+              "de": "Seite X"
+            },
             "values": [
               {
                 "id": "0",
@@ -713,10 +949,19 @@
       },
       {
         "id": "cube_Rotate",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Cube rotated",
           "nl": "Cube gedraaid",
           "de": "Cube gedreht"
+        },
+        "titleFormatted": {
+          "en": "Cube rotated with [[targetFace]]",
+          "nl": "Cube gedraaid met [[targetFace]]",
+          "de": "Cube gedreht mit [[targetFace]]"
         },
         "args": [
           {
@@ -727,6 +972,16 @@
           {
             "name": "targetFace",
             "type": "dropdown",
+            "title": {
+              "en": "Select the top side",
+              "nl": "Selecteer de boven zijde",
+              "de": "Wählen Sie die Seite oben"
+            },
+            "placeholder": {
+              "en": "side X",
+              "nl": "zijde X",
+              "de": "Seite X"
+            },
             "values": [
               {
                 "id": "0",
@@ -812,6 +1067,10 @@
       },
       {
         "id": "alarm_gas_true",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The gas alarm turned on",
           "nl": "Het gasalarm gaat aan",
@@ -827,6 +1086,10 @@
       },
       {
         "id": "alarm_gas_false",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The gas alarm turned off",
           "nl": "Het gassalarm gaat uit",
@@ -842,6 +1105,10 @@
       },
       {
         "id": "sensor_motion",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Vibration sensor motion",
           "nl": "Trillings sensor beweging",
@@ -873,6 +1140,10 @@
       },
       {
         "id": "sensor_vibration",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The vibration strength changed",
           "nl": "Het trillings niveau is veranderd",
@@ -900,6 +1171,10 @@
       },
       {
         "id": "sensor_tilt_reference",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Tilt angles to reference plane",
           "nl": "Kantelhoeken tov referentievlak",
@@ -949,6 +1224,10 @@
       },
       {
         "id": "sensor_tilt_delta",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "Tilt angles to previous position",
           "nl": "Kantelhoeken tov vorige positie",
@@ -998,6 +1277,10 @@
       },
       {
         "id": "alarm_vibration_true",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The vibration alarm turned on",
           "nl": "Het trillingsalarm gaat aan",
@@ -1013,6 +1296,10 @@
       },
       {
         "id": "alarm_vibration_false",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The vibration alarm turned off",
           "nl": "Het trillingsalarm gaat uit",
@@ -1028,6 +1315,10 @@
       },
       {
         "id": "alarm_tilt_true",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The tilt alarm turned on",
           "nl": "Het kantelalarm gaat aan",
@@ -1043,6 +1334,10 @@
       },
       {
         "id": "alarm_tilt_false",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The tilt alarm turned off",
           "nl": "Het kantelalarm gaat uit",
@@ -1058,6 +1353,10 @@
       },
       {
         "id": "alarm_drop_true",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The drop alarm turned on",
           "nl": "Het valalarm gaat aan",
@@ -1073,6 +1372,10 @@
       },
       {
         "id": "alarm_drop_false",
+        "platforms": [
+          "local",
+          "cloud"
+        ],
         "title": {
           "en": "The drop alarm turned off",
           "nl": "Het valalarm gaat uit",
@@ -1140,9 +1443,195 @@
   "drivers": [
     {
       "name": {
+        "en": "Aqara TVOC Air Quality Monitor"
+      },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "AAQS-S01, VOCKQJK11LM",
+        "EAN": [
+          "6970504214644",
+          "192784000595"
+        ]
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_battery",
+        "measure_temperature",
+        "measure_humidity",
+        "measure_VOC",
+        "measure_AirQualityLevel",
+        "alarm_VOC",
+        "alarm_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR2450",
+          "CR2450"
+        ]
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.airmonitor.acn01",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              3,
+              12,
+              1026,
+              1029,
+              64704
+            ],
+            "bindings": [
+              1,
+              12,
+              1026,
+              1029,
+              64704
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/airmonitor.acn01/assets/learn_AQM.svg",
+          "instruction": {
+            "en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 8 seconds until the screen flashes",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 8 seconden totdat het scherm knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 8 Sekunden bis das Bildschirm blinkt"
+          }
+        }
+      },
+      "images": {
+        "xlarge": "/drivers/airmonitor.acn01/assets/images/xlarge.png",
+        "large": "/drivers/airmonitor.acn01/assets/images/large.png",
+        "small": "/drivers/airmonitor.acn01/assets/images/small.png"
+      },
+      "id": "airmonitor.acn01",
+      "settings": [
+        {
+          "id": "temperature_offset",
+          "type": "number",
+          "label": {
+            "en": "Temperature offset (°C)",
+            "nl": "Temperatuur compensatie (°C)"
+          },
+          "hint": {
+            "en": "Set a correction to compensate a temperature offset.\nRange: -10 - 10, step size 0.1, \ndefault: 0 [°C]",
+            "nl": "Stel een correctiewaarde in om een temperature verschil te compenseren.\nBereik: -10 - 10, stap grootte 0.1, \nstandaard: 0 [°C]"
+          },
+          "value": 0,
+          "attr": {
+            "min": -10,
+            "max": 10,
+            "step": 0.1
+          },
+          "units": {
+            "en": "°C",
+            "nl": "°C"
+          }
+        },
+        {
+          "id": "temperature_decimals",
+          "type": "radio",
+          "label": {
+            "en": "Temperature reporting"
+          },
+          "value": "1",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Report temperature value with 1 decimal (22.1 °C)"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Report temperature value with 2 decimals (22.07 °C)"
+              }
+            }
+          ]
+        },
+        {
+          "id": "humidity_offset",
+          "type": "number",
+          "label": {
+            "en": "Humidity offset (%)",
+            "nl": "Luchtvochtigheids compensatie (%)"
+          },
+          "hint": {
+            "en": "Set a correction to compensate a humidity offset.\nRange: -10 - 10, step size 1, \ndefault: 0 [%]",
+            "nl": "Stel een correctiewaarde in om een Luchtvochtigheids verschil te compenseren.\nBereik: -10 - 10, stap grootte 1, \nstandaard: 0 [%]"
+          },
+          "value": 0,
+          "attr": {
+            "min": -10,
+            "max": 10,
+            "step": 1
+          },
+          "units": {
+            "en": "%",
+            "nl": "%"
+          }
+        },
+        {
+          "id": "humidity_decimals",
+          "type": "radio",
+          "label": {
+            "en": "Humidity reporting"
+          },
+          "value": "1",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Report humidity value with 1 decimal (65.3 %)"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Report humidity value with 2 decimals (65.34 %)"
+              }
+            }
+          ]
+        },
+        {
+          "id": "VOC_alarm_threshold",
+          "type": "number",
+          "value": 220,
+          "attr": {
+            "min": 65,
+            "max": 2200
+          },
+          "label": {
+            "en": "VOC alarm threshold",
+            "nl": "VOC alarm drempelwaarde"
+          },
+          "hint": {
+            "en": "Volatile Organic Compound (VOC) alarm threshold level \nDefault: 220 ppm (Intensified ventilation recommended)",
+            "nl": "Volatile Organic Compound (VOC) alarm drempelwaarde \nStandaard: 220 ppm (Intensieve ventilatie aanbevolen)"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
         "en": "Aqara Smart Socket",
         "nl": "Aqara Smart Socket",
         "de": "Aqara Smarte Steckdose"
+      },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBCZ11LM",
+        "EAN": "6970504210110"
       },
       "class": "socket",
       "capabilities": [
@@ -1155,9 +1644,19 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.ctrl_86plug.aq1",
+        "productId": [
+          "lumi.ctrl_86plug",
+          "lumi.ctrl_86plug.aq1"
+        ],
         "endpoints": {
           "1": {
             "clusters": [
@@ -1209,6 +1708,11 @@
         "nl": "Aqara Wall Switch Single (LN)",
         "de": "Aqara Wall Switch Single (LN)"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG11LM",
+        "EAN": "6970504210110"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -1220,9 +1724,19 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.ctrl_ln1.aq1",
+        "productId": [
+          "lumi.ctrl_ln1",
+          "lumi.ctrl_ln1.aq1"
+        ],
         "endpoints": {
           "1": {
             "clusters": [
@@ -1283,6 +1797,11 @@
         "nl": "Aqara Wall Switch Double (LN)",
         "de": "Aqara Wall Switch Double (LN)"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG12LM",
+        "EAN": "6970504210134"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -1307,9 +1826,19 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.ctrl_ln2.aq1",
+        "productId": [
+          "lumi.ctrl_ln2",
+          "lumi.ctrl_ln2.aq1"
+        ],
         "endpoints": {
           "1": {
             "clusters": [
@@ -1392,6 +1921,11 @@
         "nl": "Aqara Wall Switch Double (LN) - Links",
         "de": "Aqara Wall Switch Double (LN) - Links"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG12LM",
+        "EAN": "6970504210134"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -1403,9 +1937,19 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
-        "productId": "lumi.ctrl_ln2.aq1",
+        "productId": [
+          "lumi.ctrl_ln2",
+          "lumi.ctrl_ln2.aq1"
+        ],
         "endpoints": {
           "1": {
             "clusters": [
@@ -1501,9 +2045,21 @@
         "nl": "Aqara Wall Switch Single (L)",
         "de": "Aqara Wall Switch Single (L)"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG04LM",
+        "EAN": "6970504210011"
+      },
       "class": "socket",
       "capabilities": [
         "onoff"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -1582,6 +2138,11 @@
         "nl": "Aqara Wall Switch Double (L)",
         "de": "Aqara Wall Switch Double (L)"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG03LM",
+        "EAN": "6970504210028"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -1601,6 +2162,13 @@
           "greyout": false
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.ctrl_neutral2",
@@ -1684,9 +2252,21 @@
         "nl": "Aqara Wall Switch Double (L) - Links",
         "de": "Aqara Wall Switch Double (L) - Links"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG03LM",
+        "EAN": "6970504210028"
+      },
       "class": "socket",
       "capabilities": [
         "onoff"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -1785,6 +2365,14 @@
         "de": "Würfel"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "MFKZQ01LM",
+        "EAN": [
+          "6970504210615, 6974176874412",
+          "192784000045"
+        ]
+      },
       "capabilities": [
         "measure_battery",
         "cube_state_motion",
@@ -1797,6 +2385,13 @@
           "CR2450"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
@@ -1879,6 +2474,11 @@
         "de": "Aqara Curtain Controller"
       },
       "class": "curtain",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "ZNCLDJ11LM",
+        "EAN": "6970504210165"
+      },
       "capabilities": [
         "onoff",
         "windowcoverings_set",
@@ -1891,6 +2491,13 @@
           }
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.curtain",
@@ -1931,6 +2538,11 @@
         "de": "Aqara B1 Curtain Controller"
       },
       "class": "curtain",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "ZNCLDJ12LM",
+        "EAN": "6970504211452, 6970504211292"
+      },
       "capabilities": [
         "windowcoverings_closed",
         "windowcoverings_set",
@@ -1954,6 +2566,13 @@
           "INTERNAL"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.curtain.hagl04",
@@ -2031,6 +2650,11 @@
         "de": "Aqara LED Bulb"
       },
       "class": "light",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "ZNLDP12LM",
+        "EAN": "6970504211032"
+      },
       "capabilities": [
         "onoff",
         "dim",
@@ -2057,6 +2681,13 @@
           }
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.light.aqcn02",
@@ -2120,6 +2751,11 @@
         "de": "Smart socket plug"
       },
       "class": "socket",
+      "_appSpecific": {
+        "brand": "Xiaomi",
+        "modelID": "ZNCZ02LM",
+        "EAN": "6970244522818"
+      },
       "capabilities": [
         "onoff",
         "measure_power",
@@ -2131,6 +2767,13 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.plug",
@@ -2184,6 +2827,11 @@
         "en": "Aqara Smart plug (EU)"
       },
       "class": "socket",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "SP-EUC01",
+        "EAN": "6970504210646"
+      },
       "capabilities": [
         "onoff",
         "measure_power",
@@ -2194,6 +2842,13 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.plug.maeu01",
@@ -2235,6 +2890,11 @@
         "en": "Xiaomi Smart plug (EU)"
       },
       "class": "socket",
+      "_appSpecific": {
+        "brand": "Xiaomi",
+        "modelID": "ZNCZ04LM",
+        "EAN": "6934177706493"
+      },
       "capabilities": [
         "onoff",
         "measure_power",
@@ -2245,6 +2905,13 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.plug.mmeu01",
@@ -2300,6 +2967,11 @@
         "nl": "Aqara Double Relay",
         "de": "Aqara Double Relay"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "LLKZMK11LM",
+        "EAN": "6970504210714"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -2323,6 +2995,13 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.relay.c2acn01",
@@ -2377,6 +3056,11 @@
         "nl": "Aqara Double Relay - L1",
         "de": "Aqara Double Relay - L1"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "LLKZMK11LM",
+        "EAN": "6970504210714"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -2387,6 +3071,13 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.relay.c2acn01",
@@ -2455,6 +3146,14 @@
         "de": "Aqara Wireless Switch Single (2018)"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG03LM",
+        "EAN": [
+          "6970504211445",
+          "192784000069"
+        ]
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -2464,6 +3163,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b186acn01",
@@ -2507,6 +3213,11 @@
         "en": "Aqara D1 Wireless Switch Single"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG06LM",
+        "EAN": "6970504211445"
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -2516,6 +3227,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b186acn02",
@@ -2561,6 +3279,14 @@
         "de": "Aqara Wireless Mini Switch (2018)"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG11LM",
+        "EAN": [
+          "6970504210080",
+          "192784000052"
+        ]
+      },
       "capabilities": [
         "alarm_battery",
         "measure_battery"
@@ -2570,6 +3296,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b1acn01",
@@ -2603,6 +3336,14 @@
         "de": "Aqara Wireless Switch Double (2018)"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG02LM",
+        "EAN": [
+          "6970504211452",
+          "192784000076"
+        ]
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -2612,6 +3353,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b286acn01",
@@ -2654,6 +3402,11 @@
         "en": "Aqara D1 Wireless Switch Double"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG07LM",
+        "EAN": "6970504211452"
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -2663,6 +3416,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b286acn02",
@@ -2707,6 +3467,11 @@
         "de": "Aqara | Opple Switch - 2 button"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara Opple",
+        "modelID": "WXCJKG11LM",
+        "EAN": "6970504211964"
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -2716,6 +3481,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b286opcn01",
@@ -2763,11 +3535,14 @@
     },
     {
       "name": {
-        "en": "Aqara | Opple Switch - 4 button",
-        "nl": "Aqara | Opple Schakelaar - 4 knoppen",
-        "de": "Aqara | Opple Switch - 4 button"
+        "en": "Aqara H1 Wireless Switch Double"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WRS-R02",
+        "EAN": "6970504215023"
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -2777,6 +3552,97 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.remote.b28ac1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              3,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              1,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              3,
+              6,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "3": {
+            "clusters": [
+              3,
+              6,
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "//drivers/remote.b28ac1/assets/learn.svg",
+          "instruction": {
+            "en": "Long press any of the buttons for more than 10 seconds until the blue light flashes three times after release",
+            "nl": "Houd een van de knoppen ingedrukt voor meer dan 10 seconden totdat de blauwe led drie keer knippert",
+            "de": "Drücke den Knopf länger als 10 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        }
+      },
+      "images": {
+        "xlarge": "//drivers/remote.b28ac1/assets/images/xlarge.png",
+        "large": "//drivers/remote.b28ac1/assets/images/large.png",
+        "small": "//drivers/remote.b28ac1/assets/images/small.png"
+      },
+      "settings": [],
+      "id": "remote.b28ac1"
+    },
+    {
+      "name": {
+        "en": "Aqara | Opple Switch - 4 button",
+        "nl": "Aqara | Opple Schakelaar - 4 knoppen",
+        "de": "Aqara | Opple Switch - 4 button"
+      },
+      "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara Opple",
+        "modelID": "WXCJKG12LM",
+        "EAN": "6970504211971"
+      },
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b486opcn01",
@@ -2851,6 +3717,11 @@
         "de": "Aqara | Opple Switch - 6 button"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara Opple",
+        "modelID": "WXCJKG13LM",
+        "EAN": "6970504211988"
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -2860,6 +3731,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.remote.b686opcn01",
@@ -2954,6 +3832,11 @@
         "en": "Xiaomi Light Sensor"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Xiaomi",
+        "modelID": "GZCGQ01LM",
+        "EAN": "6934177710865"
+      },
       "capabilities": [
         "measure_luminance",
         "alarm_battery",
@@ -2964,6 +3847,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": [
           "XIAOMI",
@@ -3002,10 +3892,15 @@
     },
     {
       "name": {
-        "en": "Temperature/Humidity sensor",
-        "nl": "Temperature/Humidity sensor"
+        "en": "Xiaomi Temperature and humidity sensor",
+        "nl": "Xiaomi Temperature and humidity sensor"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Xiaomi",
+        "modelID": "WSDCGQ01LM",
+        "EAN": "6970244522801"
+      },
       "capabilities": [
         "measure_temperature",
         "measure_humidity",
@@ -3017,6 +3912,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
@@ -3035,9 +3937,9 @@
         "learnmode": {
           "image": "/drivers/sens/assets/learn_temp.svg",
           "instruction": {
-            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
-            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -3140,6 +4042,11 @@
         "de": "Aqara Wireless Remote Switch Single"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG03LM",
+        "EAN": "6970504211445"
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -3149,6 +4056,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
@@ -3186,6 +4100,11 @@
         "de": "Aqara Wireless Remote Switch Double"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG02LM",
+        "EAN": "6970504210042"
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -3195,6 +4114,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
@@ -3237,11 +4163,16 @@
     },
     {
       "name": {
-        "en": "Door/Window sensor",
-        "nl": "Door/Window sensor",
-        "de": "Door/Window sensor"
+        "en": "Xiaomi Door and window sensor",
+        "nl": "Xiaomi Door and window sensor",
+        "de": "Xiaomi Door and window sensor"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Xiaomi",
+        "modelID": "MCCGQ01LM",
+        "EAN": "6970244522771"
+      },
       "capabilities": [
         "alarm_contact",
         "alarm_battery",
@@ -3252,6 +4183,13 @@
           "CR1632"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_magnet",
@@ -3266,9 +4204,9 @@
         "learnmode": {
           "image": "/drivers/sensor_magnet/assets/learn_door.svg",
           "instruction": {
-            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
-            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -3307,6 +4245,14 @@
         "en": "Aqara Door and Window Sensor"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "MCCGQ11LM",
+        "EAN": [
+          "6970504210073",
+          "192784000083"
+        ]
+      },
       "capabilities": [
         "alarm_contact",
         "alarm_battery",
@@ -3317,6 +4263,13 @@
           "CR1632"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_magnet.aq2",
@@ -3369,11 +4322,16 @@
     },
     {
       "name": {
-        "en": "Occupancy sensor",
-        "nl": "Occupancy sensor",
-        "de": "Occupancy sensor"
+        "en": "Xiaomi Occupancy sensor",
+        "nl": "Xiaomi Occupancy sensor",
+        "de": "Xiaomi Occupancy sensor"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Xiaomi",
+        "modelID": "RTCGQ01LM",
+        "EAN": "6970244522788"
+      },
       "capabilities": [
         "alarm_motion",
         "measure_battery",
@@ -3384,6 +4342,13 @@
           "CR2450"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_motion",
@@ -3399,9 +4364,9 @@
         "learnmode": {
           "image": "/drivers/sensor_motion/assets/learn_motion.svg",
           "instruction": {
-            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
-            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -3457,6 +4422,14 @@
         "en": "Aqara Motion Sensor"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "RTCGQ11LM",
+        "EAN": [
+          "6970504210066",
+          "192784000090"
+        ]
+      },
       "capabilities": [
         "alarm_motion",
         "measure_luminance",
@@ -3468,6 +4441,13 @@
           "CR2450"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_motion.aq2",
@@ -3559,6 +4539,11 @@
         "en": "Xiaomi Honeywell natural gas detector",
         "nl": "Xiaomi Honeywell gas melder"
       },
+      "_appSpecific": {
+        "brand": "Xiaomi Honeywell",
+        "modelID": "JTQJ-BF-01LM/BW",
+        "EAN": "6953046000074"
+      },
       "class": "sensor",
       "capabilities": [
         "alarm_gas",
@@ -3569,6 +4554,13 @@
           "CR123A"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_natgas",
@@ -3605,6 +4597,11 @@
         "en": "Xiaomi Honeywell smoke detector",
         "nl": "Xiaomi Honeywell rookmelder"
       },
+      "_appSpecific": {
+        "brand": "Xiaomi Honeywell",
+        "modelID": "JTYJ-GD-01LM/BW",
+        "EAN": "6953046000074"
+      },
       "class": "sensor",
       "capabilities": [
         "alarm_smoke",
@@ -3616,6 +4613,13 @@
           "CR123A"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_smoke",
@@ -3652,6 +4656,11 @@
         "nl": "Wireless switch"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG01LM",
+        "EAN": "6970244522795"
+      },
       "capabilities": [
         "measure_battery",
         "alarm_battery"
@@ -3661,6 +4670,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_switch",
@@ -3676,9 +4692,9 @@
         "learnmode": {
           "image": "/drivers/sensor_switch/assets/learn_button.svg",
           "instruction": {
-            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
-            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
+            "en": "Hold the wireless switch during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de knop in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
           }
         }
       },
@@ -3713,6 +4729,11 @@
         "nl": "Aqara Wireless switch"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG11LM",
+        "EAN": "6970504210080"
+      },
       "capabilities": [
         "alarm_battery",
         "measure_battery"
@@ -3722,6 +4743,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_switch.aq2",
@@ -3755,6 +4783,11 @@
         "nl": "Aqara Wireless switch (Gyro)"
       },
       "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WXKG12LM",
+        "EAN": "6970504210301"
+      },
       "capabilities": [
         "alarm_battery",
         "measure_battery"
@@ -3764,6 +4797,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": [
@@ -3802,6 +4842,11 @@
         "en": "Aqara Water sensor",
         "nl": "Aqara Water sensor"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "SJCGQ11LM",
+        "EAN": "6970504210258, 6970504210608"
+      },
       "class": "sensor",
       "capabilities": [
         "alarm_water",
@@ -3813,6 +4858,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.sensor_wleak.aq1",
@@ -3848,9 +4900,21 @@
         "nl": "Aqara D1 Wall Switch Single (L)",
         "de": "Aqara D1 Wall Switch Single (L)"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG21LM",
+        "EAN": "6970504211643"
+      },
       "class": "socket",
       "capabilities": [
         "onoff"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -3866,6 +4930,17 @@
               6,
               18,
               64704
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "2": {
+            "clusters": [
+              4,
+              5,
+              6,
+              16
             ],
             "bindings": [
               6
@@ -3893,6 +4968,11 @@
         "nl": "Aqara D1 Wall Switch Single (LN)",
         "de": "Aqara D1 Wall Switch Single (LN)"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG23LM",
+        "EAN": "6970504211667"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -3904,6 +4984,13 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.switch.b1nacn02",
@@ -3948,9 +5035,21 @@
         "nl": "Aqara D1 Wall Switch Double (L) - Links",
         "de": "Aqara D1 Wall Switch Double (L) - Links"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG22LM",
+        "EAN": "6970504211650"
+      },
       "class": "socket",
       "capabilities": [
         "onoff"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -3973,13 +5072,21 @@
           },
           "2": {
             "clusters": [
-              0,
-              3,
               4,
               5,
               6,
-              18,
-              64704
+              16
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "3": {
+            "clusters": [
+              4,
+              5,
+              6,
+              16
             ],
             "bindings": [
               6
@@ -4020,6 +5127,11 @@
         "nl": "Aqara D1 Wall Switch Double (LN) - Links",
         "de": "Aqara D1 Wall Switch Double (LN) - Links"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG24LM",
+        "EAN": "6970504211674"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -4031,6 +5143,13 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.switch.b2nacn02",
@@ -4100,9 +5219,21 @@
         "nl": "Single Switch Module T1 (No Neutral)",
         "de": "Single Switch Module T1 (No Neutral)"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "SSM-U02",
+        "EAN": "6970504213302"
+      },
       "class": "socket",
       "capabilities": [
         "onoff"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -4193,7 +5324,7 @@
           },
           "zigbee": {
             "cluster": "AqaraManufacturerSpecific",
-            "attribute": "switchType"
+            "attribute": "aqaraPowerOutageMemory"
           },
           "type": "checkbox"
         }
@@ -4201,13 +5332,198 @@
     },
     {
       "name": {
-        "en": "Aqara D1 Wall Switch Tripple (L) - Left",
-        "nl": "Aqara D1 Wall Switch Tripple (L) - Links",
-        "de": "Aqara D1 Wall Switch Tripple (L) - Links"
+        "en": "Aqara H1 Wall Switch Single (No Neutral)"
+      },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WS-EUK01",
+        "EAN": "6970504214774"
       },
       "class": "socket",
       "capabilities": [
         "onoff"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.l1aeu1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          },
+          "41": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.l1aeu1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        }
+      },
+      "images": {
+        "xlarge": "/drivers/switch.l1aeu1/assets/images/xlarge.png",
+        "large": "/drivers/switch.l1aeu1/assets/images/large.png",
+        "small": "/drivers/switch.l1aeu1/assets/images/small.png"
+      },
+      "id": "switch.l1aeu1"
+    },
+    {
+      "name": {
+        "en": "Aqara H1 Wall Switch Double (No Neutral)"
+      },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WS-EUK02",
+        "EAN": "6970504214781"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.l2aeu1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "41": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "42": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "51": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.l2aeu1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "rightSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara H1 Wall Switch Double (L) - Right",
+              "nl": "Aqara H1 Wall Switch Double (L) - Rechts",
+              "de": "Aqara H1 Wall Switch Double (L) - Rechts"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "xlarge": "/drivers/switch.l2aeu1/assets/images/xlarge.png",
+        "large": "/drivers/switch.l2aeu1/assets/images/large.png",
+        "small": "/drivers/switch.l2aeu1/assets/images/small.png"
+      },
+      "id": "switch.l2aeu1"
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wall Switch Tripple (L) - Left",
+        "nl": "Aqara D1 Wall Switch Tripple (L) - Links",
+        "de": "Aqara D1 Wall Switch Tripple (L) - Links"
+      },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG25LM",
+        "EAN": "6970504211827"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
       ],
       "zigbee": {
         "manufacturerName": "LUMI",
@@ -4302,6 +5618,11 @@
         "nl": "Single Switch Module T1 (With Neutral)",
         "de": "Single Switch Module T1 (With Neutral) "
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "SSM-U01",
+        "EAN": "6970504213296"
+      },
       "class": "socket",
       "capabilities": [
         "onoff",
@@ -4313,6 +5634,13 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.switch.n0agl1",
@@ -4406,7 +5734,7 @@
           },
           "zigbee": {
             "cluster": "AqaraManufacturerSpecific",
-            "attribute": "switchType"
+            "attribute": "aqaraPowerOutageMemory"
           },
           "type": "checkbox"
         }
@@ -4414,9 +5742,116 @@
     },
     {
       "name": {
-        "en": "Aqara D1 Wall Switch Tripple (LN) - Left",
-        "nl": "Aqara D1 Wall Switch Tripple (LN) - Links",
-        "de": "Aqara D1 Wall Switch Tripple (LN) - Links"
+        "en": "Aqara H1 Wall Switch Single (With Neutral)",
+        "nl": "Aqara H1 Wall Switch Single (With Neutral)",
+        "de": "Aqara H1 Wall Switch Single (With Neutral)"
+      },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WS-EUK03",
+        "EAN": "6970504214798"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power"
+      ],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.n1aeu1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          },
+          "21": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "31": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "41": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.n1aeu1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        }
+      },
+      "images": {
+        "xlarge": "/drivers/switch.n1aeu1/assets/images/xlarge.png",
+        "large": "/drivers/switch.n1aeu1/assets/images/large.png",
+        "small": "/drivers/switch.n1aeu1/assets/images/small.png"
+      },
+      "id": "switch.n1aeu1",
+      "settings": [
+        {
+          "id": "save_state",
+          "value": false,
+          "label": {
+            "en": "Restore state after power failure",
+            "nl": "Herstel status na stroomonderbreking"
+          },
+          "hint": {
+            "en": "This parameter determines whether after a power failure the device should be restored to the state it had before the power failure.",
+            "nl": "Deze parameter bepaalt of het apparaat na een stroomonderbreking moet worden ingesteld zoals deze voor de stroomonderbreking stond ingesteld."
+          },
+          "zigbee": {
+            "cluster": "AqaraManufacturerSpecific",
+            "attribute": "aqaraPowerOutageMemory"
+          },
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Aqara H1 Wall Switch Double (With Neutral)"
+      },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WS-EUK04",
+        "EAN": "6970504214804"
       },
       "class": "socket",
       "capabilities": [
@@ -4429,6 +5864,165 @@
           "approximated": true
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.switch.n2aeu1",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6,
+              18
+            ]
+          },
+          "2": {
+            "clusters": [
+              0,
+              3,
+              4,
+              5,
+              6,
+              18,
+              64704
+            ],
+            "bindings": [
+              6
+            ]
+          },
+          "21": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "31": {
+            "clusters": [
+              12
+            ],
+            "bindings": [
+              12
+            ]
+          },
+          "41": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "42": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          },
+          "51": {
+            "clusters": [
+              18
+            ],
+            "bindings": [
+              18
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/switch.n2aeu1/assets/learn.svg",
+          "instruction": {
+            "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+            "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+          }
+        },
+        "devices": {
+          "rightSwitch": {
+            "capabilities": [
+              "onoff"
+            ],
+            "name": {
+              "en": "Aqara H1 Wall Switch Double (L) - Right",
+              "nl": "Aqara H1 Wall Switch Double (L) - Rechts",
+              "de": "Aqara H1 Wall Switch Double (L) - Rechts"
+            },
+            "settings": []
+          }
+        }
+      },
+      "images": {
+        "xlarge": "/drivers/switch.n2aeu1/assets/images/xlarge.png",
+        "large": "/drivers/switch.n2aeu1/assets/images/large.png",
+        "small": "/drivers/switch.n2aeu1/assets/images/small.png"
+      },
+      "id": "switch.n2aeu1",
+      "settings": [
+        {
+          "id": "save_state",
+          "value": false,
+          "label": {
+            "en": "Restore state after power failure",
+            "nl": "Herstel status na stroomonderbreking"
+          },
+          "hint": {
+            "en": "This parameter determines whether after a power failure the device should be restored to the state it had before the power failure.",
+            "nl": "Deze parameter bepaalt of het apparaat na een stroomonderbreking moet worden ingesteld zoals deze voor de stroomonderbreking stond ingesteld."
+          },
+          "zigbee": {
+            "cluster": "AqaraManufacturerSpecific",
+            "attribute": "aqaraPowerOutageMemory"
+          },
+          "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Aqara D1 Wall Switch Tripple (LN) - Left",
+        "nl": "Aqara D1 Wall Switch Tripple (LN) - Links",
+        "de": "Aqara D1 Wall Switch Tripple (LN) - Links"
+      },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "QBKG26LM",
+        "EAN": "6970504211858"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power",
+        "meter_power"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.switch.n3acn3",
@@ -4520,6 +6114,11 @@
         "en": "Aqara Vibration Sensor",
         "nl": "Aqara Vibration Sensor"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "DJT11LM",
+        "EAN": "6970504210592"
+      },
       "class": "sensor",
       "capabilities": [
         "measure_tilt",
@@ -4543,6 +6142,13 @@
           }
         }
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.vibration.aq1",
@@ -4702,6 +6308,14 @@
       "name": {
         "en": "Aqara Temperature and Humidity Sensor"
       },
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "WSDCGQ11LM",
+        "EAN": [
+          "6970504210097",
+          "192784000106"
+        ]
+      },
       "class": "sensor",
       "capabilities": [
         "measure_battery",
@@ -4715,6 +6329,13 @@
           "CR2032"
         ]
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
       "zigbee": {
         "manufacturerName": "LUMI",
         "productId": "lumi.weather",
@@ -4953,6 +6574,27 @@
         "nl": "Trillings alarm ging uit"
       }
     },
+    "alarm_VOC": {
+      "type": "boolean",
+      "title": {
+        "en": "VOC alarm",
+        "nl": "VOC alarm"
+      },
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "VOC alarm turned on",
+        "nl": "VOC alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "VOC alarm turned off",
+        "nl": "VOC alarm ging uit"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/alarm_VOC.svg",
+      "uiQuickAction": false
+    },
     "cube_measure_rotation": {
       "type": "number",
       "uiComponent": "sensor",
@@ -5086,6 +6728,54 @@
         }
       ]
     },
+    "measure_AirQualityLevel": {
+      "type": "enum",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/level_VOC.svg",
+      "title": {
+        "en": "Air Quality Level",
+        "nl": "Luchtkwaliteit niveaus"
+      },
+      "getable": true,
+      "setable": false,
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Excellent",
+            "nl": "Uitstekend"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Good",
+            "nl": "Goed"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Moderate",
+            "nl": "Gemiddeld"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Poor",
+            "nl": "Slecht"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "Unhealthy",
+            "nl": "Ongezond"
+          }
+        }
+      ]
+    },
     "measure_gas_density": {
       "title": {
         "en": "Gas Density"
@@ -5142,6 +6832,28 @@
       "setable": false,
       "insights": true,
       "decimals": 2
+    },
+    "measure_VOC": {
+      "type": "number",
+      "title": {
+        "en": "VOC",
+        "nl": "VOC"
+      },
+      "chartType": "spline",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "ppb",
+        "nl": "ppb"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Volatile Organic Compounds (ppb)",
+        "nl": "Vluchtige organische stoffen (ppb)"
+      },
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_VOC.svg",
+      "uiQuickAction": false
     }
   }
 }

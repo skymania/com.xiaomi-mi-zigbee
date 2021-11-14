@@ -46,5 +46,38 @@
   },
   "1.2.5": {
     "en": "Fix binding issues during inclusion"
+  },
+  "1.2.6": {
+    "en": "Fix battery reporting on Aqara Temperature and Humidity sensor"
+  },
+  "1.3.0": {
+    "en": "Add support for the Aqara Air Quality Monitor (AAQQS-S01)"
+  },
+  "1.3.1": {
+    "en": "Add support for Aqara H1 Wireless double switch & fix crashes Homey bridge"
+  },
+  "1.3.2": {
+    "en": "Add support for the Aqara H1 wireless double switch"
+  },
+  "1.3.3": {
+    "en": "Add support Aqara H1 wall switches (no neutral) & add additional devices to Homey Cloud"
+  },
+  "1.3.4": {
+    "en": "Add support Aqara H1 wall switches (no neutral) & add additional devices to Homey Cloud"
+  },
+  "1.3.5": {
+    "en": "Add support Aqara H1 wall switches (no neutral) & add additional devices to Homey Cloud"
+  },
+  "1.3.6": {
+    "en": "Fix Aqara D1 single and double switch (no neutral)"
+  },
+  "1.3.7": {
+    "en": "Fix Aqara D1 single and double switch (no neutral)"
+  },
+  "1.3.8": {
+    "en": "Fix Aqara D1 single and double switch (no neutral)"
+  },
+  "1.4.0": {
+    "en": "Add support Aqara H1 wall switches (with Neutral) and fix issue Aqara H1 wall switches (no Neutral)"
   }
 }
