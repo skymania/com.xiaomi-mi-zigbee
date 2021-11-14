@@ -2,6 +2,7 @@
   "triggers": [
     {
       "id": "cube_Motion",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Cube motion",
         "nl": "Cube beweging",
@@ -43,20 +44,36 @@
     },
     {
       "id": "cube_Shake",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Cube shaked",
         "nl": "Cube geschud",
         "de": "Cube geschüttelt"
       },
+      "titleFormatted": {
+        "en": "Cube shaked with [[targetFace]]",
+        "nl": "Cube geschud met [[targetFace]]",
+        "de": "Cube geschüttelt mit [[targetFace]]"
+      },
       "args": [{
 				"name": "targetFace",
 				"type": "dropdown",
+        "title": {
+          "en": "Select the top side",
+          "nl": "Selecteer de boven zijde",
+          "de": "Wählen Sie die Seite oben"
+        },
+        "placeholder": {
+          "en": "side X",
+          "nl": "zijde X",
+          "de": "Seite X"
+        },
 				"values": [{
 						"id": "0",
 						"label": {
 							"en": "any side up",
 							"nl": "willekeurige zijde",
-							"de": "Zufällige Seite oben"
+							"de": "zufällige Seite oben"
 						}
 					},
 					{
@@ -112,14 +129,30 @@
     },
     {
       "id": "cube_Flip90",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Cube flipped 90°",
         "nl": "Cube 90° gekanteld",
         "de": "Cube 90° gedreht"
       },
+      "titleFormatted": {
+        "en": "Cube flipped 90° [[sourceFace]] [[targetFace]]",
+        "nl": "Cube 90° gekanteld [[sourceFace]] [[targetFace]]",
+        "de": "Cube 90° gedreht [[sourceFace]] [[targetFace]]"
+      },
       "args": [{
 				"name": "sourceFace",
 				"type": "dropdown",
+        "title": {
+          "en": "Select the starting side",
+          "nl": "Selecteer de start zijde",
+          "de": "Wählen Sie die Startseite"
+        },
+        "placeholder": {
+          "en": "side X",
+          "nl": "zijde X",
+          "de": "Seite X"
+        },
 				"values": [{
 						"id": "0",
 						"label": {
@@ -181,6 +214,16 @@
 			{
 				"name": "targetFace",
 				"type": "dropdown",
+        "title": {
+          "en": "Select the top side",
+          "nl": "Selecteer de boven zijde",
+          "de": "Wählen Sie die Seite oben"
+        },
+        "placeholder": {
+          "en": "side X",
+          "nl": "zijde X",
+          "de": "Seite X"
+        },
 				"values": [{
 						"id": "0",
 						"label": {
@@ -243,18 +286,35 @@
     },
     {
       "id": "cube_Flip180",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Cube flipped 180°",
-        "nl": "Cube 180° gekanteld"
+        "nl": "Cube 180° gekanteld",
+        "de": "Cube um 180° gedreht"
+      },
+      "titleFormatted": {
+        "en": "Cube flipped 180° with [[targetFace]]",
+        "nl": "Cube 180° gekanteld met [[targetFace]]",
+        "de": "Cube um 180° gedreht mit [[targetFace]]"
       },
       "args": [{
 				"name": "targetFace",
 				"type": "dropdown",
+        "title": {
+          "en": "Select the top side",
+          "nl": "Selecteer de boven zijde",
+          "de": "Wählen Sie die Seite oben"
+        },
+        "placeholder": {
+          "en": "side X",
+          "nl": "zijde X",
+          "de": "Seite X"
+        },
 				"values": [{
 						"id": "0",
 						"label": {
 							"en": "any side up",
-							"nl": "willekeurige zijde",
+							"nl": "willekeurige zijde boven",
 							"de": "beliebige Seite oben"
 						}
 					},
@@ -311,14 +371,30 @@
     },
     {
       "id": "cube_Slide",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Cube slided",
         "nl": "Cube verschoven",
         "de": "Cube verschieben"
       },
+      "titleFormatted": {
+        "en": "Cube slided with [[targetFace]]",
+        "nl": "Cube verschoven met [[targetFace]]",
+        "de": "Cube verschieben mit [[targetFace]]"
+      },
       "args": [{
 				"name": "targetFace",
 				"type": "dropdown",
+        "title": {
+          "en": "Select the top side",
+          "nl": "Selecteer de boven zijde",
+          "de": "Wählen Sie die Seite oben"
+        },
+        "placeholder": {
+          "en": "side X",
+          "nl": "zijde X",
+          "de": "Seite X"
+        },
 				"values": [{
 						"id": "0",
 						"label": {
@@ -380,14 +456,30 @@
     },
     {
       "id": "cube_DoubleTap",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Cube double tapped",
         "nl": "Cube twee keer kloppen",
         "de": "Cube zweimal angetippt"
       },
+      "titleFormatted": {
+        "en": "Cube double tapped with [[targetFace]]",
+        "nl": "Cube twee keer kloppen met [[targetFace]]",
+        "de": "Cube zweimal angetippt mit [[targetFace]]"
+      },
       "args": [{
 				"name": "targetFace",
 				"type": "dropdown",
+        "title": {
+          "en": "Select the top side",
+          "nl": "Selecteer de boven zijde",
+          "de": "Wählen Sie die Seite oben"
+        },
+        "placeholder": {
+          "en": "side X",
+          "nl": "zijde X",
+          "de": "Seite X"
+        },
 				"values": [{
 						"id": "0",
 						"label": {
@@ -449,14 +541,30 @@
     },
     {
       "id": "cube_Rotate",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Cube rotated",
         "nl": "Cube gedraaid",
         "de": "Cube gedreht"
       },
+      "titleFormatted": {
+        "en": "Cube rotated with [[targetFace]]",
+        "nl": "Cube gedraaid met [[targetFace]]",
+        "de": "Cube gedreht mit [[targetFace]]"
+      },
       "args": [{
 				"name": "targetFace",
 				"type": "dropdown",
+        "title": {
+          "en": "Select the top side",
+          "nl": "Selecteer de boven zijde",
+          "de": "Wählen Sie die Seite oben"
+        },
+        "placeholder": {
+          "en": "side X",
+          "nl": "zijde X",
+          "de": "Seite X"
+        },
 				"values": [{
 						"id": "0",
 						"label": {

@@ -1,0 +1,109 @@
+{
+  "name": {
+    "en": "Aqara Wall Switch Double (L) - Left",
+    "nl": "Aqara Wall Switch Double (L) - Links",
+    "de": "Aqara Wall Switch Double (L) - Links"
+  },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG03LM",
+    "EAN": "6970504210028"
+  },
+  "class": "socket",
+  "capabilities": [
+    "onoff"
+  ],
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.ctrl_neutral2",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0
+        ]
+      },
+      "2": {
+        "clusters": [
+          0,
+          4,
+          5,
+          6
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "3": {
+        "clusters": [
+          0,
+          4,
+          5,
+          6
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "4": {
+        "clusters": [
+          18
+        ],
+        "bindings": [
+        ]
+      },
+      "5": {
+        "clusters": [
+          18
+        ],
+        "bindings": [
+        ]
+      },
+      "6": {
+        "clusters": [
+          18
+        ],
+        "bindings": [
+        ]
+      },
+      "7": {
+        "clusters": [
+          18
+        ],
+        "bindings": [
+        ]
+      },
+      "8": {
+        "clusters": [
+          18
+        ],
+        "bindings": [
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+        "nl": "Press and hold any of the switch button for more than 5 seconds until the blue light flashes three times after release",
+        "de": "Drücke einen beliebigen Knopf länger als 5 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+      }
+    },
+    "devices": {
+      "rightSwitch": {
+        "capabilities": [ "onoff" ],
+        "name": {
+          "en": "Aqara Wall Switch Double (L) - Right",
+          "nl": "Aqara Wall Switch Double (L) - Rechts",
+          "de": "Aqara Wall Switch Double (L) - Rechts"
+        },
+        "settings": []
+      }
+    }
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}

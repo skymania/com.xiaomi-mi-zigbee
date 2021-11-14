@@ -1,0 +1,64 @@
+{
+  "name": {
+    "en": "Aqara TVOC Air Quality Monitor"
+  },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "AAQS-S01, VOCKQJK11LM",
+    "EAN": ["6970504214644", "192784000595"]
+  },
+  "class": "sensor",
+  "capabilities": [
+    "measure_battery",
+    "measure_temperature",
+    "measure_humidity",
+    "measure_VOC",
+    "measure_AirQualityLevel",
+    "alarm_VOC",
+    "alarm_battery"
+  ],
+  "energy": {
+    "batteries": [
+      "CR2450","CR2450"
+    ]
+  },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.airmonitor.acn01",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          3,
+          12,
+          1026,
+          1029,
+          64704
+        ],
+        "bindings": [
+          1,
+          12,
+          1026,
+          1029,
+          64704
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn_AQM.svg",
+      "instruction": {
+        "en": "Hold the sensor in close proximity of Homey\nLong press the reset button for more than 8 seconds until the screen flashes",
+        "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 8 seconden totdat het scherm knippert",
+        "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 8 Sekunden bis das Bildschirm blinkt"
+      }
+    }
+  },
+  "images": {
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}

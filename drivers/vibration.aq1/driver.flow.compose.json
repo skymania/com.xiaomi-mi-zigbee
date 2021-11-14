@@ -2,6 +2,7 @@
   "triggers": [
     {
       "id": "sensor_motion",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Vibration sensor motion",
         "nl": "Trillings sensor beweging",
@@ -27,6 +28,7 @@
     },
     {
       "id": "sensor_vibration",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "The vibration strength changed",
         "nl": "Het trillings niveau is veranderd",
@@ -48,6 +50,7 @@
     },
     {
       "id": "sensor_tilt_reference",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Tilt angles to reference plane",
         "nl": "Kantelhoeken tov referentievlak",
@@ -91,6 +94,7 @@
     },
     {
       "id": "sensor_tilt_delta",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "Tilt angles to previous position",
         "nl": "Kantelhoeken tov vorige positie",
@@ -134,6 +138,7 @@
     },
     {
       "id": "alarm_vibration_true",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "The vibration alarm turned on",
         "nl": "Het trillingsalarm gaat aan",
@@ -143,6 +148,7 @@
     },
     {
       "id": "alarm_vibration_false",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "The vibration alarm turned off",
         "nl": "Het trillingsalarm gaat uit",
@@ -152,6 +158,7 @@
     },
     {
       "id": "alarm_tilt_true",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "The tilt alarm turned on",
         "nl": "Het kantelalarm gaat aan",
@@ -161,6 +168,7 @@
     },
     {
       "id": "alarm_tilt_false",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "The tilt alarm turned off",
         "nl": "Het kantelalarm gaat uit",
@@ -170,6 +178,7 @@
     },
     {
       "id": "alarm_drop_true",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "The drop alarm turned on",
         "nl": "Het valalarm gaat aan",
@@ -179,6 +188,7 @@
     },
     {
       "id": "alarm_drop_false",
+      "platforms": [ "local", "cloud" ],
       "title": {
         "en": "The drop alarm turned off",
         "nl": "Het valalarm gaat uit",

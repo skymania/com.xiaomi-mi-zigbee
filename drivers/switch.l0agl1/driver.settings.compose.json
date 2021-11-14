@@ -1,0 +1,9 @@
+[{
+  "$extends": "externalSwitchType",
+  "$id": "external_switch_type"
+},
+{
+  "$extends": "saveState",
+  "$id": "save_state"
+}
+]

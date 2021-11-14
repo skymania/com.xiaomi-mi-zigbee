@@ -3,6 +3,11 @@
     "en": "Aqara Smart plug (EU)"
   },
   "class": "socket",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "SP-EUC01",
+    "EAN": "6970504210646"
+  },
   "capabilities": [
     "onoff",
     "measure_power",
@@ -13,11 +18,28 @@
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.plug.maeu01",
-    "deviceId": 81,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          6,
+          9,
+          1794,
+          2820,
+          64704
+        ],
+        "bindings": [
+          6,
+          1794,
+          2820
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

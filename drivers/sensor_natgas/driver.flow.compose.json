@@ -1,0 +1,24 @@
+{
+  "triggers": [
+    {
+      "id": "alarm_gas_true",
+      "platforms": [ "local", "cloud" ],
+      "title": {
+        "en": "The gas alarm turned on",
+        "nl": "Het gasalarm gaat aan",
+        "de": "Der Gasalarm wurde ausgelöst"
+      },
+      "args": []
+    },
+    {
+      "id": "alarm_gas_false",
+      "platforms": [ "local", "cloud" ],
+      "title": {
+        "en": "The gas alarm turned off",
+        "nl": "Het gassalarm gaat uit",
+        "de": "Der Gasalarm wurde ausgeschaltet"
+      },
+      "args": []
+    }
+  ]
+}

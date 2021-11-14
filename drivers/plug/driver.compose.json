@@ -5,6 +5,11 @@
     "de": "Smart socket plug"
   },
   "class": "socket",
+  "_appSpecific":{
+    "brand": "Xiaomi",
+    "modelID": "ZNCZ02LM",
+    "EAN": "6970244522818"
+  },
   "capabilities": [
     "onoff",
     "measure_power",
@@ -16,11 +21,40 @@
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.plug",
-    "deviceId": 81,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          4,
+          5,
+          6
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "2": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "3": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

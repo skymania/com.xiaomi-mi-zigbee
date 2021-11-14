@@ -1,5 +1,6 @@
 {
   "id": "button2_button",
+  "platforms": [ "local" ],
   "title": {
     "en": "A button has been pressed",
     "nl": "Een knop is ingedrukt",
@@ -14,7 +15,7 @@
     {
       "name": "device",
       "type": "device",
-      "filter": "driver_id=sensor_86sw2Un|remote.b286acn01"
+      "filter": "driver_id=sensor_86sw2Un|remote.b286acn01|remote.b286acn02|remote.b286opcn01|remote.b486opcn01|remote.b686opcn01|remote.b28ac1"
     }
   ],
   "tokens": [

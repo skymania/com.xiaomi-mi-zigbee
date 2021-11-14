@@ -4,10 +4,14 @@
     "nl": "Aqara Curtain Controller",
     "de": "Aqara Curtain Controller"
   },
-  "class": "windowcoverings",
+  "class": "curtain",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "ZNCLDJ11LM",
+    "EAN": "6970504210165"
+  },
   "capabilities": [
     "onoff",
-    "dim",
     "windowcoverings_set",
     "windowcoverings_state"
   ],
@@ -16,18 +20,27 @@
       "title": {
         "en": "Curtain open"
       }
-    },
-    "dim": {
-      "title": {
-        "en": "Open level"
-      }
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.curtain",
-    "deviceId": 514,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          4,
+          5,
+          6,
+          13,
+          19,
+          258
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

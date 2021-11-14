@@ -1,16 +1,21 @@
 {
+  "deprecated": true,
   "name": {
     "en": "Aqara Wall Switch Double (LN)",
     "nl": "Aqara Wall Switch Double (LN)",
     "de": "Aqara Wall Switch Double (LN)"
+  },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG12LM",
+    "EAN": "6970504210134"
   },
   "class": "socket",
   "capabilities": [
     "onoff",
     "onoff.1",
     "measure_power",
-    "meter_power",
-    "measure_voltage"
+    "meter_power"
   ],
   "capabilitiesOptions": {
     "onoff": {
@@ -29,11 +34,75 @@
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
-    "productId": "lumi.ctrl_ln2.aq1",
-    "deviceId": 81,
-    "profileId": 260,
+    "productId": ["lumi.ctrl_ln2", "lumi.ctrl_ln2.aq1"],
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          4,
+          5,
+          6,
+          16
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "2": {
+        "clusters": [
+          6,
+          16
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "3": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "4": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "5": {
+        "clusters": [
+          16,
+          18
+        ],
+        "bindings": [
+        ]
+      },
+      "6": {
+        "clusters": [
+          16,
+          18
+        ],
+        "bindings": [
+        ]
+      },
+      "7": {
+        "clusters": [
+          16,
+          18
+        ],
+        "bindings": [
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

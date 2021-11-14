@@ -1,0 +1,84 @@
+{
+  "name": {
+    "en": "Aqara D1 Wall Switch Double (L) - Left",
+    "nl": "Aqara D1 Wall Switch Double (L) - Links",
+    "de": "Aqara D1 Wall Switch Double (L) - Links"
+  },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG22LM",
+    "EAN": "6970504211650"
+  },
+  "class": "socket",
+  "capabilities": [
+    "onoff"
+  ],
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.switch.b2lacn02",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          18,
+          64704
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "2": {
+        "clusters": [
+          4,
+          5,
+          6,
+          16
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "3": {
+        "clusters": [
+          4,
+          5,
+          6,
+          16
+        ],
+        "bindings": [
+          6
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+      }
+    },
+    "devices": {
+      "rightSwitch": {
+        "capabilities": [ "onoff" ],
+        "name": {
+          "en": "Aqara D1 Wall Switch Double (L) - Right",
+          "nl": "Aqara D1 Wall Switch Double (L) - Rechts",
+          "de": "Aqara D1 Wall Switch Double (L) - Rechts"
+        },
+        "settings": []
+      }
+    }
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}

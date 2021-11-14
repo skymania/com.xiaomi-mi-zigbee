@@ -1,0 +1,62 @@
+{
+  "name": {
+    "en": "Aqara D1 Wall Switch Single (L)",
+    "nl": "Aqara D1 Wall Switch Single (L)",
+    "de": "Aqara D1 Wall Switch Single (L)"
+  },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG21LM",
+    "EAN": "6970504211643"
+  },
+  "class": "socket",
+  "capabilities": [
+    "onoff"
+  ],
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.switch.b1lacn02",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          18,
+          64704
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "2": {
+        "clusters": [
+          4,
+          5,
+          6,
+          16
+        ],
+        "bindings": [
+          6
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "/{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+      }
+    }
+  },
+  "images": {
+    "large": "/{{driverAssetsPath}}/images/large.png",
+    "small": "/{{driverAssetsPath}}/images/small.png"
+  }
+}

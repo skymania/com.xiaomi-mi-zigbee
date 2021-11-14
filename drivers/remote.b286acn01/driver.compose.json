@@ -5,17 +5,40 @@
     "de": "Aqara Wireless Switch Double (2018)"
   },
   "class": "sensor",
-  "capabilities": [],
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "WXKG02LM",
+    "EAN": ["6970504211452", "192784000076"]
+  },
+  "capabilities": ["measure_battery", "alarm_battery"],
   "energy": {
     "batteries": [
       "CR2032"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.remote.b286acn01",
-    "deviceId": 24321,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          18
+        ]
+      },
+      "2": {
+        "clusters": [
+          18
+        ]
+      },
+      "3": {
+        "clusters": [
+          18
+        ]
+      }
+    },
     "learnmode": {
       "image": "/{{driverAssetsPath}}/learn.svg",
       "instruction": {

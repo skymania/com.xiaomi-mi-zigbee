@@ -1,0 +1,14 @@
+{
+  "title": {
+    "en": "Gas Density"
+  },
+  "type": "number",
+  "uiComponent": "sensor",
+  "units": {
+    "en": "kg/m3"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "icon": "/assets/capabilities/measure_gas_density.svg"
+}

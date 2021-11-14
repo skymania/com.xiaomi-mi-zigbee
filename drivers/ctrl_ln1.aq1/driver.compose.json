@@ -4,23 +4,66 @@
     "nl": "Aqara Wall Switch Single (LN)",
     "de": "Aqara Wall Switch Single (LN)"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG11LM",
+    "EAN": "6970504210110"
+  },
   "class": "socket",
   "capabilities": [
     "onoff",
     "measure_power",
-    "meter_power",
-    "measure_voltage"
+    "meter_power"
   ],
   "capabilitiesOptions": {
     "measure_power": {
       "approximated": true
     }
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
-    "productId": "lumi.ctrl_ln1.aq1",
-    "deviceId": 81,
-    "profileId": 260,
+    "productId": ["lumi.ctrl_ln1", "lumi.ctrl_ln1.aq1"],
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          4,
+          5,
+          6,
+          16
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "2": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "3": {
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "4": {
+        "clusters": [
+          16,
+          18
+        ],
+        "bindings": [
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

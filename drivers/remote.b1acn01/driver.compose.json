@@ -5,6 +5,11 @@
     "de": "Aqara Wireless Mini Switch (2018)"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "WXKG11LM",
+    "EAN": ["6970504210080", "192784000052"]
+  },
   "capabilities": [
     "alarm_battery",
     "measure_battery"
@@ -14,11 +19,19 @@
       "CR2032"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.remote.b1acn01",
-    "deviceId": 259,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          18
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn_switch.svg",
       "instruction": {
@@ -31,25 +44,5 @@
   "images": {
     "large": "{{driverAssetsPath}}/images/large.png",
     "small": "{{driverAssetsPath}}/images/small.png"
-  },
-  "settings": [
-    {
-      "id": "battery_threshold",
-      "type": "number",
-      "label": {
-        "en": "Battery alarm threshold (%)",
-        "nl": "Batterij alarm waarde (%)"
-      },
-      "hint": {
-        "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-        "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]",
-        "de": "Batterie level (%) Zwischen welchen Werten der Batterie Alarm aktiviert wird.\nSpanne: 1 - 90, \ndefault: 20 [%]"
-      },
-      "value": 20,
-      "attr": {
-        "min": 1,
-        "max": 90
-      }
-    }
-  ]
+  }
 }

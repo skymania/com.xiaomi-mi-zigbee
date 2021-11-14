@@ -4,15 +4,77 @@
     "nl": "Aqara Wall Switch Single (L)",
     "de": "Aqara Wall Switch Single (L)"
   },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "QBKG04LM",
+    "EAN": "6970504210011"
+  },
   "class": "socket",
   "capabilities": [
     "onoff"
   ],
+  "platforms": [ "local", "cloud"],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.ctrl_neutral1",
-    "deviceId": 6,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          2,
+          3,
+          25,
+          10
+        ],
+        "bindings": [
+        ]
+      },
+      "2": {
+        "clusters": [
+         16,
+          6,
+          4,
+          5,
+          16
+        ],
+        "bindings": [
+          6
+        ]
+      },
+      "3": {
+        "clusters": [
+         16,
+          6,
+          4,
+          5
+        ],
+        "bindings": [
+        ]
+      },
+      "4": {
+        "clusters": [
+          18
+        ],
+        "bindings": [
+        ]
+      },
+	  "5": {
+        "clusters": [
+          18
+        ],
+        "bindings": [
+        ]
+      },
+	  "6": {
+        "clusters": [
+          18
+        ],
+        "bindings": [
+        ]
+      }
+    },
     "learnmode": {
       "image": "/{{driverAssetsPath}}/learn.svg",
       "instruction": {

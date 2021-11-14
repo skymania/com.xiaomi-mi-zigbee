@@ -1,0 +1,79 @@
+{
+  "name": {
+    "en": "Aqara H1 Wall Switch Single (With Neutral)",
+    "nl": "Aqara H1 Wall Switch Single (With Neutral)",
+    "de": "Aqara H1 Wall Switch Single (With Neutral)"
+  },
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "WS-EUK03",
+    "EAN": "6970504214798"
+  },
+  "class": "socket",
+  "capabilities": [
+    "onoff",
+    "measure_power",
+    "meter_power"
+  ],
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.switch.n1aeu1",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          18,
+          64704
+        ],
+        "bindings": [
+          6,
+          18
+        ]
+      },
+      "21":{
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "31":{
+        "clusters": [
+          12
+        ],
+        "bindings": [
+          12
+        ]
+      },
+      "41":{
+        "clusters": [
+          18
+        ],
+        "bindings": [
+          18
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
+      }
+    }
+  },
+  "images": {
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  }
+}

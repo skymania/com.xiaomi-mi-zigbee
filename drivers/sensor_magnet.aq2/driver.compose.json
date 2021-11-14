@@ -3,6 +3,11 @@
     "en": "Aqara Door and Window Sensor"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "MCCGQ11LM",
+    "EAN": ["6970504210073", "192784000083"]
+  },
   "capabilities": [
     "alarm_contact",
     "alarm_battery",
@@ -13,11 +18,19 @@
       "CR1632"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.sensor_magnet.aq2",
-    "deviceId": 24321,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          6
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn_door.svg",
       "instruction": {
@@ -30,46 +43,5 @@
   "images": {
     "large": "{{driverAssetsPath}}/images/large.png",
     "small": "{{driverAssetsPath}}/images/small.png"
-  },
-  "settings": [
-    {
-      "id": "battery_threshold",
-      "type": "number",
-      "label": {
-        "en": "Battery alarm threshold (%)",
-        "nl": "Batterij alarm waarde (%)"
-      },
-      "hint": {
-        "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-        "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-      },
-      "value": 20,
-      "attr": {
-        "min": 1,
-        "max": 90
-      }
-    },
-    {
-      "type": "group",
-      "label": {
-        "en": "Expert settings",
-        "nl": "Expert instellingen"
-      },
-      "collapsed": true,
-      "children": [
-        {
-          "id": "reverse_contact_alarm",
-          "type": "checkbox",
-          "value": false,
-          "label": {
-            "en": "Reverse contact alarm logic"
-          },
-          "hint": {
-            "en": "Reverse the contact alarm logic: magnet closed = alarm activated, magnet opened = alarm deactivated.",
-            "nl": "Keer de alarm logic om: magneet gesloten = alarm geactiveerd, magneet geopened = alarm gedeactiveerd."
-          }
-        }
-      ]
-    }
-  ]
+  }
 }

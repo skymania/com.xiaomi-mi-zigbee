@@ -1,9 +1,14 @@
 {
   "name": {
-    "en": "Temperature/Humidity sensor",
-    "nl": "Temperature/Humidity sensor"
+    "en": "Xiaomi Temperature and humidity sensor",
+    "nl": "Xiaomi Temperature and humidity sensor"
   },
   "class": "sensor",
+  "_appSpecific":{
+    "brand": "Xiaomi",
+    "modelID": "WSDCGQ01LM",
+    "EAN": "6970244522801"
+  },
   "capabilities": [
     "measure_temperature",
     "measure_humidity",
@@ -15,127 +20,31 @@
       "CR2032"
     ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
-    "productId": "lumi.sens",
-    "deviceId": [
-      24321
-    ],
-    "profileId": 260,
+    "productId": ["lumi.sens", "lumi.sensor_ht"],
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1026,
+          1029
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn_temp.svg",
       "instruction": {
-        "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times\nNote: keep pressing the reset button every 2 seconds to keep the sensor awake during the inclusion",
-        "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert\nNote: blijf de reset knop iedere 2 seconden indrukken om de sensor wakker te houden tijden het toevoegen",
-        "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt\nNote: Drücke alle 2 Sekunden den Reset Knopf um den Sensor während des anlernens wach zu halten"
+        "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+        "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+        "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
       }
     }
   },
   "images": {
     "large": "{{driverAssetsPath}}/images/large.png",
     "small": "{{driverAssetsPath}}/images/small.png"
-  },
-  "settings": [
-    {
-      "id": "temperature_offset",
-      "type": "number",
-      "label": {
-        "en": "Temperature offset (°C)",
-        "nl": "Temperatuur compensatie (°C)"
-      },
-      "hint": {
-        "en": "Set a correction to compensate a temperature offset.\nRange: -10 - 10, step size 0.1, \ndefault: 0 [°C]",
-        "nl": "Stel een correctiewaarde in om een temperature verschil te compenseren.\nBereik: -10 - 10, stap grootte 0.1, \nstandaard: 0 [°C]"
-      },
-      "value": 0,
-      "attr": {
-        "min": -10,
-        "max": 10,
-        "step": 0.1
-      }
-    },
-    {
-      "id": "temperature_decimals",
-      "type": "radio",
-      "label": {
-        "en": "Temperature reporting"
-      },
-      "value": "1",
-      "values": [
-        {
-          "id": "1",
-          "label": {
-            "en": "Report temperature value with 1 decimal (22.1 °C)"
-          }
-        },
-        {
-          "id": "2",
-          "label": {
-            "en": "Report temperature value with 2 decimals (22.07 °C)"
-          }
-        }
-      ]
-    },
-    {
-      "id": "humidity_offset",
-      "type": "number",
-      "label": {
-        "en": "Humidity offset (%)",
-        "nl": "Luchtvochtigheids compensatie (%)"
-      },
-      "hint": {
-        "en": "Set a correction to compensate a humidity offset.\nRange: -10 - 10, step size 1, \ndefault: 0 [%]",
-        "nl": "Stel een correctiewaarde in om een Luchtvochtigheids verschil te compenseren.\nBereik: -10 - 10, stap grootte 1, \nstandaard: 0 [%]"
-      },
-      "value": 0,
-      "attr": {
-        "min": -10,
-        "max": 10,
-        "step": 1
-      },
-      "units": {
-         "en": "%",
-         "nl": "%"
-      }
-    },
-    {
-      "id": "humidity_decimals",
-      "type": "radio",
-      "label": {
-        "en": "Humidity reporting"
-      },
-      "value": "1",
-      "values": [
-        {
-          "id": "1",
-          "label": {
-            "en": "Report humidity value with 1 decimal (65.3 %)"
-          }
-        },
-        {
-          "id": "2",
-          "label": {
-            "en": "Report humidity value with 2 decimals (65.34 %)"
-          }
-        }
-      ]
-    },
-    {
-      "id": "battery_threshold",
-      "type": "number",
-      "label": {
-        "en": "Battery alarm threshold (%)",
-        "nl": "Batterij alarm waarde (%)"
-      },
-      "hint": {
-        "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
-        "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
-      },
-      "value": 20,
-      "attr": {
-        "min": 1,
-        "max": 90
-      }
-    }
-  ]
+  }
 }

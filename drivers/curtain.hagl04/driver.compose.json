@@ -5,19 +5,53 @@
     "de": "Aqara B1 Curtain Controller"
   },
   "class": "curtain",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "ZNCLDJ12LM",
+    "EAN": "6970504211452, 6970504211292"
+  },
   "capabilities": [
+    "windowcoverings_closed",
     "windowcoverings_set",
     "windowcoverings_state",
-    "measure_battery"
+    "measure_battery",
+    "button.calibrate"
   ],
+  "capabilitiesOptions": {
+    "button.calibrate": {
+       "maintenanceAction": true,
+       "title": {
+          "en": "Start calibration"
+       },
+       "desc": {
+          "en": "Start the curtain track calibration process."
+       }
+    }
+  },
   "energy": {
     "batteries": [ "INTERNAL" ]
   },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
   "zigbee": {
     "manufacturerName": "LUMI",
     "productId": "lumi.curtain.hagl04",
-    "deviceId": 514,
-    "profileId": 260,
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          1,
+          13,
+          19,
+          258
+        ],
+        "bindings": [
+          0,
+          1,
+          258
+        ]
+      }
+    },
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {

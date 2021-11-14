@@ -1,0 +1,55 @@
+{
+	"id": "sensor_smoke",
+	"name": {
+		"en": "Xiaomi Honeywell smoke detector",
+		"nl": "Xiaomi Honeywell rookmelder"
+	},
+	"_appSpecific":{
+  	"brand": "Xiaomi Honeywell",
+    "modelID": "JTYJ-GD-01LM/BW",
+    "EAN":"6953046000074"
+  },
+	"class": "sensor",
+	"capabilities": [
+		"alarm_smoke",
+		"alarm_battery",
+		"measure_battery"
+	],
+	"energy": {
+    "batteries": [
+      "CR123A"
+    ]
+  },
+	"platforms": [ "local", "cloud" ],
+	"connectivity": [ "zigbee" ],
+	"zigbee": {
+		"manufacturerName": "LUMI",
+		"productId": "lumi.sensor_smoke",
+		"endpoints": {
+			"1": {
+			 "clusters": [
+				 0,
+				 1,
+				 1280
+			 ],
+			 "bindings": [
+				 0,
+				 1280
+			 ]
+		 }
+	 },
+		"learnmode": {
+			"image": "{{driverAssetsPath}}/learn.svg",
+			"instruction": {
+				"en": "Press the button on your smoke detector three times",
+        "nl": "Druk driemaal op de knop op de rookmelder"
+			}
+		}
+	},
+	"images": {
+		"large": "{{driverAssetsPath}}/images/large.png",
+		"small": "{{driverAssetsPath}}/images/small.png"
+	},
+	"settings": [
+	]
+}

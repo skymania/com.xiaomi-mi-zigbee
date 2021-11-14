@@ -1,0 +1,111 @@
+{
+  "name": {
+    "en": "Aqara | Opple Switch - 6 button",
+    "nl": "Aqara | Opple Schakelaar - 6 knoppen",
+    "de": "Aqara | Opple Switch - 6 button"
+  },
+  "class": "sensor",
+  "_appSpecific":{
+    "brand": "Aqara Opple",
+    "modelID": "WXCJKG13LM",
+    "EAN": "6970504211988"
+  },
+  "capabilities": [
+    "measure_battery",
+    "alarm_battery"
+  ],
+  "energy": {
+    "batteries": [
+      "CR2032"
+    ]
+  },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.remote.b686opcn01",
+    "endpoints": {
+      "1": {
+       "clusters": [
+         0,
+		     3,
+         4,
+         5,
+         18,
+         64704
+       ],
+       "bindings": [
+         18
+       ]
+		 },
+		 "2": {
+			"clusters": [
+				3,
+				4,
+				5,
+        18
+			],
+      "bindings": [
+        18
+      ]
+		},
+    "3": {
+     "clusters": [
+       3,
+       4,
+       5,
+       18
+     ],
+     "bindings": [
+       18
+     ]
+   },
+   "4": {
+    "clusters": [
+      3,
+      4,
+      5,
+      18
+    ],
+    "bindings": [
+      18
+    ]
+  },
+  "5": {
+   "clusters": [
+     3,
+     4,
+     5,
+     18
+   ],
+   "bindings": [
+     18
+   ]
+ },
+"6": {
+  "clusters": [
+    3,
+    4,
+    5,
+    18
+  ],
+  "bindings": [
+    18
+  ]
+  }
+},
+    "learnmode": {
+      "image": "/{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Long press the reset button for more 15 seconds until the blue light flashes the second time (!) three times",
+        "nl": "Houd de reset knop ingedrukt voor meer dan 15 seconden totdat de blauwe led voor de tweede keer (!) drie keer knippert",
+        "de": "Drücken Sie die Reset-Taste noch 15 Sekunden lang, bis das blaue Licht das zweite Mal (!) dreimal blinkt"
+      }
+    }
+  },
+  "images": {
+    "large": "/{{driverAssetsPath}}/images/large.png",
+    "small": "/{{driverAssetsPath}}/images/small.png"
+  },
+  "settings": []
+}

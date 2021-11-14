@@ -1,0 +1,16 @@
+{
+  "value": true,
+  "label": {
+    "en": "Manually open curtains",
+    "nl": "Handmatig openen gordijen"
+  },
+  "hint": {
+    "en": "This parameter enables to manually open the curtains.",
+    "nl": "Deze parameter maakt het mogelijk om de gordijnen handmatig te openen."
+  },
+  "zigbee": {
+    "cluster": "XiaomiBasicCluster",
+    "attribute": "xiaomiCurtainOpenCloseManual"
+  },
+  "type": "checkbox"
+}

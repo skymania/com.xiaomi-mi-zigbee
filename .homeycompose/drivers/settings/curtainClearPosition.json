@@ -1,0 +1,16 @@
+{
+  "value": false,
+  "label": {
+    "en": "Reset curtain track limits",
+    "nl": "Herstel gordijn rails limieten"
+  },
+  "hint": {
+    "en": "This parameter enables to reverse the curtain direction.",
+    "nl": "Deze parameter maakt het mogelijk om de gordijn openingsrichting om te draaien."
+  },
+  "zigbee": {
+    "cluster": "XiaomiBasicCluster",
+    "attribute": "xiaomiCurtainClearPosition"
+  },
+  "type": "checkbox"
+}
