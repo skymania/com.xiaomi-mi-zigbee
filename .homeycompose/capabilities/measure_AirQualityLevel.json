@@ -1,0 +1,48 @@
+{
+  "type": "enum",
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/level_VOC.svg",
+  "title": {
+    "en": "Air Quality Level",
+    "nl": "Luchtkwaliteit niveaus"
+  },
+  "getable": true,
+  "setable": false,
+  "values": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Excellent",
+        "nl": "Uitstekend"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Good",
+        "nl": "Goed"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Moderate",
+        "nl": "Gemiddeld"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Poor",
+        "nl": "Slecht"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Unhealthy",
+        "nl": "Ongezond"
+      }
+    }
+  ]
+}
