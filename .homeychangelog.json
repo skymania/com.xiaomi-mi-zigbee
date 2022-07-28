@@ -79,5 +79,11 @@
   },
   "1.4.0": {
     "en": "Add support Aqara H1 wall switches (with Neutral) and fix issue Aqara H1 wall switches (no Neutral)"
+  },
+  "1.4.1": {
+    "en": "Add support Aqara H1 wall switches (with Neutral) and fix issue Aqara H1 wall switches (no Neutral)"
+  },
+  "1.4.2": {
+    "en": "Fix H1 switch state issue and extend temperature range"
   }
 }
