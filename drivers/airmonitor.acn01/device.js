@@ -76,7 +76,7 @@ class AqaraAirQualityMonitor extends ZigBeeDevice {
     // if (measuredValue !== -100) {
     const temperatureOffset = this.getSetting('temperature_offset') || 0;
     const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
-    if (parsedValue >= -20 && parsedValue <= 60) {
+    if (parsedValue >= -65 && parsedValue <= 65) {
       this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: measure_temperature), parsed payload:`, { temperature: parsedValue, temperatureOffset });
       this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset).catch(this.error);
     }
