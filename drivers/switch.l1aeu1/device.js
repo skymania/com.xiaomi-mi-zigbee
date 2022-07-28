@@ -28,6 +28,8 @@ class AqaraH1WallSwitchSingleL extends ZigBeeDevice {
 
     const node = await this.homey.zigbee.getNode(this);
 
+    this._nextTrxSeqNr = 0;
+
     if (this.isFirstInit()) {
       try {
         await zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME].writeAttributes({ mode: 1 }); // , aqaraRemoteMode: 2
@@ -46,13 +48,14 @@ class AqaraH1WallSwitchSingleL extends ZigBeeDevice {
 
       this.registerCapabilityListener('onoff', async value => {
         // Send a frame to endpoint 1, cluster 6 ('onOff') which turns the node on
+        // this.log('transaction sequence number:', this.nextSeqNr());
         try {
           await node.sendFrame(
             1, // endpoint id
             6, // cluster id
             Buffer.from([
               1, // frame control
-              0, // transaction sequence number
+              this.nextSeqNr(), // transaction sequence number
               value ? 1 : 0, // command id ('on')
             ]),
           );
@@ -101,10 +104,18 @@ class AqaraH1WallSwitchSingleL extends ZigBeeDevice {
     });
 
     if (typeof state === 'boolean') {
-      this.onOnOffAttributeReport('AqaraLifeline', 'state', state === 1);
-      // this.log('handle report (cluster: aqaraLifeline, capability: onoff), parsed payload:', state === 1);
-      // this.setCapabilityValue('onoff', state === 1).catch(this.error);
+      this.onOnOffAttributeReport('AqaraLifeline', 'state', state);
     }
+  }
+
+  /**
+   * Generates next transaction sequence number.
+   * @returns {number} - Transaction sequence number.
+   * @private
+   */
+  nextSeqNr() {
+    this._nextTrxSeqNr = (this._nextTrxSeqNr + 1) % 256;
+    return this._nextTrxSeqNr;
   }
 
 }

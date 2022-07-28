@@ -32,6 +32,8 @@ class AqaraH1WallSwitchDoubleL extends ZigBeeDevice {
 
     const node = await this.homey.zigbee.getNode(this);
 
+    this._nextTrxSeqNr = 0;
+
     const subDeviceId = this.isSubDevice() ? this.getData().subDeviceId : 'leftSwitch';
     this.log('Initializing', subDeviceId, 'at endpoint', this.endpointIds[subDeviceId]);
 
@@ -66,7 +68,7 @@ class AqaraH1WallSwitchDoubleL extends ZigBeeDevice {
       // });
 
       this.registerCapabilityListener('onoff', async value => {
-        this.log('OnOff capability', value);
+        // this.log('OnOff capability', value);
         // Send a frame to endpoint 1, cluster 6 ('onOff') which turns the node on
         try {
           await node.sendFrame(
@@ -74,7 +76,7 @@ class AqaraH1WallSwitchDoubleL extends ZigBeeDevice {
             6, // cluster id
             Buffer.from([
               1, // frame control
-              0, // transaction sequence number
+              this.nextSeqNr(), // transaction sequence number
               value ? 1 : 0, // command id ('on')
             ]),
           );
@@ -145,6 +147,16 @@ class AqaraH1WallSwitchDoubleL extends ZigBeeDevice {
         // this.setCapabilityValue('onoff', state1 === 1).catch(this.error);
       }
     }
+  }
+
+  /**
+   * Generates next transaction sequence number.
+   * @returns {number} - Transaction sequence number.
+   * @private
+   */
+  nextSeqNr() {
+    this._nextTrxSeqNr = (this._nextTrxSeqNr + 1) % 256;
+    return this._nextTrxSeqNr;
   }
 
 }

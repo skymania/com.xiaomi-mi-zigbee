@@ -166,8 +166,8 @@ class AqaraH1WallSwitchDoubleLN extends ZigBeeDevice {
     if (subDeviceId === 'leftSwitch') {
       // this.log('TEST', typeof state === 'boolean', typeof power === 'number', typeof consumption === 'number');
       if (this.hasCapability('onoff') && typeof state === 'boolean') {
-        this.log('handle report (cluster: aqaraLifeline, capability: onoff), parsed payload:', state === 1);
-        this.setCapabilityValue('onoff', state === 1).catch(this.error);
+        this.log('handle report (cluster: aqaraLifeline, capability: onoff), parsed payload:', state);
+        this.setCapabilityValue('onoff', state).catch(this.error);
       }
       if (this.hasCapability('measure_power') && typeof power === 'number') {
         this.log('handle report (cluster: aqaraLifeline, capability: measure_power), parsed payload:', power);
@@ -180,8 +180,8 @@ class AqaraH1WallSwitchDoubleLN extends ZigBeeDevice {
     }
     if (subDeviceId === 'rightSwitch') {
       if (this.hasCapability('onoff') && typeof state1 === 'boolean') {
-        this.log('handle report (cluster: aqaraLifeline, capability: onoff), parsed payload:', state1 === 1);
-        this.setCapabilityValue('onoff', state1 === 1).catch(this.error);
+        this.log('handle report (cluster: aqaraLifeline, capability: onoff), parsed payload:', state1);
+        this.setCapabilityValue('onoff', state1).catch(this.error);
       }
     }
   }

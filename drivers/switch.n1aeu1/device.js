@@ -100,8 +100,8 @@ class AqaraH1WallSwitchSingleLN extends ZigBeeDevice {
       state, power, consumption, current, voltage,
     });
     if (this.hasCapability('onoff') && typeof state === 'boolean') {
-      this.log(`handle report (cluster: AqaraLifeline, attribute: state, capability: onoff), parsed payload: ${state === 1}`);
-      this.setCapabilityValue('onoff', state === 1).catch(this.error);
+      this.log(`handle report (cluster: AqaraLifeline, attribute: state, capability: onoff), parsed payload: ${state}`);
+      this.setCapabilityValue('onoff', state).catch(this.error);
     }
     if (this.hasCapability('measure_power') && typeof power === 'number') {
       this.log(`handle report (cluster: AqaraLifeline, attribute: power, capability: measure_power), parsed payload: ${power}`);
