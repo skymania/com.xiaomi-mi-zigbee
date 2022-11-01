@@ -11,7 +11,7 @@
   "category": [
     "lights"
   ],
-  "version": "1.4.0",
+  "version": "1.4.1",
   "compatibility": ">=5.0.0",
   "support": "https://community.athom.com/t/156",
   "athomForumDiscussionId": 4120,
@@ -2533,6 +2533,232 @@
     },
     {
       "name": {
+        "en": "Aqara roller shade companion E1"
+      },
+      "class": "curtain",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "ZNJLBL01LM",
+        "EAN": "6970504215085"
+      },
+      "capabilities": [
+        "windowcoverings_closed",
+        "windowcoverings_set",
+        "windowcoverings_state",
+        "measure_battery",
+        "button.calibrate"
+      ],
+      "capabilitiesOptions": {
+        "button.calibrate": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Start calibration"
+          },
+          "desc": {
+            "en": "Start the curtain track calibration process."
+          }
+        }
+      },
+      "energy": {
+        "batteries": [
+          "INTERNAL"
+        ]
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain.acn002",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9,
+              13,
+              19,
+              258
+            ],
+            "bindings": [
+              6,
+              13,
+              19,
+              258
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/curtain.acn002/assets/learn.svg",
+          "instruction": {
+            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "de": "Drücke den Reset Knopf mehr als 5 Sekunden und lasse ihn los sobald das blaue Licht an geht."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain.acn002/assets/images/large.png",
+        "small": "/drivers/curtain.acn002/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "open_close_manual",
+          "value": true,
+          "label": {
+            "en": "Manually open curtains",
+            "nl": "Handmatig openen gordijen"
+          },
+          "hint": {
+            "en": "This parameter enables to manually open the curtains.",
+            "nl": "Deze parameter maakt het mogelijk om de gordijnen handmatig te openen."
+          },
+          "zigbee": {
+            "cluster": "XiaomiBasicCluster",
+            "attribute": "xiaomiCurtainOpenCloseManual"
+          },
+          "type": "checkbox"
+        },
+        {
+          "id": "reverse_direction",
+          "value": false,
+          "label": {
+            "en": "Reverse curtain direction",
+            "nl": "Draai gordijn richting om"
+          },
+          "hint": {
+            "en": "This parameter enables to reverse the curtain direction.",
+            "nl": "Deze parameter maakt het mogelijk om de gordijn openingsrichting om te draaien."
+          },
+          "zigbee": {
+            "cluster": "XiaomiBasicCluster",
+            "attribute": "xiaomiCurtainReverse"
+          },
+          "type": "checkbox"
+        }
+      ],
+      "id": "curtain.acn002"
+    },
+    {
+      "name": {
+        "en": "Aqara roller shade motor"
+      },
+      "class": "curtain",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "SRSC-M01",
+        "EAN": "6970504214330"
+      },
+      "capabilities": [
+        "windowcoverings_closed",
+        "windowcoverings_set",
+        "windowcoverings_state",
+        "measure_battery",
+        "button.calibrate"
+      ],
+      "capabilitiesOptions": {
+        "button.calibrate": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Start calibration"
+          },
+          "desc": {
+            "en": "Start the curtain track calibration process."
+          }
+        }
+      },
+      "energy": {
+        "batteries": [
+          "INTERNAL"
+        ]
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.curtain.acn002",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              13,
+              19,
+              258
+            ],
+            "bindings": [
+              0,
+              1,
+              258
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/curtain.aq2/assets/learn.svg",
+          "instruction": {
+            "en": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "nl": "Long-press the reset key for more than 5 seconds and then release it when the blue light it turned on",
+            "de": "Drücke den Reset Knopf mehr als 5 Sekunden und lasse ihn los sobald das blaue Licht an geht."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/curtain.aq2/assets/images/large.png",
+        "small": "/drivers/curtain.aq2/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "open_close_manual",
+          "value": true,
+          "label": {
+            "en": "Manually open curtains",
+            "nl": "Handmatig openen gordijen"
+          },
+          "hint": {
+            "en": "This parameter enables to manually open the curtains.",
+            "nl": "Deze parameter maakt het mogelijk om de gordijnen handmatig te openen."
+          },
+          "zigbee": {
+            "cluster": "XiaomiBasicCluster",
+            "attribute": "xiaomiCurtainOpenCloseManual"
+          },
+          "type": "checkbox"
+        },
+        {
+          "id": "reverse_direction",
+          "value": false,
+          "label": {
+            "en": "Reverse curtain direction",
+            "nl": "Draai gordijn richting om"
+          },
+          "hint": {
+            "en": "This parameter enables to reverse the curtain direction.",
+            "nl": "Deze parameter maakt het mogelijk om de gordijn openingsrichting om te draaien."
+          },
+          "zigbee": {
+            "cluster": "XiaomiBasicCluster",
+            "attribute": "xiaomiCurtainReverse"
+          },
+          "type": "checkbox"
+        }
+      ],
+      "id": "curtain.aq2"
+    },
+    {
+      "name": {
         "en": "Aqara B1 Curtain Controller",
         "nl": "Aqara B1 Curtain Controller",
         "de": "Aqara B1 Curtain Controller"
@@ -2743,6 +2969,91 @@
         }
       ],
       "id": "light.aqcn02"
+    },
+    {
+      "name": {
+        "en": "Aqara E1 door & window contact sensor"
+      },
+      "class": "sensor",
+      "_appSpecific": {
+        "brand": "Aqara",
+        "modelID": "MCCGQ14LM",
+        "EAN": [
+          "6970504215603"
+        ]
+      },
+      "capabilities": [
+        "alarm_contact",
+        "alarm_battery",
+        "measure_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "CR1632"
+        ]
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "zigbee": {
+        "manufacturerName": "LUMI",
+        "productId": "lumi.magnet.acn001",
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              3,
+              1280,
+              64704
+            ],
+            "bindings": [
+              1280
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/magnet.acn001/assets/learn_door.svg",
+          "instruction": {
+            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 3 seconds until the blue light flashes three times",
+            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 3 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 3 mal blinkt"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/magnet.acn001/assets/images/large.png",
+        "small": "/drivers/magnet.acn001/assets/images/small.png"
+      },
+      "id": "magnet.acn001",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Expert settings",
+            "nl": "Expert instellingen"
+          },
+          "collapsed": true,
+          "children": [
+            {
+              "id": "reverse_contact_alarm",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Reverse contact alarm logic"
+              },
+              "hint": {
+                "en": "Reverse the contact alarm logic: magnet closed = alarm activated, magnet opened = alarm deactivated.",
+                "nl": "Keer de alarm logic om: magneet gesloten = alarm geactiveerd, magneet geopened = alarm gedeactiveerd."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "name": {
