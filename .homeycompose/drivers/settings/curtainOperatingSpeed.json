@@ -1,0 +1,39 @@
+{
+  "type": "dropdown",
+  "zigbee": {
+    "cluster": "AqaraManufacturerSpecific",
+    "attribute": "aqaraCurtainOperatingSpeed"
+  },
+  "label": {
+    "en": "Operating speed",
+    "nl": "Bewegingssnelheid"
+  },
+  "hint": {
+    "en": "This parameter determines the operating speed.",
+    "nl": "Deze parameter bepaalt bewegingssnelheid."
+  },
+  "value": "2",
+  "values": [
+    {
+      "id": "0",
+      "label": {
+        "en": "low",
+        "nl": "laag"
+      }
+    },
+    {
+      "id": "1",
+      "label": {
+        "en": "medium",
+        "nl": "gemiddeld"
+      }
+    },
+    {
+      "id": "2",
+      "label": {
+        "en": "high",
+        "nl": "hoog"
+      }
+    }
+  ]
+}

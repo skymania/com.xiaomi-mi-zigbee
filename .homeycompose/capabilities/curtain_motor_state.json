@@ -1,0 +1,42 @@
+{
+  "type": "enum",
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/curtain_motor_state.svg",
+  "title": {
+    "en": "Curtain motor state",
+    "nl": "Gordijn motor toestand"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "values": [
+    {
+      "id": "0",
+      "title": {
+        "en": "Declining",
+        "nl": "Dalend"
+      }
+    },
+    {
+      "id": "1",
+      "title": {
+        "en": "Rising",
+        "nl": "Opgaand"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Paused",
+        "nl": "Gestopt"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Blocked",
+        "nl": "Geblokkeerd"
+      }
+    }
+  ]
+}

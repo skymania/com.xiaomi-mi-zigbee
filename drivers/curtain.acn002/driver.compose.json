@@ -1,0 +1,62 @@
+{
+  "name": {
+    "en": "Roller Shade Driver E1"
+  },
+  "class": "curtain",
+  "_appSpecific":{
+    "brand": "Aqara",
+    "modelID": "ZNJLBL01LM",
+    "EAN": "6970504215085"
+  },
+  "capabilities": [
+    "windowcoverings_set",
+    "measure_battery",
+    "curtain_motor_state",
+    "alarm_motor"
+  ],
+  "energy": {
+    "batteries": [ "INTERNAL" ]
+  },
+  "platforms": [ "local", "cloud" ],
+  "connectivity": [ "zigbee" ],
+  "zigbee": {
+    "manufacturerName": "LUMI",
+    "productId": "lumi.curtain.acn002",
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          9,
+          13,
+          19,
+          258,
+          64704
+        ],
+        "bindings": [
+          6,
+          13,
+          19,
+          258
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/learn.svg",
+      "instruction": {
+        "en": "Long press the reset button until the led flashes red once and then blue multiple times",
+        "nl": "Druk op de reset knop totdat de led een keer rood en daarna blauw knippert.",
+        "de": "Drücke den Reset Knopf und lasse ihn los sobald das rote Licht an geht."
+      }
+    }
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "settings": []
+}
