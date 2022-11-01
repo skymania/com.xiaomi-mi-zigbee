@@ -1,8 +1,7 @@
 {
 	"id": "sensor_wleak.aq1",
 	"name": {
-		"en": "Aqara Water sensor",
-		"nl": "Aqara Water sensor"
+		"en": "Water Leak Sensor"
 	},
 	"_appSpecific":{
   	"brand": "Aqara",

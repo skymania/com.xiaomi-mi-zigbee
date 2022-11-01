@@ -1,9 +1,7 @@
 {
   "deprecated": true,
   "name": {
-    "en": "Aqara Double Relay",
-    "nl": "Aqara Double Relay",
-    "de": "Aqara Double Relay"
+    "en": "Relay Controller Double"
   },
   "_appSpecific":{
     "brand": "Aqara",

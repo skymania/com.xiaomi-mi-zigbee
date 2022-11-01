@@ -1,8 +1,8 @@
 {
   "name": {
-    "en": "Aqara H1 Wireless Switch Double"
+    "en": "Wireless Remote Switch H1 Double"
   },
-  "class": "sensor",
+  "class": "button",
   "_appSpecific":{
     "brand": "Aqara",
     "modelID": "WRS-R02",

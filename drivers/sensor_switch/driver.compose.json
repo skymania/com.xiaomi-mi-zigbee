@@ -1,11 +1,10 @@
 {
   "name": {
-    "en": "Wireless switch",
-    "nl": "Wireless switch"
+    "en": "Xiaomi Wireless Mini Switch"
   },
-  "class": "sensor",
+  "class": "button",
   "_appSpecific":{
-    "brand": "Aqara",
+    "brand": "Xiaomi",
     "modelID": "WXKG01LM",
     "EAN":"6970244522795"
   },

@@ -1,9 +1,7 @@
 {
   "deprecated": true,
   "name": {
-    "en": "Aqara Wall Switch Double (L)",
-    "nl": "Aqara Wall Switch Double (L)",
-    "de": "Aqara Wall Switch Double (L)"
+    "en": "Wall Switch Double (No Neutral)"
   },
   "_appSpecific":{
     "brand": "Aqara",

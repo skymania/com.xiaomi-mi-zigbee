@@ -1,8 +1,6 @@
 {
   "name": {
-    "en": "Aqara LED Bulb",
-    "nl": "Aqara LED Bulb",
-    "de": "Aqara LED Bulb"
+    "en": "LED Bulb"
   },
   "class": "light",
   "_appSpecific":{

@@ -1,9 +1,8 @@
 {
   "name": {
-    "en": "Aqara Wireless switch (Gyro)",
-    "nl": "Aqara Wireless switch (Gyro)"
+    "en": "Wireless Mini Switch (with Gyro)"
   },
-  "class": "sensor",
+  "class": "button",
   "_appSpecific":{
     "brand": "Aqara",
     "modelID": "WXKG12LM",

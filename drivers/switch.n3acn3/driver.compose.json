@@ -1,8 +1,8 @@
 {
   "name": {
-    "en": "Aqara D1 Wall Switch Tripple (LN) - Left",
-    "nl": "Aqara D1 Wall Switch Tripple (LN) - Links",
-    "de": "Aqara D1 Wall Switch Tripple (LN) - Links"
+    "en": "Wall Switch D1 Tripple (with Neutral) - Left",
+    "nl": "Wall Switch D1 Tripple (with Neutral) - Links",
+    "de": "Wall Switch D1 Tripple (with Neutral) - Links"
   },
   "_appSpecific":{
     "brand": "Aqara",
@@ -81,18 +81,18 @@
       "middleSwitch": {
         "capabilities": [ "onoff" ],
         "name": {
-          "en": "Aqara D1 Wall Switch Tripple (LN) - Middle",
-          "nl": "Aqara D1 Wall Switch Tripple (LN) - Middel",
-          "de": "Aqara D1 Wall Switch Tripple (LN) - Mitte"
+          "en": "Wall Switch D1 Tripple (with Neutral) - Middle",
+          "nl": "Wall Switch D1 Tripple (with Neutral) - Middel",
+          "de": "Wall Switch D1 Tripple (with Neutral) - Mitte"
         },
         "settings": []
       },
       "rightSwitch": {
         "capabilities": [ "onoff" ],
         "name": {
-          "en": "Aqara D1 Wall Switch Tripple (LN) - Right",
-          "nl": "Aqara D1 Wall Switch Tripple (LN) - Rechts",
-          "de": "Aqara D1 Wall Switch Tripple (LN) - Rechts"
+          "en": "Wall Switch D1 Tripple (with Neutral) - Right",
+          "nl": "Wall Switch D1 Tripple (with Neutral) - Rechts",
+          "de": "Wall Switch D1 Tripple (with Neutral) - Rechts"
         },
         "settings": []
       }

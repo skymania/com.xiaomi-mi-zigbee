@@ -1,10 +1,9 @@
 {
   "name": {
-    "en": "Aqara | Opple Switch - 2 button",
-    "nl": "Aqara | Opple Schakelaar - 2 knoppen",
-    "de": "Aqara | Opple Switch - 2 button"
+    "en": "Aqara Opple Wireless Remote Switch - 2 button",
+    "nl": "Aqara Opple Draadloze Schakelaar - 2 knoppen"
   },
-  "class": "sensor",
+  "class": "button",
   "_appSpecific":{
     "brand": "Aqara Opple",
     "modelID": "WXCJKG11LM",

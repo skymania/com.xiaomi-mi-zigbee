@@ -1,6 +1,6 @@
 {
   "name": {
-    "en": "Aqara H1 Wall Switch Single (No Neutral)"
+    "en": "Wall Switch H1 Single (No Neutral)"
   },
   "_appSpecific":{
     "brand": "Aqara",
@@ -45,8 +45,8 @@
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {
-        "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
-        "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "en": "Press and hold one of the switch buttons until the blue light flashes three times, then release",
+        "nl": "Press and hold one of the switch buttons until the blue light flashes three times, then release",
         "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
       }
     }

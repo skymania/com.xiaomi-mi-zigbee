@@ -1,8 +1,8 @@
 {
   "name": {
-    "en": "Aqara D1 Wall Switch Double (L) - Left",
-    "nl": "Aqara D1 Wall Switch Double (L) - Links",
-    "de": "Aqara D1 Wall Switch Double (L) - Links"
+    "en": "Wall Switch D1 Double (No Neutral) - Left",
+    "nl": "Wall Switch D1 Double (No Neutral) - Links",
+    "de": "Wall Switch D1 Double (No Neutral) - Links"
   },
   "_appSpecific":{
     "brand": "Aqara",
@@ -60,8 +60,8 @@
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {
-        "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
-        "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "en": "Press and hold one of the switch buttons until the blue light flashes three times, then release",
+        "nl": "Press and hold one of the switch buttons until the blue light flashes three times, then release",
         "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
       }
     },
@@ -69,9 +69,9 @@
       "rightSwitch": {
         "capabilities": [ "onoff" ],
         "name": {
-          "en": "Aqara D1 Wall Switch Double (L) - Right",
-          "nl": "Aqara D1 Wall Switch Double (L) - Rechts",
-          "de": "Aqara D1 Wall Switch Double (L) - Rechts"
+          "en": "Wall Switch D1 Double (No Neutral) - Right",
+          "nl": "Wall Switch D1 Double (No Neutral) - Rechts",
+          "de": "Wall Switch D1 Double (No Neutral) - Rechts"
         },
         "settings": []
       }
