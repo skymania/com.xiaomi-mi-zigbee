@@ -89,7 +89,7 @@ class AqaraH1Remoteb28ac1 extends ZigBeeDevice {
       .on('attr.presentValue', this.onPresentValueAttributeReport.bind(this, 'Both'));
 
     zclNode.endpoints[1].clusters[CLUSTER.POWER_CONFIGURATION.NAME]
-      .on('attr.batteryVoltage', this.onBatteryVoltageAttributeReport.bind(this));
+      .on('attr.batteryVoltage', this.onBatteryVoltageAttributeReport.bind(this, CLUSTER.POWER_CONFIGURATION.NAME, 'batteryVoltage'));
 
     zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME]
       .on('attr.aqaraLifeline', this.onAqaraLifelineAttributeReport.bind(this));
@@ -173,12 +173,18 @@ class AqaraH1Remoteb28ac1 extends ZigBeeDevice {
    * temperature measurement cluster.
    * @param {number} measuredValue
    */
-  onBatteryVoltageAttributeReport(batteryVoltage) {
+  onBatteryVoltageAttributeReport(reportingClusterName, reportingAttribute, batteryVoltage) {
     if (typeof batteryVoltage === 'number') {
-      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2500');
-      this.log('measure_battery | PowerConfiguration - batteryVoltage:', batteryVoltage * 100, 'parsedBatteryPct', parsedBatPct);
-      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2850_3000');
+      if (this.hasCapability('measure_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: measure_battery), parsed payload:`, parsedBatPct);
+        this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      }
+
+      if (this.hasCapability('alarm_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
+        this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      }
     }
   }
 
@@ -193,12 +199,7 @@ class AqaraH1Remoteb28ac1 extends ZigBeeDevice {
     batteryVoltage,
   } = {}) {
     if (typeof batteryVoltage === 'number') {
-      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2500');
-      this.log('lifeline attribute report', {
-        batteryVoltage,
-      }, 'parsedBatteryPct', parsedBatPct);
-      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      this.onBatteryVoltageAttributeReport('AqaraLifeline', 'batteryVoltage', batteryVoltage / 100);
     }
   }
 

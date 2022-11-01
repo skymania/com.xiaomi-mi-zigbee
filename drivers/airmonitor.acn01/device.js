@@ -168,12 +168,16 @@ class AqaraAirQualityMonitor extends ZigBeeDevice {
    */
   onBatteryVoltageAttributeReport(reportingClusterName, reportingAttribute, batteryVoltage) {
     if (typeof batteryVoltage === 'number') {
-      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2100');
-      this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: measure_battery), parsed payload:`, parsedBatPct);
-      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2850_3000');
+      if (this.hasCapability('measure_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: measure_battery), parsed payload:`, parsedBatPct);
+        this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      }
 
-      this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
-      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      if (this.hasCapability('alarm_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
+        this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      }
     }
   }
 
@@ -192,12 +196,6 @@ class AqaraAirQualityMonitor extends ZigBeeDevice {
     });
     if (typeof batteryVoltage === 'number') {
       this.onBatteryVoltageAttributeReport('AqaraLifeline', 'batteryVoltage', batteryVoltage / 100);
-      // const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
-      // this.log('handle report (cluster: aqaraLifeline, attribute: batteryVoltage, capability: measure_battery), parsed payload:', parsedBatPct);
-      // this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-
-      // this.log('handle report (cluster: aqaraLifeline, attribute: batteryVoltage, capability: alarm_battery), parsed payload:', parsedBatPct < 20);
-      // this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
     }
   }
 

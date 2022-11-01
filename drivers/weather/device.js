@@ -43,7 +43,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
     const temperatureOffset = this.getSetting('temperature_offset') || 0;
     const parsedValue = this.getSetting('temperature_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
     if (parsedValue >= -65 && parsedValue <= 65) {
-      this.log('measure_temperature | msTemperatureMeasurement - measuredValue (temperature):', parsedValue, '+ temperature offset', temperatureOffset);
+      this.log('handle report (cluster: TemperatureMeasurement, attribute: measuredValue, capability: measure_temperature), parsed payload:', parsedValue, '+ temperature offset', temperatureOffset);
       this.setCapabilityValue('measure_temperature', parsedValue + temperatureOffset).catch(this.error);
     }
   }
@@ -58,7 +58,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
     const humidityOffset = this.getSetting('humidity_offset') || 0;
     const parsedValue = this.getSetting('humidity_decimals') === '2' ? Math.round((measuredValue / 100) * 100) / 100 : Math.round((measuredValue / 100) * 10) / 10;
     if (parsedValue >= 0 && parsedValue <= 100) {
-      this.log('measure_humidity | msRelativeHumidity - measuredValue (humidity):', parsedValue, '+ humidity offset', humidityOffset);
+      this.log('handle report (cluster: RelativeHumidity, attribute: measuredValue, capability: measure_humidity), parsed payload:', parsedValue, '+ humidity offset', humidityOffset);
       this.setCapabilityValue('measure_humidity', parsedValue + humidityOffset).catch(this.error);
     }
   }
@@ -71,8 +71,23 @@ class AqaraWeatherSensor extends ZigBeeDevice {
   onPressureMeasuredAttributeReport(measuredValue) {
     const pressureOffset = this.getSetting('pressure_offset') || 0;
     const parsedValue = Math.round((measuredValue / 100) * 100);
-    this.log('measure_pressure | msPressureMeasurement - measuredValue (pressure):', parsedValue, '+ pressure offset', pressureOffset);
+    this.log('handle report (cluster: PressureMeasurement, attribute: measuredValue, capability: measure_pressure), parsed payload:', parsedValue, '+ pressure offset', pressureOffset);
     this.setCapabilityValue('measure_pressure', parsedValue + pressureOffset).catch(this.error);
+  }
+
+  onBatteryVoltageAttributeReport(reportingClusterName, reportingAttribute, batteryVoltage) {
+    if (typeof batteryVoltage === 'number') {
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2850_3000');
+      if (this.hasCapability('measure_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: measure_battery), parsed payload:`, parsedBatPct);
+        this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      }
+
+      if (this.hasCapability('alarm_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
+        this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      }
+    }
   }
 
   /**
@@ -92,10 +107,7 @@ class AqaraWeatherSensor extends ZigBeeDevice {
     if (typeof state1 === 'number') this.onRelativeHumidityMeasuredAttributeReport(state1);
     if (typeof state2 === 'number') this.onPressureMeasuredAttributeReport(state2 / 100);
     if (typeof batteryVoltage === 'number') {
-      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
-      this.log('lifeline attribute report', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
-      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      this.onBatteryVoltageAttributeReport('AqaraLifeline', 'batteryVoltage', batteryVoltage / 100);
     }
   }
 

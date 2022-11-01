@@ -4,9 +4,9 @@
       "id": "cube_Motion",
       "platforms": [ "local", "cloud" ],
       "title": {
-        "en": "Cube motion",
-        "nl": "Cube beweging",
-        "de": "Cube Bewegung"
+        "en": "Motion",
+        "nl": "Beweging",
+        "de": "Bewegung"
       },
       "args": [],
       "tokens": [
@@ -14,9 +14,9 @@
           "name": "motion",
           "type": "string",
           "title": {
-            "en": "Cube Motion",
-            "nl": "Cube beweging",
-            "de": "Cube Bewegung"
+            "en": "Motion",
+            "nl": "Beweging",
+            "de": "Bewegung"
           },
           "example": {
             "en": "Shake",
@@ -46,14 +46,14 @@
       "id": "cube_Shake",
       "platforms": [ "local", "cloud" ],
       "title": {
-        "en": "Cube shaked",
-        "nl": "Cube geschud",
-        "de": "Cube geschüttelt"
+        "en": "Shaken",
+        "nl": "Geschud",
+        "de": "Geschüttelt"
       },
       "titleFormatted": {
-        "en": "Cube shaked with [[targetFace]]",
-        "nl": "Cube geschud met [[targetFace]]",
-        "de": "Cube geschüttelt mit [[targetFace]]"
+        "en": "Shaken with [[targetFace]]",
+        "nl": "Geschud met [[targetFace]]",
+        "de": "Geschüttelt mit [[targetFace]]"
       },
       "args": [{
 				"name": "targetFace",
@@ -131,14 +131,14 @@
       "id": "cube_Flip90",
       "platforms": [ "local", "cloud" ],
       "title": {
-        "en": "Cube flipped 90°",
-        "nl": "Cube 90° gekanteld",
-        "de": "Cube 90° gedreht"
+        "en": "Flipped 90°",
+        "nl": "90° gekanteld",
+        "de": "90° gedreht"
       },
       "titleFormatted": {
-        "en": "Cube flipped 90° [[sourceFace]] [[targetFace]]",
-        "nl": "Cube 90° gekanteld [[sourceFace]] [[targetFace]]",
-        "de": "Cube 90° gedreht [[sourceFace]] [[targetFace]]"
+        "en": "Flipped 90° [[sourceFace]] [[targetFace]]",
+        "nl": "90° gekanteld [[sourceFace]] [[targetFace]]",
+        "de": "90° gedreht [[sourceFace]] [[targetFace]]"
       },
       "args": [{
 				"name": "sourceFace",
@@ -288,14 +288,14 @@
       "id": "cube_Flip180",
       "platforms": [ "local", "cloud" ],
       "title": {
-        "en": "Cube flipped 180°",
-        "nl": "Cube 180° gekanteld",
-        "de": "Cube um 180° gedreht"
+        "en": "Flipped 180°",
+        "nl": "180° gekanteld",
+        "de": "180° gedreht"
       },
       "titleFormatted": {
-        "en": "Cube flipped 180° with [[targetFace]]",
-        "nl": "Cube 180° gekanteld met [[targetFace]]",
-        "de": "Cube um 180° gedreht mit [[targetFace]]"
+        "en": "Flipped 180° with [[targetFace]]",
+        "nl": "180° gekanteld met [[targetFace]]",
+        "de": "180° gedreht mit [[targetFace]]"
       },
       "args": [{
 				"name": "targetFace",
@@ -373,14 +373,14 @@
       "id": "cube_Slide",
       "platforms": [ "local", "cloud" ],
       "title": {
-        "en": "Cube slided",
-        "nl": "Cube verschoven",
-        "de": "Cube verschieben"
+        "en": "Slided",
+        "nl": "Verschoven",
+        "de": "Verschieben"
       },
       "titleFormatted": {
-        "en": "Cube slided with [[targetFace]]",
-        "nl": "Cube verschoven met [[targetFace]]",
-        "de": "Cube verschieben mit [[targetFace]]"
+        "en": "Slided with [[targetFace]]",
+        "nl": "Verschoven met [[targetFace]]",
+        "de": "Verschieben mit [[targetFace]]"
       },
       "args": [{
 				"name": "targetFace",
@@ -458,14 +458,14 @@
       "id": "cube_DoubleTap",
       "platforms": [ "local", "cloud" ],
       "title": {
-        "en": "Cube double tapped",
-        "nl": "Cube twee keer kloppen",
-        "de": "Cube zweimal angetippt"
+        "en": "Double tapped",
+        "nl": "Twee keer kloppen",
+        "de": "Zweimal angetippt"
       },
       "titleFormatted": {
-        "en": "Cube double tapped with [[targetFace]]",
-        "nl": "Cube twee keer kloppen met [[targetFace]]",
-        "de": "Cube zweimal angetippt mit [[targetFace]]"
+        "en": "Double tapped with [[targetFace]]",
+        "nl": "Twee keer kloppen met [[targetFace]]",
+        "de": "Zweimal angetippt mit [[targetFace]]"
       },
       "args": [{
 				"name": "targetFace",
@@ -543,14 +543,14 @@
       "id": "cube_Rotate",
       "platforms": [ "local", "cloud" ],
       "title": {
-        "en": "Cube rotated",
-        "nl": "Cube gedraaid",
-        "de": "Cube gedreht"
+        "en": "Rotated",
+        "nl": "Gedraaid",
+        "de": "Gedreht"
       },
       "titleFormatted": {
-        "en": "Cube rotated with [[targetFace]]",
-        "nl": "Cube gedraaid met [[targetFace]]",
-        "de": "Cube gedreht mit [[targetFace]]"
+        "en": "Rotated with [[targetFace]]",
+        "nl": "Gedraaid met [[targetFace]]",
+        "de": "Gedreht mit [[targetFace]]"
       },
       "args": [{
 				"name": "targetFace",
