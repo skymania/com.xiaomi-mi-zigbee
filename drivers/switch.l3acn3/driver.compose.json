@@ -1,8 +1,8 @@
 {
   "name": {
-    "en": "Aqara D1 Wall Switch Tripple (L) - Left",
-    "nl": "Aqara D1 Wall Switch Tripple (L) - Links",
-    "de": "Aqara D1 Wall Switch Tripple (L) - Links"
+    "en": "Wall Switch D1 Tripple (No Neutral) - Left",
+    "nl": "Wall Switch D1 Tripple (No Neutral) - Links",
+    "de": "Wall Switch D1 Tripple (No Neutral) - Links"
   },
   "_appSpecific":{
     "brand": "Aqara",
@@ -66,8 +66,8 @@
     "learnmode": {
       "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {
-        "en": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
-        "nl": "Press and hold any of the switch button for more than 8 seconds until the blue light flashes three times after release",
+        "en": "Press and hold one of the switch buttons until the blue light flashes three times, then release",
+        "nl": "Press and hold one of the switch buttons until the blue light flashes three times, then release",
         "de": "Drücke einen beliebigen Knopf länger als 8 Sekunden. Nach dem los lassen blinkt das blaue Licht 3 Mal."
       }
     },
@@ -75,18 +75,18 @@
       "middleSwitch": {
         "capabilities": [ "onoff" ],
         "name": {
-          "en": "Aqara D1 Wall Switch Tripple (L) - Middle",
-          "nl": "Aqara D1 Wall Switch Tripple (L) - Midden",
-          "de": "Aqara D1 Wall Switch Tripple (L) - Mitte"
+          "en": "Wall Switch D1 Tripple (No Neutral) - Middle",
+          "nl": "Wall Switch D1 Tripple (No Neutral) - Midden",
+          "de": "Wall Switch D1 Tripple (No Neutral) - Mitte"
         },
         "settings": []
       },
       "rightSwitch": {
         "capabilities": [ "onoff" ],
         "name": {
-          "en": "Aqara D1 Wall Switch Tripple (L) - Right",
-          "nl": "Aqara D1 Wall Switch Tripple (L) - Rechts",
-          "de": "Aqara D1 Wall Switch Tripple (L) - Rechts"
+          "en": "Wall Switch D1 Tripple (No Neutral) - Right",
+          "nl": "Wall Switch D1 Tripple (No Neutral) - Rechts",
+          "de": "Wall Switch D1 Tripple (No Neutral) - Rechts"
         },
         "settings": []
       }

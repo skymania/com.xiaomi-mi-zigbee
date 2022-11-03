@@ -31,7 +31,7 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
     }
 
     zclNode.endpoints[1].clusters[CLUSTER.ON_OFF.NAME]
-      .on('attr.onOff', this.onContactReport.bind(this));
+      .on('attr.onOff', this.onContactReport.bind(this, CLUSTER.ON_OFF.NAME, 'onOff'));
 
     // Lifeline
     zclNode.endpoints[1].clusters[XiaomiBasicCluster.NAME]
@@ -43,11 +43,26 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
    * @param {boolean} onOff
    */
 
-  onContactReport(data) {
+  onContactReport(reportingClusterName, reportingAttribute, data) {
     const reverseAlarmLogic = this.getSetting('reverse_contact_alarm') || false;
     const parsedData = !reverseAlarmLogic ? data === true : data === false;
-    this.log(`alarm_contact -> ${parsedData}`);
+    this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_contact), parsed payload: ${parsedData}`);
     this.setCapabilityValue('alarm_contact', parsedData).catch(this.error);
+  }
+
+  onBatteryVoltageAttributeReport(reportingClusterName, reportingAttribute, batteryVoltage) {
+    if (typeof batteryVoltage === 'number') {
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2850_3000');
+      if (this.hasCapability('measure_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: measure_battery), parsed payload:`, parsedBatPct);
+        this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      }
+
+      if (this.hasCapability('alarm_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
+        this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      }
+    }
   }
 
   /**
@@ -62,15 +77,12 @@ class XiaomiDoorWindowSensor extends ZigBeeDevice {
     const batteryVoltage = attributeBuffer.readUInt16LE(5);
 
     if (typeof state === 'boolean') {
-      this.log('lifeline attribute report', state, 'parsedState', state === 1);
-      this.onContactReport(state);
+      // this.log('lifeline attribute report', state, 'parsedState', state === 1);
+      this.onContactReport('AqaraLifeline', 'state', state);
     }
 
     if (typeof batteryVoltage === 'number') {
-      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
-      this.log('lifeline attribute report', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
-      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      this.onBatteryVoltageAttributeReport('AqaraLifeline', 'batteryVoltage', batteryVoltage / 100);
     }
   }
 

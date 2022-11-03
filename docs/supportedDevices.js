@@ -11,7 +11,7 @@ module.exports.parseManifest = function() {
 
   const classNames = {
     sensor: 'Sensors',
-    button: 'Button or wallcontrollers',
+    button: 'Button or wireless switches',
     socket: 'Built-in or plug-in socket switches',
     light: 'Lights',
     curtain: 'Curtain controllers',

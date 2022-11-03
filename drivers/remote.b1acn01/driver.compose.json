@@ -1,10 +1,8 @@
 {
   "name": {
-    "en": "Aqara Wireless Mini Switch (2018)",
-    "nl": "Aqara Wireless Mini Switch (2018)",
-    "de": "Aqara Wireless Mini Switch (2018)"
+    "en": "Wireless Mini Switch (2018)"
   },
-  "class": "sensor",
+  "class": "button",
   "_appSpecific":{
     "brand": "Aqara",
     "modelID": "WXKG11LM",

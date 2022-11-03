@@ -1,7 +1,6 @@
 {
   "name": {
-    "en": "Aqara Vibration Sensor",
-    "nl": "Aqara Vibration Sensor"
+    "en": "Vibration Sensor"
   },
   "_appSpecific":{
     "brand": "Aqara",

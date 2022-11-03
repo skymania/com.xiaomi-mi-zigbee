@@ -1,8 +1,8 @@
 {
   "name": {
-    "en": "Aqara D1 Wall Switch Single (LN)",
-    "nl": "Aqara D1 Wall Switch Single (LN)",
-    "de": "Aqara D1 Wall Switch Single (LN)"
+    "en": "Wall Switch D1 Single (With Neutral)",
+    "nl": "Wall Switch D1 Single (With Neutral)",
+    "de": "Wall Switch D1 Single (With Neutral)"
   },
   "_appSpecific":{
     "brand": "Aqara",

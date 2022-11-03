@@ -136,7 +136,7 @@ class AqaraCubeSensor extends ZigBeeDevice {
     batteryVoltage,
   } = {}) {
     if (typeof batteryVoltage === 'number') {
-      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2850_3000');
       this.log('lifeline attribute report', {
         batteryVoltage,
       }, 'parsedBatteryPct', parsedBatPct);

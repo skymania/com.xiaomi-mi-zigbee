@@ -69,6 +69,21 @@ class AqaraSensorSmoke extends ZigBeeDevice {
     this.setCapabilityValue('alarm_battery', zoneStatus.battery).catch(this.error);
   }
 
+  onBatteryVoltageAttributeReport(reportingClusterName, reportingAttribute, batteryVoltage) {
+    if (typeof batteryVoltage === 'number') {
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2850_3000');
+      if (this.hasCapability('measure_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: measure_battery), parsed payload:`, parsedBatPct);
+        this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      }
+
+      if (this.hasCapability('alarm_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
+        this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      }
+    }
+  }
+
   /**
 		 * This is Xiaomi's custom lifeline attribute, it contains a lot of data, af which the most
 		 * interesting the battery level. The battery level divided by 1000 represents the battery
@@ -80,10 +95,7 @@ class AqaraSensorSmoke extends ZigBeeDevice {
     batteryVoltage, state,
   } = {}) {
     if (typeof batteryVoltage === 'number') {
-      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2100');
-      this.log('lifeline attribute report', batteryVoltage, 'parsedBatteryPct', parsedBatPct);
-      this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-      this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+      this.onBatteryVoltageAttributeReport('AqaraLifeline', 'batteryVoltage', batteryVoltage / 100);
     }
 
     if (typeof state === 'number') {

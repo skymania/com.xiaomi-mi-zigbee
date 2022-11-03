@@ -1,8 +1,8 @@
 {
   "name": {
-    "en": "Aqara Wall Switch Double (LN) - Left",
-    "nl": "Aqara Wall Switch Double (LN) - Links",
-    "de": "Aqara Wall Switch Double (LN) - Links"
+    "en": "Wall Switch Double (With Neutral) - Left",
+    "nl": "Wall Switch Double (With Neutral) - Links",
+    "de": "Wall Switch Double (With Neutral) - Links"
   },
   "_appSpecific":{
     "brand": "Aqara",
@@ -101,9 +101,9 @@
       "rightSwitch": {
         "capabilities": [ "onoff" ],
         "name": {
-          "en": "Aqara Wall Switch Double (LN) - Right",
-          "nl": "Aqara Wall Switch Double (LN) - Rechts",
-          "de": "Aqara Wall Switch Double (LN) - Rechts"
+          "en": "Wall Switch Double (With Neutral) - Right",
+          "nl": "Wall Switch Double (With Neutral) - Rechts",
+          "de": "Wall Switch Double (With Neutral) - Rechts"
         },
         "settings": []
       }

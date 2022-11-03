@@ -1,0 +1,10 @@
+[
+{
+  "$extends": "curtainReverseDirection",
+  "$id": "reverse_direction"
+},
+{
+  "$extends": "curtainOperatingSpeed",
+  "$id": "curtain_operating_speed"
+}
+]

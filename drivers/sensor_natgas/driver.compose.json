@@ -1,7 +1,7 @@
 {
 	"id": "sensor_natgas",
 	"name": {
-		"en": "Xiaomi Honeywell natural gas detector",
+		"en": "Xiaomi Honeywell Natural Gas Detector",
 		"nl": "Xiaomi Honeywell gas melder"
 	},
 	"_appSpecific":{

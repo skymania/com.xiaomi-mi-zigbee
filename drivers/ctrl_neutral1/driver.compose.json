@@ -1,8 +1,8 @@
 {
   "name": {
-    "en": "Aqara Wall Switch Single (L)",
-    "nl": "Aqara Wall Switch Single (L)",
-    "de": "Aqara Wall Switch Single (L)"
+    "en": "Wall Switch Single (No Neutral)",
+    "nl": "Wall Switch Single (No Neutral)",
+    "de": "Wall Switch Single (No Neutral)"
   },
   "_appSpecific":{
     "brand": "Aqara",

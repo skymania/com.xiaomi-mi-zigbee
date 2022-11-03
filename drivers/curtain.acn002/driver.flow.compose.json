@@ -1,0 +1,76 @@
+{
+  "triggers": [
+    {
+      "id": "alarm_motor_false",
+      "platforms": [ "local", "cloud" ],
+      "title": {
+        "en": "The curtain motor alarm turned off",
+        "nl": "Het motor alarm gaat uit"
+      },
+      "args": []
+    },
+    {
+      "id": "alarm_motor_true",
+      "platforms": [ "local", "cloud" ],
+      "title": {
+        "en": "The curtain motor alarm turned on",
+        "nl": "Het motor alarm gaat aan"
+      },
+      "args": []
+    },
+    {
+      "id": "curtain_motor_state",
+      "platforms": [ "local", "cloud" ],
+      "title": {
+        "en": "Curtain motor state",
+        "nl": "Rolgordijn motor toestand"
+      },
+      "titleFormatted": {
+        "en": "Curtain is [[motorState]]",
+        "nl": "Rolgordijn is [[motorState]]"
+      },
+      "args": [{
+				"name": "motorState",
+				"type": "dropdown",
+        "title": {
+          "en": "Curtain motor state",
+          "nl": "Rolgordijn motor toestand"
+        },
+        "placeholder": {
+          "en": "paused",
+          "nl": "gestopt"
+        },
+				"values": [{
+						"id": "0",
+						"label": {
+							"en": "declining",
+							"nl": "dalend"
+						}
+					},
+					{
+						"id": "1",
+						"label": {
+							"en": "rising",
+							"nl": "opgaand"
+						}
+					},
+					{
+						"id": "2",
+						"label": {
+							"en": "paused",
+							"nl": "gestopt"
+						}
+					},
+					{
+						"id": "4",
+						"label": {
+							"en": "blocked",
+							"nl": "geblokkeerd"
+						}
+					}
+				]
+			}
+    ]
+  }
+]
+}

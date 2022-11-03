@@ -1,8 +1,8 @@
 {
   "name": {
-    "en": "Aqara D1 Wireless Switch Single"
+    "en": "Wireless Remote Switch D1 Single"
   },
-  "class": "sensor",
+  "class": "button",
   "_appSpecific":{
     "brand": "Aqara",
     "modelID": "WXKG06LM",

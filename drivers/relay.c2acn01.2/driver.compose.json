@@ -1,8 +1,6 @@
 {
   "name": {
-    "en": "Aqara Double Relay - L1",
-    "nl": "Aqara Double Relay - L1",
-    "de": "Aqara Double Relay - L1"
+    "en": "Relay Controller Double - L1"
   },
   "_appSpecific":{
     "brand": "Aqara",
@@ -66,9 +64,7 @@
       "secondOutlet": {
         "capabilities": [ "onoff" ],
         "name": {
-          "en": "Aqara Double Relay - L2",
-          "nl": "Aqara Double Relay - L2",
-          "de": "Aqara Double Relay - L2"
+          "en": "Relay Controller Double - L2"
         },
         "settings": []
       }

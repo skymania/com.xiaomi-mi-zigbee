@@ -1,0 +1,16 @@
+{
+  "type": "checkbox",
+  "zigbee": {
+    "cluster": "AqaraManufacturerSpecific",
+    "attribute": "aqaraCurtainTiltSupport"
+  },
+  "label": {
+    "en": "Windows coverings tilt support",
+    "nl": "Windows coverings tilt support"
+  },
+  "hint": {
+    "en": "This parameter determines if tilt adjustment is enabled",
+    "nl": "Deze parameter bepaalt of kantel afstelling ondersteunt wordt."
+  },
+  "value": false
+}

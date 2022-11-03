@@ -1,8 +1,6 @@
 {
   "name": {
-    "en": "Aqara B1 Curtain Controller",
-    "nl": "Aqara B1 Curtain Controller",
-    "de": "Aqara B1 Curtain Controller"
+    "en": "Curtain Controller B1"
   },
   "class": "curtain",
   "_appSpecific":{

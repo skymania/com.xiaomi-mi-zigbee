@@ -1,10 +1,8 @@
 {
   "name": {
-    "en": "Aqara Wireless Switch Double (2018)",
-    "nl": "Aqara Wireless Switch Double (2018)",
-    "de": "Aqara Wireless Switch Double (2018)"
+    "en": "Wireless Remote Switch Double (2018)"
   },
-  "class": "sensor",
+  "class": "button",
   "_appSpecific":{
     "brand": "Aqara",
     "modelID": "WXKG02LM",
