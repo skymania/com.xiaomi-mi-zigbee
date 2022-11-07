@@ -66,10 +66,10 @@
     "type": "checkbox",
     "value": false,
     "label": {
-      "en": "Disable motion led"
+      "en": "Motion led"
     },
     "hint": {
-      "en": "Set to true if you want to disable motion led or false if you want to enable motion led"
+      "en": "Set to true if you want to enable motion led or false if you want to disable it"
     }
   }
 ]
