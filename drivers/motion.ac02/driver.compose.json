@@ -16,8 +16,8 @@
   ],
   "energy": {
     "batteries": [
-      "CR2450",
-      "CR2450"
+      "CR2430",
+      "CR2430"
     ]
   },
   "platforms": [ "local", "cloud" ],
