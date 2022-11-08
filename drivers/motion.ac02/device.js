@@ -18,7 +18,7 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
     //this.enableDebug();
 
     // Enables debug logging in zigbee-clusters
-    debug(false);
+    // debug(false);
 
     // print the node's info to the console
     //this.printNode();
@@ -34,11 +34,11 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
     try {
       const {
         aqaraSensitivityLevel, aqaraMotionRetriggerInterval, aqaraMotionLed
-      } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)]
+      } = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)]
         .clusters[AqaraManufacturerSpecificCluster.NAME]
         .readAttributes('aqaraSensitivityLevel', 'aqaraMotionRetriggerInterval', 'aqaraLedInverted').catch(this.error);
       this.log('READattributes options ', aqaraSensitivityLevel, aqaraMotionRetriggerInterval, Boolean(aqaraMotionLed));
-      await this.setSettings({ alarm_motion_reset_window: aqaraMotionRetriggerInterval, /*motion_sensitivity_level: aqaraSensitivityLevel,*/ disable_motion_led: aqaraMotionLed }).catch(this.error);
+      await this.setSettings({ alarm_motion_reset_window: aqaraMotionRetriggerInterval, trigger_motion_led: aqaraMotionLed }).catch(this.error);
     } catch (err) {
       this.log('could not read Attributes:', err);
     }
@@ -51,6 +51,7 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
     zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME]
       .on('attr.aqaraLifeline', this.onAqaraLifelineAttributeReport.bind(this));
   }
+
   /**
    * Set `measure_luminance` when a `measureValue` attribute report is received on the measure
    * luminance cluster.
@@ -62,7 +63,7 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
       this.log('handle report (cluster: IlluminanceMeasurement, attribute: measuredValue, capability: measure_luminance), parsed payload:', measuredValue);
       this.setCapabilityValue('measure_luminance', measuredValue).catch(this.error);
     }
-
+    
     // register motion 
     this.log('handle report (cluster: OccupancySensing, attribute: -, capability: alarm_motion), parsed payload: n/a');
     this.setCapabilityValue('alarm_motion', true).catch(this.error);
@@ -76,6 +77,15 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
       this.log('manual alarm_motion reset');
       this.setCapabilityValue('alarm_motion', false).catch(this.error);
     }, alarmMotionResetWindow * 1000);
+
+    // trigger interval 
+    this.setCapabilityValue('trigger_interval', this.getSetting('alarm_motion_reset_window')).catch(this.error);
+
+    // motion sensitvity 
+    this.setCapabilityValue('motion_sensitivity', this.getSetting('motion_sensitivity_level')).catch(this.error);
+
+    // motion led 
+    this.setCapabilityValue('motion_led', this.getSetting('trigger_motion_led')).catch(this.error);
   }
 
   /**
@@ -120,27 +130,21 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
     try {
       // reverse_direction attribute
       if (changedKeys.includes('alarm_motion_reset_window')) {
-        const tmpMotionRetriggerInterval = oldSettings;
         const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
           .writeAttributes({ aqaraMotionRetriggerInterval: newSettings.alarm_motion_reset_window }).catch(this.error);
         this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraMotionRetriggerInterval', newSettings.alarm_motion_reset_window, 'result:', result);
       }
       if (changedKeys.includes('motion_sensitivity_level')) {
-        const tmpMotionSensitivityLevel = oldSettings;
         const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
           .writeAttributes({ aqaraSensitivityLevel: newSettings.motion_sensitivity_level }).catch(this.error);
         this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraSensitivityLevel', newSettings.motion_sensitivity_level, 'result:', result);
       }
-      if (changedKeys.includes('disable_motion_led')) {
-        const tmpMotionLed = oldSettings;
+      if (changedKeys.includes('trigger_motion_led')) {
         const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
-          .writeAttributes({ aqaraMotionLed: newSettings.disable_motion_led }).catch(this.error);
-        this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraMotionLed', newSettings.disable_motion_led, 'result:', result);
+          .writeAttributes({ aqaraMotionLed: newSettings.trigger_motion_led }).catch(this.error);
+        this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraMotionLed', newSettings.trigger_motion_led, 'result:', result);
       }
     } catch (err) {
-      aqaraMotionRetriggerInterval = tmpMotionRetriggerInterval;
-      aqaraSensitivityLevel = tmpMotionSensitivityLevel;
-      aqaraMotionLed = tmpMotionLed;
       // reset settings values on failed update
       throw new Error("failed to update settings. Message:" + err);
 

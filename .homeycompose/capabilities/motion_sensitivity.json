@@ -1,0 +1,32 @@
+{
+    "type": "enum",
+    "uiComponent": "sensor",
+    "icon": "/assets/capabilities/motion_sensitivity.svg",
+    "title": {
+      "en": "Motion sensitivity"
+    },
+    "getable": true,
+    "setable": false,
+    "insights": true,
+    "values": [
+      {
+        "id": "1",
+        "title": {
+          "en": "Low"
+        }
+      },
+      {
+        "id": "2",
+        "title": {
+          "en": "Medium"
+        }
+      },
+      {
+        "id": "3",
+        "title": {
+          "en": "High"
+        }
+      }
+    ]
+  }
+  

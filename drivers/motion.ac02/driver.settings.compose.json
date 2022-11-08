@@ -1,20 +1,67 @@
 [
   {
-    "id": "alarm_motion_reset_window",
-    "type": "number",
+    "type": "group",
     "label": {
-      "en": "Disable motion alarm after",
-      "nl": "Schakel bewegingsalarm uit na"
+      "en": "Because this is a sleep end device (SED), short press a button once on the device, to wake it up, before updating these settings"
     },
-    "hint": {
-      "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 1 - 200, default: 30 [s]",
-      "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 1 - 200, Standaard: 30 [s]"
-    },
-    "value": 30,
-    "attr": {
-      "min": 1,
-      "max": 200
-    }
+    "children": [
+      {
+        "id": "alarm_motion_reset_window",
+        "type": "number",
+        "label": {
+          "en": "Disable motion alarm after",
+          "nl": "Schakel bewegingsalarm uit na"
+        },
+        "hint": {
+          "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 1 - 200, default: 30 [s]",
+          "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 1 - 200, Standaard: 30 [s]"
+        },
+        "value": 30,
+        "attr": {
+          "min": 1,
+          "max": 200
+        }
+      },
+      {
+        "id": "motion_sensitivity_level",
+        "type": "radio",
+        "label": {
+          "en": "Motion sensitivity range"
+        },
+        "value": "2",
+        "values": [
+          {
+            "id": "1",
+            "label": {
+              "en": "Low"
+            }
+          },
+          {
+            "id": "2",
+            "label": {
+              "en": "Medium"
+            }
+          },
+          {
+            "id": "3",
+            "label": {
+              "en": "High"
+            }
+          }
+        ]
+      },
+      {
+        "id": "trigger_motion_led",
+        "type": "checkbox",
+        "value": false,
+        "label": {
+          "en": "Motion led"
+        },
+        "hint": {
+          "en": "Set to true if you want to enable motion led or false if you want to disable it"
+        }
+      }
+    ]
   },
   {
     "id": "battery_threshold",
@@ -31,45 +78,6 @@
     "attr": {
       "min": 1,
       "max": 90
-    }
-  },
-  {
-    "id": "motion_sensitivity_level",
-    "type": "radio",
-    "label": {
-      "en": "Motion sensitivity range"
-    },
-    "value": "2",
-    "values": [
-      {
-        "id": "1",
-        "label": {
-          "en": "Low"
-        }
-      },
-      {
-        "id": "2",
-        "label": {
-          "en": "Medium"
-        }
-      },
-      {
-        "id": "3",
-        "label": {
-          "en": "High"
-        }
-      }
-    ]
-  },
-  {
-    "id": "disable_motion_led",
-    "type": "checkbox",
-    "value": false,
-    "label": {
-      "en": "Motion led"
-    },
-    "hint": {
-      "en": "Set to true if you want to enable motion led or false if you want to disable it"
     }
   }
 ]
