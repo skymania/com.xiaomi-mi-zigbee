@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/count_down.svg",
+  "title": {
+    "en": "Trigger interval countdown"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": {
+    "en": "seconds"
+  },
+  "decimals": 2,
+  "min" : 1,
+  "max" : 200
+}
