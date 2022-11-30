@@ -30,7 +30,7 @@ class AqaraSmartPlugEU extends ZigBeeDevice {
         aqaraLedDisabled, aqaraPowerOutageMemory, aqaraPowerOffMemory, aqaraMaximumPower,
       } = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].readAttributes('aqaraLedDisabled', 'aqaraPowerOutageMemory', 'aqaraPowerOffMemory', 'aqaraMaximumPower');
       this.log('READattributes options', aqaraLedDisabled, aqaraPowerOutageMemory, aqaraPowerOffMemory, aqaraMaximumPower);
-      // await this.setSettings({ reverse_direction: xiaomiCurtainReverse, open_close_manual: !xiaomiCurtainOpenCloseManual });
+      await this.setSettings({ save_state: aqaraPowerOutageMemory });
 
       const attrs = await zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME].discoverAttributesExtended();
       this.log('READattributes attrs', attrs);
@@ -136,6 +136,15 @@ class AqaraSmartPlugEU extends ZigBeeDevice {
 
     if (typeof state === 'number') {
       this.setCapabilityValue('onoff', state === 1).catch(this.error);
+    }
+  }
+
+  async onSettings({ oldSettings, newSettings, changedKeys }) {
+    // aqaraPowerOutageMemory attribute
+    if (changedKeys.includes('save_state')) {
+      const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
+        .writeAttributes({ aqaraPowerOutageMemory: newSettings.save_state });
+      this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraPowerOutageMemory', newSettings.save_state, 'result:', result);
     }
   }
 
