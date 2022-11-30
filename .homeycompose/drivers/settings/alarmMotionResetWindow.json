@@ -1,0 +1,17 @@
+{
+  "id": "alarm_motion_reset_window",
+  "type": "number",
+  "label": {
+    "en": "Reset motion alarm after",
+    "nl": "Herstel bewegingsalarm na"
+  },
+  "hint": {
+    "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timer.",
+    "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+  },
+  "value": 300,
+  "attr": {
+    "min": 60,
+    "max": 86400
+  }
+}

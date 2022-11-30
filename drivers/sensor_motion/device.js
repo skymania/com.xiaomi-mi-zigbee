@@ -53,9 +53,9 @@ class XiaomiHumanBodySensor extends ZigBeeDevice {
     // Set and clear motion timeout
     const alarmMotionResetWindow = this.getSetting('hacked_alarm_motion_reset_window') ? 5 : (this.getSetting('alarm_motion_reset_window') || 300);
     // Set a timeout after which the alarm_motion capability is reset
-    if (this.motionAlarmTimeout) clearTimeout(this.motionAlarmTimeout);
+    if (this.alarmMotionTimeout) clearTimeout(this.alarmMotionTimeout);
 
-    this.motionAlarmTimeout = setTimeout(() => {
+    this.alarmMotionTimeout = setTimeout(() => {
       this.log('manual alarm_motion reset');
       this.setCapabilityValue('alarm_motion', false).catch(this.error);
     }, alarmMotionResetWindow * 1000);

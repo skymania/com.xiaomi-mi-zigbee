@@ -1,0 +1,84 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Because this is a sleep end device (SED), short press a button once on the device, to wake it up, before updating these settings"
+    },
+    "children": [
+      {
+        "$extends": "alarmMotionBlindTime",
+        "$id": "alarm_motion_blind_time"
+      },
+      {
+        "$extends": "alarmMotionResetWindow",
+        "$id": "alarm_motion_reset_window",
+        "attr": {
+          "min": 1,
+          "max": 86400
+        }
+      },
+      {
+        "id": "motion_sensitivity_level",
+        "type": "dropdown",
+        "label": {
+          "en": "Sensitivity",
+          "nl": "Gevoeligheid"
+        },
+        "value": "2",
+        "values": [
+          {
+            "id": "1",
+            "label": {
+              "en": "Low",
+              "nl": "Laag"
+            }
+          },
+          {
+            "id": "2",
+            "label": {
+              "en": "Medium",
+              "nl": "Gemiddeld"
+            }
+          },
+          {
+            "id": "3",
+            "label": {
+              "en": "High",
+              "nl": "Hoog"
+            }
+          }
+        ]
+      },
+      {
+        "id": "motion_led_notifications",
+        "type": "checkbox",
+        "value": false,
+        "label": {
+          "en": "Enable LED notifications",
+          "nl": "Schakel LED notificaties in"
+        },
+        "hint": {
+          "en": "This setting allows you to enable/disable LED indications.",
+          "nl": "Deze parameter bepaalt of de LED indicatie is ingeschakeld."
+        }
+      }
+    ]
+  },
+  {
+    "id": "battery_threshold",
+    "type": "number",
+    "label": {
+      "en": "Battery alarm threshold (%)",
+      "nl": "Batterij alarm waarde (%)"
+    },
+    "hint": {
+      "en": "Battery level (%) below which the battery alarm will be activated.\nRange: 1 - 90, \ndefault: 20 [%]",
+      "nl": "Battery niveau (%) waarbij het batterij alarm geactiveerd wordt.\nBereik: 1 - 90, \nstandaard: 20 [%]"
+    },
+    "value": 20,
+    "attr": {
+      "min": 1,
+      "max": 90
+    }
+  }
+]
