@@ -6,59 +6,60 @@
     },
     "children": [
       {
-        "id": "alarm_motion_reset_window",
-        "type": "number",
-        "label": {
-          "en": "Disable motion alarm after",
-          "nl": "Schakel bewegingsalarm uit na"
-        },
-        "hint": {
-          "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 1 - 200, default: 30 [s]",
-          "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 1 - 200, Standaard: 30 [s]"
-        },
-        "value": 30,
+        "$extends": "alarmMotionBlindTime",
+        "$id": "alarm_motion_blind_time"
+      },
+      {
+        "$extends": "alarmMotionResetWindow",
+        "$id": "alarm_motion_reset_window",
         "attr": {
           "min": 1,
-          "max": 200
+          "max": 86400
         }
       },
       {
         "id": "motion_sensitivity_level",
-        "type": "radio",
+        "type": "dropdown",
         "label": {
-          "en": "Motion sensitivity range"
+          "en": "Sensitivity",
+          "nl": "Gevoeligheid"
         },
         "value": "2",
         "values": [
           {
             "id": "1",
             "label": {
-              "en": "Low"
+              "en": "Low",
+              "nl": "Laag"
             }
           },
           {
             "id": "2",
             "label": {
-              "en": "Medium"
+              "en": "Medium",
+              "nl": "Gemiddeld"
             }
           },
           {
             "id": "3",
             "label": {
-              "en": "High"
+              "en": "High",
+              "nl": "Hoog"
             }
           }
         ]
       },
       {
-        "id": "trigger_motion_led",
+        "id": "motion_led_notifications",
         "type": "checkbox",
         "value": false,
         "label": {
-          "en": "Motion led"
+          "en": "Enable LED notifications",
+          "nl": "Schakel LED notificaties in"
         },
         "hint": {
-          "en": "Set to true if you want to enable motion led or false if you want to disable it"
+          "en": "This setting allows you to enable/disable LED indications.",
+          "nl": "Deze parameter bepaalt of de LED indicatie is ingeschakeld."
         }
       }
     ]

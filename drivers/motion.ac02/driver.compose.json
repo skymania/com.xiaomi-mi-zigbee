@@ -1,6 +1,6 @@
 {
   "name": {
-    "en": "Aqara Motion Sensor P1"
+    "en": "Motion Sensor P1"
   },
   "class": "sensor",
   "_appSpecific":{
@@ -12,10 +12,7 @@
     "alarm_motion",
     "measure_luminance",
     "alarm_battery",
-    "measure_battery",
-    "trigger_interval",
-    "motion_sensitivity", 
-    "motion_led"
+    "measure_battery"
   ],
   "energy": {
     "batteries": [
@@ -34,16 +31,23 @@
           0,
           1,
           3,
+          19,
+          64704
+        ],
+        "bindings": [
+          0,
+          1,
+          19,
           64704
         ]
       }
     },
     "learnmode": {
-      "image": "{{driverAssetsPath}}/learn_human_body.svg",
+      "image": "{{driverAssetsPath}}/learn.svg",
       "instruction": {
-        "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 5 seconds until the blue light flashes three times",
-        "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert",
-        "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 5 mal blinkt"
+        "en": "Long press the reset button for more than 5 seconds until the blue light flashes three times",
+        "nl": "Houd de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert",
+        "de": "Halte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 5 mal blinkt"
       }
     }
   },
