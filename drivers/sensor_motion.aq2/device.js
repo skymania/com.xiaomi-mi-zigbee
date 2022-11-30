@@ -46,9 +46,9 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
     // Set and clear motion timeout
     const alarmMotionResetWindow = this.getSetting('hacked_alarm_motion_reset_window') ? 5 : (this.getSetting('alarm_motion_reset_window') || 300);
     // Set a timeout after which the alarm_motion capability is reset
-    if (this.motionAlarmTimeout) clearTimeout(this.motionAlarmTimeout);
+    if (this.alarmMotionTimeout) clearTimeout(this.alarmMotionTimeout);
 
-    this.motionAlarmTimeout = setTimeout(() => {
+    this.alarmMotionTimeout = setTimeout(() => {
       this.log('manual alarm_motion reset');
       this.setCapabilityValue('alarm_motion', false).catch(this.error);
     }, alarmMotionResetWindow * 1000);
@@ -74,7 +74,7 @@ class AqaraHumanBodySensor extends ZigBeeDevice {
 
       if (this.hasCapability('alarm_battery')) {
         this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
-        this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
+        this.setCapabilityValue('alarm_battery', parsedBatPct < this.getSetting('battery_threshold')).catch(this.error);
       }
     }
   }

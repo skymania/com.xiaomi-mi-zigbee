@@ -18,7 +18,7 @@
       "Opple"
     ]
   },
-  "version": "1.5.0",
+  "version": "1.6.0",
   "compatibility": ">=5.0.0",
   "support": "https://community.athom.com/t/156",
   "athomForumDiscussionId": 4120,
@@ -2973,7 +2973,7 @@
     },
     {
       "name": {
-        "en": "Aqara Motion Sensor P1"
+        "en": "Motion Sensor P1"
       },
       "class": "sensor",
       "_appSpecific": {
@@ -2987,10 +2987,7 @@
         "alarm_motion",
         "measure_luminance",
         "alarm_battery",
-        "measure_battery",
-        "trigger_interval",
-        "motion_sensitivity",
-        "motion_led"
+        "measure_battery"
       ],
       "energy": {
         "batteries": [
@@ -3014,16 +3011,23 @@
               0,
               1,
               3,
+              19,
+              64704
+            ],
+            "bindings": [
+              0,
+              1,
+              19,
               64704
             ]
           }
         },
         "learnmode": {
-          "image": "/drivers/motion.ac02/assets/learn_human_body.svg",
+          "image": "/drivers/motion.ac02/assets/learn.svg",
           "instruction": {
-            "en": "Hold the sensor during inclusion in close proximity of Homey\nLong press the reset button for more than 5 seconds until the blue light flashes three times",
-            "nl": "Houd tijdens het toevoegen de sensor in de buurt van Homey\nHoud de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert",
-            "de": "Halte den Sensor nah an Homey während du ihn anlernst\nHalte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 5 mal blinkt"
+            "en": "Long press the reset button for more than 5 seconds until the blue light flashes three times",
+            "nl": "Houd de reset knop ingedrukt voor meer dan 5 seconden totdat de blauwe led drie keer knippert",
+            "de": "Halte den Reset Knopf mehr als 3 Sekunden bis das blaue Licht 5 mal blinkt"
           }
         }
       },
@@ -3040,15 +3044,15 @@
           },
           "children": [
             {
-              "id": "alarm_motion_reset_window",
+              "id": "alarm_motion_blind_time",
               "type": "number",
               "label": {
-                "en": "Disable motion alarm after",
-                "nl": "Schakel bewegingsalarm uit na"
+                "en": "Motion sensor blindtime",
+                "nl": "Bewegingssensor blindtime"
               },
               "hint": {
-                "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timeout.\nRange: 1 - 200, default: 30 [s]",
-                "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart.\nBereik: 1 - 200, Standaard: 30 [s]"
+                "en": "This setting determines the period of time through which the PIR sensor is “blind” (insensitive) to motion.",
+                "nl": "Deze parameter bepaalt de periode na detecteren van beweging gedurende de sensor ongevoelig is voor nieuwe bewegingsdetectie."
               },
               "value": 30,
               "attr": {
@@ -3057,42 +3061,65 @@
               }
             },
             {
-              "id": "motion_sensitivity_level",
-              "type": "radio",
+              "attr": {
+                "min": 1,
+                "max": 86400
+              },
+              "id": "alarm_motion_reset_window",
+              "type": "number",
               "label": {
-                "en": "Motion sensitivity range"
+                "en": "Reset motion alarm after",
+                "nl": "Herstel bewegingsalarm na"
+              },
+              "hint": {
+                "en": "This setting will disable the motion alarm after the given time (in seconds) has expired. Every time motion is observed by the device it will reset this timer.",
+                "nl": "Deze instelling zal het bewegingsalarm uitschakelen na de tijd (in seconden) is verstreken. Elke keer dat opnieuw beweging wordt gedetecteerd wordt deze timer herstart."
+              },
+              "value": 300
+            },
+            {
+              "id": "motion_sensitivity_level",
+              "type": "dropdown",
+              "label": {
+                "en": "Sensitivity",
+                "nl": "Gevoeligheid"
               },
               "value": "2",
               "values": [
                 {
                   "id": "1",
                   "label": {
-                    "en": "Low"
+                    "en": "Low",
+                    "nl": "Laag"
                   }
                 },
                 {
                   "id": "2",
                   "label": {
-                    "en": "Medium"
+                    "en": "Medium",
+                    "nl": "Gemiddeld"
                   }
                 },
                 {
                   "id": "3",
                   "label": {
-                    "en": "High"
+                    "en": "High",
+                    "nl": "Hoog"
                   }
                 }
               ]
             },
             {
-              "id": "trigger_motion_led",
+              "id": "motion_led_notifications",
               "type": "checkbox",
               "value": false,
               "label": {
-                "en": "Motion led"
+                "en": "Enable LED notifications",
+                "nl": "Schakel LED notificaties in"
               },
               "hint": {
-                "en": "Set to true if you want to enable motion led or false if you want to disable it"
+                "en": "This setting allows you to enable/disable LED indications.",
+                "nl": "Deze parameter bepaalt of de LED indicatie is ingeschakeld."
               }
             }
           ]
