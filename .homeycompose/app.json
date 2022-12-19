@@ -11,7 +11,7 @@
     "lights"
   ],
   "tags": { "en": ["xiaomi", "aqara", "Opple"] },
-  "version": "1.5.0",
+  "version": "1.6.0",
   "compatibility": ">=5.0.0",
   "support": "https://community.athom.com/t/156",
   "athomForumDiscussionId": 4120,

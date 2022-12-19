@@ -88,5 +88,8 @@
   },
   "1.5.0": {
     "en": "Add support for Aqara Roller Shade Driver E1, battery reporting optimization and updated device naming"
+  },
+  "1.6.0": {
+    "en": "Add support for Motion Sensor P1 (MS-S02)"
   }
 }

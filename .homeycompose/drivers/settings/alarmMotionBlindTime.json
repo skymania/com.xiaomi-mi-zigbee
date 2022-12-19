@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "label": {
+    "en": "Motion sensor blindtime",
+    "nl": "Bewegingssensor blindtime"
+  },
+  "hint": {
+    "en": "This setting determines the period of time through which the PIR sensor is “blind” (insensitive) to motion.",
+    "nl": "Deze parameter bepaalt de periode na detecteren van beweging gedurende de sensor ongevoelig is voor nieuwe bewegingsdetectie."
+  },
+  "value": 30,
+  "attr": {
+    "min": 1,
+    "max": 200
+  }
+}

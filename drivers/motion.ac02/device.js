@@ -10,46 +10,42 @@ const AqaraManufacturerSpecificCluster = require('../../lib/AqaraManufacturerSpe
 
 Cluster.addCluster(AqaraManufacturerSpecificCluster);
 
-class AqaraHumanBodySensorP1 extends ZigBeeDevice {
+class AqaraMotionSensorP1 extends ZigBeeDevice {
 
   async onNodeInit({ zclNode }) {
-
     // enable debugging
-    //this.enableDebug();
+    // this.enableDebug();
 
     // Enables debug logging in zigbee-clusters
-    // debug(false);
+    // debug(true);
 
     // print the node's info to the console
-    //this.printNode();
-
-    if (this.isFirstInit()) {
-      try {
-        await zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME].writeAttributes({ mode: 1 }).catch(this.error);
-      } catch (err) {
-        this.error('failed to write mode attributes', err);
-      }
-    }
-
-    try {
-      const {
-        aqaraSensitivityLevel, aqaraMotionRetriggerInterval, aqaraMotionLed
-      } = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)]
-        .clusters[AqaraManufacturerSpecificCluster.NAME]
-        .readAttributes('aqaraSensitivityLevel', 'aqaraMotionRetriggerInterval', 'aqaraLedInverted').catch(this.error);
-      this.log('READattributes options ', aqaraSensitivityLevel, aqaraMotionRetriggerInterval, Boolean(aqaraMotionLed));
-      await this.setSettings({ alarm_motion_reset_window: aqaraMotionRetriggerInterval, trigger_motion_led: aqaraMotionLed }).catch(this.error);
-    } catch (err) {
-      this.log('could not read Attributes:', err);
-    }
+    // this.printNode();
 
     // occupancy and illumination detection
     zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME]
-      .on('attr.aqaraMotionAndIllumination', this.onMotionAndLuminanceMeasuredValueAttributeReport.bind(this));
-
-    // lifeline report
-    zclNode.endpoints[1].clusters[AqaraManufacturerSpecificCluster.NAME]
+      .on('attr.aqaraMotionAndIllumination', this.onMotionAndLuminanceMeasuredValueAttributeReport.bind(this))
       .on('attr.aqaraLifeline', this.onAqaraLifelineAttributeReport.bind(this));
+
+    // if (this.hasCapability('measure_battery')) {
+    zclNode.endpoints[1].clusters[CLUSTER.POWER_CONFIGURATION.NAME]
+      .on('attr.batteryVoltage', this.onBatteryVoltageAttributeReport.bind(this, CLUSTER.POWER_CONFIGURATION.NAME, 'batteryVoltage'));
+    // }
+  }
+
+  onBatteryVoltageAttributeReport(reportingClusterName, reportingAttribute, batteryVoltage) {
+    if (typeof batteryVoltage === 'number') {
+      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage * 100, '3V_2850_3000');
+      if (this.hasCapability('measure_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: measure_battery), parsed payload:`, parsedBatPct);
+        this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
+      }
+
+      if (this.hasCapability('alarm_battery')) {
+        this.log(`handle report (cluster: ${reportingClusterName}, attribute: ${reportingAttribute}, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
+        this.setCapabilityValue('alarm_battery', parsedBatPct < this.getSetting('battery_threshold')).catch(this.error);
+      }
+    }
   }
 
   /**
@@ -58,34 +54,25 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
    * @param {number} measuredValue
    */
   onMotionAndLuminanceMeasuredValueAttributeReport(measuredValue) {
-    // set illuminance value 
-    if (typeof measuredValue === 'number') {
-      this.log('handle report (cluster: IlluminanceMeasurement, attribute: measuredValue, capability: measure_luminance), parsed payload:', measuredValue);
-      this.setCapabilityValue('measure_luminance', measuredValue).catch(this.error);
-    }
-    
-    // register motion 
+    // register motion
     this.log('handle report (cluster: OccupancySensing, attribute: -, capability: alarm_motion), parsed payload: n/a');
     this.setCapabilityValue('alarm_motion', true).catch(this.error);
 
     // set and clear motion timeout
-    const alarmMotionResetWindow = (this.getSetting('alarm_motion_reset_window') || 200);
+    const alarmMotionResetWindow = (this.getSetting('alarm_motion_reset_window') || 300);
     // set a timeout after which the alarm_motion capability is reset
-    if (this.motionAlarmTimeout) clearTimeout(this.motionAlarmTimeout);
+    if (this.alarmMotionTimeout) clearTimeout(this.alarmMotionTimeout);
 
-    this.motionAlarmTimeout = setTimeout(() => {
+    this.alarmMotionTimeout = setTimeout(() => {
       this.log('manual alarm_motion reset');
       this.setCapabilityValue('alarm_motion', false).catch(this.error);
     }, alarmMotionResetWindow * 1000);
 
-    // trigger interval 
-    this.setCapabilityValue('trigger_interval', this.getSetting('alarm_motion_reset_window')).catch(this.error);
-
-    // motion sensitvity 
-    this.setCapabilityValue('motion_sensitivity', this.getSetting('motion_sensitivity_level')).catch(this.error);
-
-    // motion led 
-    this.setCapabilityValue('motion_led', this.getSetting('trigger_motion_led')).catch(this.error);
+    // set illuminance value
+    if (typeof measuredValue === 'number') {
+      this.log('handle report (cluster: IlluminanceMeasurement, attribute: measuredValue, capability: measure_luminance), parsed payload:', measuredValue);
+      this.setCapabilityValue('measure_luminance', measuredValue).catch(this.error);
+    }
   }
 
   /**
@@ -95,13 +82,8 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
    * @param {{batteryLevel: number}} lifeline
    */
   onAqaraLifelineAttributeReport({
-    state, state1, batteryVoltage
+    state1, batteryVoltage,
   } = {}) {
-    // Motion
-    if (typeof state === 'boolean') {
-      this.log('handle report (cluster: AqaraManufacturerSpecificCluster, attribute: state, capability: alarm_motion), parsed payload:', state);
-      this.log('onAqaraLifelineAttributeReport - motion', state);
-    }
     // Illumination
     if (typeof state1 === 'number') {
       this.log('handle report (cluster: AqaraManufacturerSpecificCluster, attribute: state1, capability: measure_luminance), parsed payload:', state1);
@@ -109,47 +91,38 @@ class AqaraHumanBodySensorP1 extends ZigBeeDevice {
     }
     // Battery
     if (typeof batteryVoltage === 'number') {
-      const parsedBatPct = util.calculateBatteryPercentage(batteryVoltage, '3V_2850_3000');
-      if (this.hasCapability('measure_battery')) {
-        this.log(`handle report (cluster: AqaraLifeline, attribute: batteryVoltage, capability: measure_battery), parsed payload:`, parsedBatPct);
-        this.setCapabilityValue('measure_battery', parsedBatPct).catch(this.error);
-      }
-
-      if (this.hasCapability('alarm_battery')) {
-        this.log(`handle report (cluster: AqaraLifeline, attribute: batteryVoltage, capability: alarm_battery), parsed payload:`, parsedBatPct < 20);
-        this.setCapabilityValue('alarm_battery', parsedBatPct < 20).catch(this.error);
-      }
+      this.onBatteryVoltageAttributeReport('AqaraLifeline', 'batteryVoltage', batteryVoltage / 100);
     }
   }
 
   /**
    * Update settings
-   * @param {*} param0 
+   * @param {*} param0
    */
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     try {
       // reverse_direction attribute
-      if (changedKeys.includes('alarm_motion_reset_window')) {
+      if (changedKeys.includes('alarm_motion_blind_time')) {
         const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
-          .writeAttributes({ aqaraMotionRetriggerInterval: newSettings.alarm_motion_reset_window }).catch(this.error);
-        this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraMotionRetriggerInterval', newSettings.alarm_motion_reset_window, 'result:', result);
+          .writeAttributes({ aqaraMotionBlindTime: newSettings.alarm_motion_blind_time }).catch(this.error);
+        this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraMotionBlindTime', newSettings.alarm_motion_blind_time, 'result:', result);
       }
       if (changedKeys.includes('motion_sensitivity_level')) {
         const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
           .writeAttributes({ aqaraSensitivityLevel: newSettings.motion_sensitivity_level }).catch(this.error);
         this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraSensitivityLevel', newSettings.motion_sensitivity_level, 'result:', result);
       }
-      if (changedKeys.includes('trigger_motion_led')) {
+      if (changedKeys.includes('motion_led_notifications')) {
         const result = await this.zclNode.endpoints[this.getClusterEndpoint(AqaraManufacturerSpecificCluster)].clusters[AqaraManufacturerSpecificCluster.NAME]
-          .writeAttributes({ aqaraMotionLed: newSettings.trigger_motion_led }).catch(this.error);
-        this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraMotionLed', newSettings.trigger_motion_led, 'result:', result);
+          .writeAttributes({ aqaraMotionLed: newSettings.motion_led_notifications }).catch(this.error);
+        this.log('SETTINGS | Write Attribute - Aqara Manufacturer Specific Cluster - aqaraMotionLed', newSettings.motion_led_notifications, 'result:', result);
       }
     } catch (err) {
       // reset settings values on failed update
-      throw new Error("failed to update settings. Message:" + err);
-
+      throw new Error(`failed to update settings. Message:${err}`);
     }
   }
+
 }
 
-module.exports = AqaraHumanBodySensorP1;
+module.exports = AqaraMotionSensorP1;

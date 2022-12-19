@@ -32,6 +32,12 @@ supportedCapabilities [
     'cube_measure_rotation',
     'alarm_battery'
   ],
+  [
+    'alarm_motion',
+    'measure_luminance',
+    'alarm_battery',
+    'measure_battery'
+  ],
   [ 'onoff', 'measure_power', 'meter_power' ],
   [ 'onoff' ],
   [ 'onoff', 'onoff.1' ],
@@ -112,6 +118,7 @@ supportedCapabilities [
 | <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/drivers/vibration.aq1/assets/icon.svg" width="50%" height="50%"> | Aqara | Vibration Sensor | DJT11LM | 6970504210592 | lumi.vibration.aq1 | vibration.aq1 | measure_tilt, measure_tilt.relative, measure_vibration, alarm_vibration, alarm_tilt, alarm_drop, alarm_battery, measure_battery | No | 
 | <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/drivers/sensor_magnet.aq2/assets/icon.svg" width="50%" height="50%"> | Aqara | Door and Window Sensor | MCCGQ11LM | 6970504210073, 192784000083 | lumi.sensor_magnet.aq2 | sensor_magnet.aq2 | alarm_contact, alarm_battery, measure_battery | No | 
 | <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/drivers/cube/assets/icon.svg" width="50%" height="50%"> | Aqara | Cube | MFKZQ01LM | 6970504210615,  6974176874412, 192784000045 | lumi.sensor_cube, lumi.sensor_cube.aqgl01 | cube | measure_battery, cube_state_motion, cube_state_face, cube_measure_rotation, alarm_battery | No | 
+| <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/drivers/motion.ac02/assets/icon.svg" width="50%" height="50%"> | Aqara | Motion Sensor P1 | MS-S02 | 6970504215979 | lumi.motion.ac02 | motion.ac02 | alarm_motion, measure_luminance, alarm_battery, measure_battery | No | 
 | <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/drivers/sensor_motion.aq2/assets/icon.svg" width="50%" height="50%"> | Aqara | Motion Sensor | RTCGQ11LM | 6970504210066, 192784000090 | lumi.sensor_motion.aq2 | sensor_motion.aq2 | alarm_motion, measure_luminance, alarm_battery, measure_battery | No | 
 | <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/drivers/sensor_wleak.aq1/assets/icon.svg" width="50%" height="50%"> | Aqara | Water Leak Sensor | SJCGQ11LM | 6970504210258,  6970504210608 | lumi.sensor_wleak.aq1 | sensor_wleak.aq1 | alarm_water, alarm_battery, measure_battery | No | 
 | <img src="https://raw.githubusercontent.com/TedTolboom/com.xiaomi-mi-zigbee/master/drivers/weather/assets/icon.svg" width="50%" height="50%"> | Aqara | Temperature and Humidity Sensor | WSDCGQ11LM | 6970504210097, 192784000106 | lumi.weather | weather | measure_battery, measure_temperature, measure_pressure, measure_humidity, alarm_battery | No | 
